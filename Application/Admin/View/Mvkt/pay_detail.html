@@ -1,0 +1,115 @@
+<extend name="Layout/master" />
+<block name="title">支付详情</block>
+<block name="head">
+    <style>
+
+    </style>
+</block>
+
+<block name="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""> <a href="{:U('/mvkt/pay')}" target="_self" class="btn btn-primary ">返回</a> </div>
+                <div class="ibox-title">
+                    <h5><a href="{:U('/mvkt/pay')}"> 支付列表</a> > <small>支付详情</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form name="edit" target="_self" action="?" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">台主昵称：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nickname" value="{$data.nickname}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动时间：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="start_time" value="{$data.start_time|date='Y-m-d H:i',###}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">人均消费：</label>
+                            <div class="col-sm-10">
+                                <input type="text"  value="{$data.per_consume}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">参与者性别：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="sex" value="{$data.sex}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">参与者头像：</label>
+                            <div class="col-sm-10">
+                               <img src="{$data.headimg}" height="80px;">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">支付金额：</label>
+                            <div class="col-sm-10">
+                                <input type="text" value="{$data.money}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">openid：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="constellation" value="{$data.openid}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">支付订单号：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="total_num" value="{$data.payment_no}" class="form-control">
+                            </div>
+                        </div>
+
+
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">支付时间：</label>
+                            <div class="col-sm-10">
+                                <input type="text"  class="form-control" readonly value="{$data.create_time|date='Y-m-d H:i:s',###}">
+
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">支付状态：</label>
+                            <div class="col-sm-10">
+                                <if condition="$data.status eq 2 "><p>正常支付</p><else/><p>支付异常</p></if>
+
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+
+</block>

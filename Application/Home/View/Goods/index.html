@@ -1,0 +1,113 @@
+<extend name="Layout/master" />
+<block name="title">商品管理-</block>
+<block name="head">
+</block>
+<block name="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>商品列表</h5>
+          <!--
+          <div class="ibox-tools"> <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a> <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#"> <i class="fa fa-wrench"></i> </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="table_data_tables.html#">选项1</a> </li>
+              <li><a href="table_data_tables.html#">选项2</a> </li>
+            </ul>
+            <a class="close-link"> <i class="fa fa-times"></i> </a> </div>
+        </div>-->
+          <div class="ibox-content">
+            <div class=""> <a href="{:U('/goods/edit')}" target="_self" class="btn btn-primary ">添加商品</a>
+              <div class="input-group  col-sm-3 pull-right form-group">
+                <select class="form-control " name="search">
+                  <option value="0">所有商品</option>
+                  <option value="1" <if condition="$class eq 1">selected</if>>兑换商品</option>
+                  <option value="2" <if condition="$class eq 2">selected</if>>抽奖商品</option>
+                  <option value="3" <if condition="$class eq 3">selected</if>>兑换+现金商品</option>
+                </select>
+
+                <!--
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-sm btn-primary">
+                    搜索
+                  </button>
+                </div>-->
+              </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover " id="editable">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>商品名称</th>
+                  <th>商品图片</th>
+                  <th>商品类型</th>
+                  <th>参与方式</th>
+                  <th>消耗M币</th>
+                  <th>商品库存</th>
+                  <th>抽奖概率</th>
+                  <th>每人限兑</th>
+                  <th>添加时间</th>
+                  <th>状态</th>
+                  <th>所属平台</th>
+                  <th>操作</th>
+                  <th style="white-space: nowrap;">
+                    <button type="button" class="btn btn-primary" id="copy-goods">复制</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list" id="item">
+                  <tr class="gradeX">
+                    <td>{$item.id}</td>
+                    <td>{$item.goods_name}</td>
+                    <td><if condition="$item.goods_pic"><img src="{$item.goods_pic}"  class="view_img" data-url="{$item.goods_pic}"  style="max-width: 100px; max-height: 80px" /></if></td>
+                    <td>{:getGoodsType($item['goods_type'])}</td>
+                    <td><if condition="$item[goods_class] eq 1">兑换<elseif condition="$item[goods_class] eq 2" />抽奖<elseif condition="$item[goods_class] eq 3" />兑换+现金<else />不限</if></td>
+                    <td>{:intval($item['goods_credit'])}M币 <if condition="$item['goods_class'] == 3">+{:floatval($item['goods_price'])}元</if></td>
+                    <td>{:intval($item['sku'])}</td>
+                    <td>{:intval($item['probability'])}%</td>
+                    <td>{:intval($item['per_limit'])}</td>
+                    <td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+                    <td>{:getGoodsStatus($item['status'])}</td>
+                    <td><if condition="$item['visible_platform'] == 2">ARhere<else />互动</if></td>
+                    <td class="center" style="white-space: nowrap;">
+                      <a href="{:U('/goods/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
+                    </td>
+                    <td style="text-align: center">
+                      <input type="checkbox" name="copy-id[]" value="{$item['id']}">
+                    </td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div class="row ">
+              <div class="pages">
+              {$page}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>
+<block name="js">
+  <script type="text/javascript">
+    $('select[name="search"]').change(function(){
+      window.location.href = "{:U('/goods/index')}&class="+$(this).val();
+    });
+
+    $("#copy-goods").click(function () {
+        if (!confirm("确定要复制吗？")) {
+            return false;
+        }
+
+        var idList = [];
+        $("input[name='copy-id[]']:checked").each(function () {
+            idList.push($(this).val());
+        });
+        window.location.href = "/index.php?s=/goods/copy/list/" + idList.toString() + ".html";
+    });
+  </script>
+</block>

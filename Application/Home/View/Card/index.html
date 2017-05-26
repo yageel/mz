@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑刮刮卡</title>
+    <meta name="keywords" content="编辑刮刮卡">
+    <meta name="description" content="编辑刮刮卡">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.0.0" rel="stylesheet">
+    <base target="_self">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/card/edit')}" class="form-horizontal">
+
+                        <input type="hidden" name="card[id]" value="{$model['id']}">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="card[title]" value="{$model.title}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">消耗M币：</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="card[cost]" value="{$model.cost}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">谢谢参与：</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" name="thank[id]" value="{$thank['id']}">
+                                <input type="hidden" name="thank[type]" value="{$thank['type']}">
+                                文字：<input type="text" name="thank[item]" value="{$thank['item']}">
+                                概率：<input type="number" name="thank[probability]" value="{$thank['probability']}">
+                                <input type="hidden" name="thank[quantity]" value="9999999">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">奖项设置：</label>
+                            <div class="col-sm-10">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-info" style="margin-bottom: 15px" onclick="addAward('mbi')">添加M币</button>
+                                    <button type="button" class="btn btn-success" style="margin-bottom: 15px" onclick="addAward('entity')">添加实物</button>
+                                    <button type="button" class="btn btn-info" style="margin-bottom: 15px" onclick="addAward('money')">添加现金</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-2" id="card-award">
+                                <volist name="awards" id="award" key="key">
+                                    <div id="award-{$key}" style="margin-bottom: 15px">
+                                        <input type="hidden" name="award[{$key}][id]" value="{$award['id']}">
+                                        <input type="hidden" name="award[{$key}][type]" value="{$award['type']}">
+                                        <if condition="$award['type'] eq 'mbi'">
+                                            Ｍ币数值：<input type="text" name="award[{$key}][item]" value="{$award['item']}">
+                                        <elseif condition="$award['type'] eq 'entity'" />
+                                            实物名称：<input type="text" name="award[{$key}][item]" value="{$award['item']}">
+                                        <elseif condition="$award['type'] eq 'money'" />
+                                            现金金额：<input type="text" name="award[{$key}][item]" value="{$award['item']}">
+                                        </if>
+                                        &nbsp;&nbsp;
+                                        数量：<input type="number" name="award[{$key}][quantity]" value="{$award['quantity']}">
+                                        &nbsp;&nbsp;
+                                        概率：<input type="number" name="award[{$key}][probability]" value="{$award['probability']}">
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-danger" onclick="delAward('award-{$key}', {$award['id']})">删除</button>
+                                    </div>
+                                </volist>
+                            </div>
+                            <script>
+                                var awards_id = "{$key}";
+                                if (awards_id == "") {
+                                    awards_id = 1;
+                                }
+                            </script>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">冷却时间（单位：秒）：</label>
+                            <div class="col-sm-10">
+                                <button type="button" class="btn btn-info" style="margin-bottom: 15px" onclick="addCD()">添加冷却时间</button>
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-2" id="cool-down">
+                                <volist name="coolDownList" id="coolDown" key="CD_key">
+                                    <div id="CD-{$CD_key}" style="margin-bottom: 15px">
+                                        时间：<input type="number" name="cool_down[{$CD_key}][time]" value="{$coolDown['time']}">
+                                        概率：<input type="number" name="cool_down[{$CD_key}][probability]" value="{$coolDown['probability']}">
+                                        <button type="button" class="btn btn-warning" onclick="delCD('{$CD_key}')">删除</button>
+                                    </div>
+                                </volist>
+                            </div>
+                            <script>
+                                var cd_id = "{$CD_key}";
+                                if (cd_id == "") {
+                                    cd_id = 1;
+                                }
+                            </script>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动说明：</label>
+                            <div class="col-sm-10">
+                                <textarea rows="4" class="form-control" name="card[description]">{$model.description}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">状态：</label>
+                            <div class="col-sm-10">
+                                {$status_list}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">修改时间：</label>
+                            <div class="col-sm-10">
+                                {:timestampToDate($model['updated_at'])}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">保存内容</button>
+                                <a class="btn btn-white" href="javascript:window.location.reload()">重置</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.5"></script>
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form[name="edit"]').submit(function () {
+            return true;
+        });
+    });
+
+    function addAward(type) {
+        awards_id++;
+        var html = "<div id=\"award-" + awards_id + "\" style=\"margin-bottom: 15px\">"
+                + "<input type=\"hidden\" name=\"newAward[" + awards_id + "][type]\" value=\"" + type + "\">";
+
+        if (type == "mbi") {
+            html += "Ｍ币数值：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        } else if (type == "entity") {
+            html += "实物名称：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        } else if (type == "money") {
+            html += "现金金额：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        }
+
+        html += "&nbsp;&nbsp;\r\n"
+                + "数量：<input type=\"number\" name=\"newAward[" + awards_id + "][quantity]\">\r\n"
+                + "&nbsp;&nbsp;\r\n"
+                + "概率：<input type=\"number\" name=\"newAward[" + awards_id + "][probability]\">\r\n"
+                + "&nbsp;&nbsp;\r\n"
+                + "<button type=\"button\" class=\"btn btn-warning\" onclick=\"delNewAward('award-" + awards_id + "')\">删除</button>"
+                + "</div>";
+
+        $("#card-award").append(html);
+    }
+
+    function delAward(html_id, id) {
+        if (confirm("该奖品在使用中，真的要删除吗？")) {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                data: {"id": id},
+                url: "{:U('/card/deleteAward')}",
+                success: function(data) {
+                    alert(data.msg);
+                    if (data.status == 'success') {
+                        $("#" + html_id).remove();
+                    }
+                },
+                error: function() {
+                    alert('删除失败，稍后再试');
+                }
+            });
+        }
+    }
+
+    function delNewAward(id) {
+        if (confirm("确定要删除该项吗？")) {
+            $("#" + id).remove();
+        }
+    }
+
+    function addCD() {
+        cd_id++;
+        var html = "<div id=\"CD-" + cd_id + "\" style=\"margin-bottom: 15px\">\r\n"
+                + "时间：<input type=\"number\" name=\"cool_down[" + cd_id + "][time]\">\r\n"
+                + "概率：<input type=\"number\" name=\"cool_down[" + cd_id + "][probability]\">\r\n"
+                + "<button type=\"button\" class=\"btn btn-warning\" onclick=\"delCD('" + cd_id + "')\">删除</button>"
+                + "</div>";
+        $("#cool-down").append(html);
+    }
+
+    function delCD(id) {
+        if (confirm("真的要删除该项吗？")) {
+            $("#CD-" + id).remove();
+        }
+    }
+</script>
+</body>
+</html>

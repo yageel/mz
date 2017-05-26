@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑商品兑换规则</title>
+  
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.css?v=4.0.0" rel="stylesheet">
+    <base target="_self">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/exchange_rules/edit')}" class="form-horizontal">
+
+                        <input type="hidden" name="id" value="{$rule.id}">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动开始时间：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="begin_time" value="{$rule.begin_time}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动结束时间：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="end_time" value="{$rule.end_time}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户再次兑换：</label>
+                            <div class="col-sm-10">
+                               
+                                 弹窗文案：<input type="text" name="popup_txt" value="{$rule.popup_txt}" style="width:200px;">
+                                按钮文字：<input type="text" name="btn_txt" value="{$rule.btn_txt}">
+                               
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">限定抽奖次数：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="draw_num" value="{$rule.draw_num}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">限定刮刮卡次数：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="gua_num" value="{$rule.gua_num}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">限定M币商城兑换次数：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="mb_num" value="{$rule.mb_num}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设置规则状态：</label>
+                            <div class="col-sm-10">
+                                <select type="text" name="status"  class="form-control">
+                                    <option value="1">有效</option>
+                                    <option value="0" <if condition="$rule.status eq '0'">selected</if>>失效</option>
+                                </select>
+                                <span class="help-block m-b-none" style="color: #777">*</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+           
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">保存内容</button>
+                                <a class="btn btn-white" href="javascript:window.location.reload()">重置</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.5"></script>
+<!-- 自定义js -->
+<script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+<!-- iCheck -->
+<script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form[name="edit"]').submit(function () {
+            return true;
+        });
+    });
+
+    function addAward(type) {
+        awards_id++;
+        var html = "<div id=\"award-" + awards_id + "\" style=\"margin-bottom: 15px\">"
+                + "<input type=\"hidden\" name=\"newAward[" + awards_id + "][type]\" value=\"" + type + "\">";
+
+        if (type == "mbi") {
+            html += "Ｍ币数值：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        } else if (type == "entity") {
+            html += "实物名称：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        } else if (type == "money") {
+            html += "现金金额：<input type=\"text\" name=\"newAward[" + awards_id + "][item]\">\r\n";
+        }
+
+        html += "&nbsp;&nbsp;\r\n"
+                + "数量：<input type=\"number\" name=\"newAward[" + awards_id + "][quantity]\">\r\n"
+                + "&nbsp;&nbsp;\r\n"
+                + "概率：<input type=\"number\" name=\"newAward[" + awards_id + "][probability]\">\r\n"
+                + "&nbsp;&nbsp;\r\n"
+                + "<button type=\"button\" class=\"btn btn-warning\" onclick=\"delNewAward('award-" + awards_id + "')\">删除</button>"
+                + "</div>";
+
+        $("#card-award").append(html);
+    }
+
+    function delAward(html_id, id) {
+        if (confirm("该奖品在使用中，真的要删除吗？")) {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                data: {"id": id},
+                url: "{:U('/card/deleteAward')}",
+                success: function(data) {
+                    alert(data.msg);
+                    if (data.status == 'success') {
+                        $("#" + html_id).remove();
+                    }
+                },
+                error: function() {
+                    alert('删除失败，稍后再试');
+                }
+            });
+        }
+    }
+
+    function delNewAward(id) {
+        if (confirm("确定要删除该项吗？")) {
+            $("#" + id).remove();
+        }
+    }
+
+    function addCD() {
+        cd_id++;
+        var html = "<div id=\"CD-" + cd_id + "\" style=\"margin-bottom: 15px\">\r\n"
+                + "时间：<input type=\"number\" name=\"cool_down[" + cd_id + "][time]\">\r\n"
+                + "概率：<input type=\"number\" name=\"cool_down[" + cd_id + "][probability]\">\r\n"
+                + "<button type=\"button\" class=\"btn btn-warning\" onclick=\"delCD('" + cd_id + "')\">删除</button>"
+                + "</div>";
+        $("#cool-down").append(html);
+    }
+
+    function delCD(id) {
+        if (confirm("真的要删除该项吗？")) {
+            $("#CD-" + id).remove();
+        }
+    }
+</script>
+</body>
+</html>

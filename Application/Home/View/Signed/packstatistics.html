@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>签到统计管理-美联美客后台系统</title>
+        <meta name="keywords" content="签到统计管理">
+        <meta name="description" content="签到统计管理">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+        <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+        <!-- Data Tables -->
+        <link href="__PUBLIC__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/style.css?v=4.0.0" rel="stylesheet">
+        <link href="__PUBLIC__/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+        <base target="_self">
+    </head>
+    <body class="gray-bg">
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>签到统计列表</h5>
+
+                            <div class="ibox-content">
+
+                                <div class="form-group" id="data_1">
+                                    <div class="">
+                                        <div class=""><!-- <a href="{:U('/home/edit')}" target="_self" class="btn btn-primary ">添加素材</a>-->
+                                            <div class="input-group  col-sm-6 form-group">
+
+<div class="col-sm-6">
+    <input class="form-control layer-date"  id="date"  value="{$currday}" placeholder="年-月-日" onclick="laydate({istime: false,issure: true, format: 'YYYY-MM-DD'})">
+                                            <!--<label class="laydate-icon"></label>-->
+                                        </div>
+                                                <div class="col-sm-2">
+                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                        查询
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-bordered table-hover " id="editable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>公众号</th>
+                                                <th>签到数</th>
+                                                <th>大红包发放数量</th>
+                                                <th>大红包发放金额</th>
+                                                <th>小红包放数量</th>
+                                                <th>小红包发放金额</th>
+                                                <th>大M币发放个数</th>
+                                                <th>大M币发放总量</th>
+                                                <th>小M币发放个数</th>
+                                                <th>小M币发放总量</th>
+                                                <th>谢谢参与</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+           
+                                        <volist name="list" id="item">
+                                            <tr class="gradeX">
+                                                <td>{$item.city_id}</td>
+                                                <td>{$item.city_name}</td>
+                                                <td>{$item.ccc}</td>
+                                                <td>{$item.rb}</td>
+                                                <td>{$item.rbmoney}</td>
+                                                <td>{$item.rs}</td>
+                                                <td>{$item.rsmoney}</td>
+                                                <td>{$item.mb}</td>
+                                                <td>{$item.mbmoney}</td>
+                                                <td>{$item.ms}</td>
+                                                <td>{$item.msmoney}</td>
+
+
+
+                                                <td>{$item.ths}</td>
+                                                <!--                    <td class="center">
+                                                                      <a href="{:U('/signed/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a> |  
+                                                                    <a href="{:U('/signed/delete', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 删除</a></td>-->
+                                            </tr>
+                                        </volist>
+                                           
+                                        </tbody>
+                                    </table>    
+                                    <div class="row ">
+                                        <div class="pages">
+                                            {$page}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全局js -->
+        <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+        <script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.5"></script>
+        <script src="__PUBLIC__/js/plugins/jeditable/jquery.jeditable.js"></script>
+        <!-- Data Tables -->
+        <script src="__PUBLIC__/js/plugins/dataTables/jquery.dataTables.js"></script>
+        <script src="__PUBLIC__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+        <!-- 自定义js -->
+        <script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+
+        <!-- 自定义js -->
+        <script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+
+        <!-- Chosen -->
+        <script src="__PUBLIC__/js/plugins/chosen/chosen.jquery.js"></script>
+
+        <!-- JSKnob -->
+        <script src="__PUBLIC__/js/plugins/jsKnob/jquery.knob.js"></script>
+
+        <!-- Input Mask-->
+        <script src="__PUBLIC__/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+        <!-- Data picker -->
+        <script src="__PUBLIC__/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+        <!-- Page-Level Scripts -->
+        <script src="__PUBLIC__/js/plugins/layer/laydate/laydate.js"></script>
+
+
+        <script>
+                    //外部js调用
+                                
+                                                        
+            $('button[type="submit"]').click(function () {
+                window.location.href = "{:U('/signed/packstatistics')}&date=" + $('#date').val() ;
+            });
+            $(document).ready(function () {
+                /* Init DataTables */
+                //            var oTable = $('#editable').dataTable();
+                //
+                //            /* Apply the jEditable handlers to the table */
+                //            oTable.$('td').editable('../example_ajax.php', {
+                //                "callback": function (sValue, y) {
+                //                    var aPos = oTable.fnGetPosition(this);
+                //                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                //                },
+                //                "submitdata": function (value, settings) {
+                //                    return {
+                //                        "row_id": this.parentNode.getAttribute('id'),
+                //                        "column": oTable.fnGetPosition(this)[2]
+                //                    };
+                //                },
+                //
+                //                "width": "90%",
+                //                "height": "100%"
+                //            });
+
+
+            });
+
+            function fnClickAddRow() {
+                $('#editable').dataTable().fnAddData([
+                    "Custom row",
+                    "New row",
+                    "New row",
+                    "New row",
+                    "New row"]);
+
+            }
+        </script>
+    </body>
+</html>

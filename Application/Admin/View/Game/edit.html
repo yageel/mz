@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>游戏编辑</title>
+        <meta name="keywords" content="游戏编辑">
+        <meta name="description" content="游戏编辑">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+        <link href="__PUBLIC__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+        <link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/animate.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/style.css?v=4.0.0" rel="stylesheet">
+        <base target="_blank">
+    </head>
+    <body class="gray-bg">
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class=""> <a href="{:U('/game/index')}" target="_self" class="btn btn-primary ">返回</a> </div>
+                        <div class="ibox-title">
+                            <h5><a href="{:U('/game/index')}"> 游戏管理</a> > <small>游戏编辑</small></h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                            </div>
+                        </div>
+
+
+
+                        <div class="ibox-content">
+                            <form method="post" name="edit" target="_self" action="{:U('/game/edit')}" class="form-horizontal">
+                                <input type="hidden" name="id" value="{$game.id}" />
+                                <div class="form-group" style="display: none">
+                                    <label class="col-sm-2 control-label" ></label>
+                                    <div class="col-sm-10">
+                                        <input id="hello" class="laydate-icon form-control layer-date">
+                                    </div>
+                                </div>
+                                <!--                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">图标触发日期：</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input readonly class="form-control layer-date" id="hello1">
+                                                                            <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#hello1'});"></label>
+                                                                        </div>
+                                                                    </div>-->
+                     
+           <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">游戏名称</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" name="name" value="{$game.name}"required="" aria-required="true">
+                                    </div>
+                                </div>
+
+         
+                                <div class="hr-line-dashed">游戏设置</div>
+   <div class="form-group">
+                                    <label class="col-sm-2 control-label">游戏设置</label>  </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">1： <br/>
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <input type="text"  name="area[]" value="<php>echo $game["area"][0] </php>"  placeholder="排名区间" class="form-control">
+                                            </div>
+                                   
+                                            <div class="col-md-4">
+                                                <input type="text" name="number[]" value="<php>echo $game["number"][0] </php>" placeholder="奖励的M币" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">2： <br/>
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <input type="text"  name="area[]" value="<php>echo $game["area"][1] </php>" placeholder="排名区间" class="form-control">
+                                            </div>
+                                   
+                                            <div class="col-md-4">
+                                                <input type="text" name="number[]" value="<php>echo $game["number"][1] </php>"  placeholder="奖励的M币" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">3： <br/>
+      
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <input type="text"  name="area[]" value="<php>echo $game["area"][2] </php>" placeholder="排名区间" class="form-control">
+                                            </div>
+                                      
+                                            <div class="col-md-4">
+                                                <input type="text"  name="number[]" value="<php>echo $game["number"][2] </php>"  placeholder="奖励的M币" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">4：<br/>
+                    
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <input type="text" name="area[]" value="<php>echo $game["area"][3] </php>" placeholder="排名区间" class="form-control">
+                                            </div>
+                                        
+                                            <div class="col-md-4">
+                                                <input type="text" name="number[]" value="<php>echo $game["number"][3] </php>" placeholder="奖励的M币" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">5：<br/>
+                                      
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <input type="text" name="area[]" value="<php>echo $game["area"][4] </php>"  placeholder="排名区间" class="form-control">
+                                            </div>
+                                      
+                                            <div class="col-md-4">
+                                                <input type="text" name="number[]" value="<php>echo $game["number"][4] </php>"  placeholder="奖励的M币" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-primary" type="submit">保存内容</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 全局js -->
+        <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+        <script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.5"></script>
+        <!-- 自定义js -->
+        <script src="__PUBLIC__/js/content.js?v=1.0.0"></script>
+        <!-- iCheck -->
+        <script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+
+
+
+        <!-- layerDate plugin javascript -->
+        <script src="__PUBLIC__/js/plugins/layer/laydate/laydate.js"></script>
+        <script>
+            //外部js调用
+            laydate({
+                elem: '#hello', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+                event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+            });
+
+            //日期范围限制
+            var start = {
+                elem: '#start',
+                format: 'YYYY/MM/DD hh:mm:ss',
+                min: laydate.now(), //设定最小日期为当前日期
+                max: '2099-06-16 23:59:59', //最大日期
+                istime: true,
+                istoday: false,
+                choose: function (datas) {
+                    end.min = datas; //开始日选好后，重置结束日的最小日期
+                    end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                elem: '#end',
+                format: 'YYYY/MM/DD hh:mm:ss',
+                min: laydate.now(),
+                max: '2099-06-16 23:59:59',
+                istime: true,
+                istoday: false,
+                choose: function (datas) {
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
+            laydate(start);
+            laydate(end);
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('form[name="edit"]').submit(function () {
+
+                    return true;
+                });
+            });
+        </script>
+
+    </body>
+</html>

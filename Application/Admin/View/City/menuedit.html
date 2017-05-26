@@ -1,0 +1,159 @@
+<extend name="Layout/master" />
+<block name="title">公众号编辑-</block>
+<block name="head"></block>
+<block name="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""><a href="{:U('/city/index')}" target="_self" class="btn btn-primary ">返回</a></div>
+                <div class="ibox-title">
+                    <h5><a href="{:U('/city/index')}"> 公众号管理</a> >
+                        <small>公众号编辑</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/city/menuedit', ['id' => $city_id])}" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">菜单JSON：</label>
+                            <div class="col-sm-10">
+                                <textarea name="menu" id="menu" class="form-control" rows="20">{$menu}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="reset">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+<script>
+    $(document).ready(function () {
+        $('form[name="edit"]').submit(function () {
+            return true;
+        });
+    });
+</script>
+<script type="text/javascript">
+    var JsonUti = {
+        //定义换行符
+        n: "\n",
+        //定义制表符
+        t: "\t",
+        //转换String
+        convertToString: function (obj) {
+            return JsonUti.__writeObj(obj, 1);
+        },
+        //写对象
+        __writeObj: function (obj    //对象
+                , level             //层次（基数为1）
+                , isInArray) {       //此对象是否在一个集合内
+            //如果为空，直接输出null
+            if (obj == null) {
+                return "null";
+            }
+            //为普通类型，直接输出值
+            if (obj.constructor == Number || obj.constructor == Date || obj.constructor == String || obj.constructor == Boolean) {
+                var v = obj.toString();
+                var tab = isInArray ? JsonUti.__repeatStr(JsonUti.t, level - 1) : "";
+                if (obj.constructor == String || obj.constructor == Date) {
+                    //时间格式化只是单纯输出字符串，而不是Date对象
+                    return tab + ("\"" + v + "\"");
+                }
+                else if (obj.constructor == Boolean) {
+                    return tab + v.toLowerCase();
+                }
+                else {
+                    return tab + (v);
+                }
+            }
+
+            //写Json对象，缓存字符串
+            var currentObjStrings = [];
+            //遍历属性
+            for (var name in obj) {
+                var temp = [];
+                //格式化Tab
+                var paddingTab = JsonUti.__repeatStr(JsonUti.t, level);
+                temp.push(paddingTab);
+                //写出属性名
+                temp.push("\"" + name + "\" : ");
+
+                var val = obj[name];
+                if (val == null) {
+                    temp.push("null");
+                }
+                else {
+                    var c = val.constructor;
+
+                    if (c == Array) { //如果为集合，循环内部对象
+                        temp.push(JsonUti.n + paddingTab + "[" + JsonUti.n);
+                        var levelUp = level + 2;    //层级+2
+
+                        var tempArrValue = [];      //集合元素相关字符串缓存片段
+                        for (var i = 0; i < val.length; i++) {
+                            //递归写对象
+                            tempArrValue.push(JsonUti.__writeObj(val[i], levelUp, true));
+                        }
+
+                        temp.push(tempArrValue.join("," + JsonUti.n));
+                        temp.push(JsonUti.n + paddingTab + "]");
+                    }
+                    else if (c == Function) {
+                        temp.push("[Function]");
+                    }
+                    else {
+                        //递归写对象
+                        temp.push(JsonUti.__writeObj(val, level + 1));
+                    }
+                }
+                //加入当前对象“属性”字符串
+                currentObjStrings.push(temp.join(""));
+            }
+            return (level > 1 && !isInArray ? JsonUti.n : "")                       //如果Json对象是内部，就要换行格式化
+                    + JsonUti.__repeatStr(JsonUti.t, level - 1) + "{" + JsonUti.n     //加层次Tab格式化
+                    + currentObjStrings.join("," + JsonUti.n)                       //串联所有属性值
+                    + JsonUti.n + JsonUti.__repeatStr(JsonUti.t, level - 1) + "}";   //封闭对象
+        },
+        __isArray: function (obj) {
+            if (obj) {
+                return obj.constructor == Array;
+            }
+            return false;
+        },
+        __repeatStr: function (str, times) {
+            var newStr = [];
+            if (times > 0) {
+                for (var i = 0; i < times; i++) {
+                    newStr.push(str);
+                }
+            }
+            return newStr.join("");
+        }
+    };
+
+    window.onload = function () {
+        <if condition="$menu">
+            document.getElementById("menu").innerHTML = JsonUti.convertToString({$menu});
+        </if>
+
+        <if condition="$result">
+            JsonUti.n = "<br>";
+            JsonUti.t = "&nbsp;&nbsp;&nbsp;";
+            document.getElementById("result").innerHTML = JsonUti.convertToString({$result});
+        </if>
+    };
+</script>
+</block>

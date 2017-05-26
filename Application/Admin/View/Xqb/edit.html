@@ -1,0 +1,149 @@
+<extend name="Layout/master" />
+<block name="title">夏青杯朗诵大赛用户信息编辑-</block>
+<block name="head">
+    <style>
+        #dd{
+            display: none !important;
+        }
+    </style>
+</block>
+
+<block name="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""> <a href="{:U('/xqb/join')}" target="_self" class="btn btn-primary ">返回</a> </div>
+                <div class="ibox-title">
+                    <h5><a href="{:U('/xqb/join')}"> 夏青杯朗诵大赛</a> > <small>用户信息编辑</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/xqb/edit')}" class="form-horizontal">
+                        <input type="hidden" name="id" value="{$data.id}" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">姓名：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" value="{$data.name}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">性别：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="sex" value="{$data.sex}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手机：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="tel" value="{$data.tel}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">投票数量：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="pollsnum" value="{$data.pollsnum}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">身份证号：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="idcard" value="{$data.idcard}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">民族：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nation" value="{$data.nation}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">出生日期：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="birthday" value="{$data.birthday|date='Y-m-d',###}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">职业：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="job" value="{$data.job}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">工作单位或学校：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="work_unit" value="{$data.work_unit}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">报名所在地：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="address" value="{$data.address}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否参与非法组织：</label>
+                            <div class="col-sm-10">
+                                <select type="text" name="unlawful"  class="form-control"  id="unlawfulType">
+                                    <option value="0" <if condition="$data.unlawful eq 1">selected</if>>是</option>
+                                    <option value="1" <if condition="$data.unlawful eq 0">selected</if>>否</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">监护人：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="guardian" value="{$data.guardian}" class="form-control">
+                            </div>
+                        </div>
+                        <!-- 上传图片 -->
+                        <!--<div class="hr-line-dashed"></div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-2 control-label">个人头像：</label>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<input type="text"   id="imageid"  data-url="http://hdv4.hotwifibox.com{$data.imageid}" name="imageid"  value="{$data.imageid}"  class="view_img form-control">-->
+                                <!--<span class="help-block m-b-none"><iframe src="{:U('/admin/upload/show',array('sid'=>'activeXqbPrize','fileback'=>'imageid'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span> </div>-->
+                        <!--</div>-->
+
+
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">报名时间：</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="ctime" value="{$data.ctime|date='Y-m-d H:i:s',###}" class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="reset">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+</block>

@@ -1,0 +1,73 @@
+<extend name="Layout/master" />
+<block name="title">添加永久素材-</block>
+<block name="head"></block>
+<block name="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""><a href="{:U('/city/media')}" target="_self" class="btn btn-primary ">返回</a></div>
+                <div class="ibox-title">
+                    <h5>
+                        <a href="{:U('/city/media')}">永久素材管理</a>
+                        >
+                        <small>添加永久素材</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <if condition="count($errors)">
+                        <div class="alert alert-danger">
+                            <volist name="errors" id="error" key="key">
+                                {$key}：{$error}
+                            </volist>
+                        </div>
+                    </if>
+
+                    <form method="post" name="edit" target="_self" action="{:U('/city/mediaUpload')}" class="form-horizontal" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">城市：</label>
+                            <div class="col-sm-10">
+                                {$city_list}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">素材类型：</label>
+                            <div class="col-sm-10">
+                                {$media_type_list}
+                                <div class="help-block">
+                                    <ul>
+                                        <li>图片（image）: 2M，支持bmp/png/jpeg/jpg/gif格式</li>
+                                        <li>语音（voice）：2M，播放长度不超过60s，支持AMR/MP3格式</li>
+                                        <!--<li>视频（video）：10MB，支持MP4格式</li>-->
+                                        <li>缩略图（thumb）：64KB，支持JPG格式</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文件：</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="file">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="reset">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

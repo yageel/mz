@@ -1,0 +1,263 @@
+<extend name="Layout/master" />
+<block name="title">商品编辑-</block>
+<block name="head">
+</block>
+<block name="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+          <div class=""> <a href="{:U('/goods/index')}" target="_self" class="btn btn-primary ">返回</a> </div>
+        <div class="ibox-title">
+          <h5><a href="{:U('/goods/index')}"> 商品管理</a> > <small>商品编辑</small></h5>
+          <div class="ibox-tools">
+              <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+   </div>
+        </div>
+        <div class="ibox-content">
+          <form method="post" name="edit" target="_self" action="{:U('/goods/edit')}" class="form-horizontal">
+              <input type="hidden" name="id" value="{$goods.id}" />
+            <div class="form-group">
+              <label class="col-sm-2 control-label">商品名称：</label>
+              <div class="col-sm-10">
+                <input type="text" name="goods_name" value="{$goods.goods_name}" class="form-control">
+                  <span class="help-block m-b-none" style="color: #777">*</span>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">投放公众号：</label>
+                  <div class="col-sm-10">
+                      <select name="city_id" class="form-control">
+                          <option value="0">所有公众号</option>
+                          <volist name="city_list" id="city">
+                          <option value="{$city.city_id}" <if condition="$goods[city_id] eq $city[city_id]">selected</if>>{$city.city_name}</option>
+                          </volist>
+                      </select>
+                      <span class="help-block m-b-none" style="color: #777">*</span>
+                  </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <if condition="empty($goods['id'])">
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label">上传平台：</label>
+                      <div class="col-sm-10">
+                          <input type="radio" name="visible_platform" value="1" checked>互动
+                          <input type="radio" name="visible_platform" value="2">ARhere
+                      </div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+              </if>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">参与方式：</label>
+              <div class="col-sm-10">
+                <select name="goods_class" class="form-control" onchange="changeGoodsClass(this)">
+                    <option value="1" <if condition="$goods.goods_class eq 1">selected</if>>兑换</option>
+                    <option value="2" <if condition="$goods.goods_class eq 2">selected</if>>抽奖</option>
+                    <option value="3" <if condition="$goods.goods_class eq 3">selected</if>>兑换+现金</option>
+                </select>
+                <span class="help-block m-b-none" style="color: #777">*</span> </div>
+            </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品标签：</label>
+                  <div class="col-sm-10">
+                      <volist name="goods_tag" id="tag">
+                          <label class="checkbox-inline i-checks">
+                              <input type="checkbox" name="tag_id[]" <if condition="in_array($tag[tag_id], $goods_tags)">checked</if> value="{$tag[tag_id]}">{$tag.tag_name}</label>
+                   </volist></div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品类型：</label>
+                  <div class="col-sm-10">
+                      <select name="goods_type" class="form-control" onchange="changeGoodsType(this)">
+                          <option value="1" <if condition="$goods.goods_type eq 1">selected</if>>实物商品</option>
+                          <option value="2" <if condition="$goods.goods_type eq 2">selected</if>>微信卡券</option>
+                          <option value="3" <if condition="$goods.goods_type eq 3">selected</if>>第三方卡券</option>
+                          <option value="4" <if condition="$goods.goods_type eq 4">selected</if>>第三方链接</option>
+                          <option value="5" <if condition="$goods.goods_type eq 5">selected</if>>虚拟商品</option>
+                      </select>
+                      <span class="help-block m-b-none" style="color: #777">*</span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品图标：</label>
+                  <div class="col-sm-10">
+                      <input type="text" id="goods_ico"  data-url="{$goods.goods_ico}"  name="goods_ico" value="{$goods.goods_ico}" class="view_img form-control">
+                      <span class="help-block m-b-none"><iframe src="{:U('/admin/upload/show',array('sid'=>'goods','fileback'=>'goods_ico'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span></div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品图片：</label>
+                  <div class="col-sm-10">
+                      <input type="text" id="goods_pic"  data-url="{$goods.goods_pic}" name="goods_pic" value="{$goods.goods_pic}" class="view_img form-control">
+                      <span class="help-block m-b-none"><iframe src="{:U('/admin/upload/show',array('sid'=>'goods','fileback'=>'goods_pic'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">消耗M币：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="goods_credit" value="{$goods.goods_credit|default=0}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*兑换所需M币或每次抽奖所需M币</span></span> </div>
+              </div>
+
+              <div class="hr-line-dashed" id="goodsPriceShowLine" <if condition="$goods.goods_class neq 3"> style="display: none;"</if>></div>
+              <div class="form-group" id="goodsPriceShow" <if condition="$goods.goods_class neq 3"> style="display: none;"</if>>
+                  <label class="col-sm-2 control-label">消耗金额：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="goods_price" value="{$goods.goods_price|default=0}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*兑换所需金额</span></span> </div>
+              </div>
+
+
+              <div class="hr-line-dashed"></div>
+              <div class="form-group" id="probabilityShow" <if condition="$goods.goods_class neq 2"> style="display: none;"</if>>
+                  <label class="col-sm-2 control-label">中奖概率：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="probability" value="{$goods.probability|default=10}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*只有参与方式为抽奖才有效, 如果百分之10的概率,输入10即可,如果是万分之5输入0.05,最高支持万分比</span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">每人限兑数量：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="per_limit" value="{$goods.per_limit|default=1}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*只有参与方式为兑换才需要设置</span> </div>
+              </div>
+              <div class="hr-line-dashed" id="cardShowLine" <if condition="$goods.goods_type neq 2"> style="display: none;"</if>></div>
+              <div class="form-group" id="cardShow" <if condition="$goods.goods_type neq 2"> style="display: none;"</if>>
+                  <label class="col-sm-2 control-label">卡券ID：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="card_id" value="{$goods.card_id}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*只有参与方式为本地卡券才需要设置</span> </div>
+              </div>
+
+
+    <div class="hr-line-dashed" id="jumpUrlShowLine" <if condition="in_array($goods.goods_type, array(3,4))"> style="display: block;"<else/>style="display: none;"</if>></div>
+
+              <div class="form-group" id="jumpUrlShow" <if condition="in_array($goods.goods_type, array(3,4))"> style="display: block;"<else/>style="display: none;"</if>>
+                  <label class="col-sm-2 control-label">跳转链接：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="jump_url" value="{$goods.jump_url}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*第三方卡卷或第三方链接才需要设置</span> </div>
+              </div>
+
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品库存：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="sku" value="{$goods.sku|default=100}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*库存默认为100会随着兑换或抽奖消耗</span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品权重：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="weight" value="{$goods.weight|default=0}" class="form-control">
+                      <span class="help-block m-b-none" style="color: #777">*权重越高排在越前面</span> </div>
+              </div>
+
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品状态：</label>
+                  <div class="col-sm-10">
+                      <select name="status" class="form-control">
+                          <option value="1">发布状态</option>
+                          <option value="0" <if condition="$goods.status eq '0'">selected</if>>下架</option>
+                          <option value="99" <if condition="$goods.status eq 99">selected</if>>删除</option>
+                      </select>
+                      <span class="help-block m-b-none" style="color: #777">*只有发布状态下商品才能兑换或抽奖</span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品详情：</label>
+                  <div class="col-sm-10">
+                      <script type="text/plain" id="goods_desc" name="goods_desc">
+           {$goods.goods_desc}
+        </script>
+                      <span class="help-block m-b-none"></span> </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">商品规则：</label>
+                  <div class="col-sm-10">
+                      <script type="text/plain" id="goods_rule" name="goods_rule">
+           {$goods.goods_rule}
+        </script>
+                      <span class="help-block m-b-none"></span> </div>
+              </div>
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+                <button class="btn btn-white" type="reset">取消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</block>
+<block name="js">
+    <!-- iCheck -->
+    <script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+
+        var editor_a = UE.getEditor('goods_desc',{initialFrameHeight:400, serverUrl: '__PUBLIC__/js/plugins/ueditor/php/controller.php'});
+        var editor_b = UE.getEditor('goods_rule',{initialFrameHeight:300, serverUrl: '__PUBLIC__/js/plugins/ueditor/php/controller.php'});
+        //--自动切换提交地址----
+//        var doc=document,
+//        version = editor_a.options.serverUrl || editor_a.options.imageUrl || "php",
+//        form=doc.getElementById("form");
+
+        //-----
+
+    });
+
+
+        function changeGoodsClass(_this){
+            var v = $(_this).val();
+            if(v == 2){
+                $("#probabilityShow").show();
+                $("#goodsPriceShow").hide();
+                $("#goodsPriceShowLine").hide();
+            }else if(v == 3){
+                $("#goodsPriceShow").show();
+                $("#goodsPriceShowLine").show();
+                $("#probabilityShow").hide();
+
+            }else{
+                $("#goodsPriceShow").hide();
+                $("#goodsPriceShowLine").hide();
+                $("#probabilityShow").hide();
+            }
+        }
+
+        function changeGoodsType(_this){
+            var v = $(_this).val();
+            if(v == 2){
+                $("#cardShow").show();
+                $("#cardShowLine").show();
+                $("#jumpUrlShow").hide();
+                $("#jumpUrlShowLine").hide();
+            }else if(v == 3 || v == 4){
+                $("#jumpUrlShow").show();
+                $("#jumpUrlShowLine").show();
+                $("#cardShow").hide();
+                $("#cardShowLine").hide();
+            }else{
+                $("#cardShow").hide();
+                $("#cardShowLine").hide();
+                $("#jumpUrlShow").hide();
+                $("#jumpUrlShowLine").hide();
+
+            }
+        }
+</script>
+</block>
