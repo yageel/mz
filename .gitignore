@@ -1,0 +1,8 @@
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+.buildpath
+.project
+.settings/*
+.htaccess
