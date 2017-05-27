@@ -60,91 +60,6 @@ class SysController extends BaseController
     }
 
     /**
-     * 系统汇总数据
-     */
-    public function user_tongji(){
-        // 用户相关
-        ///////////////////////////////// 昨天数据
-        // 微信用户
-        $time = strtotime(date("Y-m-d",strtotime("-1 day")));
-        $time2 = strtotime(date("Y-m-d"));
-        $data['yestory_weixin'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE create_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE create_time BETWEEN $time AND $time2
-                            ");
-
-        $data['weixin_total'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE 1 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE 1
-                            ");
-
-        // 注册用户
-        $data['yestory_member'] = M('users_member')->where("create_time BETWEEN $time AND $time2")->count();
-        // 注册用户
-        $data['member_total'] = M('users_member')->count();
-
-        // 关注用户
-        $data['yestory_subcribe'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE is_subscribe=1 AND subcribe_time BETWEEN $time AND $time2
-                            ");
-
-        $data['subcribe_total'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE is_subscribe=1 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE is_subscribe=1
-                            ");
-
-        // 取消关注
-        $data['yestory_unsubcribe'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE is_subscribe=0 AND unsubcribe_time BETWEEN $time AND $time2
-                            ");
-
-        $data['unsubcribe_total'] = M()->query("SELECT count(*) as total FROM t_users_1 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_2 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_3 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_4 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_5 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_6 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_7 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_8 WHERE is_subscribe=0 UNION ALL
-                            SELECT count(*) as total FROM t_users_9 WHERE is_subscribe=0
-                            ");
-        print_r($data);
-        //$this->display('sys/user_tontji', $data);
-    }
-
-    /**
      * 签到数据
      */
     public function signed(){
@@ -198,10 +113,7 @@ class SysController extends BaseController
             }
 
             return false;
-
         }
-
-
         $this->display();
     }
 

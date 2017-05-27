@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="renderer" content="webkit">
-<title>美联美客后台管理系统</title>
-<meta name="keywords" content="美联美客后台管理系统">
-<meta name="description" content="美联美客后台管理系统">
+<title>魔座后台管理系统</title>
+<meta name="keywords" content="魔座后台管理系统">
+<meta name="description" content="魔座后台管理系统">
 <!--[if lt IE 8]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -36,66 +36,31 @@
           </div>
           <div class="logo-element">联</div>
         </li>
-        <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">公众号管理</span> <span class="fa arrow"></span> </a>
+
+        <li> <a href="#"> <i class="fa fa-object-group"></i> <span class="nav-label">设备管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/city/index')}">公众号列表</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/city/reply')}">消息回复管理</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/city/media')}">永久素材管理</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/device/index')}">设备列表</a> </li>
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa fa-home"></i> <span class="nav-label">首页管理</span> <span class="fa arrow"></span> </a>
+        <li> <a href="#"> <i class="fa fa-credit-card"></i> <span class="nav-label">套餐管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/home/sign')}">签到配置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/home/index')}">首页配置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/home/set')}">文案配置</a> </li>
-			<li> <a class="J_menuItem" href="{:U('/home/redSet')}">红包文案配置</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/package/index')}">套餐列表</a> </li>
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa fa-object-group"></i> <span class="nav-label">商品管理</span> <span class="fa arrow"></span> </a>
+        <li> <a href="#"> <i class="fa  fa-balance-scale"></i> <span class="nav-label">角色管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/goods/index')}">商品列表</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/goods/tag')}">商品标签</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/exchange/index')}">兑换记录</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/lottery/index')}">抽奖记录</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/express/index')}">发货记录</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/exchange_rules/edit')}">兑换规则</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/wxlog/index/rtype/1')}">微信支付记录</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/user/index')}">角色列表</a> </li>
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa fa-credit-card"></i> <span class="nav-label">刮刮卡管理</span> <span class="fa arrow"></span> </a>
+        <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-gamepad"></i> <span class="nav-label">佣金管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/card/index')}">中奖规则</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/card/history')}">刮卡记录</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/rebate/index')}">佣金列表</a> </li>
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa  fa-balance-scale"></i> <span class="nav-label">任务大厅</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/taskmall/index')}">超级任务</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/milestone/index')}">里程碑</a> </li>
-          </ul>
-        </li>
-
-        <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-gamepad"></i> <span class="nav-label">游戏管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/game/index')}">游戏列表</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/game/navigation')}">航海寻宝设置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/game/bugbear')}">无穷小怪兽设置</a> </li>
-          </ul>
-        </li>
-
-        <li> <a href="#"> <i class="fa fa-gears"></i> <span class="nav-label">营销工具</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/signed/index')}">签到礼包(线上)</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/signed/index/t/1')}">签到礼包(线下)</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/signed/packstatistics')}">签到统计</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/signed/dituistatistics')}">地推统计</a> </li>
-          </ul>
-        </li>
-        
         <li> <a href="#"> <i class="fa fa-group"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
             <li> <a class="J_menuItem" href="{:U('/users/index')}">微信用户</a> </li>
@@ -105,104 +70,13 @@
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa fa-money"></i> <span class="nav-label">资金管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/users/bank')}">用户资金</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/users/case_record')}">提现记录</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/city/wechat_pay_record')}">微信支付记录</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/users/integral_record')}">M币流水</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/users/money_record')}">资金流水</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/users/integral_exchange')}">积分兑换</a></li>
-            <li> <a class="J_menuItem" href="{:U('/wxlog/index')}">微信充值M币</a> </li>
-          </ul>
-        </li>
-
         <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-money"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/sys/msg')}">监控消息</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/signed')}">签到红包</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/sms')}">发送短信</a> </li>
-            <!--
-            <li> <a class="J_menuItem" href="{:U('/sys/user_tongji')}">用户数据</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/msg')}">红包数据</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/msg')}">M币数据</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/msg')}">提现数据</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/sys/msg')}">微信数据</a> </li>-->
+            <li> <a class="J_menuItem" href="{:U('city/index')}">公众号设置</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/home/index')}">首页配置</a> </li>
           </ul>
         </li>
 
-        <li>
-          <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">HeHa活动管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/active_heha/prize')}">奖池设置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_heha/join')}">活动参与</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_heha/invite')}">用户助力</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_heha/record')}">抽奖流水</a> </li>
-          </ul>
-        </li>
-        
-        <li>
-          <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">美食地图活动管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/active_msdt/prize')}">奖池设置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_msdt/join')}">活动参与</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_msdt/record')}">抽奖流水</a> </li>
-			<li> <a class="J_menuItem" href="{:U('/active_msdt/notdraw_record')}">未刮奖用户</a> </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">机场电视-美食地图</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/active_airport/prize')}">奖池设置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_airport/join')}">活动参与</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/active_airport/record')}">抽奖流水</a> </li>
-			<li> <a class="J_menuItem" href="{:U('/active_airport/notdraw_record')}">未刮奖用户</a> </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">二维码跳链管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/jump/index')}">二维码列表</a> </li>
-          </ul>
-        </li>
-        
-         <li>
-          <a href="#"> <i class="fa fa-desktop"></i> <span class="nav-label">图片转链接管理</span> <span class="fa arrow"></span> </a>
-          <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/imgshare/index')}">链接列表</a> </li>
-          </ul>
-        </li>
-        
-        <!--
-        <li> <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">信箱 </span><span class="label label-warning pull-right">16</span></a>
-          <ul class="nav nav-second-level">
-            <li><a class="J_menuItem" href="mailbox.html">收件箱</a> </li>
-            <li><a class="J_menuItem" href="mail_detail.html">查看邮件</a> </li>
-            <li><a class="J_menuItem" href="mail_compose.html">写信</a> </li>
-          </ul>
-        </li>-->
-        <!--
-        <li> <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-
-            <li><a class="J_menuItem" href="form_wizard.html">表单向导</a> </li>
-            <li> <a href="#">文件上传 <span class="fa arrow"></span></a>
-              <ul class="nav nav-third-level">
-                <li><a class="J_menuItem" href="form_webuploader.html">百度WebUploader</a> </li>
-                <li><a class="J_menuItem" href="form_file_upload.html">DropzoneJS</a> </li>
-                <li><a class="J_menuItem" href="form_avatar.html">头像裁剪上传</a> </li>
-              </ul>
-            </li>
-          </ul>
-        </li>-->
-        <!--
-        <li> <a class="J_menuItem" href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a> </li>
-        <li> <a href="#"><i class="fa fa-cutlery"></i> <span class="nav-label">工具 </span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-            <li><a class="J_menuItem" href="form_builder.html">表单构建器</a> </li>
-          </ul>
-        </li>-->
       </ul>
     </div>
   </nav>
@@ -269,7 +143,7 @@
       <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="{:U('index/index1')}" frameborder="0" data-id="{:U('index/index1')}" seamless></iframe>
     </div>
     <div class="footer">
-      <div class="pull-right">&copy; 2015-2016 <a href="http://www.millionmake.com/" target="_blank">美联美客</a> </div>
+      <div class="pull-right">&copy; 2015-2016 <a href="http://www.millionmake.com/" target="_blank">魔座</a> </div>
     </div>
   </div>
   <!--右侧部分结束-->
