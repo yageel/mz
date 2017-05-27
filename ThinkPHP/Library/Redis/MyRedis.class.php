@@ -71,7 +71,7 @@ class MyRedis extends \Redis{
 		return self::$tokeninstance;
 	}
 
-            /**
+	/**
 	 * 架构函数
 	 * @param array  game
 	 * @access public

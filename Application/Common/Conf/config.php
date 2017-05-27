@@ -6,11 +6,11 @@ $config = array(
     'TMPL_STRIP_SPACE'     =>true,
     'OUTPUT_ENCODE'        =>true, // 页面压缩输出
 
-    'MODULE_ALLOW_LIST'    =>    array('Admin',),
+    'MODULE_ALLOW_LIST'    =>    array('Admin','Home'),
     'DEFAULT_MODULE'       =>    'Admin',  // 默认模块
 
     //加密混合值
-    'AUTH_CODE' => 'HunDongV4',
+    'AUTH_CODE' => 'MoZuo=#=#',
     //数据库配置
     'URL_CASE_INSENSITIVE' => true,
     'URL_HTML_SUFFIX' => 'html',
@@ -21,10 +21,10 @@ $config = array(
 //        ),
 
     //
-    'AD_REDIS' => array('10.105.247.64', 6380, 5, ''), //6380
-    'PRO_REDIS' => array('10.105.247.64', 6381, 5, ''), //产品
-    'TOKEN_REDIS' => array('10.105.247.64', 6382, 5, ''), //微信token 及相关
-    'TOKEN_GAME' => array('10.105.247.64', 6390, 5, ''), //游戏
+    'AD_REDIS' => array('127.0.0.1', 6379, 5, ''), //6380
+    'PRO_REDIS' => array('127.0.0.1', 6379, 5, ''), //产品
+    'TOKEN_REDIS' => array('127.0.0.1', 6379, 5, ''), //微信token 及相关
+    'TOKEN_GAME' => array('127.0.0.1', 6379, 5, ''), //游戏
 
     'SESSION_TABLE'=>'hd_sess', //必须设置成这样，如果不加前缀就找不到数据表，这个需要注意
     'TAGLIB_BUILD_IN' => 'cx',//标签库

@@ -27,6 +27,7 @@ class LoginController extends Controller {
 
         session('is_login', 1);
         session('login_user_id',$user['id']);
+        session('login_user', $user);
         redirect(U('/index/index'));
     }
 }

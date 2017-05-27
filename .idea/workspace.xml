@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f2ecb987-c697-43fb-905e-a0360776ec4c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/mz.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/32ec6c906c117a7c2bf504769276d87a.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/4314aaf492384b75852141a74e6067ff.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/610f985b0eadf9feb3f5c61f537bf874.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Admin/f8c2417b5d036e20f93d54c2e317806d.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Runtime/Logs/Admin/17_05_27.log" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/comment.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/commentedit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/joinadd.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/joinedit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Active/upload.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/notdraw_record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveAirport/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/invite.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveHeha/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/notdraw_record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ActiveMsdt/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Ad/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Ad/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Card/history.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Card/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Card/view.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Exchange/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ExchangeRules/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/ExchangeRules/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Express/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Express/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Game/bugbear.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Game/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Game/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Game/navigation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Goods/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Goods/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Goods/tag.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Goods/tag_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Imgshare/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Imgshare/url_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Jump/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Jump/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Jump/url.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Jump/url_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Lottery/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Milestone/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Milestone/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/address.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/address_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/import_addr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/pay.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/pay_detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Mvkt/success.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/PicTourl/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/PicTourl/url_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Signed/dituistatistics.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Signed/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Signed/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Signed/packstatistics.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Taskmall/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Taskmall/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Wxlog/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Xqb/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Xqb/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Xqb/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/comment.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/commentedit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/joinadd.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/joinedit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Active/upload.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/notdraw_record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveAirport/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/invite.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveHeha/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/join_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/notdraw_record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/prize.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/prize_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ActiveMsdt/record.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Ad/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Ad/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Card/history.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Card/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Card/view.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Exchange/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ExchangeRules/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/ExchangeRules/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Express/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Express/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Game/bugbear.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Game/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Game/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Game/navigation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Goods/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Goods/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Goods/tag.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Goods/tag_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Imgshare/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Imgshare/url_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Lottery/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Milestone/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Milestone/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/address.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/address_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/import_addr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/join.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/pay.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/pay_detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Mvkt/success.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/PicTourl/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/PicTourl/url_edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Signed/dituistatistics.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Signed/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Signed/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Signed/packstatistics.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Taskmall/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Taskmall/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Wxlog/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Xqb/detail.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Xqb/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/Xqb/join.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Admin/Controller/LoginController.class.php" afterPath="$PROJECT_DIR$/Application/Admin/Controller/LoginController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Conf/config.php" afterPath="$PROJECT_DIR$/Application/Common/Conf/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Conf/db_config.php" afterPath="$PROJECT_DIR$/Application/Common/Conf/db_config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThinkPHP/Library/Redis/MyRedis.class.php" afterPath="$PROJECT_DIR$/ThinkPHP/Library/Redis/MyRedis.class.php" />
+    </list>
+    <ignored path="mz.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="mz" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="db_config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Common/Conf/db_config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.75">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.5">
+              <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseModel.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Admin/Model/BaseModel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginController.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/LoginController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6191011">
+              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Admin/Common/function.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="28.5">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1495806969611" expanded="true" signature="2185:2209" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyRedis.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ThinkPHP/Library/Redis/MyRedis.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-50.214287">
+              <caret line="74" column="11" selection-start-line="74" selection-start-column="11" selection-end-line="74" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/auto/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="functions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ThinkPHP/Common/functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Application/Common/Conf/db_config.php" />
+        <option value="D:/xampp/phpMyAdmin/config.inc.php" />
+        <option value="$PROJECT_DIR$/ThinkPHP/Library/Redis/MyRedis.class.php" />
+        <option value="$PROJECT_DIR$/Application/Common/Conf/config.php" />
+        <option value="$PROJECT_DIR$/Application/Admin/Controller/LoginController.class.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="767" />
+    <option name="y" value="37" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThinkPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThinkPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThinkPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Redis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ThinkPHP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Conf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f2ecb987-c697-43fb-905e-a0360776ec4c" name="Default" comment="" />
+      <created>1495864647097</created>
+      <option name="number" value="Default" />
+      <updated>1495864647097</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="767" y="37" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://D:/xampp/phpMyAdmin/config.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Conf/db_config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.75">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Common/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="28.5">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1495806969611" expanded="true" signature="2185:2209" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Library/Redis/MyRedis.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-50.214287">
+          <caret line="74" column="11" selection-start-line="74" selection-start-column="11" selection-end-line="74" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auto/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.5">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Model/BaseModel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/LoginController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6191011">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
