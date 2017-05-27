@@ -23,8 +23,8 @@ if($list){
             $rowno = intval($join['rowno']);
             $prize = M('active_dadi_prize')->where("active_id='{$active['id']}' AND status=1 AND top_from <=$rowno AND top_to>=$rowno")->find();
             if($prize){
-                $str = "【美联美客】恭喜您在{$city['city_name']}公众号举办的{$active['active_name']}晒图活动中最终排名{$rowno}，获得{$prize['prize_name']}，请进入活动页面，点击查看成绩，领取您的奖品。";
-                //"【美联美客】恭喜您在参加{$city['city_name']}公众号举办的{$active['active_name']}晒图活动中最终排名{$rowno}，获得礼品{$prize['prize_name']}，请进入{$city['city_name']}公众号领取您的晒图大礼吧。";
+                $str = "【魔座】恭喜您在{$city['city_name']}公众号举办的{$active['active_name']}晒图活动中最终排名{$rowno}，获得{$prize['prize_name']}，请进入活动页面，点击查看成绩，领取您的奖品。";
+                //"【魔座】恭喜您在参加{$city['city_name']}公众号举办的{$active['active_name']}晒图活动中最终排名{$rowno}，获得礼品{$prize['prize_name']}，请进入{$city['city_name']}公众号领取您的晒图大礼吧。";
                 echo $join['mobile']."===". $str."\r\n";
                 $res = send_msgs($join['mobile'],$str);
             }
@@ -33,6 +33,6 @@ if($list){
     }
 }
 
-// send_msgs($mobile_ids, "【美联美客】网站访问异常，请及时处理~", $code='888888',$openid = 'monitor');
+// send_msgs($mobile_ids, "【魔座】网站访问异常，请及时处理~", $code='888888',$openid = 'monitor');
 
 echo "ok";
