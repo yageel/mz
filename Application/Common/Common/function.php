@@ -6,9 +6,6 @@
  * Time: 21:47
  */
 
-function get_city_name($city_id){
-    return $city_id;
-}
 if(!function_exists('httpPost')){
     function httpPost($url, $data = null)
     {

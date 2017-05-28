@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Model;
+namespace Common\Model;
 use Redis\MyRedis;
 
 
@@ -37,24 +37,17 @@ class CityModel extends BaseModel
     public function get_city_list(){
        return $this->where(['status'=>1])->order('city_id ASC')->select();
     }
-    
-    
+
     /**
-     * 公众号用户列表 用于下拉列表
-     * add by Qinmj 2016-11-22
+     * 获取城市列表
+     * @return mixed
      */
-    function publicUserList(){
-    
-    	$city = D('City'); // 实例化User对象
-    
-    	$list = $city->order('create_time')->select();
-    
-    	$cityArray = array();
-    	foreach ($list as $val){
-    		$cityArray[$val['city_id']]=$val['city_name'];
-    	}
-    
-    	return $cityArray;
-    
+    public function get_city_map(){
+        $list = $this->where(['parent_id'=>0])->select();
+        foreach($list as $i=>$item){
+            $list[$i]['city_list'] = $this->where(['parent_id'=>$item['id']])->select();
+        }
+
+        return $list;
     }
 }
