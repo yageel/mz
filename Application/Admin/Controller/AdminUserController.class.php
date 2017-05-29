@@ -17,26 +17,28 @@ class AdminUserController extends BaseController
         $city_list = M('city')->where(array('status'=>1))->select();
         $this->assign('city_list', $city_list);
 
-        $tab = I('request.tag','','trim');
-        $city_id = I('request.city_id',0,'intval');
-        $wx_name = I('request.wx_name','','trim');
-        $openid = I('request.openid','','trim');
+        $tab = I('request.tab','','trim');
+        $kw = I('request.kw','','trim');
         $where = [];
-        if($city_id){
-            $where['city_id'] = $city_id;
-        }
-        if($openid){
-            $where['openid'] = $openid;
+
+        if($kw){
+            $where['contact_name'] = array('like', '%'.$kw.'%');
         }
 
-        if($wx_name){
-            $where['wx_name'] = array('like', '%'.$wx_name.'%');
+        if($tab){
+            if($tab == 'channel'){
+                $where['role'] = 3;
+            }elseif($tab == 'device'){
+                $where['role'] = 4;
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;
+            }
+        }else{
+            $where['role'] = "2";
         }
 
         $this->assign('tab', $tab);
-        $this->assign('city_id', $city_id);
-        $this->assign('wx_name', $wx_name);
-        $this->assign('openid', $openid);
+        $this->assign('kw', $kw);
 
         $users = M('Admin'); // 实例化User对象
         $count = $users->where($where)->count();// 查询满足要求的总记录数
@@ -52,6 +54,23 @@ class AdminUserController extends BaseController
         $this->assign('user_subscribe_map', Presenter::$user_subscribe_map);
         $this->assign('list', $list);// 赋值数据集
         $this->assign('page', $show);// 赋值分页输出
+        $this->display();
+    }
+
+    /**
+     * 新建用户
+     */
+    public function edit(){
+
+
+        $this->display();
+    }
+
+    /**
+     * 导入用户
+     */
+    public function import(){
+
         $this->display();
     }
 

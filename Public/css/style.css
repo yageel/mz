@@ -1462,7 +1462,7 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {width: 70px;}
 .bs-glyphicons li:hover {color: #fff;background-color: #1ab394;}
 @media (min-width: 768px) {.bs-glyphicons {margin-right: 0;margin-left: 0}
 .bs-glyphicons li {width: 12.5%;font-size: 12px}}
-.pages{width:100.5%; text-align:right;padding:10px 0;clear:both}
+.pages{width:100%; text-align:right;padding:10px 0;clear:both}
 .pages a, .pages .current{font-size:12px; font-family:Arial; margin:0 2px; color:inherit; padding:4px 6px;}
 .pages a, .pages .current{ border:1px solid #f4f4f4; background:#ffffff; text-decoration:none}
 .pages .current, .pages a:hover{background:#dddddd; color:inherit}
