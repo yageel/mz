@@ -1,5 +1,5 @@
 <extend name="Layout/master" />
-<block name="title">角色导入-</block>
+<block name="title">设备导入-</block>
 <block name="head">
 </block>
 <block name="content">
@@ -7,15 +7,15 @@
 
     <div class="col-sm-12">
       <div class="ibox float-e-margins">
-          <div class=""> <a href="{:U('/admin_user/index',['tab'=>$tab])}" target="_self" class="btn btn-primary ">返回</a>  <a href="{:U('/admin_user/index',['tab'=>$tab])}" target="_self" class="btn btn-primary ">下载{$import_name}导入模版</a></div>
+          <div class=""> <a href="{:U('/devices/index')}" target="_self" class="btn btn-primary ">返回</a>  <a href="{:U('/devices/down')}" target="_self" class="btn btn-primary ">下载设备导入模版</a></div>
         <div class="ibox-title">
-          <h5><a href="{:U('/admin_user/index')}"> 角色管理</a> > <small>{$import_name}导入</small></h5>
+          <h5><a href="{:U('/devices/index')}"> 设备管理</a> > <small>设备导入</small></h5>
           <div class="ibox-tools">
               <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
    </div>
         </div>
         <div class="ibox-content">
-          <form method="post" name="edit" target="_self" action="{:U('/admin_user/import')}" class="form-horizontal">
+          <form method="post" name="edit" target="_self" action="{:U('/devices/import')}" class="form-horizontal">
               <input type="hidden" name="tab" value="{$tab}" />
             <div class="form-group">
               <label class="col-sm-2 control-label">导入文件：</label>
