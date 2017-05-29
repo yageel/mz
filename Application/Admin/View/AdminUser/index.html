@@ -178,16 +178,16 @@
                             <volist name="list" id="item">
                                 <tr class="gradeX">
                                     <td>{$item.id}</td>
-                                    <td>{$item.unionid}</td>
+                                    <td>{$item.username}</td>
+                                    <td>{$item.contact_name}</td>
+                                    <td>{$item.mobile}</td>
                                     <td>{$item.openid}</td>
-                                    <td>{$item.city_name}</td>
-                                    <td>{$item.wx_name}</td>
-                                    <td><img src="{$item.wx_pic}" width="30"></td>
-                                    <td>{$user_subscribe_map[$item['is_subscribe']]}</td>
+                                    <td>{$item.total_device}</td>
+                                    <td>{:admin_user_status($item['status'])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
                                         <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
-                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'speard'])}"><i class="fa fa-check text-navy"></i>编辑</a>
+                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'spread'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                                     </td>
                                 </tr>
                             </volist>

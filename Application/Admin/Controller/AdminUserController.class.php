@@ -185,7 +185,7 @@ class AdminUserController extends BaseController
             }elseif($detail['role'] == 4){
                 $tab = "device";
             }elseif($detail['role'] == 5){
-                $tab = "speard";
+                $tab = "spread";
             }
             $this->assign('detail', $detail);
         }
@@ -199,8 +199,8 @@ class AdminUserController extends BaseController
             $this->display('AdminUser/channel');
         }elseif($tab == 'device'){
             $this->display('AdminUser/device');
-        }elseif($tab == 'speard'){
-            $this->display('AdminUser/speard');
+        }elseif($tab == 'spread'){
+            $this->display('AdminUser/spread');
         }else{
             $this->display();
         }
@@ -221,7 +221,7 @@ class AdminUserController extends BaseController
             $this->assign('import_name',"渠道账户");
         }elseif($tab == 'device'){
             $this->assign('import_name',"模座账户");
-        }elseif($tab == 'speard'){
+        }elseif($tab == 'spread'){
             $this->assign('import_name',"推广账户");
         }else{
             $this->assign('import_name',"系统账户");
