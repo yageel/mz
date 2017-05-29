@@ -17,6 +17,7 @@
                   <th>套餐名称</th>
                   <th>套餐时长</th>
                   <th>套餐金额</th>
+                  <th>权重</th>
                   <th>套餐状态</th>
                   <th>操作</th>
                 </tr>
@@ -27,15 +28,16 @@
                     <td><input type="checkbox" name="id[]" value="{$item.id}" /></td>
                     <td>{$item.id}</td>
                     <td>{$item.package_name}</td>
-                    <td>{$item.times}分钟</td>
-                    <td>{$item.money}元</td>
+                    <td>{$item.package_time}分钟</td>
+                    <td>{$item.package_money}元</td>
+                    <td>{$item.weight}</td>
                     <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq '0'"/><font color="red">下架</font><else/>已删除</if></td>
                     <td class="center">
                       <a href="{:U('/package/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
                       <if condition="$item[status] eq 1">
-                        <a href="{:U('/package/up', array('id'=>$item['id'],'status'=>0))}" onclick="return confirm('您确认要上架该套餐吗？')"><i class="fa fa-check text-navy"></i> 上架</a>
+                        <a href="{:U('/package/up', array('id'=>$item['id'],'status'=>0))}" onclick="return confirm('您确认要下架该套餐吗？')"><i class="fa fa-check text-navy"></i> 下架</a>
                         <elseif condition="$item[status] eq 0" />
-                        <a href="{:U('/package/up', array('id'=>$item['id'],'status'=>1))}" onclick="return confirm('您确认要下架该套餐吗？')"><i class="fa fa-check text-navy"></i> 下架</a>
+                        <a href="{:U('/package/up', array('id'=>$item['id'],'status'=>1))}" onclick="return confirm('您确认要上架该套餐吗？')"><i class="fa fa-check text-navy"></i> 上架</a>
                       </if>
                       <a href="{:U('/package/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该设备吗？')"><i class="fa fa-check text-navy"></i> 删除</a>
                     </td>

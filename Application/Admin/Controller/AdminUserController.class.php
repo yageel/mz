@@ -145,6 +145,7 @@ class AdminUserController extends BaseController
                         return $this->error("该手机号已经存在系统~");
                     }
                 }
+                $data['update_time'] = time();
                 $res = M('admin')->where(['id'=>$id])->save($data);
             }else{
                 if(empty($data['password'])){

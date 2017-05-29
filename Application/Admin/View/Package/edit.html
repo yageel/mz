@@ -7,7 +7,7 @@
 
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
-                <div class=""> <a href="{:U('/package/edit')}" target="_self" class="btn btn-primary ">返回</a> </div>
+                <div class=""> <a href="{:U('/package/index')}" target="_self" class="btn btn-primary ">返回</a> </div>
                 <div class="ibox-title">
                     <h5><a href="{:U('/package/index')}"> 套餐管理</a> > <small>套餐编辑</small></h5>
                     <div class="ibox-tools">
@@ -29,14 +29,25 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">套餐价格：</label>
                             <div class="col-sm-5">
-                                <input type="text" name="package_money" disabled value="" class="form-control input-s"  maxlength="26" />
+                                <input type="text" name="package_money"  value="{$detail.package_money}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*套餐价格，单位元</span>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">套餐时长：</label>
                             <div class="col-sm-5">
-                                <input type="text" name="package_times" disabled value="" class="form-control input-s"  maxlength="26" />
+                                <input type="text" name="package_time"  value="{$detail.package_time}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*套餐价格，单位分钟</span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐权重：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="weight"  value="{$detail.weight|default=0}" class="form-control input-s"  maxlength="6" />
+                                <span class="help-block m-b-none">*正整数，越大越靠前</span>
                             </div>
                         </div>
 
@@ -66,5 +77,5 @@
     </div>
 </block>
 <block name="js">
-    
+
 </block>

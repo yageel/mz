@@ -48,6 +48,7 @@ class DevicesController extends BaseController {
             }
 
             if( $id ){
+                $data['update_time'] = time();
                 $res = M('devices')->where(['id'=>$id])->save($data);
             }else{
                 // 添加必要字段
@@ -117,5 +118,14 @@ class DevicesController extends BaseController {
         }else{
             return $this->error("没找到设备信息~");
         }
+    }
+
+    /**
+     * 删除设备
+     */
+    public function del(){
+        $id = I('request.id',0,'intval');
+        M('devices')->where(['id'=>$id])->save(['status'=>4, 'update_time'=>time()]);
+        return $this->success("操作成功~");
     }
 }
