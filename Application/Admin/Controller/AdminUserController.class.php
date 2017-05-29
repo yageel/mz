@@ -52,14 +52,14 @@ class AdminUserController extends BaseController
         $list = $users->where($where)->order('id DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach($list as $i=>$user){
             // 运营人员
-            if($tab == '' || $tab == 'operational'){
+            if($user['role'] == 2){
                 $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY shop_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
                 $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
-            }elseif($tab == 'channel'){
+            }elseif($user['role'] == 3){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
-            }elseif($tab == 'devices'){
+            }elseif($user['role'] == 4){
                 $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
-            }elseif($tab == 'speard'){
+            }elseif($user['role'] == 5){
                 // $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
             }
         }

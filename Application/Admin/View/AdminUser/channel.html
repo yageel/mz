@@ -47,6 +47,7 @@
                             <label class="col-sm-2 control-label">所在城市：</label>
                             <div class="col-sm-5">
                                 <select type="text" name="city_id" value="{$detail.city_id}" class="form-control input-s"  maxlength="60" >
+                                    <option value="0">选择城市</option>
                                     <volist id="shen" name="area_map">
                                         <optgroup label="{$shen.city_name}">
                                         <volist id="city" name="shen[city_list]">
@@ -62,7 +63,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">门店名称：</label>
                             <div class="col-sm-5">
-                                <input type="text" name="shop_address" value="{$detail.shop_address}" class="form-control input-s"  maxlength="250" />
+                                <input type="text" name="shop_name" value="{$detail.shop_name}" class="form-control input-s"  maxlength="250" />
                                 <span class="help-block m-b-none">*渠道所属门店</span>
                             </div>
                         </div>
@@ -70,7 +71,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">门店地址：</label>
                             <div class="col-sm-5">
-                                <input type="text" name="username" value="{$detail.username}" class="form-control input-s"  maxlength="26" />
+                                <input type="text" name="shop_address" value="{$detail.shop_address}" class="form-control input-s"  maxlength="26" />
                                 <span class="help-block m-b-none">*渠道门店所在位置</span>
                             </div>
                         </div>

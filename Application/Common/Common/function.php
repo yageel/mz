@@ -41,6 +41,24 @@ function admin_user_status($status, $is_color = true){
     }
 }
 
+/**
+ * 获取城市信息~
+ * @param $city_id
+ * @param bool|false $is_show
+ * @return mixed|string
+ */
+function get_city($city_id, $is_show=false){
+    $detail = M('area')->where(['id'=>$city_id])->find();
+    if($detail){
+        if($is_show){
+            return $detail['city_name'];
+        }else{
+            return $detail;
+        }
+    }
+    return '';
+}
+
 if(!function_exists('send_msgs')){
     /**
      * @param $mobile
