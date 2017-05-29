@@ -4,19 +4,16 @@ use Think\Controller;
 use Org\Util\Strings;
 use Think\Page;
 
-class PackageController extends BaseController {
+class AreaController extends BaseController {
     public function index(){
-        $where = ['status'=>['lt', 4]];
-        $db = M('Package'); // 实例化User对象
-        $count = $db->where($where)->count();// 查询满足要求的总记录数
-        $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-
-        $show = $Page->show();// 分页显示输出
+        $parent = I('parent',0,'intval');
+        $where = [];
+        $where['parent_id'] = $parent;
+        $db = M('Area'); // 实例化User对象
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $list = $db->where($where)->order("weight DESC, id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
-
-        $this->assign('page', $show);
+        $list = $db->where($where)->order("weight DESC, id ASC")->select();
         $this->assign('list', $list);
+        $this->assign('parent', $parent);
         $this->display();
     }
 
@@ -75,16 +72,7 @@ class PackageController extends BaseController {
     public function up(){
         $id = I('request.id',0,'intval');
         $status = I('request.status', 1, 'intval');
-        M('package')->where(['id'=>$id])->save(['status'=>$status]);
+        M('Area')->where(['id'=>$id])->save(['status'=>$status]);
         return $this->success("操作成功~");
-    }
-
-    /**
-     * 设备二维码
-     */
-    public function del(){
-        $id = I('request.id',0,'intval');
-        M('package')->where(['id'=>$id])->save(['status'=>4]);
-        return $this->success("删除成功~");
     }
 }

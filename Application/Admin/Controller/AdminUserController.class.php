@@ -233,4 +233,60 @@ class AdminUserController extends BaseController
         $this->display();
     }
 
+    /**
+     * 用户编辑
+     */
+    public function info(){
+        $id = $this->admin['id'];
+        if(IS_POST){
+            $data = $_POST;
+            if(empty($data['contact_name'])){
+                return $this->error("请输入联系人员姓名~");
+            }
+
+            if(!is_mobile($data['mobile'])){
+                return $this->error("请正确输入联系人员手机号码~");
+            }
+
+            if(empty($data['username'])){
+                return $this->error("请输入登陆账户~");
+            }
+
+            if($data['password']){
+                $salt = Strings::randString(12);
+                $data['salt'] = $salt;
+                $data['pwd'] = encrypt_password($data['password'], $salt);
+            }
+
+            if($id){
+                //  判断登陆名重复
+                $info = D("Admin")->where(['id'=>$id])->find();
+                if($info['username'] != $data['username']){
+                    $username = M('admin')->where(['username'=>$data['username']])->find();
+                    if($username){
+                        return $this->error("该用户名已经存在~");
+                    }
+                }
+
+                // 判断手机号重复
+                if($info['mobile'] != $data['mobile']){
+                    $mobile = M("admin")->where(['mobile'=>$data['mobile']])->find();
+                    if($mobile){
+                        return $this->error("该手机号已经存在系统~");
+                    }
+                }
+                $data['update_time'] = time();
+                $res = M('admin')->where(['id'=>$id])->save($data);
+            }
+            if($res){
+                return $this->success("操作成功",U('/admin_user/info'));
+            }else{
+                return $this->error("操作失败~");
+            }
+        }
+
+        $this->assign('detail', $this->admin);
+        $this->display();
+    }
+
 }

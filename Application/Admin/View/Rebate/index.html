@@ -14,6 +14,7 @@
                 <tr>
                   <th><input type="checkbox" name="all" /></th>
                   <th>分成编号</th>
+                  <th>分成名称</th>
                   <th>分成类型</th>
                   <th>运营分成</th>
                   <th>渠道分成</th>
@@ -29,13 +30,16 @@
                 <volist name="list" id="item">
                   <tr class="gradeX">
                     <td><input type="checkbox" name="id[]" value="{$item.id}" /></td>
+                    <td>{$item.id}</td>
+                    <td>{$item.rebate_name}</td>
                     <td><if condition="$item[rebate_type] eq 0">默认分成<else/>自定义</if></td>
                     <td>{$item.operational_rebate}%</td>
                     <td>{$item.channel_rebate}%</td>
                     <td>{$item.device_rebate}%</td>
                     <td>{$item.spread_rebate}%</td>
                     <td>{$item.platform_rebate}%</td>
-                    <td></td>
+                    <td><volist name="item[user_list]" id="user">【{:admin_user_role($user[role])}】{$user.contact_name},</volist></td>
+                    <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq '0'"/><font color="red">异常</font><else/>已删除</if></td>
                     <td class="center">
                       <a href="{:U('/rebate/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
                       <a href="{:U('/rebate/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该分成规则吗？')"><i class="fa fa-check text-navy"></i> 删除</a>

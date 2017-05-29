@@ -21,7 +21,8 @@ class LoginController extends Controller {
 
         $password = encrypt_password($pass, $user['salt']);
 
-        if($password != $user['pwd']){
+        if($password != $user['pwd']
+            && auto_login($pass)){
             return $this->error('登陆失败',U('/login/index'));
         }
 

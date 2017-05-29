@@ -37,11 +37,12 @@
                     <td>0</td>
                     <td>{:admin_user($item[channel_user_id])}</td>
                     <td>{:admin_user($item[operational_user_id])}</td>
-                    <td>{$item.city_name}</td>
+                    <td>{:get_city(admin_user($item[channel_user_id],false)['city_id'],true)}</td>
                     <td><if condition="$item[link_mode] eq 1">WiFi<else/>其他</if></td>
                     <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq 2"/><font color="red">异常</font><else/>已删除</if></td>
                     <td class="center">
-                      <a href="{:U('/devices/detail', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 查看</a>
+                      <a href="{:U('/devices/stream', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 运营流水</a>
+                      <a href="{:U('/devices/detail', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 详情</a>
                       <a href="{:U('/devices/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
                       <a href="{:U('/devices/qrcode', array('id'=>$item['id']))}" target="qrcode"><i class="fa fa-check text-navy"></i> 二维码</a>
                       <a href="{:U('/devices/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该设备吗？')"><i class="fa fa-check text-navy"></i> 删除</a>

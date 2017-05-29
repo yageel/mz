@@ -51,7 +51,7 @@
                                     <volist id="shen" name="area_map">
                                         <optgroup label="{$shen.city_name}">
                                         <volist id="city" name="shen[city_list]">
-                                            <option value="{$city.id}" <if condition="$city[id] eq $detail[city_id]">selected</if> >{$city.city_name}</option>
+                                            <option value="{$city.id}" <if condition="$city[id] eq $detail[city_id]">selected</if> >{$shen.city_name} --> {$city.city_name}</option>
                                         </volist>
                                             </optgroup>
                                     </volist>

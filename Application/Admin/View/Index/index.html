@@ -52,22 +52,26 @@
           </ul>
         </li>
 
-        <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-gamepad"></i> <span class="nav-label">分成管理</span> <span class="fa arrow"></span> </a>
+        <li > <a href="#"> <i class="fa fa-gamepad"></i> <span class="nav-label">分成规则</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
             <li> <a class="J_menuItem" href="{:U('/rebate/index')}">分成规则列表</a> </li>
           </ul>
         </li>
 
-        <li> <a href="#"> <i class="fa fa-group"></i> <span class="nav-label">用户管理</span> <span class="fa arrow"></span> </a>
+        <li> <a href="#"> <i class="fa fa-group"></i> <span class="nav-label">佣金管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
-            <li> <a class="J_menuItem" href="{:U('/users/index')}">微信用户</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>''])}">运营佣金</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'channel'])}">渠道佣金</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'device'])}">模座佣金</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'spread'])}">推广佣金</a> </li>
           </ul>
         </li>
 
-        <li style=" border-bottom: 2px solid #ccc!important;"> <a href="#"> <i class="fa fa-money"></i> <span class="nav-label">系统设置</span> <span class="fa arrow"></span> </a>
+        <li > <a href="#"> <i class="fa fa-money"></i> <span class="nav-label">基础设置</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
             <li> <a class="J_menuItem" href="{:U('/city/index')}">公众号设置</a> </li>
-            <li> <a class="J_menuItem" href="{:U('/home/index')}">首页配置</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/area/index')}">运营城市</a> </li>
+            <li> <a class="J_menuItem" href="{:U('/admin_user/info')}">账户管理</a> </li>
           </ul>
         </li>
 

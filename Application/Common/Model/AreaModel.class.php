@@ -43,9 +43,9 @@ class AreaModel extends BaseModel
      * @return mixed
      */
     public function get_area_map(){
-        $list = $this->where(['parent_id'=>0])->select();
+        $list = $this->where(['parent_id'=>0, "status"=>1])->select();
         foreach($list as $i=>$item){
-            $list[$i]['city_list'] = $this->where(['parent_id'=>$item['id']])->select();
+            $list[$i]['city_list'] = $this->where(['parent_id'=>$item['id'], "status"=>1])->select();
         }
 
         return $list;

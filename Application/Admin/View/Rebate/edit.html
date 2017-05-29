@@ -4,7 +4,6 @@
 </block>
 <block name="content">
     <div class="row">
-
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class=""> <a href="{:U('/rebate/index')}" target="_self" class="btn btn-primary ">返回</a> </div>
@@ -17,6 +16,14 @@
                 <div class="ibox-content">
                     <form method="post" name="edit" target="_self" action="{:U('/rebate/edit')}" class="form-horizontal">
                         <input type="hidden" name="id" value="{$detail.id}" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分成名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="rebate_name" value="{$detail.rebate_name|default=''}" maxlength="12" class="form-control input-s" />
+                                <span class="help-block m-b-none">*分成名称</span>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">运营分成：</label>
                             <div class="col-sm-5">
@@ -50,6 +57,21 @@
                                 <span class="help-block m-b-none">*推广分成</span>
                             </div>
                         </div>
+                        <if condition="empty($detail) OR $detail[rebate_type] eq 1">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">订阅用户：</label>
+                            <div class="col-sm-5">
+                                <volist name="user_list" id="user">
+                                <label for="id{$user.id}" style=" border: 1px solid #ddd; font-weight: normal; line-height: 20px; margin: 6px; padding: 6px;">
+                                    <input type="checkbox" id="id{$user.id}" name="subscribe[]" style="height: 20px!important; width: 20px!important; float: left; line-height: 20px;"
+                                    <if condition="in_array($user[id], (array)$detail[subscribe_list])">checked</if>  value="{$user.id}" class="form-control input-s"  maxlength="6" />
+                                    <span style="padding-bottom: -4px;">{$user.contact_name}</span> </label>
+                                </volist>
+                                <span class="help-block m-b-none">*推广分成</span>
+                            </div>
+                        </div>
+                        </if>
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">

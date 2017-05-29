@@ -58,6 +58,30 @@ function admin_user($user_id, $username = true){
     return '';
 }
 
+function admin_user_role($role_id){
+    if($role_id == 1){
+        return '系统';
+    }elseif($role_id == 2){
+        return '运营';
+    }elseif($role_id == 3){
+        return '渠道';
+    }elseif($role_id == 4){
+        return '魔座';
+    }elseif($role_id == 5){
+        return '推广';
+    }
+    return '';
+}
+
+function package_info($package_id=0, $show=true){
+    $info = M('package')->where(['id'=>$package_id])->find();
+    if($show){
+        return $info['package_name'];
+    }else{
+        return $info;
+    }
+}
+
 /**
  * 获取城市信息~
  * @param $city_id
