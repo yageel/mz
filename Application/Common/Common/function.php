@@ -42,6 +42,23 @@ function admin_user_status($status, $is_color = true){
 }
 
 /**
+ * 用户信息
+ * @param $user_id
+ * @param bool|true $username
+ */
+function admin_user($user_id, $username = true){
+    $detail = M('admin')->where(['id'=>$user_id])->find();
+    if($detail){
+        if($username){
+            return $detail['contact_name'];
+        }else{
+            return $detail;
+        }
+    }
+    return '';
+}
+
+/**
  * 获取城市信息~
  * @param $city_id
  * @param bool|false $is_show

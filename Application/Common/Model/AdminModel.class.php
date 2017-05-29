@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Model;
+namespace Common\Model;
 use Redis\MyRedis;
 
 
@@ -17,7 +17,7 @@ class AdminModel extends BaseModel
      * 获取角色列表
      */
     public function get_user_list_role($role_id = 0){
-        return $this->where(['role_id'=>$role_id])->select();
+        return $this->where(['role'=>$role_id])->select();
     }
 
     /**

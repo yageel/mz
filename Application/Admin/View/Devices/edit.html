@@ -1,125 +1,226 @@
 <extend name="Layout/master" />
-<block name="title">公众号编辑-</block>
+<block name="title">设备编辑-</block>
 <block name="head">
 </block>
 <block name="content">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="ibox float-e-margins">
-          <div class=""> <a href="{:U('/city/index')}" target="_self" class="btn btn-primary ">返回</a> </div>
-        <div class="ibox-title">
-          <h5><a href="{:U('/city/index')}"> 公众号管理</a> > <small>公众号编辑</small></h5>
-          <div class="ibox-tools">
-              <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
-   </div>
-        </div>
-        <div class="ibox-content">
-          <form method="post" name="edit" target="_self" action="{:U('/city/edit')}" class="form-horizontal">
-              <input type="hidden" name="id" value="{$city.id}" />
-            <div class="form-group">
-              <label class="col-sm-2 control-label">城市名称：</label>
-              <div class="col-sm-10">
-                <input type="text" name="city_name" value="{$city.city_name}" class="form-control">
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Appid：</label>
-              <div class="col-sm-10">
-                <input type="text" name="appid" value="{$city.appid}" class="form-control">
-                <span class="help-block m-b-none"></span> </div>
-            </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">Appsecret：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="appsecret" value="{$city.appsecret}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">token值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="red_token" value="{$city.red_token}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">Encoding值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="encodingaeskey" value="{$city.encodingaeskey}" class="form-control">
-                      <span class="help-block m-b-none">*</span> </div>
-              </div>
+    <div class="row">
 
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">url参数值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="city_id" value="{$city.city_id}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">商户号：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="mchid" value="{$city.mchid}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">支付密钥：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="zhifu" value="{$city.zhifu}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-            <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">红包URL：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="jump_url" value="{$city.jump_url}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">开放平台：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="platform" value="{$city.platform}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">AccessToken：</label>
-                  <div class="col-sm-10">
-                      {$access_token['access_token']}
-                  </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">AccessToken到期时间：</label>
-                  <div class="col-sm-10">
-                      {:timestampToDate($access_token['expires'])}
-                  </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">本平台是否启用：</label>
-                  <div class="col-sm-10">
-                      <select name="status" class="form-control">
-                          <option value="1" >已启用</option>
-                          <option value="0" <if condition="$city.status eq '0'">selected</if>>未启用</option>
-                      </select>
-                  </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-primary" type="submit">保存内容</button>
-                <button class="btn btn-white" type="reset">取消</button>
-              </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""> <a href="{:U('/devices/edit')}" target="_self" class="btn btn-primary ">返回</a> </div>
+                <div class="ibox-title">
+                    <h5><a href="{:U('/devices/index')}"> 设备管理</a> > <small>设备编辑</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/devices/edit')}" class="form-horizontal">
+                        <input type="hidden" name="id" value="{$detail.id}" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备编号：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="device_number" value="{$detail.device_number}" maxlength="12" class="form-control input-s" />
+                                <span class="help-block m-b-none">*设备编号</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">渠道门店名称：</label>
+                            <div class="col-sm-5">
+                                <select name="channel_user_id" class="form-control input-s" >
+                                    <option value="0">选择渠道门店</option>
+                                    <volist name="channel_list" id="channel">
+                                        <option value="{$channel.id}" <if condition="$channel[id] eq $detail.channel_user_id">selected</if>>{$channel.shop_name}</option>
+                                    </volist>
+                                </select>
+                                <span class="help-block m-b-none">*请选择设备对应渠道门店</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店地址：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="shop_address" disabled value="" class="form-control input-s"   />
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店经度：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="channel_lon" disabled value="" class="form-control input-s"  maxlength="26" />
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店维度：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="channel_lat" disabled value="" class="form-control input-s"  maxlength="26" />
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">渠道联系人：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="channel_contact_name" disabled value="" autocomplete="off" class="form-control input-s" maxlength="26" />
+                                <span class="help-block m-b-none">*渠道联系人</span> </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">渠道号码：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="channel_mobile" value="" disabled autocomplete="off" class="form-control input-s" maxlength="26" />
+                                <span class="help-block m-b-none">*渠道联系号码</span> </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">运营人员：</label>
+                            <div class="col-sm-5">
+                                <select name="operational_user_id" class="form-control input-s" >
+                                    <option value="0">选择运营人员</option>
+                                    <volist name="operational_list" id="channel">
+                                        <option value="{$channel.id}" <if condition="$channel[id] eq $detail.channel_user_id">selected</if>>{$channel.contact_name}</option>
+                                    </volist>
+                                </select>
+                                <span class="help-block m-b-none">*请选择设备运营人员</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">运营号码：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="operational_mobile" value="" disabled autocomplete="off" class="form-control input-s" maxlength="26" />
+                                <span class="help-block m-b-none">*运营联系号码</span> </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">拥有人员(模座)：</label>
+                            <div class="col-sm-5">
+                                <select name="user_id" class="form-control input-s" >
+                                    <option value="0">选择拥有人员</option>
+                                    <volist name="user_list" id="user">
+                                        <option value="{$user.id}" <if condition="$user[id] eq $detail.user_id">selected</if>>{$user.contact_name}</option>
+                                    </volist>
+                                </select>
+                                <span class="help-block m-b-none">*请选择设备拥有人员</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">模座号码：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="user_mobile" value="" disabled autocomplete="off" class="form-control input-s" maxlength="26" />
+                                <span class="help-block m-b-none">*模座联系号码</span> </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">连接方式：</label>
+                            <div class="col-sm-5">
+                                <select class="form-control input-s" name="link_mode">
+                                    <option value="1">Wifi</option>
+                                    <option value="2" <if condition="$detail.link_mode eq 2">selected</if>>其他</option>
+                                </select>
+                                <span class="help-block m-b-none">*魔座设备连接方式</span> </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备状态：</label>
+                            <div class="col-sm-5">
+                                <select class="form-control input-s" name="status">
+                                    <option value="1">正常</option>
+                                    <option value="2" <if condition="$detail.status eq 2">selected</if>>异常</option>
+                                    <option value="4" <if condition="$detail.status eq 4">selected</if>>删除</option>
+                                </select>
+                                <span class="help-block m-b-none">*魔座人员状态</span> </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="reset">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        var global_channel = {:json_encode($channel_list)};
+        var global_user = {:json_encode($user_list)};
+        var global_operational = {:json_encode($operational_list)};
+        // 渠道选择
+        $('select[name="channel_user_id"]').change(function(){
+            if($(this).val() > 0){
+                var user_id = $(this).val();
+                for(var i=0; i < global_channel.length; i++){
+                    if(global_channel[i]['id'] == user_id){
+                        $('input[name="channel_mobile"]').val(global_channel[i]['mobile']);
+                        $('input[name="channel_lon"]').val(global_channel[i]['lon']);
+                        $('input[name="channel_lat"]').val(global_channel[i]['lat']);
+                        $('input[name="shop_address"]').val(global_channel[i]['shop_address']);
+                        $('input[name="channel_contact_name"]').val(global_channel[i]['contact_name']);
+                        break;
+                    }
+                }
+            }else{
+                $('input[name="channel_mobile"]').val('');
+                $('input[name="channel_lon"]').val('');
+                $('input[name="channel_lat"]').val('');
+                $('input[name="channel_address"]').val('');
+                $('input[name="channel_contact_name"]').val('');
+            }
+        });
+
+        // 运营选择
+        $('select[name="operational_user_id"]').change(function(){
+            if($(this).val() > 0){
+                var user_id = $(this).val();
+                for(var i=0; i < global_operational.length; i++){
+                    if(global_operational[i]['id'] == user_id){
+                        $('input[name="operational_mobile"]').val(global_operational[i]['mobile']);
+                        break;
+                    }
+                }
+            }else{
+                $('input[name="operational_mobile"]').val('');
+            }
+        });
+
+        var operational_user_id = $('select[name="operational_user_id"]').val();
+        for(var i=0; i < global_operational.length; i++){
+            if(global_operational[i]['id'] == operational_user_id){
+                $('input[name="operational_mobile"]').val(global_operational[i]['mobile']);
+                break;
+            }
+        }
+
+        // 拥有者选择
+        $('select[name="user_id"]').change(function(){
+            if($(this).val() > 0){
+                var user_id = $(this).val();
+               for(var i=0; i < global_user.length; i++){
+                   if(global_user[i]['id'] == user_id){
+                       $('input[name="user_mobile"]').val(global_user[i]['mobile']);
+                       break;
+                   }
+               }
+            }else{
+                $('input[name="user_mobile"]').val('');
+            }
+        });
+
+        var user_id = $('select[name="user_id"]').val();
+        for(var i=0; i < global_user.length; i++){
+            if(global_user[i]['id'] == user_id){
+                $('input[name="user_mobile"]').val(global_user[i]['mobile']);
+                break;
+            }
+        }
+
+    </script>
 </block>
