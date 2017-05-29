@@ -61,16 +61,46 @@ class AdminUserController extends BaseController
      * 新建用户
      */
     public function edit(){
+        $tab = I('reqeust.tab','','trim');
+        $id = I('request.id',0,'intval');
+        if(IS_POST){
 
+            $res = '';
+            if($res){
+                return $this->success("操作成功",U('/admin_user/index',['tab'=>$tab]));
+            }else{
+                return $this->error("操作失败~");
+            }
+        }
 
-        $this->display();
+        if($id){
+            $detail = D('Admin')->get_user_info($id);
+            $this->assign('detail', $detail);
+        }
+        $this->assign('tab', $tab);
+        if($tab == 'operational'){
+            $this->display('AdminUser/operational.html');
+        }elseif($tab == 'channel'){
+            $this->display('AdminUser/channel.html');
+        }elseif($tab == 'device'){
+            $this->display('AdminUser/device.html');
+        }elseif($tab == 'speard'){
+            $this->display('AdminUser/speard.html');
+        }else{
+            $this->display();
+        }
     }
 
     /**
      * 导入用户
      */
     public function import(){
+        $tab = I('request.tab','','trim');
+        if(IS_POST){
 
+        }
+
+        $this->assign('tab', $tab);
         $this->display();
     }
 
