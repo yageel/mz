@@ -1,34 +1,76 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class RebateController extends BaseController {
-    public function index(){
+use Think\Page;
 
+class RebateController extends BaseController {
+
+    public function index(){
+        $where = ['status'=>['lt', 4]];
+        $db = M('Rebate'); // 实例化User对象
+        $count = $db->where($where)->count();// 查询满足要求的总记录数
+        $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+
+        $show = $Page->show();// 分页显示输出
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
+        $this->assign('page', $show);
+        $this->assign('list', $list);
         $this->display();
     }
 
+    /**
+     *
+     */
     public function edit(){
-        $uname = I('request.uname','','htmlspecialchars');
-        $pass = I('request.pwd','','htmlspecialchars');
-
-        if(empty($uname) || empty($pass)){
-            return $this->error('请先提交登陆信息',U('/login/index'));
+        $id = I('request.id',0,'intval');
+        // 自动回跳列表页
+        if(strpos($_SERVER['HTTP_REFERER'],'/rebate/index') !== false){
+            $_SESSION['jump_url'] = $_SERVER['HTTP_REFERER'];
         }
 
-        $user = M('admin')->where(array('uname'=>$uname))->find();
-        if(!$user){
-            return $this->error('登陆失败',U('/login/index'));
+        if(IS_POST){
+            $data = $_POST;
+            $data['operational_rebate'] = intval($data['operational_rebate']);
+            $data['channel_rebate'] = intval($data['channel_rebate']);
+            $data['device_rebate'] = intval($data['device_rebate']);
+            $data['spread_rebate'] = intval($data['spread_rebate']);
+            if($data['operational_rebate'] < 0 || $data['operational_rebate'] > 100){
+                return $this->error("分成比例在0-100之间~");
+            }
+
+            if($data['channel_rebate'] < 0 || $data['operational_rebate'] > 100){
+                return $this->error("分成比例在0-100之间~");
+            }
+
+            if($data['device_rebate'] < 0 || $data['device_rebate'] > 100){
+                return $this->error("分成比例在0-100之间~");
+            }
+
+            if($data['spread_rebate'] < 0 || $data['spread_rebate'] > 100){
+                return $this->error("分成比例在0-100之间~");
+            }
+
+            $data['platform_rebate'] = 100 - $data['operational_rebate'] - $data['channel_rebate'] - $data['device_rebate'] - $data['spread_rebate'];
+            if($data['platform_rebate'] < 0){
+                return $this->error("总分成不能大于100");
+            }
+            $data['update_time'] = time();
+            if($id){
+                $res = M('rebate')->where(['id'=>$id])->save($data);
+            }else{
+                $data['create_time'] = time();
+                $data['rebate_type'] = 1;
+                $res = M('rebate')->add($data);
+            }
+
+            if($res){
+                return $this->success("操作成功", $_SESSION['jump_url']?$_SESSION['jump_url']:U('/rebate/index'));
+            }else{
+                return $this->error("操作失败~");
+            }
         }
-
-        $password = encrypt_password($pass, $user['salt']);
-
-        if($password != $user['pwd']){
-            return $this->error('登陆失败',U('/login/index'));
-        }
-
-        session('is_login', 1);
-        session('login_user_id',$user['id']);
-        session('login_user', $user);
-        redirect(U('/index/index'));
+       $this->display();
     }
 }

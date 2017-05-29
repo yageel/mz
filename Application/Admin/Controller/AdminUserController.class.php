@@ -53,7 +53,7 @@ class AdminUserController extends BaseController
         foreach($list as $i=>$user){
             // 运营人员
             if($user['role'] == 2){
-                $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY shop_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
+                $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
                 $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
             }elseif($user['role'] == 3){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
@@ -75,6 +75,7 @@ class AdminUserController extends BaseController
     public function edit(){
         $tab = I('request.tab','','trim');
         $id = I('request.id',0,'intval');
+
         if(IS_POST){
             $data = $_POST;
             if(empty($data['contact_name'])){

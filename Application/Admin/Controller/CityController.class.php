@@ -32,28 +32,15 @@ class CityController extends BaseController
     }
 
     /**
-     * 获取用户列表信息
-     */
-    public function get_user_list(){
-        $id = I('request.id', 0, 'intval');
-
-        $wx = $this->initWechat($id);
-        $data = $wx->getUserList();
-        if(!$data){
-            print_r($wx->checkAuth());
-            echo "<br/><br/>";
-            print_r($wx->errCode);
-            print_r($wx->errMsg);
-        }
-        print_r($data);
-    }
-
-    /**
      * 编辑城市信息
      */
     public function edit()
     {
         $id = I('request.id', 0, 'intval');
+        // 自动回跳列表页
+        if(strpos($_SERVER['HTTP_REFERER'],'/city/index') !== false){
+            $_SESSION['jump_url'] = $_SERVER['HTTP_REFERER'];
+        }
 
         if (IS_POST) {
             $data = $_POST;
@@ -73,9 +60,9 @@ class CityController extends BaseController
             }
 
             if ($res) {
-                return $this->success('操作成功', U('/city/index'));
+                return $this->success('操作成功', $_SESSION['jump_url']?$_SESSION['jump_url']:U('/city/index'));
             } else {
-                return $this->error('操作失败', U('/city/edit', array('id' => $id)));
+                return $this->error('操作失败');
             }
         }
 
