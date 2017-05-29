@@ -13,9 +13,11 @@ class AdminUserController extends BaseController
      */
     public function index()
     {
+
         $city_list = M('city')->where(array('status'=>1))->select();
         $this->assign('city_list', $city_list);
 
+        $tab = I('request.tag','','trim');
         $city_id = I('request.city_id',0,'intval');
         $wx_name = I('request.wx_name','','trim');
         $openid = I('request.openid','','trim');
@@ -31,6 +33,7 @@ class AdminUserController extends BaseController
             $where['wx_name'] = array('like', '%'.$wx_name.'%');
         }
 
+        $this->assign('tab', $tab);
         $this->assign('city_id', $city_id);
         $this->assign('wx_name', $wx_name);
         $this->assign('openid', $openid);

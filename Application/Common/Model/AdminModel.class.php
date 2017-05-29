@@ -25,7 +25,6 @@ class AdminModel extends BaseModel
      * @return mixed
      */
     public function get_user_info($user_id = 0){
-
         return $this->where(['id'=>$user_id])->find();
     }
 }
