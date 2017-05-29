@@ -36,15 +36,16 @@
                                 <tr class="gradeX">
                                     <td>{$item.id}</td>
                                     <td>{$item.username}</td>
-                                    <td>{$item.concat_name}</td>
+                                    <td>{$item.contact_name}</td>
                                     <td>{$item.mobile}</td>
                                     <td>{$item.openid}</td>
                                     <td>{$item.total_channel}</td>
                                     <td>{$item.total_device}</td>
-                                    <td>{:admin_user_status($item.status)}</td>
+                                    <td>{:admin_user_status($item[status])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/users/userview', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'operational'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -93,7 +94,8 @@
                                     <td>{$user_subscribe_map[$item['is_subscribe']]}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/users/userview', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/detail', ['id'=> $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'channel'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -138,7 +140,8 @@
                                     <td>{$user_subscribe_map[$item['is_subscribe']]}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/users/userview', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'device'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -183,7 +186,8 @@
                                     <td>{$user_subscribe_map[$item['is_subscribe']]}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/users/userview', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                                        <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'speard'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                                     </td>
                                 </tr>
                             </volist>

@@ -3,94 +3,123 @@
 <block name="head">
 </block>
 <block name="content">
-  <div class="row">
+    <div class="row">
 
-    <div class="col-sm-12">
-      <div class="ibox float-e-margins">
-          <div class=""> <a href="{:U('/admin_user/index',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">返回</a> </div>
-        <div class="ibox-title">
-          <h5><a href="{:U('/admin_user/index',['tab'=>'channel'])}"> 角色管理</a> > <small>渠道账户编辑</small></h5>
-          <div class="ibox-tools">
-              <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
-   </div>
-        </div>
-        <div class="ibox-content">
-          <form method="post" name="edit" target="_self" action="{:U('/admin_user/edit')}" class="form-horizontal">
-              <input type="hidden" name="id" value="{$detail.id}" />
-              <input type="hidden" name="tad" value="{$tab}" />
-            <div class="form-group">
-              <label class="col-sm-2 control-label">城市名称：</label>
-              <div class="col-sm-10">
-                <input type="text" name="city_name" value="{$city.city_name}" class="form-control">
-              </div>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Appid：</label>
-              <div class="col-sm-10">
-                <input type="text" name="appid" value="{$city.appid}" class="form-control">
-                <span class="help-block m-b-none"></span> </div>
-            </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">Appsecret：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="appsecret" value="{$city.appsecret}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">token值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="red_token" value="{$city.red_token}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">Encoding值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="encodingaeskey" value="{$city.encodingaeskey}" class="form-control">
-                      <span class="help-block m-b-none">*</span> </div>
-              </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class=""> <a href="{:U('/admin_user/index',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">返回</a> </div>
+                <div class="ibox-title">
+                    <h5><a href="{:U('/admin_user/index',['tab'=>'channel'])}"> 角色管理</a> > <small>渠道账户编辑</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" name="edit" target="_self" action="{:U('/admin_user/edit')}" class="form-horizontal">
+                        <input type="hidden" name="id" value="{$detail.id}" />
+                        <input type="hidden" name="tab" value="channel" />
+                        <input type="hidden" name="role" value="3" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系人员：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="contact_name" value="{$detail.contact_name}" maxlength="12" class="form-control input-s" />
+                                <span class="help-block m-b-none">*渠道人员姓名</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系号码：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="mobile" value="{$detail.mobile}" class="form-control"  maxlength="12" />
+                                <span class="help-block m-b-none">*渠道人员联系手机号,必须唯一且需要跟前台保持一致</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">登陆名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="username" value="{$detail.username}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*渠道人员登陆账户名</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所在城市：</label>
+                            <div class="col-sm-5">
+                                <select type="text" name="city_id" value="{$detail.city_id}" class="form-control input-s"  maxlength="60" >
+                                    <volist id="shen" name="area_map">
+                                        <optgroup label="{$shen.city_name}">
+                                        <volist id="city" name="shen[city_list]">
+                                            <option value="{$city.id}" <if condition="$city[id] eq $detail[city_id]">selected</if> >{$city.city_name}</option>
+                                        </volist>
+                                            </optgroup>
+                                    </volist>
+                                <select>
+                                <span class="help-block m-b-none">*渠道所属门店所在城市</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="shop_address" value="{$detail.shop_address}" class="form-control input-s"  maxlength="250" />
+                                <span class="help-block m-b-none">*渠道所属门店</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">门店地址：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="username" value="{$detail.username}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*渠道门店所在位置</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">经度：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="lon" value="{$detail.lon}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*渠道门店位置对应经度</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">纬度：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="lat" value="{$detail.lat}" class="form-control input-s"  maxlength="26" />
+                                <span class="help-block m-b-none">*渠道门店位置对应纬度</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">登陆密码：</label>
+                            <div class="col-sm-5">
+                                <input type="password" name="password" value="" autocomplete="off" class="form-control input-s" maxlength="26" />
+                                <span class="help-block m-b-none">*渠道人员登陆账密码</span> </div>
+                        </div>
 
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">url参数值：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="city_id" value="{$city.city_id}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">商户号：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="mchid" value="{$city.mchid}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">支付密钥：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="zhifu" value="{$city.zhifu}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-            <div class="hr-line-dashed"></div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">红包URL：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="jump_url" value="{$city.jump_url}" class="form-control">
-                      <span class="help-block m-b-none"></span> </div>
-              </div>
-              <div class="hr-line-dashed"></div>
-            <div class="form-group">
-              <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-primary" type="submit">保存内容</button>
-                <button class="btn btn-white" type="reset">取消</button>
-              </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户状态：</label>
+                            <div class="col-sm-5">
+                                <select class="form-control input-s" name="status">
+                                    <option value="1">正常</option>
+                                    <option value="2" <if condition="$detail.status eq 2">selected</if>>锁定</option>
+                                    <option value="4" <if condition="$detail.status eq 4">selected</if>>删除</option>
+                                </select>
+                                <span class="help-block m-b-none">*渠道人员状态</span> </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="reset">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
 </block>

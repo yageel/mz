@@ -77,7 +77,7 @@ class AdminUserController extends BaseController
         $id = I('request.id',0,'intval');
         if(IS_POST){
             $data = $_POST;
-            if(empty($data['concat_name'])){
+            if(empty($data['contact_name'])){
                 return $this->error("请输入联系人员姓名~");
             }
 
@@ -92,6 +92,25 @@ class AdminUserController extends BaseController
             if($tab){
                 if($tab == 'channel'){
                     $data['role'] = 3;
+                    if(empty($data['city_id'])){
+                        return $this->error("请选择门店所在城市");
+                    }
+
+                    if(empty($data['shop_name'])){
+                        return $this->error("请输入门店名称");
+                    }
+
+                    if(empty($data['shop_address'])){
+                        return $this->error("请输入门店地址");
+                    }
+
+                    if(empty($data['lon'])){
+                        return $this->error("请输入门店地址对应经度");
+                    }
+
+                    if(empty($data['lat'])){
+                        return $this->error("请输入门店地址对应维度");
+                    }
                 }elseif($tab == 'device'){
                     $data['role'] = 4;
                 }elseif($tab == 'spread'){
@@ -102,6 +121,13 @@ class AdminUserController extends BaseController
             }else{
                 $data['role'] = 2;
             }
+
+            if($data['password']){
+                $salt = Strings::randString(12);
+                $data['salt'] = $salt;
+                $data['pwd'] = encrypt_password($data['password'], $salt);
+            }
+
             if($id){
                 //  判断登陆名重复
                 $info = D("Admin")->where(['id'=>$id])->find();
@@ -119,11 +145,7 @@ class AdminUserController extends BaseController
                         return $this->error("该手机号已经存在系统~");
                     }
                 }
-                if($data['password']){
-                    $salt = Strings::randString(12);
-                    $data['salt'] = $salt;
-                    $data['pwd'] = encrypt_password($data['password'], $salt);
-                }
+                $res = M('admin')->where(['id'=>$id])->save($data);
             }else{
                 if(empty($data['password'])){
                     return $this->error("新建账户密码不能为空~");
@@ -141,13 +163,10 @@ class AdminUserController extends BaseController
                     return $this->error("该登陆名已经存在~");
                 }
 
-                $salt = Strings::randString(12);
-                $data['salt'] = $salt;
-                $data['pwd'] = encrypt_password($data['password'], $salt);
                 $data['create_time'] = time();
                 $res = M('admin')->add($data);
             }
-            
+
             if($res){
                 return $this->success("操作成功",U('/admin_user/index',['tab'=>$tab]));
             }else{
@@ -156,10 +175,24 @@ class AdminUserController extends BaseController
         }
 
         if($id){
-            $detail = D('Admin')->get_user_info($id);
+            $detail = M('admin')->where(['id'=>$id])->find();
+            if($detail['role'] == 1){
+                $tab = "system";
+            }elseif($detail['role'] == 2){
+                $tab = "operational";
+            }elseif($detail['role'] == 3){
+                $tab = "channel";
+            }elseif($detail['role'] == 4){
+                $tab = "device";
+            }elseif($detail['role'] == 5){
+                $tab = "speard";
+            }
             $this->assign('detail', $detail);
         }
         $this->assign('tab', $tab);
+
+        $area_map = D('Area')->get_area_map();
+        $this->assign('area_map', $area_map);
         if($tab == 'operational'){
             $this->display('AdminUser/operational');
         }elseif($tab == 'channel'){
