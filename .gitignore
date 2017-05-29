@@ -8,3 +8,4 @@
 .htaccess
 Application/Runtime/*
 Application/logs/*
+uploads/*

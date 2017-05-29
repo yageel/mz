@@ -98,16 +98,24 @@ class DevicesController extends BaseController {
      * 设备二维码
      */
     public function qrcode(){
-        if(!file_exists(APP_PATH."/../upload/qrcode/".$data['url'] .".png")){
-            if(!file_exists(APP_PATH."/../upload/qrcode/")){
-                mkdir(APP_PATH."/../upload/qrcode/",0755, true);
+        $id = I('request.id',0,'intval');
+        $detail = M('Devices')->where(['id'=>$id])->find();
+        if($detail){
+            if(!file_exists(APP_PATH."/../uploads/qrcode/".$detail['qrcode'] .".png")){
+                if(!file_exists(APP_PATH."/../uploads/qrcode/")){
+                    mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
+                }
+                $sign = encrypt_password($detail['qrcode'], $detail['id']);
+                $value = C('base_url')."index.php?s=/jump/qr/id/{$detail['qrcode']}/sign/{$sign}.html";
+                include APP_PATH."/../ThinkPHP/Library/Vendor/phpqrcode/phpqrcode.php";
+                $errorCorrectionLevel = 'L';//容错级别
+                $matrixPointSize = 12;//生成图片大小
+                //生成二维码图片
+                \QRcode::png($value, APP_PATH."/../uploads/qrcode/".$detail['qrcode'] .".png", $errorCorrectionLevel, $matrixPointSize, 2);
             }
-            include APP_PATH."/../file/phpqrcode/phpqrcode.php";
-            $value = "http://hd.millionmake.com/jump/{$data['url']}.html"; //二维码内容
-            $errorCorrectionLevel = 'L';//容错级别
-            $matrixPointSize = 12;//生成图片大小
-            //生成二维码图片
-            \QRcode::png($value, APP_PATH."/../upload/qrcode/".$data['url'] .".png", $errorCorrectionLevel, $matrixPointSize, 2);
+            return header("location: /uploads/qrcode/{$detail['qrcode']}.png");
+        }else{
+            return $this->error("没找到设备信息~");
         }
     }
 }

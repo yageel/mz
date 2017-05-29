@@ -33,7 +33,7 @@
                     <td>{$item.device_number}</td>
                     <td>{:admin_user($item[user_id])}</td>
                     <td>{:admin_user($item[user_id],false)[mobile]}</td>
-                    <td>0/td>
+                    <td>0</td>
                     <td>0</td>
                     <td>{:admin_user($item[channel_user_id])}</td>
                     <td>{:admin_user($item[operational_user_id])}</td>
@@ -43,7 +43,7 @@
                     <td class="center">
                       <a href="{:U('/devices/detail', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 查看</a>
                       <a href="{:U('/devices/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
-                      <a href="{:U('/devices/qrcode', array('id'=>$item['qrcode']))}"><i class="fa fa-check text-navy"></i> 二维码</a>
+                      <a href="{:U('/devices/qrcode', array('id'=>$item['id']))}" target="qrcode"><i class="fa fa-check text-navy"></i> 二维码</a>
                       <a href="{:U('/devices/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该设备吗？')"><i class="fa fa-check text-navy"></i> 删除</a>
                     </td>
                   </tr>

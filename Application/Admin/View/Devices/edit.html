@@ -31,7 +31,7 @@
                                 <select name="channel_user_id" class="form-control input-s" >
                                     <option value="0">选择渠道门店</option>
                                     <volist name="channel_list" id="channel">
-                                        <option value="{$channel.id}" <if condition="$channel[id] eq $detail.channel_user_id">selected</if>>{$channel.shop_name}</option>
+                                        <option value="{$channel.id}" <if condition="$channel['id'] eq $detail['channel_user_id']">selected</if>>{$channel.shop_name}</option>
                                     </volist>
                                 </select>
                                 <span class="help-block m-b-none">*请选择设备对应渠道门店</span>
@@ -78,8 +78,8 @@
                             <div class="col-sm-5">
                                 <select name="operational_user_id" class="form-control input-s" >
                                     <option value="0">选择运营人员</option>
-                                    <volist name="operational_list" id="channel">
-                                        <option value="{$channel.id}" <if condition="$channel[id] eq $detail.channel_user_id">selected</if>>{$channel.contact_name}</option>
+                                    <volist name="operational_list" id="operational">
+                                        <option value="{$operational.id}" <if condition="$operational['id'] eq $detail['operational_user_id']">selected</if>>{$detail[operational_user_id]}-{$operational[id]}={$operational.contact_name}</option>
                                     </volist>
                                 </select>
                                 <span class="help-block m-b-none">*请选择设备运营人员</span>
@@ -99,7 +99,7 @@
                                 <select name="user_id" class="form-control input-s" >
                                     <option value="0">选择拥有人员</option>
                                     <volist name="user_list" id="user">
-                                        <option value="{$user.id}" <if condition="$user[id] eq $detail.user_id">selected</if>>{$user.contact_name}</option>
+                                        <option value="{$user.id}"  <if condition="$user['id'] eq $detail['user_id']">selected</if>>{$user.id}-{$detail['user_id']}={$user.contact_name}</option>
                                     </volist>
                                 </select>
                                 <span class="help-block m-b-none">*请选择设备拥有人员</span>
@@ -175,6 +175,18 @@
                 $('input[name="channel_contact_name"]').val('');
             }
         });
+        var channel_user_id = $('select[name="channel_user_id"]').val();
+        for(var i=0; i < global_channel.length; i++){
+            if(global_channel[i]['id'] == channel_user_id){
+                $('input[name="channel_mobile"]').val(global_channel[i]['mobile']);
+                $('input[name="channel_lon"]').val(global_channel[i]['lon']);
+                $('input[name="channel_lat"]').val(global_channel[i]['lat']);
+                $('input[name="shop_address"]').val(global_channel[i]['shop_address']);
+                $('input[name="channel_contact_name"]').val(global_channel[i]['contact_name']);
+                break;
+            }
+        }
+
 
         // 运营选择
         $('select[name="operational_user_id"]').change(function(){

@@ -8,7 +8,7 @@ $config = array(
 
     'MODULE_ALLOW_LIST'    =>    array('Admin','Home'),
     'DEFAULT_MODULE'       =>    'Admin',  // 默认模块
-
+    'BASE_URL' => 'http://mz.hotwifibox.com/',
     //加密混合值
     'AUTH_CODE' => 'MoZuo=#=#',
     //数据库配置
