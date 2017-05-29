@@ -26,6 +26,21 @@ if(!function_exists('httpPost')){
     }
 }
 
+/**
+ * 用户状态
+ * @param $status
+ * @param bool|true $is_color
+ */
+function admin_user_status($status, $is_color = true){
+    if($status == 1){
+        return $is_color?"<span color='green'>正常</span>":"正常";
+    }elseif($status == 2){
+        return $is_color?"<span color='red'>锁定</span>":"锁定";
+    }elseif($status == 4){
+        return $is_color?"<span color='black'>删除</span>":"删除";
+    }
+}
+
 if(!function_exists('send_msgs')){
     /**
      * @param $mobile

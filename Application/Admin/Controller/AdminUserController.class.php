@@ -5,6 +5,7 @@ namespace Admin\Controller;
 use Helpers\Presenter;
 use Think\Controller;
 use Think\Page;
+use Org\Util\Strings;
 
 class AdminUserController extends BaseController
 {
@@ -32,9 +33,11 @@ class AdminUserController extends BaseController
                 $where['role'] = 4;
             }elseif($tab == 'spread'){
                 $where['role'] = 5;
+            }elseif($tab == 'operational'){
+                $where['role'] = 2;
             }
         }else{
-            $where['role'] = "2";
+            $where['role'] = 2;
         }
 
         $this->assign('tab', $tab);
@@ -46,12 +49,21 @@ class AdminUserController extends BaseController
 
         $show = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $list = $users->order('id DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $list = $users->where($where)->order('id DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach($list as $i=>$user){
-
+            // 运营人员
+            if($tab == '' || $tab == 'operational'){
+                $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY shop_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
+                $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
+            }elseif($tab == 'channel'){
+                $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
+            }elseif($tab == 'devices'){
+                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+            }elseif($tab == 'speard'){
+                // $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
+            }
         }
 
-        $this->assign('user_subscribe_map', Presenter::$user_subscribe_map);
         $this->assign('list', $list);// 赋值数据集
         $this->assign('page', $show);// 赋值分页输出
         $this->display();
@@ -61,11 +73,81 @@ class AdminUserController extends BaseController
      * 新建用户
      */
     public function edit(){
-        $tab = I('reqeust.tab','','trim');
+        $tab = I('request.tab','','trim');
         $id = I('request.id',0,'intval');
         if(IS_POST){
+            $data = $_POST;
+            if(empty($data['concat_name'])){
+                return $this->error("请输入联系人员姓名~");
+            }
 
-            $res = '';
+            if(!is_mobile($data['mobile'])){
+                return $this->error("请正确输入联系人员手机号码~");
+            }
+
+            if(empty($data['username'])){
+                return $this->error("请输入登陆账户~");
+            }
+
+            if($tab){
+                if($tab == 'channel'){
+                    $data['role'] = 3;
+                }elseif($tab == 'device'){
+                    $data['role'] = 4;
+                }elseif($tab == 'spread'){
+                    $data['role'] = 5;
+                }elseif($tab == 'operational'){
+                    $data['role'] = 2;
+                }
+            }else{
+                $data['role'] = 2;
+            }
+            if($id){
+                //  判断登陆名重复
+                $info = D("Admin")->where(['id'=>$id])->find();
+                if($info['username'] != $data['username']){
+                    $username = M('admin')->where(['username'=>$data['username']])->find();
+                    if($username){
+                        return $this->error("该用户名已经存在~");
+                    }
+                }
+
+                // 判断手机号重复
+                if($info['mobile'] != $data['mobile']){
+                    $mobile = M("admin")->where(['mobile'=>$data['mobile']])->find();
+                    if($mobile){
+                        return $this->error("该手机号已经存在系统~");
+                    }
+                }
+                if($data['password']){
+                    $salt = Strings::randString(12);
+                    $data['salt'] = $salt;
+                    $data['pwd'] = encrypt_password($data['password'], $salt);
+                }
+            }else{
+                if(empty($data['password'])){
+                    return $this->error("新建账户密码不能为空~");
+                }
+
+                // 判断手机号重复
+                $mobile = M("admin")->where(['mobile'=>$data['mobile']])->find();
+                if($mobile){
+                    return $this->error("该手机号已经存在系统~");
+                }
+
+                // 判断登陆名重复
+                $username = M('admin')->where(['username'=>$data['username']])->find();
+                if($username){
+                    return $this->error("该登陆名已经存在~");
+                }
+
+                $salt = Strings::randString(12);
+                $data['salt'] = $salt;
+                $data['pwd'] = encrypt_password($data['password'], $salt);
+                $data['create_time'] = time();
+                $res = M('admin')->add($data);
+            }
+            
             if($res){
                 return $this->success("操作成功",U('/admin_user/index',['tab'=>$tab]));
             }else{
@@ -79,13 +161,13 @@ class AdminUserController extends BaseController
         }
         $this->assign('tab', $tab);
         if($tab == 'operational'){
-            $this->display('AdminUser/operational.html');
+            $this->display('AdminUser/operational');
         }elseif($tab == 'channel'){
-            $this->display('AdminUser/channel.html');
+            $this->display('AdminUser/channel');
         }elseif($tab == 'device'){
-            $this->display('AdminUser/device.html');
+            $this->display('AdminUser/device');
         }elseif($tab == 'speard'){
-            $this->display('AdminUser/speard.html');
+            $this->display('AdminUser/speard');
         }else{
             $this->display();
         }
@@ -98,6 +180,18 @@ class AdminUserController extends BaseController
         $tab = I('request.tab','','trim');
         if(IS_POST){
 
+        }
+
+        if($tab == 'operational'){
+            $this->assign('import_name',"运营账户");
+        }elseif($tab == 'channel'){
+            $this->assign('import_name',"渠道账户");
+        }elseif($tab == 'device'){
+            $this->assign('import_name',"模座账户");
+        }elseif($tab == 'speard'){
+            $this->assign('import_name',"推广账户");
+        }else{
+            $this->assign('import_name',"系统账户");
         }
 
         $this->assign('tab', $tab);
