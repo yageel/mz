@@ -45,7 +45,6 @@ class BaseController extends Controller {
      * 初始化操作
      */
     public function _initialize(){
-        
         $this->openid = '';
         $this->type = I('request.type',0,'intval');
         $this->from = I('request.from',0,'intval');
@@ -58,7 +57,6 @@ class BaseController extends Controller {
         $from_city = intval(!empty($_SESSION['from_city'])?$_SESSION['from_city']:0);
 
         $this->assign('from_city', $from_city);
-
         /*add by allen 2016/06/28*/
         if ($this->from == 0 && isset($_SERVER['QUERY_STRING']) && strripos($_SERVER['QUERY_STRING'], 'from') != strpos($_SERVER['QUERY_STRING'], 'from')) {
             $pos = strpos($_SERVER['QUERY_STRING'], 'from');
@@ -165,7 +163,6 @@ class BaseController extends Controller {
             'appsecret' => $cityInfo['appsecret'] //填写高级调用功能的密钥
         );
 
-    
         return $this->wechat = new MyWechat($options);
     }
 
@@ -301,26 +298,6 @@ class BaseController extends Controller {
         $this->assign('onlyurl', $share);
     }
 
-  /**
-
-     */
-    protected function getCardSign($type, $ajax = false, $card_id = '', $card_type = '') {
-        $wechat = $this->initWechat($type);
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $signPackage = $wechat->getJsSignCard($url, $card_id, $card_type);
-
-        $share = [
-            "appid" => $signPackage["appid"],
-            "str" => $signPackage['noncestr'],
-            "time" => $signPackage['timestamp'],
-            "ticket" => $signPackage['signature']
-        ];
-        if ($ajax) {
-            return $share;
-        }
-        $this->assign('onlyurl', $share);
-    }
     /**
      * 初始化页面,主要是要获取用户的openid 并将openid写入reidis
      * @param int $type 城市ID
@@ -463,5 +440,5 @@ class BaseController extends Controller {
 
         return $uinfo;
     }
-    
+
 }
