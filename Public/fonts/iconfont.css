@@ -1,0 +1,48 @@
+
+@font-face {font-family: "iconfont";
+<<<<<<< .mine
+  src: url('iconfont.eot?t=1468574130'); /* IE9*/
+  src: url('iconfont.eot?t=1468574130#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1468574130') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1468574130') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1468574130#iconfont') format('svg'); /* iOS 4.1- */
+=======
+  src: url('iconfont.eot?t=1466389851'); /* IE9*/
+  src: url('iconfont.eot?t=1466389851#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1466389851') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1466389851') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1466389851#iconfont') format('svg'); /* iOS 4.1- */
+>>>>>>> .r13525
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-qiehuan301:before { content: "\e615"; }
+.icon-bianji:before { content: "\e617"; }
+.icon-shanchu:before { content: "\e618"; }
+.icon-gou:before { content: "\e601"; }
+.icon-chachada:before { content: "\e606"; }
+.icon-0101:before { content: "\e600"; }
+.icon-080101:before { content: "\e602"; }
+.icon-070101:before { content: "\e603"; }
+.icon-0901:before { content: "\e605"; }
+.icon-1101:before { content: "\e607"; }
+.icon-0201:before { content: "\e608"; }
+.icon-0401:before { content: "\e609"; }
+.icon-0501:before { content: "\e60a"; }
+.icon-0701011:before { content: "\e60b"; }
+.icon-1001:before { content: "\e60c"; }
+.icon-1201:before { content: "\e60d"; }
+.icon-0601:before { content: "\e60e"; }
+.icon-11:before { content: "\e60f"; }
+.icon-12011:before { content: "\e610"; }
+.icon-zhongjiangjilu:before { content: "\e604"; }
+.icon-dizhi:before { content: "\e611"; }
+.icon-duihuanjilu:before { content: "\e612"; }
+.icon-sanjiao:before { content: "\e613"; }

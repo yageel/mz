@@ -113,6 +113,7 @@ class MyRedis extends \Redis{
 	 * @return bool
 	 */
 	function new_get($name,$default=false){
+		return $name;
 		if($this->exists($name)){
 			return unserialize($this->get($name));
 		}else{

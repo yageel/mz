@@ -1,0 +1,20 @@
+﻿.button, .dialog-buttons a.button {
+    background:linear-gradient(45deg, #fa9d50, #f27d6b);
+    background:-webkit-linear-gradient(45deg, #fa9d50, #f27d6b);
+}
+.button-empty{
+    background:none;
+    border-color:#f27d6b;
+    color:#f17e6b;
+}
+.sign-today label{
+    background:linear-gradient(top, #ba0b38, #d2234f);
+    background:-webkit-linear-gradient(top, #ba0b38, #d2234f);
+}
+.sign-today span::after{
+    background:#e6305e;
+}
+.sign-today span{
+    background:linear-gradient(top, #eb3665, #f64b77);
+    background:-webkit-linear-gradient(top, #eb3665, #f64b77);
+}
