@@ -1,8 +1,9 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends BaseController {
+class UserController extends BaseController {
     public function index(){
+
         $this->display();
     }
 }
