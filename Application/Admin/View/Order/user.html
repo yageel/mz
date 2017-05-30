@@ -25,21 +25,21 @@
             <i class="fa fa-camera-retro stat_ico"></i>
                     <span style="float:left; margin-left: 20px;">
                         <span class="stat_label">佣金总收入（元）</span>
-                        <span class="stat_total"><strong>19116</strong></span>
+                        <span class="stat_total"><strong>{$user.total_income_amount}</strong></span>
                     </span>
           </div>
           <div class="col-sm-2 p-m  white-bg border-right ">
             <i class="fa fa-cny stat_ico" style=" color:#33cc00"></i>
                     <span style="float:left; margin-left: 20px;">
                         <span class="stat_label">佣金余额（元）</span>
-                        <span class="stat_total"><strong>2597</strong></span>
+                        <span class="stat_total"><strong>{$user.total_amount}</strong></span>
                     </span>
           </div>
           <div class="col-sm-2 p-m  white-bg border-right ">
             <i class="fa fa-money stat_ico" style="color:#ff6600"></i>
                     <span style="float:left; margin-left: 20px;">
                         <span class="stat_label">提现总额（元）</span>
-                        <span class="stat_total"><strong>164</strong></span>
+                        <span class="stat_total"><strong>{$user.total_cash_amount}</strong></span>
                     </span>
           </div>
 
@@ -51,9 +51,9 @@
 
   <div class="tabs-container ibox">
     <ul class="nav nav-tabs">
-      <li class="<if condition='$tab eq ""'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['ID'],'tab'=>''])}"> 佣金明细</a></li>
-      <li class="<if condition='$tab eq "balance"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['ID'],'tab'=>'balance'])}"> 结算明细</a></li>
-      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['ID'],'tab'=>'device'])}" > 运营魔座</a></li>
+      <li class="<if condition='$tab eq ""'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>''])}"> 佣金明细</a></li>
+      <li class="<if condition='$tab eq "balance"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'balance'])}"> 结算明细</a></li>
+      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'device'])}" > 运营魔座</a></li>
     </ul>
     <div class="tab-content">
       <!--//交易流水模块-->
