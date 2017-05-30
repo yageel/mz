@@ -111,11 +111,10 @@
             <!--阴影层-->
             <div class="dialog-container" id="dialog" style="z-index: 99;"></div>
 
-
             <div class="user-info">
                 <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
                 <div>
-                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" />
+                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/header.jpg'}" />
                     <span class="name color-white">{$users['wx_name']|default="未知"}</span>
                 </div>
             </div>
@@ -134,15 +133,7 @@
                             </a>
                         </div>
                     </li>
-                    <li>
-                        <div class="wrap color-link item">
-                            <span class="iconfont over">M币余额:</span>
-                            <span class="wrap-content mb">{$usersBank['total_integral']}M</span>
-                            <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/recharge/index', ['wxcallback' => 1])}" style="width: 15%;margin-right: 0.8rem;">
-                                <span class="iconfont item-gt">充值</span>
-                            </a>
-                        </div>
-                    </li>
+
                 </ul>
             </div>
             <div class="text-item-tab wrap">
@@ -158,42 +149,11 @@
                     <p>余额详情</p>
                 </div>
                 <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/integral')}" class="color-link">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/cash')}" class="color-link">
                         <img src="__PUBLIC__/images/mb.png" alt="">
                     </a>
-                    <p>M币详情</p>
+                    <p>提现详情</p>
                 </div>
-                <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看兑换订单')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/exchange')}">
-                        <img src="__PUBLIC__/images/exchange-list.png" alt="">
-                    </a>
-                    <p>兑换订单</p>
-                </div>
-            </div>
-            <div class="text-item-content1 wrap">
-                <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看中奖纪录')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/lottery')}">
-                        <img src="__PUBLIC__/images/prize-record.png" alt="">
-                    </a>
-                    <p>中奖记录</p>
-                </div>
-                <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看我的地址')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/address')}">
-                        <img src="__PUBLIC__/images/my-address.png" alt="">
-                    </a>
-                    <p>我的地址</p>
-                </div>
-                <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看活动记录')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/active/record_list')}">
-                        <img src="__PUBLIC__/images/activity-record.png" alt="">
-                    </a>
-                    <p>活动记录</p>
-                </div>
-            </div>
-
-            <div class="button-list">
-                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/index/index')}" class="button">赚取更多</a>
-                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/market/index')}" class="button loginBtn">商城首页</a>
             </div>
         </div>
     </div>
