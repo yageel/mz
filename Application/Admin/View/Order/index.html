@@ -1,5 +1,5 @@
 <extend name="Layout/master" />
-<block name="title">用户管理-</block>
+<block name="title">佣金管理-</block>
 <block name="head">
 </block>
 <block name="content">
@@ -34,15 +34,15 @@
             <volist name="list" id="item">
               <tr class="gradeX">
                 <td>{$item.id}</td>
-                <td>{$item.username}</td>
                 <td>{$item.contact_name}</td>
                 <td>{$item.mobile}</td>
-                <td>{$item.total_channel}</td>
                 <td>{$item.total_device}</td>
-                <td>{:admin_user_status($item[status])}</td>
-                <td>{:timestampToDate($item['create_time'])}</td>
+                <td>{$item.total_amount}</td>
+                <td>{$item.total_income_amount}</td>
+                <td>{$item.total_sales_amount}</td>
+                <td>{:admin_user_status($item['status'])}</td>
                 <td class="center">
-                  <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                  <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>'operational'])}"><i class="fa fa-check text-navy"></i>详细</a>
                 </td>
               </tr>
             </volist>
@@ -79,15 +79,15 @@
           <volist name="list" id="item">
             <tr class="gradeX">
               <td>{$item.id}</td>
-              <td>{$item.username}</td>
               <td>{$item.contact_name}</td>
               <td>{$item.mobile}</td>
-              <td>{$item.shop_name}</td>
-              <td>{$item.openid}</td>
               <td>{$item.total_device}</td>
+              <td>{$item.total_amount}</td>
+              <td>{$item.total_income_amount}</td>
+              <td>{$item.total_sales_amount}</td>
               <td>{:admin_user_status($item['status'])}</td>
               <td class="center">
-                <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>'channel'])}"><i class="fa fa-check text-navy"></i>详细</a>
               </td>
             </tr>
           </volist>
@@ -124,15 +124,15 @@
         <volist name="list" id="item">
           <tr class="gradeX">
             <td>{$item.id}</td>
-            <td>{$item.username}</td>
             <td>{$item.contact_name}</td>
             <td>{$item.mobile}</td>
-            <td>{$item.openid}</td>
             <td>{$item.total_device}</td>
+            <td>{$item.total_amount}</td>
+            <td>{$item.total_income_amount}</td>
+            <td>{$item.total_sales_amount}</td>
             <td>{:admin_user_status($item['status'])}</td>
-            <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>'device'])}"><i class="fa fa-check text-navy"></i>详细</a>
             </td>
           </tr>
         </volist>
@@ -169,15 +169,15 @@
         <volist name="list" id="item">
           <tr class="gradeX">
             <td>{$item.id}</td>
-            <td>{$item.username}</td>
             <td>{$item.contact_name}</td>
             <td>{$item.mobile}</td>
-            <td>{$item.openid}</td>
             <td>{$item.total_device}</td>
+            <td>{$item.total_amount}</td>
+            <td>{$item.total_income_amount}</td>
+            <td>{$item.total_sales_amount}</td>
             <td>{:admin_user_status($item['status'])}</td>
-            <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>'spread'])}"><i class="fa fa-check text-navy"></i>详细</a>
             </td>
           </tr>
         </volist>
