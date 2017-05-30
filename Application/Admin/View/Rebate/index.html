@@ -32,7 +32,7 @@
                     <td><input type="checkbox" name="id[]" value="{$item.id}" /></td>
                     <td>{$item.id}</td>
                     <td>{$item.rebate_name}</td>
-                    <td><if condition="$item[rebate_type] eq 0">默认分成<else/>自定义</if></td>
+                    <td><if condition="$item[rebate_type] eq 0"><font color="green" >默认分成</font><else/>自定义</if></td>
                     <td>{$item.operational_rebate}%</td>
                     <td>{$item.channel_rebate}%</td>
                     <td>{$item.device_rebate}%</td>

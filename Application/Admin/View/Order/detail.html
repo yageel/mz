@@ -87,7 +87,8 @@
               <td>{$item.total_device}</td>
               <td>{:admin_user_status($item['status'])}</td>
               <td class="center">
-                <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/detail', ['id'=> $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'channel'])}"><i class="fa fa-check text-navy"></i>编辑</a>
               </td>
             </tr>
           </volist>
@@ -132,7 +133,8 @@
             <td>{:admin_user_status($item['status'])}</td>
             <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'device'])}"><i class="fa fa-check text-navy"></i>编辑</a>
             </td>
           </tr>
         </volist>
@@ -177,7 +179,8 @@
             <td>{:admin_user_status($item['status'])}</td>
             <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'spread'])}"><i class="fa fa-check text-navy"></i>编辑</a>
             </td>
           </tr>
         </volist>

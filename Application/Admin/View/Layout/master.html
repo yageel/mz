@@ -48,6 +48,12 @@
     },function(){
         $(".view_image_block").remove();
     });
+
+    $(document).ready(function(){
+        var title = document.title.split('-');
+        parent.$('.J_menuTab[class*=active]').html(title[0]+' <i class="fa fa-times-circle"></i>');// 分成规则列表
+
+    });
 </script>
 </body>
 </html>

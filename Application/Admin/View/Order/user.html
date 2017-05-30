@@ -1,13 +1,58 @@
 <extend name="Layout/master" />
 <block name="title">用户管理-</block>
 <block name="head">
+  <style type="text/css">
+    .stat_block{font-size: 24px;padding-bottom: 15px;}
+    .stat_block .stat_ico{ float:left; margin-left:30px; font-size:42px; margin-top: 22px; color:#0099ff}
+    .stat_block .stat_total{float:left; clear:both; margin-top:5px; color: red; font-size: 40px}
+    .stat_block .stat_label{float: left; clear: both; font-weight: normal !important; font-size: 16px; color: #999}
+  </style>
 </block>
 <block name="content">
-  <div class="tabs-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>李雪华-佣金统计</h5>
+          <div class="ibox-tools">
+
+          </div>
+        </div>
+        <div class="ibox-content stat_block">
+
+          <div class="col-sm-2 p-m  white-bg border-right ">
+            <i class="fa fa-camera-retro stat_ico"></i>
+                    <span style="float:left; margin-left: 20px;">
+                        <span class="stat_label">佣金总收入（元）</span>
+                        <span class="stat_total"><strong>19116</strong></span>
+                    </span>
+          </div>
+          <div class="col-sm-2 p-m  white-bg border-right ">
+            <i class="fa fa-cny stat_ico" style=" color:#33cc00"></i>
+                    <span style="float:left; margin-left: 20px;">
+                        <span class="stat_label">佣金余额（元）</span>
+                        <span class="stat_total"><strong>2597</strong></span>
+                    </span>
+          </div>
+          <div class="col-sm-2 p-m  white-bg border-right ">
+            <i class="fa fa-money stat_ico" style="color:#ff6600"></i>
+                    <span style="float:left; margin-left: 20px;">
+                        <span class="stat_label">提现总额（元）</span>
+                        <span class="stat_total"><strong>164</strong></span>
+                    </span>
+          </div>
+
+          <div style="clear: both; height: 1px;">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs-container ibox">
     <ul class="nav nav-tabs">
-      <li class="<if condition='$tab eq "" OR $tab eq "operational"'>active</if>"><a data-toggle="tab" href="{:U('/order/index')}"> 运营佣金管理</a></li>
-      <li class="<if condition='$tab eq "channel"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'channel'])}"> 渠道佣金管理</a></li>
-      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'device'])}" > 模座佣金管理</a></li>
+      <li class="<if condition='$tab eq "" OR $tab eq "operational"'>active</if>"><a data-toggle="tab" href="{:U('/order/index')}"> 佣金明细</a></li>
+      <li class="<if condition='$tab eq "channel"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'channel'])}"> 结算明细</a></li>
+      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'device'])}" > 所属模座</a></li>
       <li class="<if condition='$tab eq "spread"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'spread'])}"> 推广管佣金理</a></li>
     </ul>
     <div class="tab-content">
@@ -42,7 +87,8 @@
                 <td>{:admin_user_status($item[status])}</td>
                 <td>{:timestampToDate($item['create_time'])}</td>
                 <td class="center">
-                  <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                  <a href="{:U('/order/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                  <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'operational'])}"><i class="fa fa-check text-navy"></i>编辑</a>
                 </td>
               </tr>
             </volist>
@@ -87,7 +133,8 @@
               <td>{$item.total_device}</td>
               <td>{:admin_user_status($item['status'])}</td>
               <td class="center">
-                <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/detail', ['id'=> $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'channel'])}"><i class="fa fa-check text-navy"></i>编辑</a>
               </td>
             </tr>
           </volist>
@@ -132,7 +179,8 @@
             <td>{:admin_user_status($item['status'])}</td>
             <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'device'])}"><i class="fa fa-check text-navy"></i>编辑</a>
             </td>
           </tr>
         </volist>
@@ -177,7 +225,8 @@
             <td>{:admin_user_status($item['status'])}</td>
             <td>{:timestampToDate($item['create_time'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/edit', ['id'=> $item['id'],'tab'=>'spread'])}"><i class="fa fa-check text-navy"></i>编辑</a>
             </td>
           </tr>
         </volist>

@@ -44,8 +44,8 @@
                                     <td>{:admin_user_status($item[status])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
                                         <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'operational'])}"><i class="fa fa-check text-navy"></i>编辑</a>
+                                        <a href="{:U('/admin_user/del', ['id'=> $item['id'],'tab'=>'operational'])}" onclick="return confirm('确定要删除该用户吗？')"><i class="fa fa-check text-navy"></i>删除</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -94,8 +94,8 @@
                                     <td>{:admin_user_status($item['status'])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/admin_user/detail', ['id'=> $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
                                         <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'channel'])}"><i class="fa fa-check text-navy"></i>编辑</a>
+                                        <a href="{:U('/admin_user/del', ['id'=> $item['id'],'tab'=>'channel'])}" onclick="return confirm('确定要删除该用户吗？')"><i class="fa fa-check text-navy"></i>删除</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -140,8 +140,8 @@
                                     <td>{:admin_user_status($item['status'])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
                                         <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'device'])}"><i class="fa fa-check text-navy"></i>编辑</a>
+                                        <a href="{:U('/admin_user/del', ['id'=> $item['id'],'tab'=>'device'])}" onclick="return confirm('确定要删除该用户吗？')"><i class="fa fa-check text-navy"></i>删除</a>
                                     </td>
                                 </tr>
                             </volist>
@@ -186,8 +186,8 @@
                                     <td>{:admin_user_status($item['status'])}</td>
                                     <td>{:timestampToDate($item['create_time'])}</td>
                                     <td class="center">
-                                        <a href="{:U('/admin_user/detail', ['id' => $item['id']])}"><i class="fa fa-check text-navy"></i>详细</a>
                                         <a href="{:U('/admin_user/edit', ['id'=> $item['id'],'tab'=>'spread'])}"><i class="fa fa-check text-navy"></i>编辑</a>
+                                        <a href="{:U('/admin_user/del', ['id'=> $item['id'],'tab'=>'spread'])}" onclick="return confirm('确定要删除该用户吗？')"><i class="fa fa-check text-navy"></i>删除</a>
                                     </td>
                                 </tr>
                             </volist>
