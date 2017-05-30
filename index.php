@@ -18,7 +18,7 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 define('APP_DEBUG',true);
 
 // 自定义操作
-if(strpos('mzht', $_SERVER['HTTP_HOST']) !== false){
+if(strpos($_SERVER['HTTP_HOST'],'mzht') !== false){
     define('BIND_MODULE', 'Admin');
 }else {
     define('BIND_MODULE', 'Home');
