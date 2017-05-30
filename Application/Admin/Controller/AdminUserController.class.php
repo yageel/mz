@@ -60,7 +60,7 @@ class AdminUserController extends BaseController
             }elseif($user['role'] == 4){
                 $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
             }elseif($user['role'] == 5){
-                 $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+                 $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
             }
         }
 
