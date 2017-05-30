@@ -1,0 +1,61 @@
+<extend name="layout/master" />
+<block name="title">兑换记录</block>
+<block name="head">
+    <link href="__PUBLIC__/css/details-comm.css?v=__VERSION__" rel="stylesheet" />
+    <link href="__PUBLIC__/css/exchangeDetails.css?v=1__VERSION__" rel="stylesheet" />
+    <style>
+        .goods-pre{
+            width:60px;
+        }
+        .goods-pre img{
+            width:100%;
+        }
+    </style>
+</block>
+<block name="content">
+    <div class="content-padding abs100">
+        <div id="exchangeDetailsContent" class="wrap wrap-vertical">
+            <div class="user-info">
+                <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
+                <div>
+                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" />
+                    <span class="name color-white">{$users['wx_name']|default="未知"}</span>
+                </div>
+            </div>
+            <div>
+                <div class="text-item-tab wrap">
+                    <a href="{:tsurl('/user/index')}" class="color-link wrap-content active">个人余额：<span class="color-focus">￥{$usersBank['total_amount']}</span></a>
+                    <a href="{:tsurl('/user/index',array('tab'=>'mbi'))}" class="color-link wrap-content">个人M币：<span class="color-focus"><span class="iconfont">&#xe608;</span>{$usersBank['total_integral']}</span></a>
+                </div>
+            </div>
+            <div class="dividing">
+                <div class="dividing-text color-link"><span>兑换记录</span></div>
+            </div>
+            <div class="wrap-content ohide">
+                <div class="exchangeDetails-items" id="exchangeDetailsItems"  data-page="{$total_pages}">
+                    <volist name="list" id="item">
+                    <div class="dividing-line">
+                        <a href="<if condition='$item[goods][goods_type] eq 1 OR $item[goods][goods_type] eq 2'>{:tsurl('/user/detail',array('id'=>$item[id],'class'=>'exchange'))}<else/>{:jump_tsurl($item[goods][jump_url])}</if>" class="wrap color-link">
+                            <span class="goods-pre">
+                                <img src="{:pic_url($item[goods][goods_pic])}" />
+                            </span>
+                            <span class="wrap-content">
+                                <i class="text-overhide">{$item.goods.goods_name}</i>
+                                <i class="text-overhide">{$item.create_time|date='Y-m-d H:i:s',###}</i>
+                                <i class="text-overhide">已兑换<if condition="is_array($item[express])">,<if condition="$item[express][status] eq '0'"><font color="#999">待发货</font><elseif  condition="$item[express][status] eq '1'" /><font color="black">待收货</font><elseif  condition="$item[express][status] eq '2'" /><font color="green" >已签收</font><elseif  condition="$item[express][status] eq '3'" /><font color="green" >已完成</font><elseif  condition="$item[express][status] eq '4'" />已关闭</if></if></i>
+                            </span>
+                            <span class="color-remarks">查看详情</span>
+                        </a>
+                    </div>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        var url_api = 'exchange_api';
+    </script>
+    <script src="__PUBLIC__/js/exchangeDetails.js?v=1__VERSION__"></script>
+</block>

@@ -1,0 +1,106 @@
+/**
+ * Created by lenovo on 2016/12/12.
+ */
+
+var updateTimeoutIdx,
+    localStorageSendMsgKey = "REGISTER-SEND-MSG-TIME";
+
+$("#btnChange").bind("click", function () {
+    var mobile = checkMobile(),
+        vercode = $.trim($("#txtVercode").val());
+
+    if (!mobile)
+        return;
+
+    if (!vercode) {
+        tools.alert("请输入手机验证码！");
+        return;
+    }
+
+    tools.sendData("更绑页-点击获取验证码");
+
+    tools.ajax(tools.url("user", "post_change_bind"), {
+        mobile: mobile,
+        vercode: vercode
+    });
+});
+
+$("#btnVercode").bind("click", function () {
+    var $tag = $(this),
+        mobile = checkMobile();
+
+    if (!mobile || $tag.hasClass("gray"))
+        return;
+
+    tools.sendData("更绑页-点击获取验证码");
+
+    tools.ajax(tools.url("user", "vercode_api"), {
+        mobile: mobile
+    }, function () {
+        tools.storage(localStorageSendMsgKey, (new Date()).getTime());
+
+        updateVercodeBtn();
+    });
+});
+
+function updateVercodeBtn() {
+    clearTimeout(updateTimeoutIdx);
+
+    var $btn = $("#btnVercode").addClass("gray");
+
+    _update();
+
+    updateTimeoutIdx = $.delay(_update, 1000);
+
+    function _update() {
+        var now = (new Date()).getTime(),
+            sendTime = tools.storage(localStorageSendMsgKey);
+
+        if (!sendTime) {
+            $btn.removeClass("gray");
+            return;
+        }
+
+        var countdown = 60000 - now + parseInt(sendTime),
+            countdownSeconds;
+
+        countdownSeconds = parseInt(countdown / 1000);
+
+        if (countdown % 1000 > 0)
+            countdownSeconds++;
+
+        $btn.text("剩余" + countdownSeconds + "秒");
+
+        if (countdown > 0){
+            updateTimeoutIdx = $.delay(_update, countdown % 1000);
+        } else {
+            clearTimeout(updateTimeoutIdx);
+            tools.removeStorage(localStorageSendMsgKey)
+            $btn.text("重新获取").removeClass("gray");
+        }
+    }
+}
+
+function checkMobile() {
+    var mobile = $.trim($("#txtMobile").val());
+
+    if (!mobile) {
+        tools.alert("请输入手机号！");
+        return false;
+    }
+
+    if (!tools.isMobile(mobile)) {
+        tools.alert("输入的手机号码格式不正确！");
+        return false;
+    }
+
+    return mobile;
+}
+
+$(function () {
+    new ntScroll("registerContent");
+});
+
+updateVercodeBtn();
+
+tools.sendData("加载更绑手机页");

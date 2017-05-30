@@ -1,0 +1,142 @@
+<extend name="layout/master" />
+<block name="title">视频互动</block>
+<block name="head">
+	<link href="__PUBLIC__/css/templateComment.css?v=__VERSION__" rel="stylesheet" />
+</block>
+<block name="content">
+    <div class="abs100 wrap wrap-vertical">
+        <div class="wrap-content ohide">
+            <div class="absm100" id="templateCommentContent">
+                <div class="comment-top">
+                    <iframe frameborder="0" id="frameVideo" data-src="http://player.youku.com/embed/XMTcxNTI3MjY4MA==" allowfullscreen></iframe>
+                </div>
+                <div class="comment-main">
+                    <div class="wrap">
+                        <div class="comment-circle">
+                            <div class="text-overhide color-link">阿萨德</div>
+                        </div>
+                        <div class="wrap-content comment-title">
+                            <p class="color-link">as大大缩短</p>
+                            <div class="color-remarks">电风扇电风扇的as大三大四的阿萨德阿萨德阿萨德阿杜</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-list">
+                    <div class="dividing-container">
+                        <div class="dividing-text"><label class="color-link">热门评论</label></div>
+                    </div>
+                    <div class="comment-item" onclick="showMenu(this)" data-user="9" data-id="10">
+                        <div class="wrap">
+                            <div class="comment-user"><img src="__PUBLIC__/images/temp/user-user-head.jpg" /></div>
+                            <div class="comment-content wrap-content color-remarks">
+                                <em>
+                                    <span class="color-link">艾伦</span>
+                                    <i>2016-09-07</i>
+                                    <i>刚刚</i>
+                                </em>
+                                <p>这个视频我已经看了1000次了，真棒。我要推荐给我的所有亲戚朋友。</p>
+                                <blockquote>老五对老四说老三的老二老大了</blockquote>
+                            </div>
+                            <div onclick="changeSupport(this, event)" class="comment-support color-remarks">
+                                <div><img src="__PUBLIC__/images/support-no.png" /><img src="__PUBLIC__/images/support-yes.png" /></div>
+                                <label>211</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-item" onclick="showMenu(this)" data-user="10" data-id="11">
+                        <div class="wrap">
+                            <div class="comment-user"><img src="__PUBLIC__/images/temp/user-user-head.jpg" /></div>
+                            <div class="comment-content wrap-content color-remarks">
+                                <em>
+                                    <span class="color-link">威哥</span>
+                                    <i>2016-09-07</i>
+                                    <i>刚刚</i>
+                                </em>
+                                <p>这个视频我已经看了1000次了，真棒。我要推荐给我的所有亲戚朋友。</p>
+                            </div>
+                            <div onclick="changeSupport(this, event)" class="comment-support color-remarks">
+                                <div><img src="__PUBLIC__/images/support-no.png" /><img src="__PUBLIC__/images/support-yes.png" /></div>
+                                <label>211</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-item" onclick="showMenu(this)" data-user="11" data-id="12">
+                        <div class="wrap">
+                            <div class="comment-user"><img src="__PUBLIC__/images/temp/user-user-head.jpg" /></div>
+                            <div class="comment-content wrap-content color-remarks">
+                                <em>
+                                    <span class="color-link">大飞哥</span>
+                                    <i>2016-09-07</i>
+                                    <i>刚刚</i>
+                                </em>
+                                <p>这个视频我已经看了1000次了，真棒。我要推荐给我的所有亲戚朋友。</p>
+                            </div>
+                            <div onclick="changeSupport(this, event)" class="comment-support support-yes color-red">
+                                <div><img src="__PUBLIC__/images/support-no.png" /><img src="__PUBLIC__/images/support-yes.png" /></div>
+                                <label>211</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dividing-container">
+                        <div class="dividing-text"><label class="color-link">新鲜评论</label></div>
+                    </div>
+                    <div class="comment-item" onclick="showMenu(this)" data-user="12" data-id="13">
+                        <div class="wrap">
+                            <div class="comment-user"><img src="__PUBLIC__/images/temp/user-user-head.jpg" /></div>
+                            <div class="comment-content wrap-content color-remarks">
+                                <em>
+                                    <span class="color-link">小飞哥</span>
+                                    <i>2016-09-07</i>
+                                    <i>刚刚</i>
+                                </em>
+                                <p>这个视频我已经看了1000次了，真棒。我要推荐给我的所有亲戚朋友。</p>
+                                <blockquote>老五对老四说老三的老二老大了</blockquote>
+                            </div>
+                            <div onclick="changeSupport(this, event)" class="comment-support color-remarks">
+                                <div><img src="__PUBLIC__/images/support-no.png" /><img src="__PUBLIC__/images/support-yes.png" /></div>
+                                <label>211</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-item" onclick="showMenu(this)" data-user="13" data-id="14">
+                        <div class="wrap">
+                            <div class="comment-user"><img src="__PUBLIC__/images/temp/user-user-head.jpg" /></div>
+                            <div class="comment-content wrap-content color-remarks">
+                                <em>
+                                    <span class="color-link">威哥</span>
+                                    <i>2016-09-07</i>
+                                    <i>刚刚</i>
+                                </em>
+                                <p>这个视频我已经看了1000次了，真棒。我要推荐给我的所有亲戚朋友。</p>
+                            </div>
+                            <div onclick="changeSupport(this, event)" class="comment-support color-remarks">
+                                <div><img src="__PUBLIC__/images/support-no.png" /><img src="__PUBLIC__/images/support-yes.png" /></div>
+                                <label>211</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comment-footer dividing-line">
+            <div class="wrap">
+                <div class="wrap-content">
+                    <input id="txtComment" type="text" placeholder="请输入评论" />
+                </div>
+                <div class="send-box">
+                    <a href="javascript:void(0)" onclick="sendComment()" class="button">发送</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divCommentMenus" class="comment-menus">
+        <ul>
+            <li class="dividing-line color-link dividing-line-top" onclick="commentUser()">回复</li>
+            <li class="dividing-line color-link" onclick="reportUser()">举报</li>
+            <li class="dividing-line dividing-line-top color-orange" onclick="hideMenu()">取消</li>
+        </ul>
+    </div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/js/templateComment.js?v=__VERSION__"></script>
+</block>

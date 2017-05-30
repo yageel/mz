@@ -1,0 +1,47 @@
+﻿.user-info{
+    position:relative;
+}
+.user-info .user-bg, .user-info .wrap img{
+    display:block;
+    width:100%;
+}
+.user-info .wrap{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translateY(-50%) translateX(-50%);
+    -webkit-transform:translateY(-50%) translateX(-50%);
+    height:70px;
+}
+.user-info .wrap img{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+}
+.user-text{
+    padding-left:20px;
+    color:#fff;
+}
+.user-text p{
+    font-size:18px;
+    padding:10px 0;
+}
+.user-text label{
+    font-size:14px;
+    white-space:nowrap;
+}
+.user-nav li{
+    height:48px;
+    border-bottom:1px solid #efefef;
+    padding:0 20px;
+}
+.user-nav a, .user-nav span{
+    height:48px;
+    line-height:48px;
+    overflow:hidden;
+    font-size:15px;
+    color:#666;
+}
+.user-nav li:active{
+    background:#efefef;
+}

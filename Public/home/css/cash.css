@@ -1,0 +1,86 @@
+﻿.menu-fixed, .use-content, .dividing-text span{
+    background:#F0F0EF;
+}
+.user-info{
+    position:relative;
+    line-height:100%;
+}
+.user-info > .bg{
+    display:block;
+    width:100%;
+}
+.user-info > div{
+    height:70px;
+    position:absolute;
+    left:0;
+    top:50%;
+    width:100%;
+    transform:translateY(-50%);
+    -webkit-transform:translateY(-50%);
+}
+.user-info .head{
+    width:60px;
+    height:60px;
+    display:block;
+    margin:5px 20px 0;
+    border-radius:100%;
+}
+.user-info .name{
+    font-size:16px;
+    padding-top:5px;
+}
+.user-info .money{
+    font-size:17px;
+    padding:9px 0 8px;
+}
+.user-info .total{
+    font-size:13px;
+}
+.use-content{
+    padding:30px 15px 7px;
+}
+.cash-money{
+    border-radius:3px;
+    padding-bottom:25px;
+    background:#fff;
+}
+.cash-money input{
+    border:0;
+    height:34px;
+    box-sizing:border-box;
+    padding:9px 0;
+    line-height:14px;
+    text-align:center;
+    display:block;
+    width:100%;
+    font-size:14px;
+}
+.cash-money div{
+    width:60%;
+    min-width:170px;
+    margin:0 auto;
+    border-bottom:1px solid #6E6E6E;
+}
+.cash-money p{
+    font-size:17px;
+    font-weight:bold;
+    padding:10px 0 10px 20px;
+}
+.cash-remarks{
+    line-height:200%;
+}
+.button-cash{
+    margin-top:15px;
+}
+.dividing-text{
+    margin-top:20px;
+}
+.guide{
+    padding:15px;
+    background:#fff;
+}
+.guide ol{
+    padding-left:2em;
+    list-style:decimal;
+    line-height:150%;
+}

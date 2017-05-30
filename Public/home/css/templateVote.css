@@ -1,0 +1,128 @@
+﻿.menu-fixed {
+    background: #F0F0EF;
+}
+.vote-top img{
+    display:block;
+    width:100%;
+}
+.vote-top iframe, .vote-top video{
+    width:100%;
+    height:3.65rem;
+}
+.vote-top video{
+    height:auto;
+}
+.vote-main{
+    padding:0 20px 10px;
+    line-height:110%;
+}
+.vote-main > div{
+    margin-top:10px;
+}
+.vote-circle{
+    width:56px;
+    padding-right:10px;
+    position:relative;
+    min-height:40px;
+}
+.circle-big{
+    min-height:70px;
+}
+.vote-circle::before{
+    content:"";
+    position:absolute;
+    top:11px;
+    height:100%;
+    width:5px;
+    background:#ECEBEA;
+    left:25.5px;
+}
+.vote-main > .wrap:last-child .vote-circle::before{
+    height:0;
+}
+.vote-main > .wrap:last-child .vote-circle{
+    min-height:36px;
+}
+.vote-circle > div{
+    width:36px;
+    height:36px;
+    border-radius:100%;
+    background:#ECEBEA;
+    margin-left:10px;
+    line-height:36px;
+    overflow:hidden;
+    position:relative;
+    box-sizing:border-box;
+    text-align:center;
+    font-weight:bold;
+}
+.circle-big > div{
+    width:56px;
+    height:56px;
+    margin-left:0;
+    line-height:56px;
+    font-size:13px;
+}
+.vote-title p{
+    padding-top:10px;
+    font-size:12px;
+}
+.vote-title div{
+    padding-top:5px;
+    font-size:11px;
+}
+.vote-circle .vote-question{
+    font-size:13px;
+    font-weight:normal;
+}
+.question-title p{
+    font-size:13px;
+    padding-top:4px;
+}
+.question-title div{
+    font-size:12px;
+    padding-top:4px;
+}
+.vote-option-img div{
+    width:32px;
+    height:32px;
+    margin:2px auto 0;
+    overflow:hidden;
+    position:relative;
+}
+.vote-option-img input:checked + div::before{
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    background:rgba(0,0,0,.5);
+    content:"";
+    position:absolute;
+    border-radius:100%;
+    content:"\e601";
+    position:absolute;
+    font-family:"iconfont";
+    font-size:20px;
+    font-style:normal;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-stroke-width:0.2px;
+    color:#fff;
+    font-weight:normal;
+    line-height:34px;
+}
+.vote-option-img img{
+    width:100%;
+    height:100%;
+    display:block;
+    border-radius:100%;
+}
+.vote-option-text p{
+    font-size:13px;
+    padding-top:11px;
+}
+.vote-circle input{
+    display:none;
+}
+.vote-submit{
+    padding:10px 20px;
+}

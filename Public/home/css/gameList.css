@@ -1,0 +1,73 @@
+﻿.menu-fixed, html, body{
+    background:#F0F0EF;
+}
+.banner, .banner img, .preview img{
+    width:100%;
+    display:block;
+}
+.game-list{
+    padding:5px;
+}
+.game-entity{
+    background:#fff;
+    border-radius:3px;
+}
+.game-entity .logo, .sort img{
+    display:block;
+    height:60px;
+    height:60px;
+    display:block;
+    border-radius:10px;
+    margin:10px;
+}
+.entity-head p, .entity-head span{
+    line-height:100%;
+    display:block;
+    padding-top:10px;
+}
+.entity-head p{
+    padding-top:12px;
+}
+.entity-head span{
+    font-size:11px;
+}
+.game-entity .button{
+    position:absolute;
+    right:10px;
+    top:15px;
+    height:24px;
+    line-height:24px;
+    font-size:12px;
+}
+.plr10{
+    padding-left:10px;
+    padding-right:10px;
+}
+.p10{
+    padding:10px;
+}
+.dividing-line::after{
+    border-top-style:dashed;
+}
+.sort img{
+    width:46px;
+    height:38px;
+}
+.preview .split-x{
+    width:5px;
+}
+.sort{
+    line-height:58px;
+}
+.sort em{
+    display:block;
+    width:9px;
+    height:9px;
+    border:1px solid #808080;
+    border-top:0;
+    border-left:0;
+    transform:rotate(315deg);
+    -webkit-transform:rotate(315deg);
+    transform-origin:50% 50%;
+    margin:24px 15px 0 0;
+}

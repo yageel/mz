@@ -1,0 +1,65 @@
+body, html{
+	height: 100%;
+}
+/*body{
+	background: url(../images/bg-winning.png) no-repeat;
+	background-size: 100% auto;
+}*/
+.color-min{
+	color: #666;
+}
+.color-max{
+	font-size: 15px;
+	font-weight: bold;
+	color: #444;
+	font-family: "Miscrof Yahei";
+}
+.content-box{
+    background-color: #fff;
+    position: absolute;
+    top: 20vh;
+    left: 5%;
+    width: 90vw;
+    height: 75%;
+    border-radius: 6px;
+    padding:10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+}
+.content-item img{
+	height:60px;
+	width:60px;
+}
+.wrap-nav{
+	line-height: 63px;
+}
+.content-item{
+	min-height: 60px;
+	padding: 10px;
+	background: #f3f3f3;
+	margin-bottom: 10px;
+}
+.big-text{
+	font-size: 32px;
+	color:#5A5A5A;
+	font-family: "Miscrof Yahei";
+}
+.content-item p{
+	font-size: 13px;
+	line-height: 130%;
+	padding: 3px 10px;
+}
+.content-item .ggl-button{
+	height:34px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-top:13px;
+    padding: 0 15px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.text-common{
+	color: #555;
+	font-family: "Miscrof Yahei";
+}

@@ -1,0 +1,15 @@
+﻿.about-box{
+    padding:0 10px 10px 10px;
+}
+ol ol li{
+    line-height:150%;
+    text-indent:2em;
+    margin-bottom:5px;
+    color:#666;
+}
+h3{
+    font-size:16px;
+    font-weight:bold;
+    color:#333;
+    padding:10px 0;
+}

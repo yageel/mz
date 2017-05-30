@@ -15,7 +15,6 @@
     <!--<block name='title'></block>-->
     <link href="__PUBLIC__/css/comm.css?v=__VERSION__" rel="stylesheet" />
 	<block name="head"></block>
-    <link href="__PUBLIC__/spring/css/template.css?v=__VERSION__" rel="stylesheet" />
     <style>
         .personalInfo{
             position: absolute;
@@ -43,7 +42,7 @@
         <div id="leftMenu" class="left-menu">
             <div class="left-user">
                 <img src="__PUBLIC__/spring/images/user-top-bg.png" />
-                <a class="wrap" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮1')">
+                <a class="wrap" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" onclick="leftMenuClick(this, '点击导航-头像')">
                     <span><img src="{$users['wx_pic']}" /></span>
                     <span class="wrap-content">
                         <span class="text-overhide">{$users['wx_name']}</span>
@@ -75,23 +74,23 @@
             -->
 
             <div class="left-menu-group dividing-line">
-                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/index/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮2')">
+                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/index/index')}" onclick="leftMenuClick(this, '点击导航-互动首页')">
                     <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/introduction.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                     <!--<span class="iconfont">&#xe60f;</span>-->
                     <span class="wrap-content">互动推荐</span>
                 </a>
-                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/market/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮3')">
+                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/market/index')}" onclick="leftMenuClick(this, '点击导航-M币商城')">
                     <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/mall.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                     <!--<span class="iconfont">&#xe609;</span>-->
                     <span class="wrap-content">美客商城</span>
                 </a>
-                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮4')">
+                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" onclick="leftMenuClick(this, '点击导航-个人中心')">
                     <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/personal.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                     <!--<span class="iconfont">&#xe60a;</span>-->
                     <span class="wrap-content">个人中心</span>
                 </a>
                 <!--新增游戏入口-->
-                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/game/gamelist')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮5')">
+                <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/game/gamelist')}" onclick="leftMenuClick(this, '点击导航-游戏中心')">
                     <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/game.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                     <!--<span class="iconfont">&#xe60a;</span>-->
                     <span class="wrap-content">游戏中心</span>
@@ -99,13 +98,13 @@
             </div>
             <if condition="$isLogin">
                 <div class="left-menu-group">
-                    <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/user/change_bind')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮6')">
+                    <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/user/change_bind')}" onclick="leftMenuClick(this, '点击导航-更绑手机')">
                         <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/bind-mobile.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                         <!--<span class="iconfont">&#xe615;</span>-->
                         <span class="wrap-content">更绑手机</span>
                     </a>
                     <!--新增联系客服-->
-                    <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/service/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮7')">
+                    <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/service/index')}" onclick="leftMenuClick(this, '点击导航-联系客服')">
                         <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/concat.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                         <span class="wrap-content">联系客服</span>
                     </a>
@@ -118,7 +117,6 @@
         <!-- 内容区域 Begin -->
         <div id="contentContainer" class="content-container">
 			<block name="content"></block>
-            <if condition="$from neq 5">
             <if condition="$is_index eq 1">
 			    <div class="menu-fixed">
                     <a href="javascript:void(0)" id="btnShowLeftMenu" class="iconfont color-link" style="color: #fff;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;background-color: rgba(204,204,204,.3);width: 38px;height: 38px;"><block name="fixedColor"></block>&#xe60e;</a>
@@ -128,7 +126,7 @@
                     <a href="javascript:void(0)" id="btnShowLeftMenu" class="iconfont color-link"><block name="fixedColor"></block>&#xe60e;</a>
                 </div>
             </if>
-            </if>
+
 			<div class="content-mask"></div>
 		</div>
     </div>
@@ -148,28 +146,7 @@
     <!-- 全局隐藏域参数 End -->
 
 	<!-- 脚本区域 Begin -->
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script src="__PUBLIC__/js/comm.js?v=3__VERSION__"></script>
-
-    <if condition="($type eq 63) and ($from eq 1)" >
-        <script src="http://zb.weixin.qq.com/nearbycgi/addcontact/BeaconAddContactJsBridge.js"></script>
-        <script type="text/javascript">
-            var myDate = new Date();
-            var t = myDate.getTime();
-            tools.ajax(tools.url("active", "get_user_subscribe"),{'t':t},function (ret) {
-                tools.closeLoading();
-                if(ret.data.userSubscribe != 1){
-                    tools.alert("您尚未关注我们的公众号请先关注我们再执行此操作",function(){
-                        BeaconAddContactJsBridge.invoke('jumpAddContact');
-                    });
-                }
-            });
-        </script>
-
-    </if>
-	<block name="js">
-
-    </block>
+	<block name="js"></block>
 	<!-- 脚本区域 End -->
 </body>
 </html>

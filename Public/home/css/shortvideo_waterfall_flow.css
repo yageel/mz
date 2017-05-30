@@ -1,0 +1,22 @@
+.main-list{
+    padding:10px 5px 0 5px;
+}
+.main-list > div{
+    float:left;
+    width:50%;
+    padding:0 5px;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+.video-item{
+    margin-bottom:10px;
+    height:34vw;
+}
+.video-item.vertical{
+    height:68vw;
+}
+.loading-more {
+    padding-bottom:10px;
+    color:#999;
+    text-align:center;
+}

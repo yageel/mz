@@ -1,0 +1,38 @@
+﻿.banner-list, .banner-list a, .banner-list img{
+    height:50vw;
+    width:100%;
+}
+.banner-list a, .banner-list img{
+    display:block;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+body .video-list{
+    overflow:visible;
+    margin-right:10px;
+}
+.video-list div{
+    width:33.3333333%;
+    height:100%;
+    float:left;
+    padding-left:10px;
+    margin-bottom:10px;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+.video-list img{
+    height:40vw;
+}
+.ranking{
+    padding:10px;
+}
+.ranking a{
+    display:block;
+    float:right;
+    padding:5px 15px 5px 27px;
+    color:#fff;
+    font-size:13px;
+    background:url(../images/ranking_icon.png) no-repeat 15px center #f19149;
+    background-size:8px auto;
+}

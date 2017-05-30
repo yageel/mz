@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=1.0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="x5-orientation" content="landscape" />
+    <meta name="x5-page-mode" content="app" />
+    <!-- 针对特殊公众号标题显示要求处理 -->
+    <title><block name="title"></block>
+        <if condition="$cityInfo['city_id'] eq 63">
+
+        <elseif condition="$cityInfo['city_id'] eq 3"/>
+
+        <else />
+            -{$cityInfo['city_name']}
+        </if>
+    </title>
+    <meta charset="utf-8" />
+    <link href="__PUBLIC__/css/comm.css?v=__VERSION__" rel="stylesheet" />
+	<block name="head"></block>
+    <link href="__PUBLIC__/spring/css/template.css?v=__VERSION__" rel="stylesheet" />
+</head>
+<body>
+    <block name="content"></block>
+    
+    <!-- 全局隐藏域参数 Begin -->
+    <input id="global_from" name="from" type="hidden" value="{$from}" />
+    <input id="global_type" name="type" type="hidden" value="{$type}" />
+    <input id="hidAppid" type="hidden" value="{$signature['appid']}" />
+    <input id="hidTimestamp" type="hidden" value="{$signature['time']}" />
+    <input id="hidSignature" type="hidden" value="{$signature['ticket']}" />
+    <input id="hidNoncestr" type="hidden" value="{$signature['str']}" />
+
+    <input id="hidShareTitle" type="hidden" value="{$share_title|default=$share_default_title}" />
+    <input id="hidShareDesc" type="hidden" value="{$share_desc|default=$share_default_sub_title}" />
+    <input id="hidShareLink" type="hidden" value="{$share_link|default=tsurl('/index/index',array('from'=>3),true,true)}" />
+    <input id="hidShareImage" type="hidden" value="{$share_img|default=$share_default_pic}" />
+
+    <!-- 全局隐藏域参数 End -->
+
+	<!-- 脚本区域 Begin -->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="__PUBLIC__/js/comm.js?v=6__VERSION__"></script>
+
+	<block name="js"></block>
+	<!-- 脚本区域 End -->
+<script type="text/javascript">
+//    $first=$.cookie('first_vist');
+//    if(!$first||$first=='null'||$first==null){
+//        $.cookie('first_vist','1',{ expires: 7 });
+//    }else{
+//        $.cookie('first_vist',null);
+//        location.reload(true);
+//    }
+</script>
+</body>
+</html>

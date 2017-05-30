@@ -1,0 +1,42 @@
+﻿#balanceDetailsContent{
+    height:100%;
+}
+.balanceDetails-items{
+    padding-bottom:10px;
+    position:absolute;
+    width:100%;
+    background:#fff;
+    min-height:100%;
+    box-sizing:border-box;
+}
+.balanceDetails-items a{
+    line-height:40px;
+    margin-top:10px;
+}
+.balanceDetails-items i{
+    font-style:normal;
+    display:block;
+    line-height:21px;
+    height:20px;
+    overflow:hidden;
+    font-size:14px;
+}
+.balanceDetails-items b{
+    height:40px;
+    line-height:40px;
+    overflow:hidden;
+    font-size:18px;
+    float:left;
+    padding-right:5px;
+    font-weight:normal;
+}
+.balanceDetails-items span{
+    padding:0 15px;
+    position:relative;
+}
+.balanceDetails-items span.mbi{
+    background:url(../images/mbi-icon.png) no-repeat center right;
+    background-size:.28rem auto;
+    padding:0 25px 0 0px;
+    margin-right: 10px;
+}

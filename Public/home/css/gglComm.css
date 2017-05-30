@@ -1,0 +1,21 @@
+.ggl-button, .ggl-button-small, .ggl-button-big{
+    text-align:center;
+    color:#fff;
+    background-color: #EA3834;
+    font-weight: bold;
+    border-radius: 5px;
+    padding:8px 12px;
+    box-shadow: 0px 1px 1px #EA3834;
+    -webkit-box-shadow: 0px 1px 1px #EA3834;
+}
+.ggl-button{
+    font-size: 14px;
+}
+.ggl-button-small{
+	font-size:12px;
+	padding: 5px 10px;
+}
+.ggl-button-big{
+	font-size:15px;
+	padding: 10px 20px;
+}

@@ -1,0 +1,76 @@
+yu<extend name="layout/master" />
+<block name="title">{$goods.goods_name}</block>
+<block name="head">
+    <link href="__PUBLIC__/css/detail.css?v=__VERSION__" rel="stylesheet" />
+    <style>
+        .fixed{
+            padding:0px;
+        }
+    </style>
+</block>
+<block name="content">
+    <div class="content-padding abs100">
+        <!--
+        <div class="wrap wrap-vertical abs100">
+            <div class="wrap-content detail-contents" id="divTabContents">
+                <div class="abs100 ohide">
+                -->
+                <div class="h100 ohide pr">
+                    <div id="content1Item" class="absm100">
+                        <!-- 以下内容来自编辑器，此处是演示代码 Begin -->
+                        <img src="{:pic_url($goods[goods_pic])}" style="width: 100%;"/>
+                        <!-- 以上内容来自编辑器，此处是演示代码 End -->
+                        <!-- 如果是抽奖则改成抽奖 -->
+                        <!--<div class="fixed">-->
+                        <div class="fixed-new">
+                            <div class="color-orange" style="text-align: center;"><span style="font-size: 16px;" class="color-text1">{$detail.credit}</span>
+                                <if condition="$detail.price gt 0">
+                                <span class="color-text" style="background:none;font-size: 16px;">￥ {$detail.price}</span>
+                                </if>
+                            </div>
+                            <div style="background:#EEEEEE;text-align: left;">
+                                <img src="__PUBLIC__/images/label.png" class="label" style="display: inline-block;">
+                                <span style="background:none;font-size: 13px;padding: 0px;">订单详情</span>
+                            </div>
+                            <div style="background: #fff;">
+                                <if condition="!empty($express)">
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">收货人名：{$express.receive_user}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">联系号码：{$express.receive_phone}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">收货地址：{$express.receive_address}{$express.receive_detail_address}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">物流状态：<if condition="$express.status eq '0'">待发货<elseif condition="$express.status eq 1" />待收货<elseif condition="$express.status eq 2" />已签收<elseif condition="$express.status eq 3" />已完成<elseif condition="$express.status eq 4" />已关闭</if></div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">订单备注：{$express.receive_remark}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">物流公司：{$express.express_company}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">快递单号：{$express.express_no}</div>
+                                    <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">发货时间：<if condition="$express.express_time gt 0">{$express.express_time|date='Y-m-d H:i:s',###}</if></div>
+                                </if>
+                            </div>
+                            <if condition="$express.status eq '0' or $express.status eq '1'">
+                                <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;">订单操作：<if condition="$express.status eq '0'"><a href="{:tsurl('/user/express',array('id'=>$express[id]))}">更改地址</a></if> <if condition="$express.status eq '1'"><a href="{:tsurl('/user/signed',array('id'=>$express['id']))}">确认签收</a></if> </div>
+                            </if>
+                            <if condition="$goods.goods_type eq 2">
+                                <div class="" style="font-size: 13px; height: 26px; line-height: 20px; color: #666; text-align: left;margin: 8px;"><a href="javascript:" class="button" onclick="getCard()">领取卡券</a> </div>
+                            </if>
+                            <if condition="!empty($express)">
+                                <a id="btnHandle" class="button loginBtn" style="width: 80%;background:none;color: #F8B2B2;border: 1px solid #F8B2B2;" href="javascript:void(0)" onclick="gotoLink(this)" data-href="{:tsurl('/market/index')}">商城首页</a>
+                                <else/>
+                                <a id="btnHandle" class="button loginBtn" style="width: 80%;background:none;color: #F8B2B2;border: 1px solid #F8B2B2;position: absolute;bottom: 10px;left: 50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);" href="javascript:void(0)" onclick="gotoLink(this)" data-href="{:tsurl('/market/index')}">商城首页</a>
+                            </if>
+                        </div>
+                    </div>
+                </div>
+        <!--
+            </div>
+        </div>
+        -->
+    </div>
+
+    <input type="hidden" id="hidSign" value="{$sign}" />
+</block>
+<block name="js">
+    <script src="__PUBLIC__/js/detail-new.js?v=__VERSION__"></script>
+    <script type="text/javascript">
+        function getCard(){
+            tools.addCard({$cardData});
+        }
+    </script>
+</block>

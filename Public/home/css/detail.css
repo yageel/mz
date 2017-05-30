@@ -1,0 +1,147 @@
+﻿.menu-fixed{
+    background:#F0F0EF;
+}
+.detail-tab, .detail-tab li{
+    height:50px;
+    line-height:51px;
+    overflow:hidden;
+    font-size:16px;
+}
+.detail-tab li{
+    float:left;
+    width:33.333333%;
+    text-align:center;
+    background:#F0F0EF;
+}
+.content-container .dividing-line::after{
+    bottom:auto;
+    top:0;
+}
+.detail-tab li span{
+    font-size: 16px;
+}
+.detail-tab li.active span{
+    background:#FA9D50;
+    color: #fff;
+    padding: 0px 20px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 10px;
+    font-size:16px;
+}
+.detail-contents{
+    transition:transform .3s ease;
+    -webkit-transition:transform .3s ease;
+}
+.detail-contents img{
+    max-width:100%;
+    display:block;
+}
+.detail-contents div:nth-child(2){
+    left:100%;
+}
+.detail-contents div:nth-child(3){
+    left:200%;
+}
+.fixed{
+    padding:30px 15px 0;
+}
+/*.fixed-new div, .fixed-new span{*/
+    /*height:40px;*/
+    /*line-height:40px;*/
+    /*!*overflow:hidden;*!*/
+    /*font-size:26px;*/
+    /*text-align:center;*/
+/*}*/
+.fixed-new span{
+    height:40px;
+    line-height:40px;
+    /*overflow:hidden;*/
+    font-size:26px;
+    text-align:center;
+}
+.fixed-new span{
+    background:url(../images/mbi-icon.png) no-repeat left;
+    background-size:0.42rem auto;
+    padding-left:0.5rem;
+}
+.dialog-result{
+    width:270px;
+    background:#fff;
+}
+.dialog-result .dialog-buttons{
+    background:#fff;
+}
+.dialog-result img{
+    display:block;
+    width:139px;
+    height:87px;
+    margin:20px auto;
+}
+.dialog-result img.successful{
+    height:67px;
+}
+.dialog-result img.failure{
+    width:203px;
+    height:126px;
+}
+.dialog-result img.nothing{
+    width:197px;
+    height:113px;
+}
+.dialog-result .dialog-buttons{
+    padding:0 30px 20px;
+}
+.dialog-result .dialog-buttons a.button{
+    height:34px;
+    line-height:34px;
+    margin-right:5px;
+    font-size:14px;
+}
+.dialog-result .dialog-buttons a.button-empty{
+    line-height:32px;
+    margin-left:5px;
+    margin-right:0;
+}
+.dialog-result .dialog-buttons::after{
+    content:none;
+}
+.result-custom{
+    font-size:14px;
+    padding:0 15px;
+    text-align:center;
+    line-height:140%;
+}
+.result-custom.color-red{
+    font-size:18px;
+}
+.result-custom p{
+    padding-top:15px;
+}
+/*透明背景*/
+.dialog-container{
+    animation: bg-opacity-in ease .3s both;
+    -webkit-animation:bg-opacity-in ease .3s both;
+    position: fixed;
+    width:100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+@keyframes bg-opacity-in{
+    0%{
+        background: rgba(0,0,0,0);
+    }
+    100%{
+        background: rgba(0,0,0,.4);
+    }
+}
+ @-webkit-keyframes bg-opacity-in{
+    0%{
+        background: rgba(0,0,0,0);
+    }
+    100%{
+        background: rgba(0,0,0,.4);
+    }
+}

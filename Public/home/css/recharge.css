@@ -1,0 +1,113 @@
+*{
+    margin:0;
+    padding:0;
+}
+body,html{
+    height:100%;
+}
+header{
+    width:100%;
+    height:3rem;
+}
+header img{
+    width:100%;
+    height:100%;
+}
+.content{
+    text-align: center;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+.content h3{
+    color: #555;
+    font-size: 0.3rem;
+}
+.content .itemList{
+    width: 90%;
+    margin: 0.2rem auto;
+    overflow: hidden;
+}
+.itemList .itemContent{
+    width:45%;
+    overflow: hidden;
+    display: inline-block;
+}
+.itemList .itemContent:nth-child(2n+1){
+    margin-right: 4%;
+}
+.itemContent>span{
+    margin-top: 10px;
+    font-size: 0.3rem;
+}
+.itemList .item{
+    width:98%;
+    height:1.5rem;
+    display: inline-block;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+}
+.itemList .item .recharge{
+    /*background: #FFF79A;*/
+    background-image:url(../../../../Public/images/recharge.png);
+    background-size: 100%;
+    height:70%;
+    line-height: 1rem;
+    color: #DB9F44;
+    font-weight:bold;
+    font-size: 20px;
+}
+.recharge img{
+    width:0.7rem;
+    vertical-align: middle;
+    margin-top: -0.1rem;
+}
+.itemList .item .send{
+    text-align: center;
+    height:30%;
+    color: #FAD29A;
+    line-height: 0.5rem;
+}
+.choose{
+    text-align: left;
+    margin-top: 0.5rem;
+}
+.choose #chooseImg{
+    vertical-align: middle;
+    width:24px;
+    height:24px;
+    margin-right: 10px;
+}
+.choose .info{
+    color: #666;
+    border-bottom:1px solid #666;
+}
+footer{
+    margin-top: 0.5rem;
+}
+footer #recharge{
+    color: #fff;
+    width:80%;
+    height:35px;
+    line-height:35px;
+    text-align: center;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    background: pink;
+    margin:0px auto;
+    background: linear-gradient(45deg, #fa9d50, #f27d6b);
+    background: -webkit-linear-gradient(45deg, #fa9d50, #f27d6b);
+}
+.checked{
+    color: #EF8181;
+}
+.border-color{
+    border:1px solid #ccc;
+}
+.checked-border{
+    border: 2px solid #EF8181;
+}
+.active{
+    color: #fff;
+}

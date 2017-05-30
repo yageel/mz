@@ -1,0 +1,83 @@
+﻿.menu-fixed{
+    background:#F0F0EF;
+}
+.task-head img{
+    display:block;
+    width:100%;
+}
+.task-tab, .task-tab li{
+    height:50px;
+    line-height:51px;
+    overflow:hidden;
+    font-size:16px;
+}
+.task-tab li{
+    float:left;
+    width:50%;
+    text-align:center;
+    background:#F0F0EF;
+}
+.task-tab li.active{
+    background:#fff;
+}
+.task-contents > div:nth-child(2){
+    left:100%;
+}
+.task-contents li{
+    padding:0 10px;
+    font-size:14px;
+}
+.task-contents *{
+    font-weight:normal;
+    font-style:normal;
+}
+.task-contents li > div{
+    padding:10px 0;
+}
+.task-contents .button{
+    width:66px;
+    padding:0;
+    font-size:12px;
+    position:absolute;
+    right:0;
+    top:16px;
+    height:30px;
+    line-height:30px;
+}
+.task-contents img{
+    height:60px;
+    display:block;
+    margin-right:10px;
+}
+.task-contents .text-overhide{
+    line-height:15px;
+    height:15px;
+    overflow:hidden;
+}
+.task-contents span{
+    margin:8px 0 7px;
+}
+.super-task-item label *{
+    float:left;
+    margin-top:1px;
+}
+.super-task-item label b{
+    margin-left:15px;
+}
+.super-milestone-item span{
+    width:130px;
+    border:1px solid #6E6E6E;
+    border-radius:13px;
+    box-sizing:border-box;
+    overflow:hidden;
+}
+.super-milestone-item b{
+    display:block;
+    background:#C37878;
+    height:13px;
+    transition:width ease .3s;
+    -webkit-transition:width ease .3s;
+}
+.super-milestone-item img{
+    margin-right:10px;
+}

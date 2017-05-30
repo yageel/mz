@@ -1,0 +1,81 @@
+﻿.menu-fixed{
+    background:#F0F0EF;
+}
+.address-item{
+    position:relative;
+}
+.address-item label, .address-item span{
+    float:left;
+    line-height:2.666;
+    margin:0 10px;
+    padding-top:2px;
+}
+.address-item span{
+    float:right;
+}
+.address-item *{
+    font-weight:normal;
+    font-style:normal;
+}
+.address-item p{
+    padding:0 10px 13px;
+    line-height:100%;
+}
+.address-edit > a{
+    padding-left:20px;
+}
+.address-edit > a::before{
+    width:14px;
+    height:14px;
+    content:"";
+    position:absolute;
+    left:0;
+    top:12px;
+    border:1px solid #ccc;
+    border-radius:100%;
+}
+.address-edit a.active::before{
+    border:1px solid #68c807;
+}
+.address-edit > a.active::after{
+    content:"";
+    position:absolute;
+    width:7px;
+    height:4px;
+    border:1px solid #68c807;
+    left:4px;
+    top:16px;
+    border-left-width:0;
+    border-bottom-width:0;
+    transform-origin:50% 50%;
+    -webkit-transform-origin:50% 50%;
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg);
+    border-radius:0;
+}
+.address-item i, .address-item a{
+    height:40px;
+    line-height:40px;
+    float:left;
+}
+.address-item i.iconfont{
+    font-size:22px;
+    margin-right:2px;
+    line-height:38px;
+}
+.address-item a{
+    margin-left:10px;
+}
+.address-item strong{
+    margin-left:10px;
+}
+.address-item em{
+    float:right;
+    margin-right:10px;
+}
+.address-edit{
+    background:#f0f0f0;
+}
+.button-item{
+    padding:30px 15px;
+}

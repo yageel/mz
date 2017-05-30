@@ -1,0 +1,51 @@
+﻿body, html{
+    background:#fff;
+}
+.menu-fixed{
+    background:#F0F0EF;
+}
+.user-info{
+    position:relative;
+}
+.user-info > .bg{
+    display:block;
+    width:100%;
+}
+.user-info > div{
+    height:70px;
+    position:absolute;
+    left:0;
+    top:50%;
+    width:100%;
+    transform:translateY(-50%);
+    -webkit-transform:translateY(-50%);
+}
+.user-info .head{
+    width:45px;
+    height:45px;
+    display:block;
+    margin:0 auto;
+    border-radius:100%;
+    border:1px solid #8A8A8A;
+}
+.user-info .name{
+    font-size:16px;
+    line-height:100%;
+    display:block;
+    text-align:center;
+    padding-top:7px;
+}
+.text-item-tab{
+    height:50px;
+    line-height:51px;
+    overflow:hidden;
+    text-align:center;
+    font-size:16px;
+    background:#F0F0EF;
+}
+.text-item-tab .active{
+    background:#fff;
+}
+.dividing{
+    padding-top:10px;
+}

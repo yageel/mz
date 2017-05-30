@@ -1,0 +1,203 @@
+﻿<extend name="layout/master" />
+<block name="title">个人中心</block>
+<block name="head">
+    <link href="__PUBLIC__/css/userCenter.css?v=__VERSION__" rel="stylesheet" />
+    <style>
+        #rechargeContent{
+            position: absolute;
+            left:50%;
+            top:45%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            width:65%;
+            background: #fff;
+            border:1px solid pink;
+            padding:0px 5% 5%;
+            text-align: center;
+            z-index: 100;
+            -webkit-border-radius:8px;
+            -moz-border-radius:8px;
+            border-radius:8px;
+            display: none;
+        }
+        #rechargeContent img{
+            height: 1.875rem;
+            width: 3rem;
+            margin-top: 0.5rem;
+        }
+        #rechargeContent .info{
+            margin-top: 0.3rem;
+        }
+        #rechargeContent .overage{
+            color: #FBB37D;
+        }
+        #rechargeContent .footer{
+            margin-top: 15px;
+        }
+        #rechargeContent .footer span{
+            line-height: 30px;
+            text-align: center;
+            height:30px;
+            width:40%;
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+        #rechargeContent .footer #cancel{
+            border:1px solid #F8B2A8;
+            color: #F9C7BF;
+            margin-right: 5%;
+        }
+        #rechargeContent .footer #sure{
+            color: #fff;
+            background: linear-gradient(45deg, #fa9d50, #f27d6b);
+            background: -webkit-linear-gradient(45deg, #fa9d50, #f27d6b);
+            margin-left: 5%;
+        }
+        #dialog{
+            display: none;
+        }
+        .text-item-content .over{
+            font-size: 13px;
+            padding:0 13px;
+            width:1.3rem;
+        }
+        .text-item-content .money{
+            color: #F89FA0;
+        }
+        .text-item-content .mb{
+            color: #F7CF94;
+        }
+        .text-item-content1{
+            padding:0.3rem 8%;
+        }
+        .text-item-content1 .listImg{
+            flex-grow: 1;
+            display: inline-block;
+            text-align: center;
+            -webkit-flex-grow:1;
+        }
+        .text-item-content1 .listImg img{
+            width:1.3rem;
+            height:0.9rem;
+        }
+        .text-item-content1 .listImg a{
+            display: inline-block;
+        }
+        .text-item-content1 .listImg p{
+            margin-top: 6px;
+            color: #666;
+        }
+    </style>
+</block>
+<block name="content">
+    <div class="content-padding abs100">
+        <div id="userCenterContent">
+            <!--充值弹窗-->
+            <div id="rechargeContent" <if condition='$wxpaycallback eq 1'>style="display: block"</if>  >
+                <img src="__PUBLIC__/images/result-bg.png" alt="">
+                <p class="info">
+                    本次充值成功,现有M币余额
+                    <span class="overage">{$usersBank['total_integral']}</span>
+                </p>
+                <div class="footer">
+                    <span id="cancel">取消</span>
+                    <span id="sure">确定</span>
+                </div>
+            </div>
+            <!--阴影层-->
+            <div class="dialog-container" id="dialog" style="z-index: 99;"></div>
+
+
+            <div class="user-info">
+                <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
+                <div>
+                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" />
+                    <span class="name color-white">{$users['wx_name']|default="未知"}</span>
+                </div>
+            </div>
+            <div class="text-item-tab wrap">
+                <img src="__PUBLIC__/images/label.png" class="label">
+                <span style="color: #666;">我的账户</span>
+            </div>
+            <div class="text-item-content" id="tabItems">
+                <ul class="<if condition='!$tab'>active</if>">
+                    <li>
+                        <div class="wrap color-link item">
+                            <span class="iconfont over">个人余额:</span>
+                            <span class="wrap-content money">{$usersBank['total_amount']}￥</span>
+                            <a onclick="gotoLink(this)" id="btnGotoCash" href="javascript:void(0)" data-href="{:tsurl('/user/cash')}" style="width: 15%;margin-right: 0.8rem;">
+                                <span class="iconfont item-gt">提现</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="wrap color-link item">
+                            <span class="iconfont over">M币余额:</span>
+                            <span class="wrap-content mb">{$usersBank['total_integral']}M</span>
+                            <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/recharge/index', ['wxcallback' => 1])}" style="width: 15%;margin-right: 0.8rem;">
+                                <span class="iconfont item-gt">充值</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-item-tab wrap">
+                <img src="__PUBLIC__/images/label.png" class="label">
+                <span style="color: #666;">更多服务</span>
+            </div>
+
+            <div class="text-item-content1 wrap">
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看余额详情')" href="javascript:void(0)" data-href="{:tsurl('/user/money')}" class="color-link">
+                        <img src="__PUBLIC__/images/over-detail.png" alt="">
+                    </a>
+                    <p>余额详情</p>
+                </div>
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/integral')}" class="color-link">
+                        <img src="__PUBLIC__/images/mb.png" alt="">
+                    </a>
+                    <p>M币详情</p>
+                </div>
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看兑换订单')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/exchange')}">
+                        <img src="__PUBLIC__/images/exchange-list.png" alt="">
+                    </a>
+                    <p>兑换订单</p>
+                </div>
+            </div>
+            <div class="text-item-content1 wrap">
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看中奖纪录')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/lottery')}">
+                        <img src="__PUBLIC__/images/prize-record.png" alt="">
+                    </a>
+                    <p>中奖记录</p>
+                </div>
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看我的地址')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/user/address')}">
+                        <img src="__PUBLIC__/images/my-address.png" alt="">
+                    </a>
+                    <p>我的地址</p>
+                </div>
+                <div class="listImg">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看活动记录')" class="color-link" href="javascript:void(0)" data-href="{:tsurl('/active/record_list')}">
+                        <img src="__PUBLIC__/images/activity-record.png" alt="">
+                    </a>
+                    <p>活动记录</p>
+                </div>
+            </div>
+
+            <div class="button-list">
+                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/index/index')}" class="button">赚取更多</a>
+                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/market/index')}" class="button loginBtn">商城首页</a>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
+</block>

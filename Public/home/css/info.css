@@ -1,0 +1,122 @@
+.content{
+	position: absolute;
+	bottom: 3%;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+}
+
+.winning-head{
+	text-align: center;
+	left: 5vw;
+	width: 90vw;
+}
+.canvas{
+	width: 5rem;
+	height: 2rem;
+	position: absolute;
+	top: 2vh;
+	left: 6vw;
+}
+
+/*.ownerwinning{
+	margin-top: 10%;
+	text-align: center;
+	line-height: 7vh;
+	background-color: #FFEC1F;
+	color: #FE4400;
+	border-radius: 24px;
+	width: 66vw;
+	height: 7vh; 	
+	box-shadow: 0px 1px 2px #F7BE2E; 
+	font-size:22px;
+	font-family: 'Microsoft YaHei';
+	font-weight: bold;
+}	*/
+.myprize{
+	margin-top: 8%;
+	width: 65%;
+	height: 100%;
+}
+.guize{
+	margin-bottom: 30px;
+}
+
+.footer-info{
+	background-color: #F8C100;
+	color: #fff;
+	padding: 14px;
+	width: 85vw;
+	line-height: 25px;
+	text-align: justify;
+	border-radius: 6px;
+	font-family: Helvetica;
+}	
+
+
+.ggk-bg{
+	line-height: 2rem;
+    text-align: center;
+    height: 2rem;
+    overflow: hidden;
+    color: #CE392E;
+}
+.ggk-bg *{
+	font-size: .6rem;
+}
+.ggk-bg .iconfont{
+	padding-right: .1rem;
+}
+.iconfont{
+	font-family: "iconfont" !important;
+	font-style: normal;
+	-webkit-text-stroke-width:0.2px;
+	-webkit-font-smoothing:antialiased;
+}
+.ggk-code{
+	position: absolute;
+    right: .4rem;
+    top: .2rem;
+    background: #555757;
+    color: #fff;
+    line-height: 2.22;
+    padding: 0 10px;
+    font-size: 12px;
+}
+.ggk-code em{
+	padding: 0 3px; 
+}
+.color-orange{
+	color: #D98E31;
+}
+.warning-info {
+	height: 1rem;
+	overflow: hidden;
+	margin-top: -1.2rem;
+}
+.warning-info li{
+	height: .5rem;
+	line-height: .5rem;
+	color: #FFA888;
+	font-size: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.warning-info ul{
+	transition: .3s ease transform;
+	-webkit-transition: .3s ease transform;
+}
+.wining-info{margin-top:1%;font-size:12px;color: #FFA888;}
+/*.footer-info p{
+	margin-top:5px;
+}*/
+.info{
+	color: #FFA888;
+	font-size: 12px;
+	position: absolute;
+	top: 36px;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform:translateX(-50%);
+}

@@ -1,0 +1,57 @@
+﻿body, html, .menu-fixed{
+    background:#F0F0EF;
+}
+#registerContent > div{
+    padding:0 15px;
+}
+.register-box .dividing-line::after{
+    width:92%;
+}
+.register-box{
+    background:#fff;
+    border-radius:3px;
+}
+.register-box label.iconfont{
+    font-size:30px;
+    padding:8px 10px;
+}
+.register-box .wrap{
+    height:46px;
+    overflow:hidden;
+}
+.register-box input{
+    width:100%;
+    height:45px;
+    padding:16px 5px 11px;
+    box-sizing:border-box;
+    line-height:18px;
+    font-size:15px;
+}
+.register-buttons, .register-buttons a:last-child{
+    margin-top:20px;
+}
+#btnVercode{
+    height:36px;
+    padding:0;
+    line-height:36px;
+    overflow:hidden;
+    width:120px;
+    text-align:center;
+    margin-top:3px;
+    margin:5px 10px 0;
+}
+#btnVercode.gray{
+    background:#BBB2B9;
+    color:#fff;
+    border-color:#BBB2B9;
+}
+.register-agreement{
+    font-size:12px;
+    padding:0 15px;
+    position:absolute;
+    bottom:15px;
+    left:0;
+    width:100%;
+    text-align:center;
+    box-sizing:border-box;
+}

@@ -1,0 +1,78 @@
+﻿.main-bg{
+    display:block;
+    width:100%;
+    min-height:100%;
+}
+.exchange-button{
+    width:40vw;
+    height:11vw;
+    left:30vw;
+    top:84.5vw;
+    position:absolute;
+    transition:.3s ease height, .3s ease top;
+    -webkit-transition:.3s ease height, .3s ease top;
+}
+.exchange-button:active{
+    height:8vw;
+    top:87.5vw;
+}
+.exchange-button:active i{
+    height:1vw;
+}
+.exchange-button label{
+    height:7.6vw;
+    /*clip-path:polygon(3.9% 0, 96.1% 0, 100% 100%, 0 100%);
+    -webkit-clip-path:polygon(3.9% 0, 96.1% 0, 100% 100%, 0 100%);*/
+    background:url(../images/activity/exchangeMbi/exchange-mbi-button.png) no-repeat;
+    background-size:100% 100%;
+    text-indent:-1000px;
+    z-index:10;
+}
+.exchange-button i{
+    position:absolute;
+    height:4vw;
+    width:100%;
+    top:-.6vw;
+    left:0;
+    content:"";
+    background:#80edb6;
+    border-radius:0 0 1vw 1vw;
+    transition:.3s ease height;
+    -webkit-transition:.3s ease height;
+}
+.user-info{
+    width:68.75vw;
+    left:15.625vw;
+    position:absolute;
+    top:39.2vw;
+    height:16vw;
+    overflow:hidden;
+    font-size:4.8vw;
+}
+.user-info img{
+    height:16vw;
+    width:16vw;
+    border-radius:100%;
+    border:3px solid #65cd98;
+    box-sizing:border-box;
+    margin:0 15px;
+}
+.user-info label{
+    color:#170a26;
+    text-shadow:1px 0 0 #fff57f,0 1px 0 #fff57f,-1px 0 0 #fff57f,0 -1px 0 #fff57f;
+    -webkit-text-shadow:1px 0 0 #fff57f,0 1px 0 #fff57f,-1px 0 0 #fff57f,0 -1px 0 #fff57f;
+}
+.user-info div,.user-info p{
+    line-height:100%;
+}
+.user-info div.text-overhide{
+    padding:2vw 0 2.3vw 0;
+}
+.experience{
+    width:48.55vw;
+    height:12vw;
+    position:absolute;
+    top:106vw;
+    left:25.625vw;
+    text-indent:-1000px;
+}
