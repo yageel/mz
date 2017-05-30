@@ -42,6 +42,17 @@ class OrderController extends BaseController {
         $id = I('request.id',0,'intval');
         $user = D('Admin')->get_user_info($id);
 
+        // 用户角色对应跳转标签
+        if($user['role'] == 2){
+            $user['tab'] = '';
+        }elseif($user['role'] == 3){
+            $user['tab'] = 'channel';
+        }elseif($user['role'] == 4){
+            $user['tab'] = 'device';
+        }elseif($user['tab'] == 5){
+            $user['tab'] = 'spread';
+        }
+
         // 订单流水
         if($tab == ''){
             $where = [];
