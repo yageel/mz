@@ -6,4 +6,11 @@ class UserController extends BaseController {
 
         $this->display();
     }
+
+    /**
+     * 提现操作
+     */
+    public function cash(){
+
+    }
 }

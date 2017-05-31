@@ -2405,7 +2405,7 @@ class Wechat
 
 	/**
 	 * oauth 授权跳转接口
-	 * @param string $callback 回调URI
+	 * @param string $callback 回调URI //snsapi_userinfo
 	 * @return string
 	 */
 	public function getOauthRedirect($callback,$state='',$scope='snsapi_userinfo'){
