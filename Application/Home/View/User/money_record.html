@@ -21,18 +21,15 @@
             <div class="user-info">
                 <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
                 <div>
-                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" />
+                    <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/header.jpg'}" />
                     <span class="name color-white">{$users['wx_name']|default="未知"}</span>
                 </div>
             </div>
-            <!--
             <div>
                 <div class="text-item-tab wrap">
-                    <a href="{:tsurl('/user/index')}" class="color-link wrap-content active">个人余额：<span class="color-focus">￥{$usersBank['total_amount']}</span></a>
-                    <a href="{:tsurl('/user/index',array('tab'=>'mbi'))}" class="color-link wrap-content ">个人M币：<span class="color-focus"><span class="iconfont">&#xe608;</span>{$usersBank['total_integral']}</span></a>
+                    <a href="{:tsurl('/user/index')}" class="color-link wrap-content active">个人余额：<span class="color-focus">￥{$admin['total_amount']|default='0.00'}</span></a>
                 </div>
             </div>
-            -->
             <div class="dividing">
                 <div class="color-link">
                     <img src="__PUBLIC__/images/label.png" class="label">
@@ -54,8 +51,7 @@
             </div>
             <!--新增两个button-->
             <div class="button-list">
-                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/index/index')}" class="button">赚取更多</a>
-                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/market/index')}" class="button loginBtn">商城首页</a>
+                <a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" class="button loginBtn">个人中心</a>
             </div>
         </div>
     </div>

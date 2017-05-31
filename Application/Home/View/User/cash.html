@@ -9,11 +9,11 @@
 			<div class="user-info">
 				<img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
 				<div class="wrap">
-					<div><img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" /></div>
+					<div><img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/header.jpg'}" /></div>
 					<div class="color-white wrap-content">
 						<div class="name">{$users['wx_name']|default="未知"}</div>
-						<div class="money">￥{$usersBank['total_amount']}</div>
-						<div class="total">累计提现￥{$usersBank['total_cash_amount']}</div>
+						<div class="money">￥{$admin['total_amount']|default='0.00'}</div>
+						<div class="total">累计提现￥{$admin['total_cash_amount']|default='0.00'}</div>
 					</div>
 				</div>
 			</div>
@@ -21,13 +21,13 @@
 				<div class="cash-money">
 					<p class="color-link">提现金额:</p>
 					<div>
+						<input type="hidden" name="total_amount" value="{$admin['total_amount']}" />
 						<input type="text" maxlength="7" id="txtMoney" placeholder="请输入大于1元的金额" />
 					</div>
 				</div>
 				<div class="color-remarks cash-remarks">本月剩余提现次数:{$surplus_cash_count}次</div>
-				<a href="javascript:void(0)" id="btnCash" data-href="{$cityInfo['jump_url']}" data-contact="{$userSubscribe}" class="button button-cash">提现</a>
+				<a href="javascript:void(0)" id="btnCash" class="button button-cash">提现</a>
 				<div class="dividing-text color-link"><span>温馨提示</span></div>
-				<input type="hidden"  id="cashtype"  value="{$cashtype}"/>
 			</div>
 			<div class="guide color-link">
 				<ol>
@@ -42,6 +42,6 @@
 	</div>
 </block>
 <block name="js">
-	<script src="__PUBLIC__/js/cash2.js?v=__VERSION__&t=7"></script>
+	<script src="__PUBLIC__/js/cash.js?v=__VERSION__&t=7"></script>
 	<script src="http://zb.weixin.qq.com/nearbycgi/addcontact/BeaconAddContactJsBridge.js"></script>
 </block>

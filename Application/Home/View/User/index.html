@@ -127,7 +127,7 @@
                     <li>
                         <div class="wrap color-link item">
                             <span class="iconfont over">个人余额:</span>
-                            <span class="wrap-content money">{$usersBank['total_amount']}￥</span>
+                            <span class="wrap-content money">{$admin['total_amount']|default='0.00'}￥</span>
                             <a onclick="gotoLink(this)" id="btnGotoCash" href="javascript:void(0)" data-href="{:tsurl('/user/cash')}" style="width: 15%;margin-right: 0.8rem;">
                                 <span class="iconfont item-gt">提现</span>
                             </a>
@@ -143,13 +143,13 @@
 
             <div class="text-item-content1 wrap">
                 <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看余额详情')" href="javascript:void(0)" data-href="{:tsurl('/user/money')}" class="color-link">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看余额详情')" href="javascript:void(0)" data-href="{:tsurl('/user/money_record')}" class="color-link">
                         <img src="__PUBLIC__/images/over-detail.png" alt="">
                     </a>
                     <p>余额详情</p>
                 </div>
                 <div class="listImg">
-                    <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/cash')}" class="color-link">
+                    <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/cash_record')}" class="color-link">
                         <img src="__PUBLIC__/images/mb.png" alt="">
                     </a>
                     <p>提现详情</p>

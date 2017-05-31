@@ -10,7 +10,7 @@
     <meta name="x5-fullscreen" content="true" />
     <meta name="x5-orientation" content="landscape" />
     <meta name="x5-page-mode" content="app" />
-    <title>{$home_title}</title>
+    <title>{$home_title}<block name="title"></block></title>
     <meta charset="utf-8" />
     <!--<block name='title'></block>-->
     <link href="__PUBLIC__/css/comm.css?v=__VERSION__" rel="stylesheet" />
@@ -44,16 +44,16 @@
             <div class="left-user">
                 <img src="__PUBLIC__/spring/images/user-top-bg.png" />
                 <a class="wrap" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮1')">
-                    <span><img src="{$users['wx_pic']|default='__PUBLIC__/images/head.jpg'}" /></span>
+                    <span><img src="{$users['wx_pic']|default='__PUBLIC__/images/header.jpg'}" /></span>
                     <span class="wrap-content">
                         <span class="text-overhide">{$users['wx_name']|default='未知'}</span>
-                        <i class="text-overhide" id="lblUserMobile"><if condition="$isLogin">{$usersMember['mobile']}<else/>点击登录</if></i>
+                        <i class="text-overhide" id="lblUserMobile"><if condition="$isLogin">{: substr_replace($users['mobile'],'*****','3','5')}<else/>点击登录</if></i>
                     </span>
                 </a>
                 <!--余额,M币-->
                 <div class="personalInfo">
                     <span style="padding-left: 5px;">我的余额:</span>
-                    <span class="money">{$usersBank['total_amount']|default='0.00'}￥</span>
+                    <span class="money">{$admin['total_amount']|default='0.00'}￥</span>
                 </div>
             </div>
 

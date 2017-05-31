@@ -21,9 +21,7 @@ class BaseController extends Controller {
     /**
      * @var 开发
      */
-    public $usersUnion = null;
-    public $usersMember = null;
-    public $usersBank = null;
+    public $admin = null;
     public $isLogin = false;
 
     /**
@@ -131,8 +129,13 @@ class BaseController extends Controller {
         $this->assign('type', $this->type);
         $this->assign('from', $this->from);
 
-        $this->isLogin = empty($this->users)?false:true;
+        $this->isLogin = empty($this->users['mobile'])?false:true;
 
+        if($this->users['bind_user_id']){
+            $admin = D('Admin')->get_user_info($users['bind_user_id']);
+            $this->admin = $admin;
+            $this->assign('admin', $admin);
+        }
         $this->assign('isLogin', $this->isLogin);
     }
 
