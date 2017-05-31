@@ -48,20 +48,16 @@ class BaseController extends Controller {
         $this->openid = '';
         $this->type = I('request.type',0,'intval');
         $this->from = I('request.from',0,'intval');
+        if($this->from < 1){
+            $this->from = get_real_from();
+        }
 
         $from_city = I('request.city_id',0,'intval');
         if($from_city){
             $_SESSION['from_city'] = $from_city;
         }
-
-        $from_city = intval(!empty($_SESSION['from_city'])?$_SESSION['from_city']:0);
-
         $this->assign('from_city', $from_city);
-        /*add by allen 2016/06/28*/
-        if ($this->from == 0 && isset($_SERVER['QUERY_STRING']) && strripos($_SERVER['QUERY_STRING'], 'from') != strpos($_SERVER['QUERY_STRING'], 'from')) {
-            $pos = strpos($_SERVER['QUERY_STRING'], 'from');
-            $this->from = intval(substr($_SERVER['QUERY_STRING'], $pos + 5));
-        }
+
 
         // 刷新token接口不处理以下
         if(strtolower(ACTION_NAME) == 'getaccesstoken0_0'){
@@ -77,7 +73,7 @@ class BaseController extends Controller {
             return true;
         }
 
-        if($this->from != 4 && $this->from != 5 && strtolower(CONTROLLER_NAME) != 'access'){
+        if($this->from != 4 && $this->from != 5){
             $this->initPage($this->type, $this->from);
         }
 
@@ -105,7 +101,7 @@ class BaseController extends Controller {
         }
 
         // 最高获取三次
-        if( empty($this->openid) && strtolower(CONTROLLER_NAME) != 'access'){
+        if( empty($this->openid)){
             $_SESSION['reload_num'] =  intval($_SESSION['reload_num'])+1;
             if($_SESSION['reload_num']> 3){
                 die("No Found Openid");
