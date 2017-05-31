@@ -121,20 +121,57 @@ if(!function_exists('send_msgs')){
  * @param $mobile
  * @param $message
  */
+/**
+ * 短信下发接口
+ * @param $mobile
+ * @param $message
+ */
 function send_msg($mobile, $message, $code='',$openid = '') {
     $openid = strval($openid);
     // 校验 //每个手机30十分钟内只能发3次
     // 校验 // 每个用户30分钟内只能发5次
-        $token = md5($message . 'mlmk1234');
-        try {
-            $url = "http://sms.weiyingjia.cn:8080/dog3/httpUTF8SMSToken.jsp?username=mlmk&token={$token}&mobile=$mobile&msg=$message";
-            $res = file_get_contents($url);
-            var_dump($res);
+    $bool = D('Sms')->check_mobile($mobile);
+    if (!$bool) {
+        return false;
+    }
 
+    $bool = D('Sms')->check_user($openid);
+    if (!$bool) {
+        return false;
+    }
+
+    $data = array(
+        'mobile' => $mobile,
+        'msg' => $message,
+        'code'=>$code,
+        'openid' => strval($openid),
+        'send_time' => time()
+    );
+
+    $res = D('Sms')->add($data);
+    if($res){
+//        $token = md5($message . 'mlmk1234');
+        try {
+//            $url = "http://sms.weiyingjia.cn:8080/dog3/httpUTF8SMSToken.jsp?username=mlmk&token={$token}&mobile=$mobile&msg=$message";
+//            $data = [];
+//            $data['log'] = file_get_contents($url);
+            $uid = "200117"; $pwd = strtoupper(md5('634131')); $encode = "utf8";$content = base64_encode($message);
+            $data = "uid={$uid}&password={$pwd}&encode={$encode}&encodeType=base64&content={$content}&mobile=$mobile";
+            $res2 = httpPost('http://119.90.36.56:8090/jtdsms/smsSend.do',$data);
+            $data = [];
+            if (  $res2 > 0) {
+                $data['send_status'] = 1;
+            } else {
+                $data['send_status'] = 2;
+            }
+            $data['log'] = $res2;
+            D('Sms')->where(array('id'=>$res))->save($data);
         } catch (\Exception $e) {
 
         }
-
+    }else{
+        return false;
+    }
     return true;
 }
 
