@@ -63,7 +63,7 @@ class RegisterController extends BaseController {
     /**
      * 优化用户注册，注册成功不跳转页面，返回json
      */
-    public function ajax_register(){
+    public function post(){
 
         $mobile = I('post.mobile','','strval');
         $code = I('post.vercode','','strval');
@@ -101,8 +101,9 @@ class RegisterController extends BaseController {
             }
             D('Users')->where(['openid'=>$this->openid])->save(['mobile'=>$mobile, 'bind_user_id'=>$admin['id']]);
             D('Admin')->where(['id'=>$admin['id']])->save(['city_id'=>$this->type, 'openid'=>$this->openid]);
-            $json['state'] = 1;
+            $json['state'] = 5;
             $json['msg'] = "注册成功~";
+            $json['data'] = tsurl('/user/index');
         }while(false);
         $this->ajaxReturn($json);
     }

@@ -27,6 +27,7 @@ class UsersModel extends BaseModel
      */
     public function get_user($openid, $is_cache=true){
         if(empty($openid)) return false;
+        return $this->where(array('openid'=>$openid))->find();
         $key = 't_users_'.$openid;
         $data = MyRedis::getProInstance()->new_get($key);
 

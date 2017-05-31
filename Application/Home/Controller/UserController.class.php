@@ -21,7 +21,7 @@ class UserController extends BaseController {
      * 提现操作
      */
     public function cash(){
-
+        $this->display();
     }
 
     public function login(){

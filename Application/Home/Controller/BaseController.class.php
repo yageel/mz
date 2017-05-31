@@ -125,6 +125,7 @@ class BaseController extends Controller {
         $this->assign('cityInfo',$city);
 
         $this->assign('users', $users);
+
         $this->users = $users;
 
         $this->assign('type', $this->type);
