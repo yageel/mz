@@ -170,8 +170,8 @@ class UserController extends BaseController {
                     M('wechat_pay_record')->add($wechat_pay_record_data);
 
                     if ($returnData['result_code'] != 'SUCCESS') {
-                        M('cash_record')->where(array('id'=>$a3))->save(array('	payment_log'=>'test'.strval($returnData['err_code_des'])));
-                        $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~'."={$a3}=".json_encode(array('	payment_log'=>'test'.strval($returnData['err_code_des'])));
+                        M('cash_record')->where(array('id'=>$a3))->save(array('payment_log'=>'test'.strval($returnData['err_code_des'])));
+                        $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~'."={$a3}=".json_encode(array('payment_log'=>'test'.strval($returnData['err_code_des'])));
                         break;
                     }else{
                         // 更改提现状态
@@ -187,7 +187,7 @@ class UserController extends BaseController {
             } else {
                 M()->rollback();
                 $result[ 'msg'] = '太火爆了，等会儿再来呗！';
-        
+
             }
         }while(false);
         $this->ajaxReturn($result);
