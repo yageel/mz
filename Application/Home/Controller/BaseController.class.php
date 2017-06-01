@@ -72,7 +72,7 @@ class BaseController extends Controller {
         }
 
         if($this->from != 4 ){
-            return $this->initPage($this->type, $this->from);
+           $this->initPage($this->type, $this->from);
         }
 
         // 第三方授权调回
