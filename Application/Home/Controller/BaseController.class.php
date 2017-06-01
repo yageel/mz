@@ -91,7 +91,7 @@ class BaseController extends Controller {
         }
 
         $this->openid = $_SESSION['openid'.$this->type];
-        print_r($_SESSION);
+
         // 测试接口分配测试用户
         if($this->from == 4 && empty($this->openid)){
             // 增加自定义测试用户
@@ -331,10 +331,10 @@ class BaseController extends Controller {
                         $openid = $info["openid"];
                         $access_token = $info["access_token"];
                         $info = $weObj->getOauthUserinfo($access_token, $openid);
-
+                        print_r($info);die();
                         $users = [
                             'openid' =>$openid,
-                            'cityid' => $type,
+                            'city_id' => $type,
                             'wx_name' =>strval($info['nickname']),
                             'wx_pic' => strval($info['headimgurl'])
                         ];
