@@ -320,6 +320,7 @@ class BaseController extends Controller {
                 {
                     //用户授权
                     $info = $this->authorize($type);
+                 var_dump($info);
                     if ($info) {
                         $FUserId = $info['openid'];
 
@@ -331,7 +332,7 @@ class BaseController extends Controller {
                         $openid = $info["openid"];
                         $access_token = $info["access_token"];
                         $info = $weObj->getOauthUserinfo($access_token, $openid);
-                        print_r($info);die();
+                        var_dump($info);die();
                         $users = [
                             'openid' =>$openid,
                             'city_id' => $type,
