@@ -33,18 +33,18 @@
             <div class="dividing">
                 <div class="color-link">
                     <img src="__PUBLIC__/images/label.png" class="label">
-                    <span>余额详情</span>
+                    <span>提现详情</span>
                 </div>
             </div>
             <div class="wrap-content ohide">
                 <div class="balanceDetails-items" id="balanceDetailsItems" data-page="{$total_pages}" data-type="money">
                     <volist name="list" id="item">
-                    <a href="javascript:void(0)" class="wrap <if condition="$item[record_type] eq 2">color-green<else/>color-link</if>">
+                    <a href="javascript:void(0)" class="wrap color-green">
 						<span class="wrap-content" style="width: 60%;">
-							<i class="text-overhide"><if condition="$item[record_type] eq 1">订单分成<else/>余额提现</if></i>
+							<i class="text-overhide">用户提现</i>
 							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
 						</span>
-                        <span class="<if condition="$item[record_type] eq 2">color-green<else/>color-text</if>"><if condition="$item[record_type] eq 1">+</if>{$item.amount} ￥</span>
+                        <span class="color-green">{$item.cash_amount} ￥</span>
                     </a>
                     </volist>
                 </div>
