@@ -104,21 +104,10 @@ class UserController extends BaseController {
             //修改用户余额、记录本次交易
             // 开始操作
             M()->startTrans();
-            $users_money_record = [
-                'openid' => strval($this->openid),
-                'user_id'=> intval($this->admin['id']),
-                'city_id' => intval($this->type),
-                'cash_amount' => $money,
-                'title' => $title,
-                'create_time' => $time
-            ];
+
 
             $a1 = M()->execute("UPDATE ".C('DB_PREFIX')."users_bank SET update_time='$time', total_amount=total_amount-{$money},total_cash_amount=total_cash_amount+{$money} WHERE id='{$this->usersBank['id']}' AND total_amount>={$money}");
-            $a2 = M('users_money_record')->add($users_money_record_data);
-
             $users_cash_record_data = [
-                'union_id' => intval($this->usersUnion['id']),
-                'uid' => intval($this->usersMember['id']),
                 'openid' => $this->openid,
                 'city_id' => $this->type,
                 'money' => $money,
@@ -130,6 +119,18 @@ class UserController extends BaseController {
             ];
 
             $a3 = M('users_cash_record')->add($users_cash_record_data);
+
+            $users_money_record = [
+                'openid' => strval($this->openid),
+                'user_id'=> intval($this->admin['id']),
+                'city_id' => intval($this->type),
+                'cash_amount' => $money,
+                'title' => $title,
+                'create_time' => $time
+            ];
+            $a2 = M('users_money_record')->add($users_money_record);
+
+
 
             if ($a1 && $a2 && $a3) {
                 M()->commit();
