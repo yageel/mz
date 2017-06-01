@@ -171,7 +171,7 @@ class UserController extends BaseController {
 
                     if ($returnData['result_code'] != 'SUCCESS') {
                         M('cash_record')->where(array('id'=>$a3))->save(array('	payment_log'=>'test'.strval($returnData['err_code_des'])));
-                        $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~';
+                        $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~'."={$a3}=".json_encode(array('	payment_log'=>'test'.strval($returnData['err_code_des'])));
                         break;
                     }else{
                         // 更改提现状态
