@@ -153,8 +153,6 @@ class BaseController extends Controller {
 
         $cityInfo = D('City')->get_city($type);
 
-        print_r($cityInfo);die();
-
         if(empty($cityInfo)){
             die('No Found Weixin Option.');
         }
