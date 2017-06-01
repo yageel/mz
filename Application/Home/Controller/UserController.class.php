@@ -290,4 +290,21 @@ class UserController extends BaseController {
         }while(false);
         $this->ajaxReturn($json);
     }
+
+    public function test(){
+        $users_cash_record_data = M('cash_record')->find();
+        $city = D('city')->get_city($this->type);
+        $data = [
+            'mch_appid' => $city['appid'],
+            'mchid' => $city['mchid'],
+            'partner_trade_no' => $users_cash_record_data['order_sn'],
+            'openid' => $this->openid,
+            'check_name' => 'NO_CHECK',
+            'amount' => $users_cash_record_data['cash_amount'] * 100,
+            'desc' => "用户提现",
+        ];
+        $url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
+        $returnData = MyWechat::pay($url, $data, $city['zhifu'], $this->type);
+        var_dump($returnData);
+    }
 }
