@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 use Think\Page;
+use Weixin\MyWechat;
 class UserController extends BaseController {
 
     public function _initialize()
@@ -105,54 +106,82 @@ class UserController extends BaseController {
             // 开始操作
             M()->startTrans();
 
-
-            $a1 = M()->execute("UPDATE ".C('DB_PREFIX')."users_bank SET update_time='$time', total_amount=total_amount-{$money},total_cash_amount=total_cash_amount+{$money} WHERE id='{$this->usersBank['id']}' AND total_amount>={$money}");
+            // `id`, `cash_amount`, `order_sn`, `user_id`, `openid`, `city_id`, `payment_no`, `payment_log`, `status`, `is_send`, `create_time`
             $users_cash_record_data = [
                 'openid' => $this->openid,
                 'city_id' => $this->type,
-                'money' => $money,
-                'is_new' => 1,
-                'payment_no'=>'',
-                'partner_trade_no' => $partner_trade_no,
-                'created_at' => $time,
-                'reg_ip' => get_client_ip()
-            ];
-
-            $a3 = M('users_cash_record')->add($users_cash_record_data);
-
-            $users_money_record = [
-                'openid' => strval($this->openid),
-                'user_id'=> intval($this->admin['id']),
-                'city_id' => intval($this->type),
                 'cash_amount' => $money,
-                'title' => $title,
+                'payment_no'=>'',
+                'user_id' => intval($this->admin['id']),
+                'order_sn' => $partner_trade_no,
                 'create_time' => $time
             ];
-            $a2 = M('users_money_record')->add($users_money_record);
 
-
+            $a3 = M('cash_record')->add($users_cash_record_data);
+            // `record_type`, `user_id`, `water_id`, `amount`, `total_amount`, `create_time`
+            $users_money_record = [
+                'user_id'=> intval($this->admin['id']),
+                'city_id' => intval($this->type),
+                'amount' => $money,
+                'water_id' => $a3,
+                'total_amount' => floatval($this->admin['total_amount'] + $money),
+                'create_time' => $time
+            ];
+            $a2 = M('amount_record')->add($users_money_record);
+            $a1 = M()->execute("UPDATE ".C('DB_PREFIX')."admin SET update_time='$time', total_amount=total_amount-{$money},
+            total_cash_amount=total_cash_amount+{$money} WHERE id='{$this->admin['id']}' AND total_amount>={$money}");
 
             if ($a1 && $a2 && $a3) {
                 M()->commit();
-
-                $time = time();
-                $openid = md5($this->openid);
-                $result = [
-                    'state' => 2,
-                    'msg' => '请稍后，正在进入处理中...',
-                    'data' => tsurl("/user/cashapi",[
-                        'cash_id' => $a3,
-                        'time'=>$time,
-                        'openid' => $openid,
-                        'sign'=> $this->getCashSign($openid, $a3,$this->type, $this->from, $time),
-                        'city_id' => $this->type,
-                        'from_id' => $this->from,
-                        'cashtype' => $cashtype,
-                        'from'=>2,
-                        'type'=>2
-                    ])
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////具体体现操作//
+                $city = D('city')->get_city($this->type);
+                $data = [
+                    'mch_appid' => $city['appid'],
+                    'mchid' => $city['mchid'],
+                    'partner_trade_no' => $users_cash_record_data['order_sn'],
+                    'openid' => $this->openid,
+                    'check_name' => 'NO_CHECK',
+                    'amount' => $users_cash_record_data['cash_amount'] * 100,
+                    'desc' => "用户提现",
                 ];
+                $url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers';
+                $returnData = MyWechat::pay($url, $data, $city['zhifu'], $this->type);
+                //$this->assign('returnData', json_encode($data));
+                if ($returnData) {
+                    $wechat_pay_record_data = [
+                        'openid' => $users_cash_record_data['openid'],
+                        'city_id' => $users_cash_record_data['city_id'],
+                        'reopenid' => $this->openid,
+                        'money' => $users_cash_record_data['cash_amount'],
+                        'partner_trade_no' => $users_cash_record_data['order_sn'],
+                        'payment_no' => strval($returnData['payment_no']),
+                        'return_msg' => strval($returnData['return_msg']),
+                        'result_code' => strval($returnData['result_code']),
+                        'err_code' => strval($returnData['err_code']),
+                        'err_code_des' => strval($returnData['err_code_des']),
+                        'spbill_create_ip' => strval($_SERVER['SERVER_ADDR']),
+                        'type' => 1,
+                        'created_at' => $time,
+                    ];
 
+                    M('wechat_pay_record')->add($wechat_pay_record_data);
+
+                    if ($returnData['result_code'] != 'SUCCESS') {
+                        M('cash_record')->where(array('id'=>$a3))->save(array('remark'=>strval($returnData['err_code_des'])));
+                        $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~';
+                        break;
+                    }else{
+                        // 更改提现状态
+                        M('cash_record')->where(array('id'=>$a3))->save(array('status'=>1, 'payment_no'=>strval($returnData['payment_no'])));
+                        $result['msg'] = '恭喜您，红包提现成功，请查看微信钱包的零钱收入';
+                        break;
+                    }
+                } else {
+                    $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~';
+                    break;
+                }
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
                 M()->rollback();
                 $result = [
