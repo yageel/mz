@@ -94,7 +94,7 @@ class RegisterController extends BaseController {
             }
 
             $user = D('Users')->where(['mobile'=>$mobile])->find();
-            if(!$user) {
+            if($user) {
                 $json['msg'] = '该手机号已经注册了~';
                 break;
             }
