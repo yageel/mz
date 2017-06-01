@@ -20,11 +20,12 @@ class CityModel extends BaseModel
      */
     public function get_city($city_id=0){
         $key = 't_city_'.$city_id;
-        $data = MyRedis::getProInstance()->new_get($key);
-        if(!$data){
+        //$data = MyRedis::getProInstance()->new_get($key);
+       // if(!$data)
+        {
             $data = $this->where(array('city_id'=>$city_id))->find();
             if($data){
-                MyRedis::getProInstance()->new_set($key, $data);
+                //MyRedis::getProInstance()->new_set($key, $data);
             }
         }
 
