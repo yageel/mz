@@ -71,7 +71,7 @@ class BaseController extends Controller {
             return true;
         }
 
-        if($this->from != 4 && empty($_SESSION['openid'.$this->type])){
+        if($this->from != 4 ){
             return $this->initPage($this->type, $this->from);
         }
 
@@ -117,7 +117,7 @@ class BaseController extends Controller {
             unset($get['state']);
             unset($get['isappinstalled']);//groupmessage&isappinstalled=0
             $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
-            return header("Location: ".$url);
+            //return header("Location: ".$url);
         }
 
         $users = D('Users')->get_user($this->openid);
