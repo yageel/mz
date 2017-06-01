@@ -91,6 +91,9 @@
             margin-top: 6px;
             color: #666;
         }
+        .spread_block{ text-align: center; clear: both; height: 120px; overflow: scroll }
+        .spread_block .spread_list{ margin: 12px;}
+        .spread_block .spread_list div{ clear: both; float: left; line-height: 26px;}
         .product_list{ text-align: center; clear: both; height: 260px;}
         .product_list div.product_block{ margin: 0 auto; margin: 6px; border-top: #ddd 1px solid; text-align: center;}
         .product_list div.product_block div.product_item{ float: left; margin: 6px 1px; width: 32%; border: #efefef 1px solid; }
@@ -134,10 +137,22 @@
                 </ul>
             </div>
                 <div style="clear: both"></div>
-            <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
-                <a class="button" id="btnVercode2" style="width: 120px; margin-top: 12px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
-            </div>
+                <div class="spread_block wrap wrap-vertical" id="spread_block" >
+                    <div class="spread_list">
+                        <div><input type="radio" name="spread_id" value="1" /> 李雪华</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 杨姜慧子</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 谭美娟</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 刘德华</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 梁朝伟</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 金城武</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 李璐</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 王小明</div>
+                        <div><input type="radio" name="spread_id" value="1" /> 韩梅梅</div>
+                    </div>
+                </div>
+                <div style="clear: both; text-align: center; margin: 20px 0;">
+                    <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
+                </div>
 
             <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
                 出门在外的人士，如果有一款贴心的按摩沙发随时随地，缓解旅途的疲劳，让您流连忘返，请试试魔座的产品。酒店、影院、地铁站甚至出租车上都有我们的身影，随手一扫，即可享受无处不在的舒适感觉。
@@ -167,6 +182,8 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
     <script type="text/javascript">
+
+
         $('.package_block').click(function(){
             $('input[name="package_id"]').val($(this).attr('data-id'));
             $('.package_block').find('.active').removeClass('active');

@@ -9,6 +9,12 @@ class IndexController extends BaseController {
         $this->display();
     }
 
+    public function spread(){
+        $package_list = M('package')->where(['status'=>1])->order("weight DESC, id ASC")->select();
+        $this->assign('package_list', $package_list);
+        $this->display();
+    }
+
     /**
      * 用户退出登录
      */
