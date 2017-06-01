@@ -72,7 +72,7 @@ class BaseController extends Controller {
         }
 
         if($this->from != 4){
-            $this->initPage($this->type, $this->from);
+            return $this->initPage($this->type, $this->from);
         }
 
         // 第三方授权调回
@@ -107,6 +107,8 @@ class BaseController extends Controller {
             return header("Location: ".tsurl("/index/index"));
         }
         $_SESSION['reload_num'] = 0;
+
+
 
         // 如果还停留在授权链接则跳出， 防止拷贝出去报错
         if($_GET['code'] && $_GET['state']){
@@ -320,7 +322,7 @@ class BaseController extends Controller {
                 {
                     //用户授权
                     $info = $this->authorize($type);
-               
+
                     if ($info) {
                         $FUserId = $info['openid'];
 
