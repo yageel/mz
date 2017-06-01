@@ -187,7 +187,7 @@ class UserController extends BaseController {
             } else {
                 M()->rollback();
                 $result[ 'msg'] = '太火爆了，等会儿再来呗！';
-                ];
+        
             }
         }while(false);
         $this->ajaxReturn($result);
