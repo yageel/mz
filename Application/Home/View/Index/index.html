@@ -1,122 +1,163 @@
 <extend name="Layout/master" />
-<block name="title">首页</block>
+<block name="title">魔座</block>
 <block name="head">
-    <link href="__PUBLIC__/css/home.css?v=__VERSION__" rel="stylesheet" />
+    <link href="__PUBLIC__/css/userCenter.css?v=__VERSION__" rel="stylesheet" />
+    <style>
+        #rechargeContent{
+            position: absolute;
+            left:50%;
+            top:45%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            width:65%;
+            background: #fff;
+            border:1px solid pink;
+            padding:0px 5% 5%;
+            text-align: center;
+            z-index: 100;
+            -webkit-border-radius:8px;
+            -moz-border-radius:8px;
+            border-radius:8px;
+            display: none;
+        }
+        #rechargeContent img{
+            height: 1.875rem;
+            width: 3rem;
+            margin-top: 0.5rem;
+        }
+        #rechargeContent .info{
+            margin-top: 0.3rem;
+        }
+        #rechargeContent .overage{
+            color: #FBB37D;
+        }
+        #rechargeContent .footer{
+            margin-top: 15px;
+        }
+        #rechargeContent .footer span{
+            line-height: 30px;
+            text-align: center;
+            height:30px;
+            width:40%;
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+        }
+        #rechargeContent .footer #cancel{
+            border:1px solid #F8B2A8;
+            color: #F9C7BF;
+            margin-right: 5%;
+        }
+        #rechargeContent .footer #sure{
+            color: #fff;
+            background: linear-gradient(45deg, #fa9d50, #f27d6b);
+            background: -webkit-linear-gradient(45deg, #fa9d50, #f27d6b);
+            margin-left: 5%;
+        }
+        #dialog{
+            display: none;
+        }
+        .text-item-content .over{
+            font-size: 13px;
+            padding:0 13px;
+            width:1.3rem;
+        }
+        .text-item-content .money{
+            color: #F89FA0;
+        }
+        .text-item-content .mb{
+            color: #F7CF94;
+        }
+        .text-item-content1{
+            padding:0.3rem 8%;
+        }
+        .text-item-content1 .listImg{
+            flex-grow: 1;
+            display: inline-block;
+            text-align: center;
+            -webkit-flex-grow:1;
+        }
+        .text-item-content1 .listImg img{
+            width:1.3rem;
+            height:0.9rem;
+        }
+        .text-item-content1 .listImg a{
+            display: inline-block;
+        }
+        .text-item-content1 .listImg p{
+            margin-top: 6px;
+            color: #666;
+        }
+    </style>
 </block>
 <block name="content">
-    <ul class="main-bg-list" id="mainBgList">
-        <if condition="$alone eq 1">
-            <if condition="$city eq 63">
-            <li><img src="__PUBLIC__/images/worldgalaxy.png" /></li>
-            <else />
-            <li><img src="__PUBLIC__/images/red-bg.png" /></li>
-            </if>
-        </if>
-
-        <volist name="adlist" id="item" key="k">
-            <if condition="$k eq $signedcardidex">
-
-                <if condition="$city eq 63">
-                    <li><img src="__PUBLIC__/images/worldgalaxy.png" /></li>
-                    <else />
-                    <li><img src="__PUBLIC__/christmas/images/sign-bg.png" /></li>
-                </if>
-            </if>
-            <if condition="$item['id'] gt 0">   
-                <li><img src="{$item.bg_img}" /></li>
-            </if>
-        </volist>
-    </ul>
-    <div class="main-content">
-        <div class="main-item-list" id="mainItemList">
-            <if condition="$alone eq 1">   
-             <div class="wrap wrap-vertical show" data-id="100000000" data-pv="{:pvUrl(100000000,$city)}">
-                <div class="wrap-content">
-                    <div class="main-item-content abs100">
-                        <div class="sign-today">
-                            {$curday_html}
-                        </div>
-                        <div class="main-item-title"><a href="javascript:void(0)" class="color-title">日日签到，天天有奖！</a></div>
-                        <div class="main-item-remark"><a href="javascript:void(0)" class="color-remarks">你猜今天是现金还是M币呢？</a></div>
-
-                    </div>
-                </div>
-                <div class="main-item-footer">
-                    <p class="color-title sign-title">签到礼包</p>
-                    <a id="btnSignToday" data-index="0" data-steps="['showRedBox']" data-image="{$config.pic}" data-content="{$config.content}"  data-text="['已签到']" data-disable="[true]" data-redbox="{signToDay:true}" class="button <if condition='$signed eq 1'>button-disable</if>" onclick="itemClick(this)"><if condition="$signed eq 1">已签到<else />签到领取</if></a>
-                </div>
-                </div>
-                </if>
-            <volist name="adlist" id="item" key="k">
-                <if condition="$k eq $signedcardidex">   
-                <div class="wrap wrap-vertical <if condition="$k eq 1">show</if>"  <if condition="$k eq 1">id="firstcard"</if> data-id="100000000" data-pv="{:pvUrl(100000000,$city)}">
-                <div class="wrap-content">
-                    <div class="main-item-content abs100">
-                        <div class="sign-today">
-                            {$curday_html}
-                        </div>
-                        <div class="main-item-title"><a href="javascript:void(0)" class="color-title">日日签到，天天有奖！</a></div>
-                        <div class="main-item-remark">
-                                <a href="javascript:void(0)" class="color-remarks">你猜今天是现金还是M币呢？</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-item-footer">
-                    <p class="color-title sign-title">签到礼包</p>
-                    <a id="btnSignToday" data-index="0" data-steps="['showRedBox']" data-image="{$config.pic}" data-content="{$config.content}"  data-text="['已签到']" data-disable="[true]" data-redbox="{signToDay:true}" class="button <if condition='$signed eq 1'>button-disable</if>" onclick="itemClick(this)"><if condition="$signed eq 1">已签到<else />签到领取</if></a>
-                </div>
-                </div>
-                </if>
-                
-                <if condition="$item['id'] gt 0">   
-                {:recordCode($item['id'],$city)}
-                <div class="wrap wrap-vertical" data-id="{$item['id']}" <if condition="$k eq 1 AND $signedcardidex neq 1">id="firstcard"</if>  data-pv="{:pvUrl($item['id'],$city)}">
-                    <div class="wrap-content">
-                        <div class="main-item-content abs100">
-                            <if condition="$item['admetatype'] eq 4"> 
-                                <a data-card ='{$item['data_card']}' data-clicked-ajax="{:redirectUrl_dataclicked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}"  data-looked-ajax="{:redirectUrl_datalooked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}"  data-index="0" data-steps="['addWxCard']" onclick="itemClick(this, '{$item['id']}')" data-disable="[false]" data-text="['']"  class="main-item-img"><img src="{$item.specImg}" /></a>
-                            <else /> 
-                                <a href="{:redirectUrl($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" class="main-item-img"><img src="{$item.specImg}" /></a>
-                            </if>
-                            <div class="main-item-title"><a href="javascript:void(0)" class="color-title">{$item.adName}</a></div>
-                            <div class="main-item-remark">
-                                    <a href="javascript:void(0)" class="color-remarks">{$item.subtitle}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-item-footer">
-                        <if condition="$item['disable'] eq 0">
-                            <p class="color-focus">{$item.moneyper}</p>
-                            <if condition="$item['admetatype'] eq 4"> 
-                                <a data-card='{$item['data_card']}' data-clicked-ajax="{:redirectUrl_dataclicked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}"  data-looked-ajax="{:redirectUrl_datalooked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" id="otherItemBtn{$item['id']}" data-index="<if condition="$item['status'] eq 1">1<else />0</if>" data-steps="['{$item['step']}'<if condition="$item['disable'] eq 0">,'showRedBox'</if>]"  data-image="{$config.pic}" data-content="{$config.content}"  data-text="[<if condition="$item['disable'] eq 0">'领取红包', '已领取'<else />'{$item.clickbutton}'</if>]" data-disable="[false<if condition="$item['disable'] eq 0">, true</if>]" data-redbox="{signToDay:false,id:'{$item['id']}'}" class="button <if condition="$item['status'] eq 2">button-disable</if> " onclick="itemClick(this, '{$item['id']}')">{$item.clickbutton}</a>
-                            <else /> 
-                                <a id="otherItemBtn{$item['id']}"  <if condition="$item['tgrule'] eq 2"> data-loop="true" </if> data-href="{:redirectUrl($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" data-index="<if condition="$item['status'] eq 1">1<else />0</if>" data-steps="['{$item['step']}'<if condition="$item['disable'] eq 0">,'showRedBox'</if>]"  data-image="{$config.pic}" data-content="{$config.content}"  data-text="[<if condition="$item['disable'] eq 0">'领取红包', '已领取'<else />'{$item.clickbutton}'</if>]" data-disable="[false<if condition="$item['disable'] eq 0">, true</if>]" data-redbox="{signToDay:false,id:'{$item['id']}'}" class="button <if condition="$item['status'] eq 2">button-disable</if> "  onclick="itemClick(this, '{$item['id']}')">{$item.clickbutton}</a>
-                            </if>
-                        <elseif condition="$item['disable'] eq 3"/>
-                            <if condition="$item['admetatype'] eq 4"> 
-                                <a data-card='{$item['data_card']}' data-clicked-ajax="{:redirectUrl_dataclicked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" data-looked-ajax="{:redirectUrl_datalooked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}"  data-index="0" data-steps="['addWxCard']" onclick="itemClick(this, '{$item['id']}')" data-disable="[false]" data-text="['领取红包']"  class="button <if condition="$item['status'] eq 2">button-disable</if>">{$item.clickbutton}</a>
-                            <else /> 
-                                <a data-href="{:redirectUrl($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" onclick="itemClick(this, '{$item['id']}')"  class="button">{$item.clickbutton}</a>
-                            </if>
-                        <else />
-                            <if condition="$item['admetatype'] eq 4"> 
-                                <a data-card='{$item['data_card']}' data-clicked-ajax="{:redirectUrl_dataclicked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" data-looked-ajax="{:redirectUrl_datalooked_ajax($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}"  data-index="0" data-steps="['addWxCard']" onclick="itemClick(this, '{$item['id']}')" data-disable="[false]" data-text="['领取红包']"  class="button <if condition="$item['status'] eq 2">button-disable</if>">{$item.clickbutton}</a>
-                            <else /> 
-                                <a data-href="{:redirectUrl($item['jumpurl'],$item['id'],$city,$item['admetatype'],$openid,$unionid,$uid)}" onclick="itemClick(this, '{$item['id']}')"  class="button">{$item.clickbutton}</a>
-                            </if>
-                        </if>
-                    </div>
-                </div>
-                </if>
-
-            </volist>
-
+    <div class="content-padding abs100">
+        <div id="userCenterContent">
+            <!--充值弹窗-->
+            <div id="rechargeContent" <if condition='$wxpaycallback eq 1'>style="display: block"</if>  >
+            <img src="__PUBLIC__/images/result-bg.png" alt="">
+            <p class="info">
+                本次充值成功,现有M币余额
+                <span class="overage">{$usersBank['total_integral']}</span>
+            </p>
+            <div class="footer">
+                <span id="cancel">取消</span>
+                <span id="sure">确定</span>
+            </div>
         </div>
-        <div class="main-index" id="mainIndex"><label class="active"></label><volist name="adlist" id="item"> <if condition="$item['id'] gt 0"><label></label></if></volist></div>
+        <!--阴影层-->
+        <div class="dialog-container" id="dialog" style="z-index: 99;"></div>
+
+        <div class="user-info">
+            <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
+            <div>
+                <img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/header.jpg'}" />
+                <span class="name color-white">{$users['wx_name']|default="未知"}</span>
+            </div>
+        </div>
+        <div class="text-item-tab wrap">
+            <img src="__PUBLIC__/images/label.png" class="label">
+            <span style="color: #666;">我的账户</span>
+        </div>
+        <div class="text-item-content" id="tabItems">
+            <ul class="<if condition='!$tab'>active</if>">
+                <li>
+                    <div class="wrap color-link item">
+                        <span class="iconfont over">个人余额:</span>
+                        <span class="wrap-content money">{$admin['total_amount']|default='0.00'}￥</span>
+                        <a onclick="gotoLink(this)" id="btnGotoCash" href="javascript:void(0)" data-href="{:tsurl('/user/cash')}" style="width: 15%;margin-right: 0.8rem;">
+                            <span class="iconfont item-gt">提现</span>
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="text-item-tab wrap">
+            <img src="__PUBLIC__/images/label.png" class="label">
+            <span style="color: #666;">更多服务</span>
+        </div>
+
+        <div class="text-item-content1 wrap">
+            <div class="listImg">
+                <a onclick="gotoLink2(this,'个人中心页-点击查看余额详情')" href="javascript:void(0)" data-href="{:tsurl('/user/money_record')}" class="color-link">
+                    <img src="__PUBLIC__/images/over-detail.png" alt="">
+                </a>
+                <p>余额详情</p>
+            </div>
+            <div class="listImg">
+                <a onclick="gotoLink2(this,'个人中心页-点击查看M币详情')" href="javascript:void(0)" data-href="{:tsurl('/user/cash_record')}" class="color-link">
+                    <img src="__PUBLIC__/images/mb.png" alt="">
+                </a>
+                <p>提现详情</p>
+            </div>
+        </div>
+    </div>
     </div>
 </block>
 <block name="js">
-    <script src="__PUBLIC__/js/guide.js?v=__VERSION__"></script>
-    <script src="__PUBLIC__/js/home.js?v=__VERSION__"></script>
+    <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
 </block>
-
