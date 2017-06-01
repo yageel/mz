@@ -315,7 +315,7 @@ class BaseController extends Controller {
                 /**
                  * @shengyue 2016-05-26 session改成redis
                  */
-                 if (empty($FUserId) || empty($_SESSION["openid".$type]) )
+                 //if (empty($FUserId) || empty($_SESSION["openid".$type]) )
                  //if(true)
                 {
                     //用户授权
