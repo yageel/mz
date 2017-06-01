@@ -92,6 +92,13 @@ class RegisterController extends BaseController {
                 $json['msg'] = '该手机号不能注册，请联系服务确认~';
                 break;
             }
+
+            $user = D('Users')->where(['mobile'=>$mobile])->find();
+            if(!$user) {
+                $json['msg'] = '该手机号已经注册了~';
+                break;
+            }
+
             $user = D('Users')->where(['openid'=>$this->openid])->find();
             if(!$user)
             {
