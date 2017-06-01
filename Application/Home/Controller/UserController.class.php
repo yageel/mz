@@ -227,7 +227,7 @@ class UserController extends BaseController {
             }
 
             $code = create_code();
-            $bool = send_msg($mobile, "【魔座】您的验证码是".$code, $code, $this->openid);
+            $bool = send_msg($mobile, "【魔座驾到】您的验证码是".$code, $code, $this->openid);
             if(!$bool){
                 $json['msg'] = '短信发送失败，请不要频繁提交';
                 break;

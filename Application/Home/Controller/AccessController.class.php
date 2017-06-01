@@ -9,6 +9,7 @@ class AccessController extends BaseController
 {
    function index(){
        try {
+           file_put_contents(APP_PATH . "log/access.log", date("Y-m-d H:i:s == ") . json_encode($_REQUEST)."\r\n", FILE_APPEND);
            ob_clean();
            $weObj = $this->initWechat($this->type);
 
