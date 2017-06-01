@@ -71,7 +71,7 @@ class BaseController extends Controller {
             return true;
         }
 
-        if($this->from != 4 && $this->from != 5){
+        if($this->from != 4){
             $this->initPage($this->type, $this->from);
         }
 
@@ -91,7 +91,7 @@ class BaseController extends Controller {
         }
 
         $this->openid = $_SESSION['openid'.$this->type];
-
+        print_r($_SESSION);
         // 测试接口分配测试用户
         if($this->from == 4 && empty($this->openid)){
             // 增加自定义测试用户
