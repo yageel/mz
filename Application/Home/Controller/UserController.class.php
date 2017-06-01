@@ -65,6 +65,8 @@ class UserController extends BaseController {
     public function cashSave()
     {
         $result = $this->ajax_json();
+        $result['state'] = 5;
+        $result['data'] = tsurl('/user/index');
         do{
             $money = I('post.money',0,'floatval');
 //            $result['msg'] = '系统维护，提现将在2016年8月9日恢复，请耐心等待。对于任何形式的作弊行为，本公司持有法律起诉权。';
@@ -168,7 +170,7 @@ class UserController extends BaseController {
                     M('wechat_pay_record')->add($wechat_pay_record_data);
 
                     if ($returnData['result_code'] != 'SUCCESS') {
-                        M('cash_record')->where(array('id'=>$a3))->save(array('	payment_log'=>strval($returnData['err_code_des'])));
+                        M('cash_record')->where(array('id'=>$a3))->save(array('	payment_log'=>'test'.strval($returnData['err_code_des'])));
                         $result['msg'] = '提现金额稍后会转入到你的余额账户,谢谢~';
                         break;
                     }else{
@@ -184,9 +186,7 @@ class UserController extends BaseController {
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
             } else {
                 M()->rollback();
-                $result = [
-                    'state' => 4,
-                    'msg' => '太火爆了，等会儿再来呗！',
+                $result[ 'msg'] = '太火爆了，等会儿再来呗！';
                 ];
             }
         }while(false);
