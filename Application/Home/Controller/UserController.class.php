@@ -8,6 +8,8 @@ class UserController extends BaseController {
     public function _initialize()
     {
         parent::_initialize();
+
+        var_dump($this->users);die();
         // 没登陆自动登录
         if(empty($this->users['mobile'])){
             return header("location: ".tsurl('/register/index'));
