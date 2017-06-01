@@ -71,7 +71,7 @@ class BaseController extends Controller {
             return true;
         }
 
-        if($this->from != 4){
+        if($this->from != 4 && empty($_SESSION['openid'.$this->type])){
             return $this->initPage($this->type, $this->from);
         }
 
