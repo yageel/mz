@@ -425,6 +425,8 @@ class BaseController extends Controller {
                 $snsapi_base = 'snsapi_userinfo';
             }
 
+            echo $snsapi_base;die();
+
             $url = $weObj->getOauthRedirect('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], uniqid(),$snsapi_base);
             if ($url) {
                 header("Location:$url");
