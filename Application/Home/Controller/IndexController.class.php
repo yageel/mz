@@ -68,11 +68,11 @@ class IndexController extends BaseController {
 
             // 优先级 1. 推广分成， 2. 设备所有者分成, 3. 渠道分成 4. 运营分成
             if($spread_id){
-                $spread = M('admin')->where(['id'=>$spread_id])->find();
-                if($spread){
+                $spread_info = M('admin')->where(['id'=>$spread_id])->find();
+                if($spread_info){
                     $user_spread_id = $spread_id;
-                    if($spread['rebate_id']){
-                        $rebate_info = M('rebate')->where(['id'=>$spread['rebate_id'],'status'=>1])->find();
+                    if($spread_info['rebate_id']){
+                        $rebate_info = M('rebate')->where(['id'=>$spread_info['rebate_id'],'status'=>1])->find();
                     }
                 }
             }
@@ -117,7 +117,18 @@ class IndexController extends BaseController {
             // 分成计算
             $operational_rebate = $rebate_info['operational_rebate'];
             M()->startTrans();
-            $operational_price = number_format("");
+            
+            $operational_price = number_format(($package['package_amount'] * $rebate_info['operational_rebate'] / 100),2,'.','');
+            $channel_price = number_format(($package['package_amount'] * $rebate_info['channel_rebate'] / 100),2,'.','');
+            $device_price = number_format(($package['package_amount'] * $rebate_info['device_rebate'] / 100),2,'.','');
+            if($spread_info){
+                $spread_price = number_format(($package['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
+            }else{
+                $spread_price = 0;
+            }
+
+            $platform_price = $package['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
+            /////////////////////////
 
 
 
