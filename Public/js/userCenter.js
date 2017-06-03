@@ -9,12 +9,12 @@ $(function () {
 
 function auto(){
     setTimeout(function(){
-        tools.ajax(tools.url('register','wh'),{
+        tools.ajax(tools.url('register','wh',{loading:false}),{
             r: Date.parse(new Date())
         }, function (result){
             auto();
         });
-    }, 1000);
+    }, 30000);
 }
 auto();
 
