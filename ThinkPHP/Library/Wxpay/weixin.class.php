@@ -166,7 +166,7 @@ class PayNotifyCallBack extends WxPayNotify
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['platform_money']}', total_income_amount = total_income_amount+ '{$recharge['platform_money']}',
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['operational_money']}', total_income_amount = total_income_amount+ '{$recharge['operational_money']}',
                       total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['operational_user_id']}'");
                 }
 
