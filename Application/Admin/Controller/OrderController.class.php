@@ -27,6 +27,19 @@ class OrderController extends BaseController {
         $show = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        foreach($list as $i=>$item){
+            // 运营人员
+            if($item['role'] == 2){
+                // $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
+                $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
+            }elseif($item['role'] == 3){
+                $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
+            }elseif($item['role'] == 4){
+                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+            }elseif($item['role'] == 5){
+                $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
+            }
+        }
 
         $this->assign('tab', $tab);
         $this->assign('page', $show);
