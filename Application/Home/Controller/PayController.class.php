@@ -16,13 +16,8 @@ class PayController extends Controller
 
     public function __construct()
     {
-        $request_uri = $_SERVER['REQUEST_URI'];
-        $type =substr($request_uri,-7,2);
-        $str = strstr($type,"/");
-        if($str){
-            $type=str_replace('/','',$str);
-        }
-        $type = intval($type);
+        $type = intval($_REQUEST['type']);
+        
 
         //初始化wxpayconfig配置
         $cityInfo = D('City')->get_city($type);
@@ -39,6 +34,7 @@ class PayController extends Controller
     }
 
     public function notify(){
+
         notify();
     }
 

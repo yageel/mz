@@ -209,7 +209,7 @@ class IndexController extends BaseController {
                 $data['total_fee'] = $payment;
                 $data['goods_tag'] = "MZAM";
                 $data['openid'] = $this->openid;
-                $data['notify_url'] = "http://mz.hotwifibox.com/index.php?s=/pay/notify/type/{$this->type}.html";
+                $data['notify_url'] = "http://mz.hotwifibox.com/pay/notify/type/{$this->type}.html";
 
                 $jsApiParameters = jsapipay($data, true);
                 $json['data'] = json_decode($jsApiParameters);
