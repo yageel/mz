@@ -199,8 +199,6 @@ class IndexController extends BaseController {
             if($order_id){
                 // 初始化支付
                 $this->wpconfig();
-                print_r(\WxPayConfig::$APPID);
-                die();
                 $data = [];
                 $data['body'] = "购买{$package_info['package_name']}按摩套餐";
                 $data['order_sn'] = $order_sn;
