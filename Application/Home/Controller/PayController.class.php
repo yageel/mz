@@ -78,7 +78,7 @@ class PayController extends Controller
                     'create_time' => time()
                 ];
                 M('amount_record')->add($log);
-                M()->query("UPDATE t_admin SET total_amount = total_amount+'{$recharge['platform_money']}', total_income_amount = total_income_amount+'{$recharge['platform_money']}',total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id=1");
+                M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['platform_money']}', total_income_amount = total_income_amount+'{$recharge['platform_money']}',total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id=1");
 
                 // 运营进账//
                 if($recharge['operational_user_id']){
@@ -92,7 +92,7 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->query("UPDATE t_admin SET total_amount = total_amount+'{$recharge['platform_money']}',total_income_amount=total_income_amount+'{$recharge['platform_money']}',".
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['platform_money']}',total_income_amount=total_income_amount+'{$recharge['platform_money']}',".
                         "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['operational_user_id']}'");
                 }
 
@@ -109,7 +109,7 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->query("UPDATE t_admin SET total_amount = total_amount+'{$recharge['channel_money']}',total_income_amount=total_income_amount+'{$recharge['channel_money']}',".
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['channel_money']}',total_income_amount=total_income_amount+'{$recharge['channel_money']}',".
                         "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['channel_user_id']}'");
                 }
 
@@ -126,7 +126,7 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->query("UPDATE t_admin SET total_amount=total_amount+'{$recharge['device_money']}',total_income_amount=total_income_amount+'{$recharge['device_money']}',".
+                    M()->execute("UPDATE t_admin SET total_amount=total_amount+'{$recharge['device_money']}',total_income_amount=total_income_amount+'{$recharge['device_money']}',".
                       "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['device_user_id']}'");
                 }
 
@@ -142,7 +142,7 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->query("UPDATE t_admin SET total_amount=total_amount+'{$recharge['spread_money']}',total_income_amount=total_income_amount+'{$recharge['spread_money']}',".
+                    M()->execute("UPDATE t_admin SET total_amount=total_amount+'{$recharge['spread_money']}',total_income_amount=total_income_amount+'{$recharge['spread_money']}',".
                         "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['spread_user_id']}'");
                 }
             }
