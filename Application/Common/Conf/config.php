@@ -37,6 +37,6 @@ $db = dirname(__FILE__).'/db_config.php';
 $db_config = file_exists($db) ? include "$db" : array();
 
 $other = dirname(__FILE__).'/other.php';
-$db_config = file_exists($other) ? include "$other" : array();
+$other_config = file_exists($other) ? include "$other" : array();
 
 return array_merge($db_config,$config,$other);
