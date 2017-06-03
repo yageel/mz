@@ -58,7 +58,6 @@ class IndexController extends BaseController {
         $json['error'] = 1;
         $paackage_id = I('request.package_id',0,'intval');
         $spread_id = I('request.spread_id',0,'intval');
-        $device_id = $this->device_id;
         do{
             if(empty($paackage_id)){
                 $json['msg'] = "请选择购买套餐~";
@@ -181,7 +180,7 @@ class IndexController extends BaseController {
             $order_id = M('order')->add($order);
             ////////////////////////////////////////////////////////////////
             if($order_id){
-
+                $data = [];
                 $data['body'] = "购买{$package_info['package_name']}按摩套餐";
                 $data['order_sn'] = $order_sn;
                 $payment = $order['package_amount'] * 100;
@@ -192,7 +191,7 @@ class IndexController extends BaseController {
                 $data['goods_tag'] = "WXCZ";
                 $data['openid'] = $this->openid;
                 $data['notify_url'] = "http://{$_SERVER[HTTP_HOST]}/pay/notify/type/{$this->type}.html";
-
+                print_r($data);die();
                 $jsApiParameters = jsapipay($data, true);
                 $json['data'] = $jsApiParameters;
                 $json['error'] = 0;
