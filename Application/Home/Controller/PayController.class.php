@@ -26,14 +26,14 @@ class PayController extends Controller
 
         //初始化wxpayconfig配置
         $cityInfo = D('City')->get_city($type);
-        c('WXPAY.APPID', $cityInfo['appid']);
-        c('WXPAY.APPSECRET',$cityInfo['appsecret']);
-        c('WXPAY.MCHID', $cityInfo['mchid']);
-        c('WXPAY.KEY', $cityInfo['zhifu']);
+        C('WXPAY.APPID', $cityInfo['appid']);
+        C('WXPAY.APPSECRET',$cityInfo['appsecret']);
+        C('WXPAY.MCHID', $cityInfo['mchid']);
+        C('WXPAY.KEY', $cityInfo['zhifu']);
 
         $path = LIB_PATH . 'Weixin/zhengshu_'.$type;
-        c('WXPAY.SSLCERT_PATH', $path . '/apiclient_cert.pem');
-        c('WXPAY.SSLKEY_PATH', $path . '/apiclient_key.pem');
+        C('WXPAY.SSLCERT_PATH', $path . '/apiclient_cert.pem');
+        C('WXPAY.SSLKEY_PATH', $path . '/apiclient_key.pem');
         $config = new \WxPayConfig();
 
     }
