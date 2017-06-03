@@ -282,7 +282,7 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
     //if($vars)
     {
         if (is_array($vars) || empty($vars)) {
-            $vars = (array) $vars;print_r($vars);
+            $vars = (array) $vars;
             if (!isset($vars['type'])) {
                 $vars['type'] = (int) $_REQUEST['type'];
             }
