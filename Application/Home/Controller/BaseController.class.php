@@ -105,7 +105,6 @@ class BaseController extends Controller {
         }
         $_SESSION['reload_num'] = 0;
 
-
         if($this->openid){
             // 如果还停留在授权链接则跳出， 防止拷贝出去报错
             if($_GET['code'] && $_GET['state']){
@@ -117,7 +116,7 @@ class BaseController extends Controller {
                 return header("Location: ".$url);
             }
         }
-        
+
         $users = D('Users')->get_user($this->openid);
         $city = D('City')->get_city($this->type);
         $this->assign('cityInfo',$city);

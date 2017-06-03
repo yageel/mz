@@ -18,6 +18,14 @@ class IndexController extends BaseController {
             }
         }
 
+        // 默认删除qr 防止分享出去
+        if($_REQUEST['qr']){
+            $get = (array)$_GET;
+            unset($get['qr']);
+            $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
+            return header("Location: ".$url);
+        }
+
         // 如果没有按摩椅
         if(empty($_SESSION['global_qr'])){
              $this->assign("msg", "抱歉~ 请重新扫描按摩椅二维码试下吧~");
@@ -33,12 +41,18 @@ class IndexController extends BaseController {
             die();
         }
 
+
+
         if($this->device_info['status'] != 1){
             $this->assign("msg", "抱歉~ 该按摩椅暂不提供服务~ 请扫描其他按摩椅吧~");
             $this->display("error");
             die();
         }
+
+
+
         $this->device_id = intval($this->device_info['id']);
+
     }
 
     /**

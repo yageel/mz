@@ -302,10 +302,6 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
             if (strstr($vars, 'gfrom=') === false) {
                 $vars .= "&gfrom=" . intval($_REQUEST['gfrom']);
             }
-
-            if (strstr($vars, 'qr=') === false) {
-                $vars .= "&qr=" . $_REQUEST['qr'];
-            }
         }
     }
     return U($url, $vars, $suffix, $domain);
