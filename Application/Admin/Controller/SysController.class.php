@@ -117,4 +117,18 @@ class SysController extends BaseController
         $this->display();
     }
 
+    /**
+     * 网站基础设置
+     */
+    public function basic(){
+        if(IS_POST){
+            $data = $_POST;
+            $settingstr = "<?php \n return array(\n'Setting' =>\n".var_export($data)." \n ?>";
+            F('other.php',$settingstr, COMMON_PATH . 'Conf/');
+            return $this->success("编辑成功~");
+        }
+        $this->assign('basic',(array)load_config(COMMON_PATH . 'Conf/other.php'));
+        $this->display();
+    }
+
 }
