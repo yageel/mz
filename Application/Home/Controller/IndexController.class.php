@@ -22,6 +22,7 @@ class IndexController extends BaseController {
         if($_REQUEST['qr']){
             $get = (array)$_GET;
             unset($get['qr']);
+            $get['test'] = time();
             $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
             return header("Location: ".$url);
         }
@@ -160,7 +161,6 @@ class IndexController extends BaseController {
             }
 
             // 分成计算
-            $operational_rebate = $rebate_info['operational_rebate'];
             // M()->startTrans();
             
             $operational_price = number_format(($package_info['package_amount'] * $rebate_info['operational_rebate'] / 100),2,'.','');
