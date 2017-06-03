@@ -10,15 +10,24 @@ class IndexController extends BaseController {
         //
         $device_id = $_REQUEST['qr'];
         if($device_id){
-            $device = M('devices')->where(['qrcode'=>$device_id])->find();
-            if($device['status'] == 1){
-                $_SESSION['device_id'] = $device['id'];
+            if($_SESSION['qr'] == $device_id && $_SESSION['device_id']){
+
             }else{
-                return $this->display("device_error");
+                $_SESSION['qr'] = $device_id;
+
+                $device = M('devices')->where(['qrcode'=>$device_id])->find();
+                if($device['status'] == 1){
+                    $_SESSION['device_id'] = $device['id'];
+                }else{
+                     $this->display("error");
+                    die();
+                }
             }
+
         }else{
             if(empty($_SESSION['device_id'])){
-                return $this->display("device_error");
+                 $this->display("error");
+                die();
             }
         }
 
@@ -30,7 +39,6 @@ class IndexController extends BaseController {
      *
      */
     public function index(){
-
         $package_list = M('package')->where(['status'=>1])->order("weight DESC, id ASC")->select();
         $this->assign('package_list', $package_list);
         $this->display();
@@ -136,7 +144,13 @@ class IndexController extends BaseController {
         return $this->ajaxReturn($josn);
     }
 
+    /**
+     * 邀请人
+     */
     public function spread(){
+        $spread_list = M('devices_spread')->where(['device_id'=>$this->device_id])->select();
+
+        $this->assign('spread_list', $spread_list);
         $package_list = M('package')->where(['status'=>1])->order("weight DESC, id ASC")->select();
         $this->assign('package_list', $package_list);
         $this->display();

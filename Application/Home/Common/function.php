@@ -227,9 +227,9 @@ function check_code( $code,$mobile) {
 
 /*获得第一个from*/
 function get_real_from() {
-    if (isset($_SERVER['QUERY_STRING']) && strripos($_SERVER['QUERY_STRING'], 'from') != strpos($_SERVER['QUERY_STRING'], 'from')) {
-        $pos = strpos($_SERVER['QUERY_STRING'], 'from');
-        return intval(substr($_SERVER['QUERY_STRING'], $pos + 5)); //from/
+    if (isset($_SERVER['QUERY_STRING']) && strripos($_SERVER['QUERY_STRING'], 'gfrom') != strpos($_SERVER['QUERY_STRING'], 'gfrom')) {
+        $pos = strpos($_SERVER['QUERY_STRING'], 'gfrom');
+        return intval(substr($_SERVER['QUERY_STRING'], $pos + 6)); //from/
     }
 }
 
@@ -274,8 +274,8 @@ function jump_tsurl($url,$valrs='', $suffix = true, $domain = false){
         if(strpos($url,"/type/") == false && strpos($url,"&type=") === false){
             $url .= "&type=".intval($_REQUEST['type']);
         }
-        if(strpos($url,"/from/") == false && strpos($url,"&from=") === false){
-            $url .= "&from=".intval($_REQUEST['from']);
+        if(strpos($url,"/gfrom/") == false && strpos($url,"&gfrom=") === false){
+            $url .= "&gfrom=".intval($_REQUEST['gfrom']);
         }
         return $url;
     }else{
@@ -296,10 +296,10 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
                 $vars['type'] = (int) $_REQUEST['type'];
             }
 
-            if (!isset($vars['from'])) {
-                $vars['from'] = (int) $_REQUEST['from'];
-                if ((int) $_REQUEST['from'] == 0) {
-                    $vars['from'] = get_real_from();
+            if (!isset($vars['gfrom'])) {
+                $vars['gfrom'] = (int) $_REQUEST['from'];
+                if ((int) $_REQUEST['gfrom'] == 0) {
+                    $vars['gfrom'] = get_real_from();
                 }
             }
         } else {
@@ -307,12 +307,12 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
                 $vars .= "&type=" . intval($_REQUEST['type']);
             }
 
-            if (strstr($vars, 'from=') === false) {
-                $realfrom = intval($_REQUEST['from']);
+            if (strstr($vars, 'gfrom=') === false) {
+                $realfrom = intval($_REQUEST['gfrom']);
                 if ($realfrom == 0) {
                    $realfrom = get_real_from();
                 }
-                $vars .= "&from=" . $realfrom;
+                $vars .= "&gfrom=" . $realfrom;
             }
         }
     }

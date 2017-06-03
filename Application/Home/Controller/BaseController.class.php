@@ -10,7 +10,7 @@ class BaseController extends Controller {
     /** @var null  */
     public  $wechat = null;
     public $type = 0;
-    public $from = 0;
+    public $gfrom = 0;
     public $openid = '';
 
     /**
@@ -45,9 +45,9 @@ class BaseController extends Controller {
     public function _initialize(){
         $this->openid = '';
         $this->type = I('request.type',0,'intval');
-        $this->from = I('request.from',0,'intval');
-        if($this->from < 1){
-            $this->from = get_real_from();
+        $this->gfrom = I('request.gfrom',0,'intval');
+        if($this->gfrom < 1){
+            $this->gfrom = get_real_from();
         }
 
         $from_city = I('request.city_id',0,'intval');
@@ -71,8 +71,8 @@ class BaseController extends Controller {
             return true;
         }
 
-        if($this->from != 4 ){
-           $this->initPage($this->type, $this->from);
+        if($this->gfrom != 4 ){
+           $this->initPage($this->type, $this->gfrom);
         }
 
         // 第三方授权调回
@@ -93,7 +93,7 @@ class BaseController extends Controller {
         $this->openid = $_SESSION['openid'.$this->type];
 
         // 测试接口分配测试用户
-        if($this->from == 4 && empty($this->openid)){
+        if($this->gfrom == 4 && empty($this->openid)){
             // 增加自定义测试用户
              $this->openid = $_GET['wx_openid2']?$_GET['wx_openid2']:'ojXJAwe5RvGIc1Blh_8kiDLRMlhk';
         }
@@ -129,7 +129,7 @@ class BaseController extends Controller {
         $this->users = $users;
 
         $this->assign('type', $this->type);
-        $this->assign('from', $this->from);
+        $this->assign('gfrom', $this->gfrom);
 
         $this->isLogin = empty($this->users['mobile'])?false:true;
 
@@ -305,12 +305,12 @@ class BaseController extends Controller {
      * @param int $type 城市ID
      * @param int $from 来源 1:摇一摇进来的, 2:菜单进来的, 3:分享链接进来的, 4:用来调试的
      */
-    protected function initPage($type,$from){
+    protected function initPage($type,$gfrom){
         /*******************初始化******/
         $FUserId = $_SESSION['FUserId' . $type];
         // 2016-12-27 ShengYue
         $error = '';
-        switch ($from) {
+        switch ($gfrom) {
             case 1:
             case 2:
             case 3:
@@ -381,7 +381,7 @@ class BaseController extends Controller {
                 break;
             default:
 
-                $error = "访问来源无法确定".$from;
+                $error = "访问来源无法确定".$gfrom;
                 break;
         }
 

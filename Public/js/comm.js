@@ -1196,7 +1196,7 @@ function uploadAudio() {
         getFromType: function () {
             // if (fromType === undefined)
             {
-                fromType = _queryPars("from");
+                fromType = _queryPars("gfrom");
                 if (fromType)
                     fromType = parseInt(fromType);
             }

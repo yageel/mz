@@ -61,9 +61,9 @@ function jsApiCall(data)
             var wxcallback = $("#wxcallback").val();
             var goodid = $("#goodsid").val();
             if(wxcallback==2){
-                var url = "/index.php?s=/goods/order/id/"+goodid+"/type/" + tools.getCityID() + "/from/" + tools.getFromType()+"/wxpaycallback/2";
+                var url = "/index.php?s=/goods/order/id/"+goodid+"/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType()+"/wxpaycallback/2";
             }else{
-                var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/from/" + tools.getFromType()+"/wxpaycallback/1";
+                var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType()+"/wxpaycallback/1";
             }
 
             /*window.location.href = url;

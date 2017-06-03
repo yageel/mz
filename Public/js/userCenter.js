@@ -40,7 +40,7 @@ tools.sendData("加载个人中心页");
 $("#cancel").click(function(){
     $("#rechargeContent").css('display','none');
     $("#dialog").css('display','none');
-    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/from/" + tools.getFromType();
+    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType();
     window.location.href = url;
 });
 
@@ -48,6 +48,6 @@ $("#cancel").click(function(){
 $("#sure").click(function(){
     $("#rechargeContent").css('display','none');
     $("#dialog").css('display','none');
-    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/from/" + tools.getFromType();
+    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType();
     window.location.href = url;
 });

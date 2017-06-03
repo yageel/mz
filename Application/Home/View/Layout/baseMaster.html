@@ -29,7 +29,7 @@
     <block name="content"></block>
     
     <!-- 全局隐藏域参数 Begin -->
-    <input id="global_from" name="from" type="hidden" value="{$from}" />
+    <input id="global_from" name="gfrom" type="hidden" value="{$gfrom}" />
     <input id="global_type" name="type" type="hidden" value="{$type}" />
     <input id="hidAppid" type="hidden" value="{$signature['appid']}" />
     <input id="hidTimestamp" type="hidden" value="{$signature['time']}" />
@@ -38,7 +38,7 @@
 
     <input id="hidShareTitle" type="hidden" value="{$share_title|default=$share_default_title}" />
     <input id="hidShareDesc" type="hidden" value="{$share_desc|default=$share_default_sub_title}" />
-    <input id="hidShareLink" type="hidden" value="{$share_link|default=tsurl('/index/index',array('from'=>3),true,true)}" />
+    <input id="hidShareLink" type="hidden" value="{$share_link|default=tsurl('/index/index',array('gfrom'=>3),true,true)}" />
     <input id="hidShareImage" type="hidden" value="{$share_img|default=$share_default_pic}" />
 
     <!-- 全局隐藏域参数 End -->
