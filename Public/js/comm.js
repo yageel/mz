@@ -1583,7 +1583,7 @@ function uploadAudio() {
                                             } else if (typeof e.target.selectionStart == 'number' && typeof e.target.selectionEnd == 'number') {
                                                 e.target.selectionStart = e.target.selectionEnd = len;
                                             }
-                                        } catch (e) { }
+                                        } catch (es) { }
                                     }
                                 } else {
                                     e.target && e.target.click && e.target.click();
@@ -1599,8 +1599,10 @@ function uploadAudio() {
                         startPoint = startTime = container = cache = undefined;
                         break;
                 }
+                if(boxType != 'radio' && boxType != undefined){
+                    e.preventDefault();
+                }
 
-                e.preventDefault();
             },
             touchEndHandler: function (e) {
                 var y = endY = utils.scrollYHandle(e);
