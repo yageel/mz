@@ -62,7 +62,7 @@ function jsApiCall(data)
                     tools.alert("支付错误", "系统提示");
                     break;
                 case 'get_brand_wcpay_request:ok':
-                    //tools.alert("支付成功", "系统提示");
+                    tools.alert("支付成功", "系统提示");
                     break;
             }
         }
