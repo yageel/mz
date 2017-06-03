@@ -33,7 +33,10 @@ $config = array(
 );
 
 
-$db_config = dirname(__FILE__).'/db_config.php';
-$db_config = file_exists($db_config) ? include "$db_config" : array();
+$db = dirname(__FILE__).'/db_config.php';
+$db_config = file_exists($db) ? include "$db" : array();
 
-return array_merge($db_config,$config);
+$other = dirname(__FILE__).'/other.php';
+$db_config = file_exists($other) ? include "$other" : array();
+
+return array_merge($db_config,$config,$other);
