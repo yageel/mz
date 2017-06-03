@@ -3,13 +3,21 @@ namespace Home\Controller;
 use Think\Controller;
 class RegisterController extends BaseController {
 
-
+    /**
+     * 注册页
+     */
     public function index(){
         $this->display();
     }
 
     public function  agreement(){
         $this->display();
+    }
+
+    public function wh(){
+        $json = $this->ajax_json();
+        $json['state'] = 99;
+        $this->ajaxReturn($json);
     }
 
 
