@@ -5,6 +5,7 @@
     'title' => '',
     'platform_user_id' => '1',
     'spread_user_id' => '1',
+    'version' => '001',
   ),
 );
  ?>
