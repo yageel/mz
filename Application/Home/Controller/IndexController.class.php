@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 require_once LIB_PATH .'Wxpay/weixin.class.php';
-require_once LIB_PATH ."Wxpay/Lib/WxPay.Config.php";
+require_once LIB_PATH ."Wxpay/lib/WxPay.Config.php";
 class IndexController extends BaseController {
     public $device_id = 0;
     public $device_info = [];
