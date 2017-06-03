@@ -8,6 +8,7 @@ use Redis\MyRedis;
 use Think\Controller;
 use Think\Page;
 use Think\Upload;
+use Org\Util\File;
 
 /**
  * @shengyue 2016-07-04
@@ -124,7 +125,7 @@ class SysController extends BaseController
         if(IS_POST){
             $data = $_POST;
             $settingstr = "<?php \n return array(\n".var_export($data, true)." );\n ?>";
-            F('other',$settingstr, COMMON_PATH . 'Conf/');
+            file::write_file(COMMON_PATH . 'Conf/other.php',$settingstr);
             return $this->success("编辑成功~");
         }
         $this->assign('basic',(array)load_config(COMMON_PATH . 'Conf/other.php'));
