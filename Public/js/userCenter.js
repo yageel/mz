@@ -27,20 +27,24 @@ function gotoLink2(tag,title) {
 
 tools.sendData("加载个人中心页");
 
-function set_pay(){
+$('#btnVercode').click(function(){
     var id = $('input[name="package_id"]').val();
     var spread_id = $('input[name="spread_id"]:checked').val();
-    tools.ajax(tools.url("index", "order"),{
+    if(id == ''){
+        tools.alert("请选择购买套餐~", "系统提示~");
+        return false;
+    }
+    tools.ajax($('input[name="url"]').val(),{
         package_id: id,
         spread_id:spread_id
     }, function (result){
         if(result.error==0){
             callpay(result.data);
         }else if(result.error==1){
-            tools.alert(result.message, "系统提示");
+            tools.alert(result.msg, "系统提示");
         }
     });
-}
+});
 
 //调用微信JS api 支付
 //调用微信JS api 支付

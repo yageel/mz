@@ -36,7 +36,7 @@ class IndexController extends BaseController {
             $this->display("error");
             die();
         }
-        $this->device_id = $this->device_info['id'];
+        $this->device_id = intval($this->device_info['id']);
     }
 
     /**
@@ -52,7 +52,9 @@ class IndexController extends BaseController {
      * 支付订单
      */
     public function order(){
-        $josn = $this->ajax_json();
+        $json = $this->ajax_json();
+        $json['state'] = 99;
+        $json['error'] = 1;
         $paackage_id = I('request.package_id',0,'intval');
         $spread_id = I('request.spread_id',0,'intval');
         $device_id = $this->device_id;
@@ -62,17 +64,17 @@ class IndexController extends BaseController {
                 break;
             }
 
-            $package = M('package')->where(['id'=>$paackage_id])->find();
-            if($package['status'] != 1){
+            $package_info = M('package')->where(['id'=>$paackage_id])->find();
+            if(empty($package_info) || $package_info['status'] != 1){
                 $json['msg'] = "购买套餐已下架~";
                 break;
             }
 
             // 参与分成用户
             $user_spread_id = 0;
-            $user_device_id = $this->device_info['user_id'];
-            $user_channel_id = $this->device_info['channel_user_id'];
-            $user_operational_id = $this->device_info['operational_user_id'];
+            $user_device_id = intval($this->device_info['user_id']);
+            $user_channel_id = intval($this->device_info['channel_user_id']);
+            $user_operational_id = intval($this->device_info['operational_user_id']);
             $user_platform_id = 1;
 
             // 分成规则
@@ -116,7 +118,7 @@ class IndexController extends BaseController {
                 }
             }
 
-            //
+            // 默认系统返利规则
             if(! $rebate_info ){
                 $rebate_info = M('rebate')->where(['rebate_type'=>0])->find();
             }
@@ -128,25 +130,81 @@ class IndexController extends BaseController {
 
             // 分成计算
             $operational_rebate = $rebate_info['operational_rebate'];
-            M()->startTrans();
+            // M()->startTrans();
             
-            $operational_price = number_format(($package['package_amount'] * $rebate_info['operational_rebate'] / 100),2,'.','');
-            $channel_price = number_format(($package['package_amount'] * $rebate_info['channel_rebate'] / 100),2,'.','');
-            $device_price = number_format(($package['package_amount'] * $rebate_info['device_rebate'] / 100),2,'.','');
+            $operational_price = number_format(($package_info['package_amount'] * $rebate_info['operational_rebate'] / 100),2,'.','');
+            $channel_price = number_format(($package_info['package_amount'] * $rebate_info['channel_rebate'] / 100),2,'.','');
+            $device_price = number_format(($package_info['package_amount'] * $rebate_info['device_rebate'] / 100),2,'.','');
             if($spread_info){
-                $spread_price = number_format(($package['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
+                $spread_price = number_format(($package_info['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
             }else{
                 $spread_price = 0;
             }
 
-            $platform_price = $package['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
-            /////////////////////////
+            $platform_price = $package_info['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
+            ////////////////////////////////////////////////////////////////
+            // `id`, `openid`, `device_id`, `package_id`, `package_amount`, `package_time`, `order_sn`, `status`, `start_status`,
+            // `start_log`, `platform_rebate`, `platform_money`, `operational_rebate`, `operational_user_id`, `operational_money`,
+            // `channel_rebate`, `channel_user_id`, `channel_money`, `device_rebate`, `device_user_id`, `device_money`, `spread_rebate`,
+            // `spread_user_id`, `spread_money`, `payment_no`, `send_status`, `create_time`, `update_time`, `from_id`,
+            // `city_id`, `client_ip`, `client_agent`
+            $order_sn = get_order_no();
+            $order = [
+                'openid' => $this->openid,
+                'device_id' => $this->device_id,
+                'package_id' => $paackage_id,
+                'package_amount' => $package_info['package_amount'],
+                'package_time' => $package_info['package_time'],
+                'order_sn' => $order_sn,
+                'platform_rebate' => $rebate_info['platform_rebate'],
+                'platform_money' => $platform_price,
+                'operational_rebate' =>$rebate_info['operational_rebate'],
+                'platform_money' => $operational_price,
+                'operational_user_id' => $user_operational_id,
+                'channel_rebate' => $rebate_info['channel_rebate'],
+                'channel_money' => $channel_price,
+                'channel_user_id' => $user_channel_id,
+                'device_rebate' => $rebate_info['device_rebate'],
+                'device_money' => $device_price,
+                'device_user_id' => $user_device_id,
+                'spread_rebate' => $rebate_info['spread_rebate'],
+                'spread_money' => $spread_price,
+                'spread_user_id' => $user_spread_id,
+                'create_time' => time(),
+                'from_id' => $this->gfrom,
+                'type' => $this->type,
+                'client_ip' =>get_client_ip(),
+                'client_agent' => substr($_SERVER['HTTP_USER_AGENT'],0,255)
+            ];
 
+            $order_id = M('order')->add($order);
+            ////////////////////////////////////////////////////////////////
+            if($order_id){
 
+                $data['body'] = "购买{$package_info['package_name']}按摩套餐";
+                $data['order_sn'] = $order_sn;
+                $payment = $order['package_amount'] * 100;
+                if( $this->openid == 'ojXJAwe5RvGIc1Blh_8kiDLRMlhk'){
+                    $payment = 1;
+                }
+                $data['total_fee'] = $payment;
+                $data['goods_tag'] = "WXCZ";
+                $data['openid'] = $this->openid;
+                $data['notify_url'] = "http://{$_SERVER[HTTP_HOST]}/pay/notify/type/{$this->type}.html";
+
+                $jsApiParameters = jsapipay($data, true);
+                $json['data'] = $jsApiParameters;
+                $json['error'] = 0;
+                break;
+            }else{
+                $json['msg'] = "订单提交失败~";
+                break;
+            }
 
         }while(false);
-        return $this->ajaxReturn($josn);
+        return $this->ajaxReturn($json);
     }
+
 
     /**
      * 邀请人
