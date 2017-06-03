@@ -31,13 +31,13 @@ class OrderController extends BaseController {
             // 运营人员
             if($item['role'] == 2){
                 // $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
-                $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
+                $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$item['id']])->count();
             }elseif($item['role'] == 3){
-                $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
+                $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $item['id']])->count();
             }elseif($item['role'] == 4){
-                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $item['id']])->count();
             }elseif($item['role'] == 5){
-                $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
+                $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $item['id']])->count();
             }
         }
 
