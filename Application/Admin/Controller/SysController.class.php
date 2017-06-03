@@ -124,7 +124,7 @@ class SysController extends BaseController
     public function basic(){
         if(IS_POST){
             $data = $_POST;
-            $settingstr = "<?php \n return array(\n".var_export($data, true)." );\n ?>";
+            $settingstr = "<?php \n return ".var_export($data, true).";\n ?>";
             file::write_file(COMMON_PATH . 'Conf/other.php',$settingstr);
             return $this->success("编辑成功~");
         }
