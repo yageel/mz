@@ -109,7 +109,7 @@ class OrderController extends BaseController {
                     $where['user_id'] = $user['id'];
                     // 推广人员
                 }
-                $db = M('order');
+                $db = M('devices');
                 $count = $db->where($where)->count();// 查询满足要求的总记录数
                 $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 
