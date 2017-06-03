@@ -176,7 +176,7 @@ class IndexController extends BaseController {
                 'platform_rebate' => $rebate_info['platform_rebate'],
                 'platform_money' => $platform_price,
                 'operational_rebate' =>$rebate_info['operational_rebate'],
-                'platform_money' => $operational_price,
+                'operational_money' => $operational_price,
                 'operational_user_id' => $user_operational_id,
                 'channel_rebate' => $rebate_info['channel_rebate'],
                 'channel_money' => $channel_price,
