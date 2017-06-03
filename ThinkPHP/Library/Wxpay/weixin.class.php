@@ -130,7 +130,7 @@ class PayNotifyCallBack extends WxPayNotify
                 'payment_no'=>$result['transaction_id'],
                 'status' => 1
             );
-            $res1 = M('order')->where("partner_trade_no='{$order_sn}'")->save($data);
+            $res1 = M('order')->where(["order_sn"=>$order_sn])->save($data);
             ///////////////////////记录流水
             if($res1){
                 // 平台进账//
