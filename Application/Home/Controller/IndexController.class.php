@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+require_once LIB_PATH .'Wxpay/weixin.class.php';
 class IndexController extends BaseController {
     public $device_id = 0;
     public $device_info = [];
@@ -184,7 +185,7 @@ class IndexController extends BaseController {
                 $data['body'] = "购买{$package_info['package_name']}按摩套餐";
                 $data['order_sn'] = $order_sn;
                 $payment = $order['package_amount'] * 100;
-                if( $this->openid == 'ojXJAwe5RvGIc1Blh_8kiDLRMlhk'){
+                if( $this->openid == 'ochkGv1tTGLLRNJ0n6VmdkggifIQ'){
                     $payment = 1;
                 }
                 $data['total_fee'] = $payment;
