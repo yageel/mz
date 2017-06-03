@@ -135,7 +135,7 @@ class OrderController extends BaseController {
             }
 
         }
-        print_r($list);
+
         $this->assign('page', $show);
         $this->assign('list', $list);
         $this->assign('user', $user);
