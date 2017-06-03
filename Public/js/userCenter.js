@@ -7,16 +7,6 @@ $(function () {
     new ntScroll("userCenterContent");
 });
 
-function changeTab(tag, idx) {
-    $(tag).addClass("active").siblings().removeClass("active");
-
-    $("#tabItems").children().each(function (i) {
-        $(this)[idx === i ? "addClass" : "removeClass"]("active");
-    });
-
-    $("#btnGoto" + (idx ? "Exchange" : "Cash")).show();
-    $("#btnGoto" + (idx ? "Cash" : "Exchange")).hide();
-}
 
 function gotoLink(tag) {
     var text = $(tag).find("span.wrap-content").text();
@@ -29,6 +19,7 @@ function gotoLink(tag) {
 
     location.href = $(tag).attr("data-href");
 }
+
 function gotoLink2(tag,title) {
     tools.sendData(title);
     location.href = $(tag).attr("data-href");
@@ -36,18 +27,54 @@ function gotoLink2(tag,title) {
 
 tools.sendData("加载个人中心页");
 
-//取消弹窗
-$("#cancel").click(function(){
-    $("#rechargeContent").css('display','none');
-    $("#dialog").css('display','none');
-    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType();
-    window.location.href = url;
-});
+function set_pay(){
+    var id = $('input[name="package_id"]').val();
+    var spread_id = $('input[name="spread_id"]:checked').val();
+    tools.ajax(tools.url("index", "order"),{
+        package_id: id,
+        spread_id:spread_id
+    }, function (result){
+        if(result.error==0){
+            callpay(result.data);
+        }else if(result.error==1){
+            tools.alert(result.message, "系统提示");
+        }
+    });
+}
 
-//取消弹窗
-$("#sure").click(function(){
-    $("#rechargeContent").css('display','none');
-    $("#dialog").css('display','none');
-    var url = "/index.php?s=/user/index/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType();
-    window.location.href = url;
-});
+//调用微信JS api 支付
+//调用微信JS api 支付
+function jsApiCall(data)
+{
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest',
+        data,
+        function(res){
+            switch (res.err_msg){
+                case 'get_brand_wcpay_request:cancel':
+                    tools.alert("支付取消", "系统提示");
+                    break;
+                case 'get_brand_wcpay_request:fail':
+                    tools.alert("支付错误", "系统提示");
+                    break;
+                case 'get_brand_wcpay_request:ok':
+                    //tools.alert("支付成功", "系统提示");
+                    break;
+            }
+        }
+    );
+}
+
+function callpay(data)
+{
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+        }
+    }else{
+        jsApiCall(data);
+    }
+}
