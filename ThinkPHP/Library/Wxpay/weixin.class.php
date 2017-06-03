@@ -220,6 +220,7 @@ class PayNotifyCallBack extends WxPayNotify
                       total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['spread_user_id']}'");
                 }
             }
+            return true;
             ///////////////////////记录流水
         }
 
