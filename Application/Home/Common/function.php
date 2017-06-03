@@ -290,7 +290,7 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
             if (!isset($vars['gfrom'])) {
                 $vars['gfrom'] = (int) $_REQUEST['gfrom'];
             }
-            
+
         } else {
             if (strstr($vars, 'type=') === false) {
                 $vars .= "&type=" . intval($_REQUEST['type']);
