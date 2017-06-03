@@ -106,17 +106,18 @@ class BaseController extends Controller {
         $_SESSION['reload_num'] = 0;
 
 
-
-        // 如果还停留在授权链接则跳出， 防止拷贝出去报错
-        if($_GET['code'] && $_GET['state']){
-            $get = (array)$_GET;
-            unset($get['code']);
-            unset($get['state']);
-            unset($get['isappinstalled']);//groupmessage&isappinstalled=0
-            $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
-            //return header("Location: ".$url);
+        if($this->openid){
+            // 如果还停留在授权链接则跳出， 防止拷贝出去报错
+            if($_GET['code'] && $_GET['state']){
+                $get = (array)$_GET;
+                unset($get['code']);
+                unset($get['state']);
+                unset($get['isappinstalled']);//groupmessage&isappinstalled=0
+                $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
+                return header("Location: ".$url);
+            }
         }
-
+        
         $users = D('Users')->get_user($this->openid);
         $city = D('City')->get_city($this->type);
         $this->assign('cityInfo',$city);
