@@ -49,6 +49,22 @@ class IndexController extends BaseController {
         $this->display();
     }
 
+    /*
+    * 初始化wxpayconfig配置
+    */
+    private function wpconfig(){
+        $cityInfo = D('City')->get_city($this->type);
+        c('WXPAY.APPID', $cityInfo['appid']);
+        c('WXPAY.APPSECRET',$cityInfo['appsecret']);
+        c('WXPAY.MCHID', $cityInfo['mchid']);
+        c('WXPAY.KEY', $cityInfo['zhifu']);
+
+        $path = LIB_PATH . 'Weixin/zhengshu_' . $this->type;
+        c('WXPAY.SSLCERT_PATH', $path . '/apiclient_cert.pem');
+        c('WXPAY.SSLKEY_PATH', $path . '/apiclient_key.pem');
+        $config = new \WxPayConfig();
+    }
+
     /**
      * 支付订单
      */
@@ -180,6 +196,8 @@ class IndexController extends BaseController {
             $order_id = M('order')->add($order);
             ////////////////////////////////////////////////////////////////
             if($order_id){
+                // 初始化支付
+                $this->wpconfig();
                 $data = [];
                 $data['body'] = "购买{$package_info['package_name']}按摩套餐";
                 $data['order_sn'] = $order_sn;
@@ -188,7 +206,7 @@ class IndexController extends BaseController {
                     $payment = 1;
                 }
                 $data['total_fee'] = $payment;
-                $data['goods_tag'] = "WXCZ";
+                $data['goods_tag'] = "MZAM";
                 $data['openid'] = $this->openid;
                 $data['notify_url'] = "http://mz.hotwifibox.com/index.php?s=/pay/notify/type/{$this->type}.html";
 
