@@ -112,6 +112,7 @@ class BaseController extends Controller {
                 unset($get['code']);
                 unset($get['state']);
                 unset($get['isappinstalled']);//groupmessage&isappinstalled=0
+                $get['test'] = time();
                 $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
                 return header("Location: ".$url);
             }
