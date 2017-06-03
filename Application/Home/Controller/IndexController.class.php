@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 require_once LIB_PATH .'Wxpay/weixin.class.php';
+require_once LIB_PATH ."Wxpay/Lib/WxPay.Config.php";
 class IndexController extends BaseController {
     public $device_id = 0;
     public $device_info = [];
@@ -198,6 +199,8 @@ class IndexController extends BaseController {
             if($order_id){
                 // 初始化支付
                 $this->wpconfig();
+                print_r(\WxPayConfig::$APPID);
+                die();
                 $data = [];
                 $data['body'] = "购买{$package_info['package_name']}按摩套餐";
                 $data['order_sn'] = $order_sn;
