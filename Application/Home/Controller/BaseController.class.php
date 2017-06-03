@@ -46,9 +46,6 @@ class BaseController extends Controller {
         $this->openid = '';
         $this->type = I('request.type',0,'intval');
         $this->gfrom = I('request.gfrom',0,'intval');
-        if($this->gfrom < 1){
-            $this->gfrom = get_real_from();
-        }
 
         $from_city = I('request.city_id',0,'intval');
         if($from_city){

@@ -9,7 +9,7 @@ class IndexController extends BaseController {
         parent::_initialize();
 
         // 如果扫描了其他按摩椅
-        $device_qr = $_REQUEST['global_qr'];
+        $device_qr = $_REQUEST['qr'];
         if($device_qr) {
             if ($_SESSION['global_qr'] != $device_qr) {
                 $_SESSION['global_qr'] = $device_qr;
@@ -18,7 +18,7 @@ class IndexController extends BaseController {
 
         // 如果没有按摩椅
         if(empty($_SESSION['global_qr'])){
-             $this->assign("msg", "抱歉~ 请重新扫描按摩椅~");
+             $this->assign("msg", "抱歉~ 请重新扫描按摩椅二维码试下吧~");
              $this->display("error");
             die();
         }

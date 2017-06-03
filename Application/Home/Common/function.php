@@ -224,15 +224,6 @@ function check_code( $code,$mobile) {
     }
 }
 
-
-/*获得第一个from*/
-function get_real_from() {
-    if (isset($_SERVER['QUERY_STRING']) && strripos($_SERVER['QUERY_STRING'], 'gfrom') != strpos($_SERVER['QUERY_STRING'], 'gfrom')) {
-        $pos = strpos($_SERVER['QUERY_STRING'], 'gfrom');
-        return intval(substr($_SERVER['QUERY_STRING'], $pos + 6)); //from/
-    }
-}
-
 /**
  * 前端picurl
  * @param $pic
@@ -291,16 +282,17 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
     //if($vars)
     {
         if (is_array($vars) || empty($vars)) {
-            $vars = (array) $vars;
+            $vars = (array) $vars;print_r($vars);
             if (!isset($vars['type'])) {
                 $vars['type'] = (int) $_REQUEST['type'];
             }
 
             if (!isset($vars['gfrom'])) {
-                $vars['gfrom'] = (int) $_REQUEST['from'];
-                if ((int) $_REQUEST['gfrom'] == 0) {
-                    $vars['gfrom'] = get_real_from();
-                }
+                $vars['gfrom'] = (int) $_REQUEST['gfrom'];
+            }
+
+            if (!isset($vars['qr'])) {
+                $vars['qr'] = $_REQUEST['qr'];
             }
         } else {
             if (strstr($vars, 'type=') === false) {
@@ -308,11 +300,11 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
             }
 
             if (strstr($vars, 'gfrom=') === false) {
-                $realfrom = intval($_REQUEST['gfrom']);
-                if ($realfrom == 0) {
-                   $realfrom = get_real_from();
-                }
-                $vars .= "&gfrom=" . $realfrom;
+                $vars .= "&gfrom=" . intval($_REQUEST['gfrom']);
+            }
+
+            if (strstr($vars, 'qr=') === false) {
+                $vars .= "&qr=" . $_REQUEST['qr'];
             }
         }
     }

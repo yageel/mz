@@ -1085,7 +1085,7 @@ function uploadAudio() {
                                     case 0:
                                         tools.confirm("未登录或登录超时，是否跳转登录！", resultObj.data || "操作提示", function (idx, type) {
                                             if (type == "ok")
-                                                location.href = "/user/login.html?type=" + tools.getCityID() + "&from=" + tools.getFromType();
+                                                location.href = "/user/login.html?type=" + tools.getCityID() + "&gfrom=" + tools.getFromType();
                                         });
                                         break;
                                     case 2:
@@ -1262,7 +1262,7 @@ function uploadAudio() {
             pars = pars || {};
             pars.type = pars.type || "route";
 
-            var url = "/index.php?s=/" + controller + "/" + action + "/type/" + tools.getCityID() + "/from/" + tools.getFromType(),
+            var url = "/index.php?s=/" + controller + "/" + action + "/type/" + tools.getCityID() + "/gfrom/" + tools.getFromType(),
                 urlPars = "";
 
             if (pars.type === "general") {
@@ -1893,7 +1893,7 @@ function uploadAudio() {
     //定义当前页面路径
     _hmt.push(['_trackPageview', '/' + controller + '/' + action]);
     //定义用户来源类型
-    _hmt.push(['_setCustomVar', 1, "from", tools.getFromType(), 3]);
+    _hmt.push(['_setCustomVar', 1, "gfrom", tools.getFromType(), 3]);
     //定义用户来源城市
     _hmt.push(['_setCustomVar', 2, "city", tools.getCityID(), 3]);
     //定义用户是否登录
