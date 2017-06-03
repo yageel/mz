@@ -128,7 +128,8 @@ class SysController extends BaseController
             file::write_file(COMMON_PATH . 'Conf/other.php',$settingstr);
             return $this->success("编辑成功~");
         }
-
+        var_dump( C('basic'));
+        var_dump( C('basic.platform_user_id'));
         $this->assign('config',(array)load_config(COMMON_PATH . 'Conf/other.php'));
         $this->display();
     }
