@@ -7,32 +7,36 @@ class IndexController extends BaseController {
     public function _initialize()
     {
         parent::_initialize();
-        //
-        $device_id = $_REQUEST['qr'];
-        if($device_id){
-            if($_SESSION['qr'] == $device_id && $_SESSION['device_id']){
 
-            }else{
-                $_SESSION['qr'] = $device_id;
-
-                $device = M('devices')->where(['qrcode'=>$device_id])->find();
-                if($device['status'] == 1){
-                    $_SESSION['device_id'] = $device['id'];
-                }else{
-                     $this->display("error");
-                    die();
-                }
-            }
-
-        }else{
-            if(empty($_SESSION['device_id'])){
-                 $this->display("error");
-                die();
+        // 如果扫描了其他按摩椅
+        $device_qr = $_REQUEST['global_qr'];
+        if($device_qr) {
+            if ($_SESSION['global_qr'] != $device_qr) {
+                $_SESSION['global_qr'] = $device_qr;
             }
         }
 
-        $this->device_id = $_SESSION['device_id'];
-        $this->device_info = M('devices')->where(['id'=>$this->device_id])->find();
+        // 如果没有按摩椅
+        if(empty($_SESSION['global_qr'])){
+             $this->assign("msg", "抱歉~ 请重新扫描按摩椅~");
+             $this->display("error");
+            die();
+        }
+
+        // 设备初始化
+        $this->device_info = M('devices')->where(['qrcode'=>$_SESSION['global_qr']])->find();
+        if(empty($this->device_info)){
+            $this->assign("msg", "抱歉~ 请正确扫描按摩椅~");
+            $this->display("error");
+            die();
+        }
+
+        if($this->device_info['status'] != 1){
+            $this->assign("msg", "抱歉~ 该按摩椅暂不提供服务~ 请扫描其他按摩椅吧~");
+            $this->display("error");
+            die();
+        }
+        $this->device_id = $this->device_info['id'];
     }
 
     /**
