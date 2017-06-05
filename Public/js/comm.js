@@ -1353,7 +1353,8 @@ function uploadAudio() {
             'onVoicePlayEnd',
             'stopVoice',
             'uploadVoice',
-            'downloadVoice'
+            'downloadVoice',
+            'scanQRCode'
         ]
     });
 
