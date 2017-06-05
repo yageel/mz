@@ -233,7 +233,7 @@ class IndexController extends BaseController {
                 $data['goods_tag'] = "MZAM";
                 $data['openid'] = $this->openid;
                 $data['notify_url'] = C('BASE_URL')."/pay/notify/type/{$this->type}.html";
-                print_r($data);die();
+                //print_r($data);die();
                 $jsApiParameters = jsapipay($data, true);
                 $json['data'] = json_decode($jsApiParameters);
                 $json['error'] = 0;
