@@ -306,6 +306,13 @@ class UserController extends BaseController {
         $this->ajaxReturn($json);
     }
 
+    /**
+     * 设备绑定
+     */
+    public function device(){
+        $this->display();
+    }
+
     public function test(){
         $users_cash_record_data = M('cash_record')->find();
         $city = D('city')->get_city($this->type);

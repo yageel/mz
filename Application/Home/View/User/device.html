@@ -1,4 +1,4 @@
-<extend name="Layout/baseMaster" />
+﻿<extend name="Layout/master" />
 <block name="title">魔座</block>
 <block name="head">
     <link href="__PUBLIC__/css/userCenter.css?v=__VERSION__" rel="stylesheet" />
@@ -91,11 +91,16 @@
             margin-top: 6px;
             color: #666;
         }
-        .product_list{ text-align: center; clear: both; height: 260px;}
+        .spread_block{ clear: both; height: 120px;border: 1px solid #ddd; width: 96%; overflow: hidden;  margin: 12px auto; text-align: left; }
+        .spread_block .spread_list{ margin: 12px; overflow: scroll; }
+        .spread_block .spread_list div{ clear: both; float: left; line-height: 26px; width: 98%;}
+        .product_list{ text-align: center; clear: both; height: 160px;}
         .product_list div.product_block{ margin: 0 auto; margin: 6px; border-top: #ddd 1px solid; text-align: center;}
         .product_list div.product_block div.product_item{ float: left; margin: 6px 1px; width: 32%; border: #efefef 1px solid; }
         .product_list div.product_block div.product_item div{ float: left; width: 100%; text-align: center; clear: both; line-height: 22px;}
         .product_list div.product_block div.product_item img{max-width: 100px;}
+
+
         #tabItems{}
         #tabItems li{ float: left; width: 33.2%; text-align: center; vertical-align: top; padding-top: 6px; }
         #tabItems li .package_block{ width: 62px; height: 59px; background: url(/Public/images/package.png) no-repeat; text-align: center; margin: 0 auto; position: relative; }
@@ -110,7 +115,6 @@
         <div id="userCenterContent">
             <div class="user-info">
                 <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
-
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
@@ -123,56 +127,48 @@
                 <input type="hidden" name="package_id" value="" />
                 <ul class="">
                     <volist name="package_list" id="package">
-                    <li>
-                        <div class="package_block" data-id="{$package.id}">
-                            <div class="select_block" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
-                            <div class="package_title">按摩<br/>{$package.package_time}分钟</div>
-                            <div class="package_money"> ￥{$package.package_amount}元</div>
-                        </div>
-                    </li>
+                        <li>
+                            <div class="package_block" data-id="{$package.id}">
+                                <div class="select_block" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
+                                <div class="package_title">按摩<br/>{$package.package_time}分钟</div>
+                                <div class="package_money"> ￥{$package.package_amount}元</div>
+                            </div>
+                        </li>
                     </volist>
                 </ul>
             </div>
-                <div style="clear: both"></div>
-            <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
-                <a class="button" id="btnVercode2" style="width: 120px; margin-top: 12px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
-            </div>
-
-            <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
-                出门在外的人士，如果有一款贴心的按摩沙发随时随地，缓解旅途的疲劳，让您流连忘返，请试试魔座的产品。酒店、影院、地铁站甚至出租车上都有我们的身影，随手一扫，即可享受无处不在的舒适感觉。
-            </div>
-
-            <div class="product_list">
-                <div class="product_block">
-                    <div class="product_item">
-                        <div class="product_img"><img src="/Public/images/yizi1.jpg" /> </div>
-                        <div class="product_title">绿色按摩</div>
-                    </div>
-                    <div class="product_item">
-                        <div class="product_img"><img src="/Public/images/yizi2.jpg" /> </div>
-                        <div class="product_title">绿色按摩</div>
-                    </div>
-                    <div class="product_item">
-                        <div class="product_img"><img src="/Public/images/yizi3.jpg" /> </div>
-                        <div class="product_title">绿色按摩</div>
-                    </div>
+            <div style="clear: both"></div>
+            <div class="spread_block wrap wrap-vertical" id="spread_block" >
+                <div class="spread_list" id="spread_list">
+                    <div><label for="id1"><input type="radio" id="id1" name="spread_id" value="1" /> 李雪华</label></div>
+                    <div><label for="id2"><input type="radio" id="id2" name="spread_id" value="1" /> 杨姜慧子</label></div>
+                    <div><label for="id3"><input type="radio" id="id3" name="spread_id" value="1" /> 谭美娟</label></div>
+                    <div><label for="id4"><input type="radio" id="id4" name="spread_id" value="1" /> 刘德华</label></div>
+                    <div><label for="id5"><input type="radio" id="id5" name="spread_id" value="1" /> 梁朝伟</label></div>
+                    <div><label for="id6"><input type="radio" id="id6" name="spread_id" value="1" /> 金城武</label></div>
+                    <div><label for="id7"><input type="radio" id="id7" name="spread_id" value="1" /> 李璐</label></div>
+                    <div><label for="id8"><input type="radio" id="id8" name="spread_id" value="1" /> 王小明</label></div>
+                    <div><label for="id9"><input type="radio" id="id9" name="spread_id" value="1" /> 韩梅梅</label></div>
                 </div>
             </div>
+            <div style="clear: both; text-align: center; margin: 20px 0;">
+                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击绑定推广</a>
+            </div>
+
             <div style="clear: both">&nbsp;</div>
 
         </div>
     </div>
 </block>
 <block name="js">
-    <script src="http://zb.weixin.qq.com/nearbycgi/addcontact/BeaconAddContactJsBridge.js"></script>
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
     <script type="text/javascript">
+        var scroll = new ntScroll("spread_list");
+        // spread_list
         $('.package_block').click(function(){
             $('input[name="package_id"]').val($(this).attr('data-id'));
             $('.package_block').find('.active').removeClass('active');
             $(this).find('.select_block').addClass('active');
         });
-
     </script>
 </block>
