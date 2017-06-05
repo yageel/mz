@@ -128,26 +128,26 @@
 
                 <if condition="$order[status] eq 1">
                     <if condition="$order[start_status] eq '0'">
-                        <a class="button" class="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
+                        <a class="button btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
                     <elseif  condition="$order[start_status] eq 1" />
-                        <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
+                        <a class="button btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
                     <else />
-                        <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已完成</a>
+                        <a class="button btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已完成</a>
                     </if>
                 <elseif condition="$order[status] eq '0'" />
                     <if condition="$order[return_status] eq '0'">
-                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
                     <elseif condition="$order[create_time]+120 gt time()" />
-                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
                         <else/>
-                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">准备中</a>
+                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">准备中</a>
                     </if>
                 <else />
-                    <a class="button" class="btnVercode" href="{:tsurl('/index/index')}"  style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                    <a class="button btnVercode" href="{:tsurl('/index/index')}"  style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
                 </if>
 
 
-                <a class="button" class="btnVercode"  href="javascript:" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                <a class="button btnVercode"  href="javascript:" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
             </div>
 
             <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
