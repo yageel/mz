@@ -72,8 +72,13 @@ function jsApiCall(data)
                     tools.alert("支付错误", "系统提示");
                     break;
                 case 'get_brand_wcpay_request:ok':
-                    window.location.href = '';
-                    // tools.alert("支付成功", "系统提示");
+                    // 同步成功状态~
+                    tools.ajax($('input[name="updateurl"]').val(),{
+                        order_sn:data.order_sn
+                    }, function (result){
+                        // 自动更新~
+                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+                    });
                     break;
             }
         }

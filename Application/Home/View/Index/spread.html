@@ -121,6 +121,9 @@
                 <span style="color: #666;">我的账户</span>
             </div>
             <div class="text-item-content" id="tabItems">
+                <input type="hidden" name="url" value="{:tsurl('/index/order')}" />
+                <input type="hidden" name="updateurl" value="{:tsurl('/index/update_order')}" />
+                <input type="hidden" name="starturl" value="{:tsurl('/index/start',['order_sn'=>'order_snid'])}" />
                 <input type="hidden" name="package_id" value="" />
                 <ul class="">
                     <volist name="package_list" id="package">

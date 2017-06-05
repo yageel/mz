@@ -42,15 +42,11 @@ class IndexController extends BaseController {
             die();
         }
 
-
-
         if($this->device_info['status'] != 1){
             $this->assign("msg", "抱歉~ 该按摩椅暂不提供服务~ 请扫描其他按摩椅吧~");
             $this->display("error");
             die();
         }
-
-
 
         $this->device_id = intval($this->device_info['id']);
 
@@ -101,9 +97,9 @@ class IndexController extends BaseController {
                 $json['msg'] = "购买套餐已下架~";
                 break;
             }
-
+            // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
             // 检查半个小时内订单未支付 有效
-            $order = M("order")->where(['openid'=>$this->openid, "create_time"=>['lt', time() - 1800, "status"=>1, "return_status"=>0]])->find();
+            $order = M("order")->where(['openid'=>$this->openid,  'device_id'=>$this->device_id,'package_id'=>$paackage_id, "status"=>0, "return_status"=>0 ,"create_time"=>['lt', time() - 1800]])->find();
             if($order){
                 $order_id = $order['id'];
                 $order_sn = $order['order_sn'];
@@ -253,12 +249,19 @@ class IndexController extends BaseController {
     /**
      * 更新前台状态
      */
-    public function update(){
+    public function update_order(){
         $order_sn = I('request.order_sn','', 'trim');
         // 判断是否重复
-
+        M('order')->where(['order_sn'=>$order_sn])->save(['return_status'=>1, 'update_time'=>time()]);
     }
 
+    /**
+     * 启动应用
+     */
+    public function start(){
+        $order_sn = I('request.order_sn','','trim');
+
+    }
 
     /**
      * 邀请人
