@@ -49,6 +49,7 @@ class IndexController extends BaseController {
         }
 
         $this->device_id = intval($this->device_info['id']);
+        $this->assign('device_info', $this->device_info);
 
     }
 
@@ -260,7 +261,11 @@ class IndexController extends BaseController {
      */
     public function start(){
         $order_sn = I('request.order_sn','','trim');
-
+        if($order_sn){
+            $order = M('order')->where(['order_sn'=>$order_sn])->find();
+            $this->assign('order', $order);
+        }
+        $this->display();
     }
 
     /**

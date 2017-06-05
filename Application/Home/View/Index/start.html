@@ -114,26 +114,22 @@
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
-                <span style="color: #666;">我的账户</span>
-            </div>
-            <div class="text-item-content" id="tabItems">
-                <input type="hidden" name="package_id" value="" />
-                <ul class="">
-                    <volist name="package_list" id="package">
-                    <li>
-                        <div class="package_block" data-id="{$package.id}">
-                            <div class="select_block" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
-                            <div class="package_title">按摩<br/>{$package.package_time}分钟</div>
-                            <div class="package_money"> ￥{$package.package_amount}元</div>
-                        </div>
-                    </li>
-                    </volist>
-                </ul>
+                <span style="color: #666;">魔座编号： {$device_info.device_number}</span>
             </div>
                 <div style="clear: both"></div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
-                <a class="button" id="btnVercode2" style="width: 120px; margin-top: 12px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
+                <input type="hidden" name="starturl" value="{:tsurl('/index/start_device')}" />
+
+                <if condition="$order[status] eq 1 AND $order[start_status] eq '0'">
+                    <a class="button" id="btnStart" class="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
+                <elseif  condition="$order[status] eq 1 AND $order[start_status] eq 1" />
+                    <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
+                <elseif  condition="$order[status] eq 1 AND $order[start_status] eq 2" />
+                    <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已完成</a>
+                <else/>
+                    <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                </if>
+
             </div>
 
             <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
@@ -162,12 +158,30 @@
     </div>
 </block>
 <block name="js">
-    <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
+    <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
-        $('.package_block').click(function(){
-            $('input[name="package_id"]').val($(this).attr('data-id'));
-            $('.package_block').find('.active').removeClass('active');
-            $(this).find('.select_block').addClass('active');
+
+        $('#btnStart').click(function(){
+            tools.ajax($('input[name="starturl"]').val(),{
+                order_sn:data.order_sn
+            }, function (result){
+                // 自动更新~
+                window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+            });
         });
+
+        (function interval(){
+            setTimeout(function(){
+                // 同步成功状态~
+                tools.ajax($('input[name="updateurl"]').val(),{
+                    order_sn:data.order_sn
+                }, function (result){
+                    // 自动更新~
+                    window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+                });
+                interval();
+            },10000);
+        })();
+
     </script>
 </block>
