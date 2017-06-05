@@ -119,17 +119,32 @@
                 <div style="clear: both"></div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
                 <input type="hidden" name="starturl" value="{:tsurl('/index/start_device')}" />
+                <input type="hidden" name="order_sn" value="{$order[order_sn]}" />
+                <input type="hidden" name="status" value="{$order[status]}" />
+                <input type="hidden" name="return_status" value="{$order[return_status]}" />
+                <input type="hidden" name="start_status" value="{$order[start_status]}" />
+                <input type="hidden" name="time" value="{:time()}" />
+                <input type="hidden" name="sign" value="{:md5('!@#$%^+_)(*&^'.time())}" />
 
-                <if condition="$order[status] eq 1 AND $order[start_status] eq '0'">
-                    <a class="button" id="btnStart" class="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
-                <elseif  condition="$order[status] eq 1 AND $order[start_status] eq 1" />
-                    <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
-                <elseif  condition="$order[status] eq 1 AND $order[start_status] eq 2" />
-                    <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已完成</a>
-                <else/>
-                    <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                <if condition="$order[status] eq 1">
+                    <if condition="$order[start_status] eq '0'">
+                        <a class="button" class="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
+                    <elseif  condition="$order[start_status] eq 1" />
+                        <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
+                    <else />
+                        <a class="button" class="btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已完成</a>
+                    </if>
+                <elseif condition="$order[status] eq '0'" />
+                    <if condition="$order[return_status] eq '0'">
+                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                    <elseif condition="$order[create_time]+120 gt time()" />
+                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                        <else/>
+                        <a class="button" class="btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">准备中</a>
+                    </if>
+                <else />
+                    <a class="button" class="btnVercode" href="{:tsurl('/index/index')}"  style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
                 </if>
-
             </div>
 
             <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
@@ -161,25 +176,36 @@
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
 
-        $('#btnStart').click(function(){
-            tools.ajax($('input[name="starturl"]').val(),{
-                order_sn:data.order_sn
-            }, function (result){
-                // 自动更新~
-                window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
-            });
-        });
-
-        (function interval(){
-            setTimeout(function(){
-                // 同步成功状态~
-                tools.ajax($('input[name="updateurl"]').val(),{
+        $('.btnVercode').click(function(){
+            if($(this).text() == '启动'){
+                tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:data.order_sn
                 }, function (result){
                     // 自动更新~
                     window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
                 });
-                interval();
+            }
+
+        });
+
+        (function interval(){
+            setTimeout(function(){
+                if($('.btnVercode').text() == '准备中'){
+                    window.location.reload();
+                    return true;
+                }
+
+                if($('.btnVercode').text() == '已启动'){
+                    // 同步成功状态~
+                    tools.ajax($('input[name="updateurl"]').val(),{
+                        order_sn:data.order_sn
+                    }, function (result){
+                        // 自动更新~
+                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+                    });
+                    interval();
+                }
+
             },10000);
         })();
 

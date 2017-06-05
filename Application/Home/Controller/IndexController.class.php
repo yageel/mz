@@ -269,6 +269,13 @@ class IndexController extends BaseController {
     }
 
     /**
+     * 启动设备
+     */
+    public function start_device(){
+        
+    }
+
+    /**
      * 邀请人
      */
     public function spread(){
