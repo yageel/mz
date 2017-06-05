@@ -5,7 +5,7 @@ $config = array(
     'DB_FIELDTYPE_CHECK'   =>true,
     'TMPL_STRIP_SPACE'     =>true,
     'OUTPUT_ENCODE'        =>true, // 页面压缩输出
-
+    'USE_REDIS' => false,
     'MODULE_ALLOW_LIST'    =>    array('Admin','Home'),
     'DEFAULT_MODULE'       =>    'Admin',  // 默认模块
     'BASE_URL' => 'http://mz.hotwifibox.com/',

@@ -144,7 +144,7 @@ class BaseController extends Controller {
             $this->assign('signature', $signature);//赚了
             $this->assign('share_default_title', "魔座按摩椅带给你不一样的享受！");
             $this->assign("share_default_sub_title","魔座按摩椅带给你不一样的享受~");
-            $this->assign('share_default_pic', 'http://mz.hotwifibox.com/Public/images/failure-bg.png');
+            $this->assign('share_default_pic', C('BASE_URL').'Public/images/failure-bg.png');
 
         }
     }
