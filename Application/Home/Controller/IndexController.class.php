@@ -100,8 +100,8 @@ class IndexController extends BaseController {
             }
             // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
             // 检查半个小时内订单未支付 有效
-            $order = M("order")->where(['openid'=>$this->openid,  'device_id'=>$this->device_id,'package_id'=>$paackage_id, "status"=>0, "return_status"=>0 ,"create_time"=>['lt', time() - 1800]])->find();
-            echo M()->getLastSql();die();
+            $order = M("order")->where(['openid'=>$this->openid,  'device_id'=>$this->device_id,'package_id'=>$paackage_id, "status"=>0, "return_status"=>0 ,"create_time"=>['gt', time() - 1800]])->find();
+
             if($order){
                 $order_id = $order['id'];
                 $order_sn = $order['order_sn'];
