@@ -272,7 +272,26 @@ class IndexController extends BaseController {
      * 启动设备
      */
     public function start_device(){
-        
+        $order_sn = I('request.order_sn','','trim');
+        $json = $this->ajax_json();
+        if($order_sn){
+            $order = M('order')->where(['order_sn'=>$order_sn])->find();
+            // 如果状态正常则
+            if($order['status'] == 1){
+                // 启动设备
+                if($order['start_status'] == '0'){
+                    // 启动操作
+
+                }else{
+                    // 已启动
+                }
+            }else{
+                // 不能启动
+                
+            }
+        }
+
+        $this->ajaxReturn($json);
     }
 
     /**
