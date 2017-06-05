@@ -740,70 +740,7 @@ function uploadAudio() {
 }
 
 (function () {
-    var zIndex = 10000,
-        toastTimeout,
-        idIndex = 1,
-        cityID,
-        fromType,
-        wxReady;
-        bool = location.href.indexOf('showtest')>0?true:false;
-    wx.config({
-        debug: bool,
-        appId: $("#hidAppid").val(),
-        timestamp: $("#hidTimestamp").val(),
-        nonceStr: $("#hidNoncestr").val(),
-        signature: $("#hidSignature").val(),
-        jsApiList: [
-            /*
-             * 所有要调用的 API 都要加到这个列表中
-             * 这里以图像接口为例
-             */
-            "chooseImage",
-            "uploadImage",
-            'openLocation',
-            'getLocation',
-            'addCard',
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo',
-            'onMenuShareQZone',
-            'startRecord',
-            'stopRecord',
-            'onVoiceRecordEnd',
-            'playVoice',
-            'pauseVoice',
-            'onVoicePlayEnd',
-            'stopVoice',
-            'uploadVoice',
-            'downloadVoice'
-        ]
-    });
 
-    wx.ready(function () {
-        wx.onVoiceRecordEnd({
-            complete: recordComplate
-        });
-
-        wx.onVoicePlayEnd({
-            success: function (res) {
-                changeAudioPlayState();
-            }
-        });
-        tools.configShare({
-            title: $("#hidShareTitle").val(),
-            desc: $("#hidShareDesc").val(),
-            link: $("#hidShareLink").val(),
-            imgUrl: $("#hidShareImage").val(),
-            type: 'link',
-            success: function () {
-                tools.sendData("页面分享成功");
-            }
-        });
-
-        if ($.isFunction(wxReady))
-            wxReady();
-    });
 
     window.tools = {
         loading: function (text) {
@@ -1379,6 +1316,73 @@ function uploadAudio() {
 
         return null;
     }
+
+
+
+    var zIndex = 10000,
+        toastTimeout,
+        idIndex = 1,
+        cityID,
+        fromType,
+        wxReady;
+    bool = location.href.indexOf('showtest')>0?true:false;
+    wx.config({
+        debug: bool,
+        appId: $("#hidAppid").val(),
+        timestamp: $("#hidTimestamp").val(),
+        nonceStr: $("#hidNoncestr").val(),
+        signature: $("#hidSignature").val(),
+        jsApiList: [
+            /*
+             * 所有要调用的 API 都要加到这个列表中
+             * 这里以图像接口为例
+             */
+            "chooseImage",
+            "uploadImage",
+            'openLocation',
+            'getLocation',
+            'addCard',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'onVoicePlayEnd',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice'
+        ]
+    });
+
+    wx.ready(function () {
+        wx.onVoiceRecordEnd({
+            complete: recordComplate
+        });
+
+        wx.onVoicePlayEnd({
+            success: function (res) {
+                changeAudioPlayState();
+            }
+        });
+        tools.configShare({
+            title: $("#hidShareTitle").val(),
+            desc: $("#hidShareDesc").val(),
+            link: $("#hidShareLink").val(),
+            imgUrl: $("#hidShareImage").val(),
+            type: 'link',
+            success: function () {
+                tools.sendData("页面分享成功");
+            }
+        });
+
+        if ($.isFunction(wxReady))
+            wxReady();
+    });
 })();
 
 /*
