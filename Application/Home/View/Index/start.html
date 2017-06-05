@@ -147,7 +147,7 @@
                 </if>
 
 
-                <a class="button" class="btnVercode"   style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                <a class="button" class="btnVercode"  href="javascript:" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
             </div>
 
             <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
@@ -178,7 +178,9 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
-
+        $('.btnVercode').click(function(){
+            alert('sss');
+        });
 
 
 
