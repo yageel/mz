@@ -1901,9 +1901,10 @@ function uploadAudio() {
     _hmt.push(['_setCustomVar', 2, "city", tools.getCityID(), 3]);
     //定义用户是否登录
     _hmt.push(['_setCustomVar', 3, "logined", tools.isBind(), 3]);
-
+    var global_left_menu = false;
     //绑定显示左侧菜单按钮的点击事件。
     $("#btnShowLeftMenu").bind("click", function (e) {
+        setTimeout(function(){global_left_menu = true;},200)
         $(this).addClass("rotate").removeClass("static");
         $("#leftMenu").removeClass("hide").addClass("show");
         $("#contentContainer").removeClass("show").addClass("hide");
@@ -1915,6 +1916,8 @@ function uploadAudio() {
 
     //绑定主内容区域的点击以及动画完成事件。
     $("#contentContainer").bind("click", function () {
+        if(global_left_menu == false){return false;}
+        global_left_menu = false;
         if ($(this).hasClass("hide")) {
             $("#leftMenu").removeClass("show").addClass("hide");
             $(this).removeClass("hide").addClass("show");

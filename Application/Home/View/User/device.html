@@ -140,25 +140,18 @@
             <div style="clear: both"></div>
             <div class="spread_block wrap wrap-vertical" id="spread_block" >
                 <div class="spread_list" id="spread_list">
-                    <div class="group">
-                        <div class="input_group_block"><input type="checkbox" id="id0" class="" name="spread_id" value="1" /> 门店一</div>
-                        <div class="input_block"><input type="checkbox" id="id1" name="spread_id" value="1" /> 李雪华</div>
-                        <div class="input_block"><input type="checkbox" id="id2" name="spread_id" value="1" /> 杨姜慧子</div>
-                        <div class="input_block"><input type="checkbox" id="id3" name="spread_id" value="1" /> 谭美娟</div>
-                        <div class="input_block"><input type="checkbox" id="id4" name="spread_id" value="1" /> 刘德华</div>
-                    </div>
-                    <div class="group">
-                        <div class="input_group_block"><input type="checkbox" id="id10" class="" name="spread_id" value="1" /> 门店二</div>
-                        <div class="input_block"><input type="checkbox" id="id5" name="spread_id" value="1" /> 梁朝伟</div>
-                        <div class="input_block"><input type="checkbox" id="id6" name="spread_id" value="1" /> 金城武</div>
-                        <div class="input_block"><input type="checkbox" id="id7" name="spread_id" value="1" /> 李璐</div>
-                        <div class="input_block"><input type="checkbox" id="id8" name="spread_id" value="1" /> 王小明</div>
-                        <div class="input_block"><input type="checkbox" id="id9" name="spread_id" value="1" /> 韩梅梅</div>
-                    </div>
+                    <volist id="shop" name="list">
+                        <div class="group">
+                            <div class="input_group_block"><input type="checkbox" id="id0" class="group_block" value="1" /> {$shop.shop_name}</div>
+                            <volist id="device" name="shop[device_list]">
+                            <div class="input_block"><input type="checkbox" id="id1" name="spread_id" value="{$device.id}" /> {$device.device_number}</div>
+                            </volist>
+                        </div>
+                    </volist>
                 </div>
             </div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击绑定推广</a>
+                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">绑定推广</a>
             </div>
 
             <div style="clear: both">&nbsp;</div>
@@ -169,7 +162,15 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
     <script type="text/javascript">
-
+        $('input').click(function(){
+            if($(this).hasClass('group_block')){
+                if($(this).attr("checked")){
+                    $(this).parent().parent().find("input[type='checkbox']").attr("checked", true);
+                }else{
+                    $(this).parent().parent().find("input[type='checkbox']").attr("checked", false);
+                }
+            }
+        });
         // 初始化
         wx.ready(function(){
             wx.getLocation({
