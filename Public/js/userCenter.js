@@ -7,16 +7,16 @@ $(function () {
     new ntScroll("userCenterContent");
 });
 
-function auto(){
-    setTimeout(function(){
-        tools.ajax(tools.url('register','wh'),{
-            r: Date.parse(new Date())
-        }, function (result){
-            auto();
-        },{loading:false});
-    }, 30000);
-}
-auto();
+//function auto(){
+//    setTimeout(function(){
+//        tools.ajax(tools.url('register','wh'),{
+//            r: Date.parse(new Date())
+//        }, function (result){
+//            auto();
+//        },{loading:false});
+//    }, 30000);
+//}
+//auto();
 
 function gotoLink(tag) {
     var text = $(tag).find("span.wrap-content").text();

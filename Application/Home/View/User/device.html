@@ -99,7 +99,7 @@
         .product_list div.product_block div.product_item{ float: left; margin: 6px 1px; width: 32%; border: #efefef 1px solid; }
         .product_list div.product_block div.product_item div{ float: left; width: 100%; text-align: center; clear: both; line-height: 22px;}
         .product_list div.product_block div.product_item img{max-width: 100px;}
-
+        .input_block{ margin-left: 20px;}
 
         #tabItems{}
         #tabItems li{ float: left; width: 33.2%; text-align: center; vertical-align: top; padding-top: 6px; }
@@ -140,15 +140,21 @@
             <div style="clear: both"></div>
             <div class="spread_block wrap wrap-vertical" id="spread_block" >
                 <div class="spread_list" id="spread_list">
-                    <div><label for="id1"><input type="radio" id="id1" name="spread_id" value="1" /> 李雪华</label></div>
-                    <div><label for="id2"><input type="radio" id="id2" name="spread_id" value="1" /> 杨姜慧子</label></div>
-                    <div><label for="id3"><input type="radio" id="id3" name="spread_id" value="1" /> 谭美娟</label></div>
-                    <div><label for="id4"><input type="radio" id="id4" name="spread_id" value="1" /> 刘德华</label></div>
-                    <div><label for="id5"><input type="radio" id="id5" name="spread_id" value="1" /> 梁朝伟</label></div>
-                    <div><label for="id6"><input type="radio" id="id6" name="spread_id" value="1" /> 金城武</label></div>
-                    <div><label for="id7"><input type="radio" id="id7" name="spread_id" value="1" /> 李璐</label></div>
-                    <div><label for="id8"><input type="radio" id="id8" name="spread_id" value="1" /> 王小明</label></div>
-                    <div><label for="id9"><input type="radio" id="id9" name="spread_id" value="1" /> 韩梅梅</label></div>
+                    <div class="group">
+                        <div class="input_group_block"><input type="checkbox" id="id0" class="" name="spread_id" value="1" /> 门店一</div>
+                        <div class="input_block"><input type="checkbox" id="id1" name="spread_id" value="1" /> 李雪华</div>
+                        <div class="input_block"><input type="checkbox" id="id2" name="spread_id" value="1" /> 杨姜慧子</div>
+                        <div class="input_block"><input type="checkbox" id="id3" name="spread_id" value="1" /> 谭美娟</div>
+                        <div class="input_block"><input type="checkbox" id="id4" name="spread_id" value="1" /> 刘德华</div>
+                    </div>
+                    <div class="group">
+                        <div class="input_group_block"><input type="checkbox" id="id10" class="" name="spread_id" value="1" /> 门店二</div>
+                        <div class="input_block"><input type="checkbox" id="id5" name="spread_id" value="1" /> 梁朝伟</div>
+                        <div class="input_block"><input type="checkbox" id="id6" name="spread_id" value="1" /> 金城武</div>
+                        <div class="input_block"><input type="checkbox" id="id7" name="spread_id" value="1" /> 李璐</div>
+                        <div class="input_block"><input type="checkbox" id="id8" name="spread_id" value="1" /> 王小明</div>
+                        <div class="input_block"><input type="checkbox" id="id9" name="spread_id" value="1" /> 韩梅梅</div>
+                    </div>
                 </div>
             </div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
@@ -163,6 +169,33 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
     <script type="text/javascript">
+
+        // 初始化
+        wx.ready(function(){
+            wx.getLocation({
+
+                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+
+                success: function (res) {
+                    var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                    var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    var speed = res.speed; // 速度，以米/每秒计
+                    var accuracy = res.accuracy; // 位置精度
+                    tools.ajax(tools.url('register','wh'),{
+                        latitude: latitude,
+                        longitude: longitude,
+                        speed: speed,
+                        accuracy: accuracy
+                        }, function (data){
+                            auto();
+                        });
+
+
+                }
+
+            });
+        });
+
         var scroll = new ntScroll("spread_list");
         // spread_list
         $('.package_block').click(function(){

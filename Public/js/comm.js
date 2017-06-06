@@ -1602,7 +1602,7 @@ function uploadAudio() {
                         startPoint = startTime = container = cache = undefined;
                         break;
                 }
-                if(boxType != 'radio' && boxType != undefined){
+                if(boxType != 'radio' && boxType != 'checkbox'&& boxType != undefined){
                     e.preventDefault();
                 }
 
