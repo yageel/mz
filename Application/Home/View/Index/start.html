@@ -114,7 +114,7 @@
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
-                <span style="color: #666;">魔座编号： {$device_info.device_number}</span>
+                <span style="color: #666;">魔座编号： {$device_info.id}</span>
             </div>
                 <div style="clear: both"></div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
@@ -180,23 +180,6 @@
     <script type="text/javascript">
 
         $('.btnVercode').click(function(){
-//
-//            wx.scanQRCode({
-//
-//                needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-//
-//                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-//
-//                success: function (res) {
-//
-//                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-//                    alert(result);
-//
-//                }
-//
-//            });
-
-
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:data.order_sn
@@ -208,26 +191,26 @@
 
         });
 
-        (function interval(){
-            setTimeout(function(){
-                if($('.btnVercode').text() == '准备中'){
-                    window.location.reload();
-                    return true;
-                }
-
-                if($('.btnVercode').text() == '已启动'){
-                    // 同步成功状态~
-                    tools.ajax($('input[name="updateurl"]').val(),{
-                        order_sn:data.order_sn
-                    }, function (result){
-                        // 自动更新~
-                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
-                    });
-                    interval();
-                }
-
-            },10000);
-        })();
+//        (function interval(){
+//            setTimeout(function(){
+//                if($('.btnVercode').text() == '准备中'){
+//                    window.location.reload();
+//                    return true;
+//                }
+//
+//                if($('.btnVercode').text() == '已启动'){
+//                    // 同步成功状态~
+//                    tools.ajax($('input[name="updateurl"]').val(),{
+//                        order_sn:data.order_sn
+//                    }, function (result){
+//                        // 自动更新~
+//                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+//                    });
+//                    interval();
+//                }
+//
+//            },10000);
+//        })();
 
     </script>
 </block>

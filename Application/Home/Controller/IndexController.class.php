@@ -111,7 +111,8 @@ class IndexController extends BaseController {
                 $user_device_id = intval($this->device_info['user_id']);
                 $user_channel_id = intval($this->device_info['channel_user_id']);
                 $user_operational_id = intval($this->device_info['operational_user_id']);
-                $user_platform_id = 1;
+                $user_platform_id = C('basic.platform_user_id');
+                $user_platform_id = $user_platform_id?$user_platform_id:1;
 
                 // 分成规则
                 $rebate_info = [];
@@ -175,7 +176,8 @@ class IndexController extends BaseController {
                 if($spread_info){
                     $spread_price = number_format(($package_info['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
                 }else{
-                    $spread_price = 0;
+                    $spread_price =  C('basic.spread_user_id');
+                    $spread_price = $spread_price?$spread_price:0;
                 }
 
                 $platform_price = $package_info['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
@@ -193,6 +195,7 @@ class IndexController extends BaseController {
                     'package_amount' => $package_info['package_amount'],
                     'package_time' => $package_info['package_time'],
                     'order_sn' => $order_sn,
+                    'platform_user_id'=>$user_platform_id,
                     'platform_rebate' => $rebate_info['platform_rebate'],
                     'platform_money' => $platform_price,
                     'operational_rebate' =>$rebate_info['operational_rebate'],

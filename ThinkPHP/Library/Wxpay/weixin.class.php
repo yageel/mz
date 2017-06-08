@@ -141,10 +141,10 @@ class PayNotifyCallBack extends WxPayNotify
                 // `channel_rebate`, `channel_user_id`, `channel_money`, `device_rebate`, `device_user_id`, `device_money`, `spread_rebate`,
                 // `spread_user_id`, `spread_money`, `payment_no`, `payment_log_id`, `pay_time`, `send_status`, `create_time`, `update_time`, `
                 //`, `city_id`, `client_ip`, `client_agent`
-                $user = M('admin')->where(['id'=>1])->find();
+                $user = M('admin')->where(['id'=>$res1['platform_user_id']])->find();
                 $log = [
                     'record_type' => 1,
-                    'user_id' => 1,
+                    'user_id' => $user['id'],
                     'water_id' => $recharge['id'],
                     'amount' => $recharge['platform_money'],
                     'total_amount' => $recharge['platform_money'] + $user['total_amount'],
@@ -152,7 +152,7 @@ class PayNotifyCallBack extends WxPayNotify
                 ];
                 M('amount_record')->add($log);
                 M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['platform_money']}', total_income_amount = total_income_amount+ '{$recharge['platform_money']}',
-                  total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id=1");
+                  total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$user['id']}'");
 
                 // 运营进账//
                 if($recharge['operational_user_id']){
@@ -223,69 +223,6 @@ class PayNotifyCallBack extends WxPayNotify
             return true;
             ///////////////////////记录流水
         }
-
-    }
-
-
-    /**
-     * 用户添加M币
-     * @param $record_num
-     * @param $uid
-     * @param $title
-     * @return bool|mixed
-     */
-    public function consume_user_integral($recharge,$recordnum){
-
-        $where = array();
-        if($recharge['uid']){
-            $where['uid'] = $recharge['uid'];
-        }elseif($recharge['user_union_id']){
-            $where['union_id'] = $recharge['user_union_id'];
-        }else{
-            return false;
-        }
-
-        if($recordnum > 0){
-            $rechargeArr = array('10'=>'1200','20'=>'2400','50'=>'6000','100'=>'12000');
-            $rechargeSource = array('10'=>'1000','20'=>'2000','50'=>'5000','100'=>'10000');
-            $rechargeGive = array('10'=>'200','20'=>'400','50'=>'1000','100'=>'2000');
-            $money = $rechargeArr[intval($recharge['money'])];
-            $title = "用户充值".$rechargeSource[intval($recharge['money'])]."M币,平台赠送".$rechargeGive[intval($recharge['money'])]."M币";
-            M('db_hd_v4.users_bank')->where($where)->setInc('total_integral', $money);
-
-
-
-        }elseif($recordnum <= 0){
-            $money = -intval($recharge['money']);
-            $title = "现金+M币商品兑换消耗".$recharge['money'].'M币';
-            M('db_hd_v4.users_bank')->where($where)->setDec('total_integral', abs($money));
-        }else{
-            return false;
-        }
-
-        $data = array(
-            'openid' => $recharge['openid'],
-            'user_open_id' => $recharge['user_open_id'],
-            'user_union_id' => $recharge['user_union_id'],
-            'title' => $title,
-            'uid' => $recharge['uid'],
-            'city_id' => $recharge['city_id'],
-            'record_num' => $money,
-            'create_time' => time()
-        );
-
-        Log::DEBUG('users_integral_record-data:'.json_encode($data));
-
-        // 增加日志
-        if($recharge['openid']){
-            $table = get_hash_table('users_integral_record',$data['openid']);
-            Log::DEBUG('users_integral_record-table:'.$table);
-            $integral = M($table)->add($data);
-            Log::DEBUG('users_integral_record-sql:'.M($table)->getLastSql());
-            return $integral;
-        }
-
-        return false;
 
     }
 
