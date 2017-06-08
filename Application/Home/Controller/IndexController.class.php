@@ -291,7 +291,7 @@ class IndexController extends BaseController {
                         $time = $order['package_time'] * 60;
                         $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
                         $device_number = $device_detail['device_number'];
-                        $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/13750541512/12345678/{$device_number}/{$time}";
+                        $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
                         $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
                         $json['data_json'] = $data_json;
                         if($data_json){
