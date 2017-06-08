@@ -176,11 +176,10 @@
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
 
-        $('.btnVercode').click(function(){alert(123);
-            alert($(this).text());
+        $('.btnVercode').click(function(){
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
-                    order_sn:data.order_sn
+                    order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
                         $(this).text(result.msg);
