@@ -281,7 +281,6 @@ class IndexController extends BaseController {
         do{
             if($order_sn){
                 $order = M('order')->where(['order_sn'=>$order_sn])->find();
-                $json['order'] = $order;
                 // 如果状态正常则
                 if($order['status'] == 1){
                     // 启动设备
@@ -293,6 +292,7 @@ class IndexController extends BaseController {
                         $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
                         $device_number = $device_detail['device_number'];
                         $data_json = file_get_contents("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
+                        $json['data_json'] = $data_json;
                         if($data_json){
                             $data = json_decode($data_json, true);
                             if($data['code'] == 200){
@@ -308,6 +308,10 @@ class IndexController extends BaseController {
                                 $json['msg'] = "启动失败~ 请联系客服人员吧~";
                                 break;
                             }
+                        }else{
+                            $json['state'] = 4;
+                            $json['msg'] = "启动失败";
+                            break;
                         }
                     }else{
                         // 已启动
