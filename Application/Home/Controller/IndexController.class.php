@@ -22,7 +22,7 @@ class IndexController extends BaseController {
         if($_REQUEST['qr']){
             $get = (array)$_GET;
             unset($get['qr']);
-            $get['test'] = time();
+            $get['t'] = time();
             $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
             return header("Location: ".$url);
         }
