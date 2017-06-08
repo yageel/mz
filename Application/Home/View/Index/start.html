@@ -125,7 +125,7 @@
 
                 <if condition="$order[status] eq 1">
                     <if condition="$order[start_status] eq '0'">
-                        <a class="button btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">启动</a>
+                        <a class="button btnVercode btnVercode22" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >启动</a>
                     <elseif  condition="$order[start_status] eq 1" />
                         <a class="button btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
                     <else />
@@ -182,9 +182,9 @@
                     order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
-                        $(this).text(result.msg);
+                        $('.btnVercode22').text(result.msg);
                     }else{
-                        $(this).text("启动失败~");
+                        $('.btnVercode22').text("启动失败~");
                         tools.alert(result.msg)
                     }
                 });
