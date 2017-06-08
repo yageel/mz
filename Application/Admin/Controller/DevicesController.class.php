@@ -137,7 +137,7 @@ class DevicesController extends BaseController {
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
                 $sign = encrypt_password($detail['qrcode'], $detail['id']);
-                $value = C('base_url')."index.php?s=/index/index/qr/{$detail['qrcode']}/sign/{$sign}.html";
+                $value = C('base_url')."index.php?s=/index/index/type/1/from/2/qr/{$detail['qrcode']}/sign/{$sign}.html";
                 include APP_PATH."/../ThinkPHP/Library/Vendor/phpqrcode/phpqrcode.php";
                 $errorCorrectionLevel = 'L';//容错级别
                 $matrixPointSize = 12;//生成图片大小
