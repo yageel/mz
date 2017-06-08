@@ -182,9 +182,9 @@
                     order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
-                        $('#btnVercode22').text(result.msg);
+                        $('#btnVercode22').html(result.msg);
                     }else{
-                        $('#btnVercode22').text("启动失败");
+                        $('#btnVercode22').html("启动失败");
                         tools.alert(result.msg)
                     }
                 });
