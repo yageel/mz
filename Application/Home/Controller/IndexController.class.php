@@ -278,22 +278,52 @@ class IndexController extends BaseController {
     public function start_device(){
         $order_sn = I('request.order_sn','','trim');
         $json = $this->ajax_json();
-        if($order_sn){
-            $order = M('order')->where(['order_sn'=>$order_sn])->find();
-            // 如果状态正常则
-            if($order['status'] == 1){
-                // 启动设备
-                if($order['start_status'] == '0'){
-                    // 启动操作
-
+        do{
+            if($order_sn){
+                $order = M('order')->where(['order_sn'=>$order_sn])->find();
+                // 如果状态正常则
+                if($order['status'] == 1){
+                    // 启动设备
+                    if($order['start_status'] == '0'){
+                        // 启动操作
+                        $username = C('basic.app_user');
+                        $pwd = C('basic.app_pwd');
+                        $time = $order['package_time'] * 60;
+                        $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
+                        $device_number = $device_detail['device_number'];
+                        $data_json = file_get_contents("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
+                        if($data_json){
+                            $data = json_decode($data_json, true);
+                            if($data['code'] == 200){
+                                // 启动成功~
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
+                                $json['state'] = 1;
+                                $json['msg'] = "启动成功~";
+                                break;
+                            }else{
+                                // 启动失败
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>3,'send_status'=>3,'start_log'=>"{$data['message']}",'update_time'=>time()]);
+                                $json['state'] = 1;
+                                $json['msg'] = "启动失败~ 请联系客服人员吧~";
+                                break;
+                            }
+                        }
+                    }else{
+                        // 已启动
+                        $json['state'] = 1;
+                        $json['msg'] = "设备已启动~";
+                        break;
+                    }
                 }else{
-                    // 已启动
+                    // 不能启动
+                    $json['msg'] = "订单无效~";
+                    break;
                 }
             }else{
-                // 不能启动
-
+                $json['msg'] = "订单无效~";
+                break;
             }
-        }
+        }while(false);
 
         $this->ajaxReturn($json);
     }
@@ -303,8 +333,11 @@ class IndexController extends BaseController {
      */
     public function spread(){
         $spread_list = M('devices_spread')->where(['device_id'=>$this->device_id])->select();
-
+        foreach($spread_list as $i=>$item){
+            $spread_list[$i]['user'] = M('admin')->where(['id'=>$item['user_id']])->find();
+        }
         $this->assign('spread_list', $spread_list);
+
         $package_list = M('package')->where(['status'=>1])->order("weight DESC, id ASC")->select();
         $this->assign('package_list', $package_list);
         $this->display();
