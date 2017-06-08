@@ -98,6 +98,35 @@ class IndexController extends BaseController {
                 $json['msg'] = "购买套餐已下架~";
                 break;
             }
+
+            // 查询魔座状态
+            $device_bool = true;
+            $device_number = $this->device_info['device_number'];
+            $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+            if($data_json){
+                $device_status = json_decode($data_json, true);
+                if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                    $device_bool = false;
+                }
+            }
+
+            // 重试一次
+            if($device_bool){
+                $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+                if($data_json){
+                    $device_status = json_decode($data_json, true);
+                    if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                        $device_bool = false;
+                    }
+                }
+            }
+
+            // 机器状态不对，不支持服务
+            if($device_bool){
+                $json['msg'] = "暂不能提供服务，请扫描其他机器试试吧~";
+                break;
+            }
+
             // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
             // 检查半个小时内订单未支付 有效
             $order = M("order")->where(['openid'=>$this->openid,  'device_id'=>$this->device_id,'package_id'=>$paackage_id, "status"=>0, "return_status"=>0 ,"create_time"=>['gt', time() - 1800]])->find();
