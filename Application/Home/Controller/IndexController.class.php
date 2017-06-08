@@ -287,6 +287,10 @@ class IndexController extends BaseController {
         $order_sn = I('request.order_sn','', 'trim');
         // 判断是否重复
         M('order')->where(['order_sn'=>$order_sn])->save(['return_status'=>1, 'update_time'=>time()]);
+        $json = $this->ajax_json();
+        $json['state'] = 1;
+        $json['msg'] = "处理成功~";
+        $this->ajaxReturn($json);
     }
 
     /**
