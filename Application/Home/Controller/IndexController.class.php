@@ -286,8 +286,8 @@ class IndexController extends BaseController {
                     // 启动设备
                     if($order['start_status'] == '0'){
                         // 启动操作
-                        $username = C('basic.app_user');
-                        $pwd = C('basic.app_pwd');
+                        $username = C('basic.api_user');
+                        $pwd = C('basic.api_pwd');
                         $time = $order['package_time'] * 60;
                         $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
                         $device_number = $device_detail['device_number'];
