@@ -176,7 +176,8 @@
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
 
-        $('.btnVercode').click(function(){
+        $('.btnVercode').click(function(){alert(123);
+            alert($(this).text());
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:data.order_sn
