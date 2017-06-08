@@ -281,6 +281,7 @@ class IndexController extends BaseController {
         do{
             if($order_sn){
                 $order = M('order')->where(['order_sn'=>$order_sn])->find();
+                $json['order'] = $order;
                 // 如果状态正常则
                 if($order['status'] == 1){
                     // 启动设备
