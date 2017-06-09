@@ -43,9 +43,13 @@
                     <td class="center">
                       <a href="{:U('/devices/stream', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 运营流水</a>
                       <a href="{:U('/devices/detail', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 详情</a>
+                      <if condition="$admin[role] eq 1">
                       <a href="{:U('/devices/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
+                      </if>
                       <a href="{:U('/devices/qrcode', array('id'=>$item['id']))}" target="qrcode"><i class="fa fa-check text-navy"></i> 二维码</a>
+                      <if condition="$admin[role] eq 1">
                       <a href="{:U('/devices/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该设备吗？')"><i class="fa fa-check text-navy"></i> 删除</a>
+                      </if>
                     </td>
                   </tr>
                 </volist>
