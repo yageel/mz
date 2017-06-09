@@ -320,7 +320,7 @@ class UserController extends BaseController {
                         </div>
                     </volist>
         */
-
+        $json = $this->ajax_json();
         header("Content-Type: text/html; charset=UTF-8");
 
         $html = "<div style='text-align: center; line-height: 30px;'>暂无可推广设备~</div>";
@@ -333,7 +333,7 @@ class UserController extends BaseController {
         $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($latitude * PI() / 180 - lat * PI() / 180) / 2),2) +
             COS($latitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($longitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))
             * 1000) AS juli FROM t_admin  WHERE role = 3 AND status=1 HAVING  juli<$spread_distance ORDER BY juli ASC";
-
+        $json['sql'] = $sql;
         $shop_list = M()->query($sql);
         if($shop_list){
             $html = '';
@@ -350,7 +350,7 @@ class UserController extends BaseController {
 
             }
         }
-        $json = $this->ajax_json();
+
         $json['state'] = 1;
         $json['html'] = $html;
         $this->ajaxReturn($json);
