@@ -350,8 +350,11 @@ class UserController extends BaseController {
 
             }
         }
-
-        echo $html;
+        $json = $this->ajax_json();
+        $json['state'] = 1;
+        $json['html'] = $html;
+        $this->ajaxReturn($json);
+        // echo $html;
 
     }
 
