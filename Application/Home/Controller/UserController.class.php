@@ -10,6 +10,8 @@ class UserController extends BaseController {
         parent::_initialize();
         // 没登陆自动登录
         if(empty($this->users['mobile'])){
+            echo time();
+            print_r($this->users);die();
             return header("location: ".tsurl('/register/index'));
         }
     }
