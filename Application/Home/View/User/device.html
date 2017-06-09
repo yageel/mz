@@ -126,15 +126,7 @@
                 <input type="hidden" name="starturl" value="{:tsurl('/index/start',['order_sn'=>'order_snid'])}" />
                 <input type="hidden" name="package_id" value="" />
                 <ul class="">
-                    <volist name="package_list" id="package">
-                        <li>
-                            <div class="package_block" data-id="{$package.id}">
-                                <div class="select_block" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
-                                <div class="package_title">按摩<br/>{$package.package_time}分钟</div>
-                                <div class="package_money"> ￥{$package.package_amount}元</div>
-                            </div>
-                        </li>
-                    </volist>
+
                 </ul>
             </div>
             <div style="clear: both"></div>
@@ -162,15 +154,7 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__"></script>
     <script type="text/javascript">
-        $('input').click(function(){
-            if($(this).hasClass('group_block')){
-                if($(this).attr("checked")){
-                    $(this).parent().parent().find("input[type='checkbox']").attr("checked", true);
-                }else{
-                    $(this).parent().parent().find("input[type='checkbox']").attr("checked", false);
-                }
-            }
-        });
+
         // 初始化
         wx.ready(function(){
             wx.getLocation({
@@ -187,6 +171,16 @@
                         accuracy: accuracy
                         }, function (data){
                             $('#spread_list').html(data.html);
+
+                            $('input').click(function(){
+                                if($(this).hasClass('group_block')){
+                                    if($(this).attr("checked")){
+                                        $(this).parent().parent().find("input[type='checkbox']").attr("checked", true);
+                                    }else{
+                                        $(this).parent().parent().find("input[type='checkbox']").attr("checked", false);
+                                    }
+                                }
+                            });
                         });
                 }
 
@@ -194,11 +188,5 @@
         });
 
         var scroll = new ntScroll("spread_list");
-        // spread_list
-        $('.package_block').click(function(){
-            $('input[name="package_id"]').val($(this).attr('data-id'));
-            $('.package_block').find('.active').removeClass('active');
-            $(this).find('.select_block').addClass('active');
-        });
     </script>
 </block>
