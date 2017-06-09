@@ -52,26 +52,36 @@
           </ul>
         </li>
 
+      <if condition="$admin[role] eq 1">
         <li > <a href="#"> <i class="fa fa-gamepad"></i> <span class="nav-label">分成规则</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
             <li> <a class="J_menuItem" href="{:U('/rebate/index')}">分成规则列表</a> </li>
           </ul>
         </li>
+      </if>
 
         <li> <a href="#"> <i class="fa fa-group"></i> <span class="nav-label">佣金管理</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2">
             <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>''])}">运营佣金</a> </li>
+            </if>
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2 OR $admin[role] eq 3">
             <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'channel'])}">渠道佣金</a> </li>
+              </if>
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2 OR $admin[role] eq 3  OR $admin[role] eq 4">
             <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'device'])}">模座佣金</a> </li>
+              </if>
             <li> <a class="J_menuItem" href="{:U('/order/index',['tab'=>'spread'])}">推广佣金</a> </li>
           </ul>
         </li>
 
         <li > <a href="#"> <i class="fa fa-money"></i> <span class="nav-label">基础设置</span> <span class="fa arrow"></span> </a>
           <ul class="nav nav-second-level">
+            <if condition="$admin[role] eq 1">
             <li> <a class="J_menuItem" href="{:U('/sys/basic')}">基础设置</a> </li>
             <li> <a class="J_menuItem" href="{:U('/city/index')}">公众号设置</a> </li>
             <li> <a class="J_menuItem" href="{:U('/area/index')}">运营城市</a> </li>
+            </if>
             <li> <a class="J_menuItem" href="{:U('/admin_user/info')}">账户管理</a> </li>
           </ul>
         </li>

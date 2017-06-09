@@ -5,10 +5,19 @@
 <block name="content">
     <div class="tabs-container">
         <ul class="nav nav-tabs">
+
+            <if condition="$admin[role] eq 1">
             <li class="<if condition='$tab eq "" OR $tab eq "operational"'>active</if>"><a data-toggle="tab" href="{:U('/admin_user/index')}"> 运营管理</a></li>
+            </if>
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2">
             <li class="<if condition='$tab eq "channel"'>active</if>"><a data-toggle="tab" href="{:U('/admin_user/index',['tab'=>'channel'])}"> 渠道管理</a></li>
+            </if>
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2 OR $admin[role] eq 3">
             <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/admin_user/index',['tab'=>'device'])}" > 模座管理</a></li>
+            </if>
+            <if condition="$admin[role] eq 1 OR $admin[role] eq 2 OR $admin[role] eq 3 OR $admin[role] eq 4">
             <li class="<if condition='$tab eq "spread"'>active</if>"><a data-toggle="tab" href="{:U('/admin_user/index',['tab'=>'spread'])}"> 推广管理</a></li>
+            </if>
         </ul>
         <div class="tab-content">
             <!--//运营模块-->

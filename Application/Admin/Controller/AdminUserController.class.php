@@ -37,7 +37,19 @@ class AdminUserController extends BaseController
                 $where['role'] = 2;
             }
         }else{
-            $where['role'] = 2;
+            if($this->admin['role'] == 1){
+                $where['role'] = 2;
+                $tab = 'operational';
+            }elseif($this->admin['role'] == 2){
+                $where['role'] = 3;
+                $tab = 'channel';
+            }elseif($this->admin['role'] == 3){
+                $where['role'] = 4;
+                $tab = 'device';
+            }elseif($this->admin['role'] == 4){
+                $where['role'] = 5;
+                $tab = 'spread';
+            }
         }
 
         $this->assign('tab', $tab);

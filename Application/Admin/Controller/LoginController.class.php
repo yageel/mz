@@ -14,7 +14,7 @@ class LoginController extends Controller {
             return $this->error('请先提交登陆信息',U('/login/index'));
         }
 
-        $user = M('admin')->where(array('uname'=>$uname))->find();
+        $user = M('admin')->where(array('username'=>$uname))->find();
         if(!$user){
             return $this->error('登陆失败',U('/login/index'));
         }
