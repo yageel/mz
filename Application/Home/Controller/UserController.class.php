@@ -328,17 +328,17 @@ class UserController extends BaseController {
         $longitude = I('request.longitude',0,'floatval');// 经度
 
         $spread_distance = intval(C('basic.spread_distance'));
-        $json['request'] = $_REQUEST;
+
         // 计算指定距离内的门店
         $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($longitude * PI() / 180 - lat * PI() / 180) / 2),2) +".
             "COS($longitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($latitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))".
             "* 1000) AS juli FROM t_admin  WHERE role = 3 AND status=1 HAVING  juli<$spread_distance ORDER BY juli ASC";
-        $json['sql'] = $sql;
+
         $shop_list = M()->query($sql);
         if($shop_list){
             $html = '';
             foreach($shop_list as $shop){
-                $device_list = M("devices")->where(['user_id'=>$shop['id'],"status"=>1])->select();
+                $device_list = M("devices")->where(['channel_user_id'=>$shop['id'],"status"=>1])->select();
                 if($device_list){
                     $html .= '<div class="group">';
                     $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" value="1" /> '.$shop['shop_name'].'</div>';
