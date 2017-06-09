@@ -307,9 +307,46 @@ class UserController extends BaseController {
     }
 
     /**
+     * 绑定设备列表
+     */
+    public function device_list(){
+        /*
+         <volist id="shop" name="list">
+                        <div class="group">
+                            <div class="input_group_block"><input type="checkbox" id="id0" class="group_block" value="1" /> {$shop.shop_name}</div>
+                            <volist id="device" name="shop[device_list]">
+                            <div class="input_block"><input type="checkbox" id="id1" name="spread_id" value="{$device.id}" /> {$device.device_number}</div>
+                            </volist>
+                        </div>
+                    </volist>
+        */
+
+        header("Content-Type: text/html; charset=UTF-8");
+
+        $latitude = I('request.latitude',0,'floatval');// 纬度
+        $longitude = I('request.longitude',0,'floatval');// 经度
+
+        $spread_distance = intval(C('spread_distance'));
+
+        // 计算指定距离内的门店
+        $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($latitude * PI() / 180 - lat * PI() / 180) / 2),2) +
+            COS($latitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($longitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))
+            * 1000) AS juli FROM t_admin  WHERE role = 3 AND status=1 HAVING  juli<$spread_distance ORDER BY juli ASC";
+
+        $shop_list = M()->query($sql);
+        if($shop_list){
+            foreach($shop_list as $shop){
+
+            }
+        }
+
+    }
+
+    /**
      * 设备绑定
      */
     public function device(){
+
         $this->display();
     }
 
