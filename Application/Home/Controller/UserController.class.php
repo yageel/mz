@@ -324,14 +324,14 @@ class UserController extends BaseController {
         header("Content-Type: text/html; charset=UTF-8");
 
         $html = "<div style='text-align: center; line-height: 30px;'>暂无可推广设备~</div>";
-        $longitude = I('request.latitude',0,'floatval');// 纬度
-        $latitude = I('request.longitude',0,'floatval');// 经度
+        $latitude = I('request.latitude',0,'floatval');// 纬度
+        $longitude = I('request.longitude',0,'floatval');// 经度
 
         $spread_distance = intval(C('basic.spread_distance'));
         $json['request'] = $_REQUEST;
         // 计算指定距离内的门店
-        $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($latitude * PI() / 180 - lat * PI() / 180) / 2),2) +".
-            "COS($latitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($longitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))".
+        $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($longitude * PI() / 180 - lat * PI() / 180) / 2),2) +".
+            "COS($longitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($latitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))".
             "* 1000) AS juli FROM t_admin  WHERE role = 3 AND status=1 HAVING  juli<$spread_distance ORDER BY juli ASC";
         $json['sql'] = $sql;
         $shop_list = M()->query($sql);
