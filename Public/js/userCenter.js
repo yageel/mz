@@ -45,6 +45,24 @@ $('#btnVercode').click(function(){
     });
 });
 
+$('#btnVercode2').click(function(){
+    var spread_id = [];
+    $('.spread_id:checked').each(function(){
+        spread_id.push($(this).val())
+    });
+    if(spread_id == []){
+        tools.alert("请选择绑定的设备~", "系统提示~");
+        return false;
+    }
+    tools.ajax($('input[name="url"]').val(),{
+        spread_id:spread_id
+    }, function (result){
+        if(result.state == 1){
+            tools.alert("绑定成功~");
+        }
+    });
+});
+
 //调用微信JS api 支付
 //调用微信JS api 支付
 function jsApiCall(data)

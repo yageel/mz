@@ -343,7 +343,7 @@ class UserController extends BaseController {
                     $html .= '<div class="group">';
                     $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" value="1" /> '.$shop['shop_name'].'</div>';
                     foreach($device_list as $device){
-                        $html .= '<div class="input_block"><input type="checkbox" id="id'.$device['id'].'" name="spread_id[]" value="{$device.id}" />'.$device['id'].'</div>';
+                        $html .= '<div class="input_block"><input type="checkbox" id="id'.$device['id'].'" class="spread_id" name="spread_id[]" value="{$device.id}" />'.$device['id'].'</div>';
                     }
                     $html .= '</div>';
                 }
@@ -354,8 +354,6 @@ class UserController extends BaseController {
         $json['state'] = 1;
         $json['html'] = $html;
         $this->ajaxReturn($json);
-        // echo $html;
-
     }
 
     /**
@@ -364,6 +362,32 @@ class UserController extends BaseController {
     public function device(){
 
         $this->display();
+    }
+
+    /**
+     * 绑定设备
+     */
+    public function bind_device(){
+        //
+        $spread_id = (array)I('spread_id',[],'');
+        $json = $this->ajax_json();
+        do{
+            if($spread_id ){
+                foreach($spread_id as $spread){
+                    $device = M('devices_spread')->where(['device_id'=>$spread, 'user_id'=>$this->users['id']])->find();
+                    if($device){
+                        M('devices_spread')->where(['id'=>$device['id']])->save(['update_time'=>time()]);
+                    }else{
+                        M('devices_spread')->add(['device_id'=>$spread, 'user'=>$this->users['id'], 'update_time'=>time(),'create_time'=>time()]);
+                    }
+                }
+            }
+
+        }while(false);
+        $json['state'] = 1;
+        $json['request'] = $_REQUEST;
+        $this->ajaxReturn($json);
+
     }
 
     public function test(){

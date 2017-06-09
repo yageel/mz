@@ -121,10 +121,7 @@
                 <span style="color: #666;">绑定魔座</span>
             </div>
             <div class="text-item-content" id="tabItems">
-                <input type="hidden" name="url" value="{:tsurl('/index/order')}" />
-                <input type="hidden" name="updateurl" value="{:tsurl('/index/update_order')}" />
-                <input type="hidden" name="starturl" value="{:tsurl('/index/start',['order_sn'=>'order_snid'])}" />
-                <input type="hidden" name="package_id" value="" />
+                <input type="hidden" name="url" value="{:tsurl('/user/bind_device')}" />
                 <ul class="">
 
                 </ul>
@@ -132,18 +129,11 @@
             <div style="clear: both"></div>
             <div class="spread_block wrap wrap-vertical" id="spread_block" >
                 <div class="spread_list" id="spread_list">
-                    <volist id="shop" name="list">
-                        <div class="group">
-                            <div class="input_group_block"><input type="checkbox" id="id0" class="group_block" value="1" /> {$shop.shop_name}</div>
-                            <volist id="device" name="shop[device_list]">
-                            <div class="input_block"><input type="checkbox" id="id1" name="spread_id" value="{$device.id}" /> {$device.device_number}</div>
-                            </volist>
-                        </div>
-                    </volist>
+
                 </div>
             </div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">绑定推广</a>
+                <a class="button" id="btnVercode2" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">绑定推广</a>
             </div>
 
             <div style="clear: both">&nbsp;</div>
