@@ -53,6 +53,24 @@
 
               <div class="hr-line-dashed"></div>
               <div class="form-group">
+                  <label class="col-sm-2 control-label">API账户：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="basic[api_user]"  class="form-control" value="{$config[basic][api_user]|default=''}" />
+                      <span class="help-block m-b-none" style="color: #777">* 魔座API账户</span>
+                  </div>
+              </div>
+
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label">API密码：</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="basic[api_pwd]"  class="form-control" value="{$config[basic][api_pwd]|default=''}" />
+                      <span class="help-block m-b-none" style="color: #777">* 魔座API密码</span>
+                  </div>
+              </div>
+
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
                   <label class="col-sm-2 control-label">推广范围：</label>
                   <div class="col-sm-10">
                       <input type="text" name="basic[spread_user_id]"  class="form-control" value="{$config[basic][spread_distance]|default=0}" />

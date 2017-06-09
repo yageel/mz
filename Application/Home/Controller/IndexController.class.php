@@ -22,7 +22,7 @@ class IndexController extends BaseController {
         if($_REQUEST['qr']){
             $get = (array)$_GET;
             unset($get['qr']);
-            $get['test'] = time();
+            $get['t'] = time();
             $url = tsurl(CONTROLLER_NAME.'/'.ACTION_NAME,$get);
             return header("Location: ".$url);
         }
@@ -98,6 +98,35 @@ class IndexController extends BaseController {
                 $json['msg'] = "购买套餐已下架~";
                 break;
             }
+
+            // 查询魔座状态
+            $device_bool = true;
+            $device_number = $this->device_info['device_number'];
+            $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+            if($data_json){
+                $device_status = json_decode($data_json, true);
+                if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                    $device_bool = false;
+                }
+            }
+
+            // 重试一次
+            if($device_bool){
+                $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+                if($data_json){
+                    $device_status = json_decode($data_json, true);
+                    if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                        $device_bool = false;
+                    }
+                }
+            }
+
+            // 机器状态不对，不支持服务
+            if($device_bool){
+                $json['msg'] = "暂不能提供服务，请扫描其他机器试试吧~";
+                break;
+            }
+
             // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
             // 检查半个小时内订单未支付 有效
             $order = M("order")->where(['openid'=>$this->openid,  'device_id'=>$this->device_id,'package_id'=>$paackage_id, "status"=>0, "return_status"=>0 ,"create_time"=>['gt', time() - 1800]])->find();
@@ -111,7 +140,8 @@ class IndexController extends BaseController {
                 $user_device_id = intval($this->device_info['user_id']);
                 $user_channel_id = intval($this->device_info['channel_user_id']);
                 $user_operational_id = intval($this->device_info['operational_user_id']);
-                $user_platform_id = 1;
+                $user_platform_id = C('basic.platform_user_id');
+                $user_platform_id = $user_platform_id?$user_platform_id:1;
 
                 // 分成规则
                 $rebate_info = [];
@@ -175,7 +205,8 @@ class IndexController extends BaseController {
                 if($spread_info){
                     $spread_price = number_format(($package_info['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
                 }else{
-                    $spread_price = 0;
+                    $spread_price =  C('basic.spread_user_id');
+                    $spread_price = $spread_price?$spread_price:0;
                 }
 
                 $platform_price = $package_info['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
@@ -193,6 +224,7 @@ class IndexController extends BaseController {
                     'package_amount' => $package_info['package_amount'],
                     'package_time' => $package_info['package_time'],
                     'order_sn' => $order_sn,
+                    'platform_user_id'=>$user_platform_id,
                     'platform_rebate' => $rebate_info['platform_rebate'],
                     'platform_money' => $platform_price,
                     'operational_rebate' =>$rebate_info['operational_rebate'],
@@ -255,6 +287,10 @@ class IndexController extends BaseController {
         $order_sn = I('request.order_sn','', 'trim');
         // 判断是否重复
         M('order')->where(['order_sn'=>$order_sn])->save(['return_status'=>1, 'update_time'=>time()]);
+        $json = $this->ajax_json();
+        $json['state'] = 1;
+        $json['msg'] = "处理成功~";
+        $this->ajaxReturn($json);
     }
 
     /**
@@ -275,22 +311,57 @@ class IndexController extends BaseController {
     public function start_device(){
         $order_sn = I('request.order_sn','','trim');
         $json = $this->ajax_json();
-        if($order_sn){
-            $order = M('order')->where(['order_sn'=>$order_sn])->find();
-            // 如果状态正常则
-            if($order['status'] == 1){
-                // 启动设备
-                if($order['start_status'] == '0'){
-                    // 启动操作
-
+        do{
+            if($order_sn){
+                $order = M('order')->where(['order_sn'=>$order_sn])->find();
+                // 如果状态正常则
+                if($order['status'] == 1){
+                    // 启动设备
+                    if($order['start_status'] == '0'){
+                        // 启动操作
+                        $username = C('basic.api_user');
+                        $pwd = C('basic.api_pwd');
+                        $time = $order['package_time'] * 60;
+                        $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
+                        $device_number = $device_detail['device_number'];
+                        $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
+                        $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
+                        $json['data_json'] = $data_json;
+                        if($data_json){
+                            $data = json_decode($data_json, true);
+                            if($data['code'] == 200){
+                                // 启动成功~
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
+                                $json['state'] = 1;
+                                $json['msg'] = "启动成功~";
+                                break;
+                            }else{
+                                // 启动失败
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>3,'send_status'=>3,'start_log'=>"{$data['message']}",'update_time'=>time()]);
+                                $json['msg'] = "启动失败~ 请联系客服人员吧~";
+                                break;
+                            }
+                        }else{
+                            $json['state'] = 4;
+                            $json['msg'] = "启动失败";
+                            break;
+                        }
+                    }else{
+                        // 已启动
+                        $json['state'] = 1;
+                        $json['msg'] = "设备已启动~";
+                        break;
+                    }
                 }else{
-                    // 已启动
+                    // 不能启动
+                    $json['msg'] = "订单无效~";
+                    break;
                 }
             }else{
-                // 不能启动
-
+                $json['msg'] = "订单无效~";
+                break;
             }
-        }
+        }while(false);
 
         $this->ajaxReturn($json);
     }
@@ -300,8 +371,11 @@ class IndexController extends BaseController {
      */
     public function spread(){
         $spread_list = M('devices_spread')->where(['device_id'=>$this->device_id])->select();
-
+        foreach($spread_list as $i=>$item){
+            $spread_list[$i]['user'] = M('admin')->where(['id'=>$item['user_id']])->find();
+        }
         $this->assign('spread_list', $spread_list);
+
         $package_list = M('package')->where(['status'=>1])->order("weight DESC, id ASC")->select();
         $this->assign('package_list', $package_list);
         $this->display();
