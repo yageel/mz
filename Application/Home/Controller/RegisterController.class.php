@@ -7,7 +7,9 @@ class RegisterController extends BaseController {
      * 注册页
      */
     public function index(){
-        print_r(C('basic.version'));
+        if($this->users['mobile']){
+            return header("location: ".tsurl('/user/index'));
+        }
         $this->display();
     }
 
