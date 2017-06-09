@@ -327,7 +327,7 @@ class UserController extends BaseController {
         $latitude = I('request.latitude',0,'floatval');// 纬度
         $longitude = I('request.longitude',0,'floatval');// 经度
 
-        $spread_distance = intval(C('spread_distance'));
+        $spread_distance = intval(C('basic.spread_distance'));
 
         // 计算指定距离内的门店
         $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($latitude * PI() / 180 - lat * PI() / 180) / 2),2) +
