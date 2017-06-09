@@ -323,6 +323,7 @@ class UserController extends BaseController {
 
         header("Content-Type: text/html; charset=UTF-8");
 
+        $html = "<div style='text-align: center; line-height: 30px;'>暂无可推广设备~</div>";
         $latitude = I('request.latitude',0,'floatval');// 纬度
         $longitude = I('request.longitude',0,'floatval');// 经度
 
@@ -335,10 +336,22 @@ class UserController extends BaseController {
 
         $shop_list = M()->query($sql);
         if($shop_list){
+            $html = '';
             foreach($shop_list as $shop){
+                $device_list = M("devices")->where(['user_id'=>$shop['id'],"status"=>1])->select();
+                if($device_list){
+                    $html .= '<div class="group">';
+                    $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" value="1" /> '.$shop['shop_name'].'</div>';
+                    foreach($device_list as $device){
+                        $html .= '<div class="input_block"><input type="checkbox" id="id'.$device['id'].'" name="spread_id[]" value="{$device.id}" />'.$device['id'].'</div>';
+                    }
+                    $html .= '</div>';
+                }
 
             }
         }
+
+        echo $html;
 
     }
 
