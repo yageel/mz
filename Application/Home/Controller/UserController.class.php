@@ -324,8 +324,8 @@ class UserController extends BaseController {
         header("Content-Type: text/html; charset=UTF-8");
 
         $html = "<div style='text-align: center; line-height: 30px;'>暂无可推广设备~</div>";
-        $latitude = I('request.latitude',0,'floatval');// 纬度
-        $longitude = I('request.longitude',0,'floatval');// 经度
+        $longitude = I('request.latitude',0,'floatval');// 纬度
+        $latitude = I('request.longitude',0,'floatval');// 经度
 
         $spread_distance = intval(C('basic.spread_distance'));
 
