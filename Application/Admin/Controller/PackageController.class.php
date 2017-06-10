@@ -43,6 +43,9 @@ class PackageController extends BaseController {
                 return $this->error("请输入套餐时长~");
             }
 
+            if(empty($data['package_pic'])){
+                return $this->error("请上传套餐图片~");
+            }
 
             if( $id ){
                 $data['update_time'] = time();

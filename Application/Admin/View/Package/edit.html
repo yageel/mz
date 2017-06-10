@@ -44,6 +44,15 @@
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">套餐图标：</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="package_pic"  data-url="{$detail.package_pic}" name="package_pic" value="{$detail.package_pic}" class="view_img form-control">
+                                <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'package','fileback'=>'package_pic'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
                             <label class="col-sm-2 control-label">套餐权重：</label>
                             <div class="col-sm-5">
                                 <input type="text" name="weight"  value="{$detail.weight|default=0}" class="form-control input-s"  maxlength="6" />

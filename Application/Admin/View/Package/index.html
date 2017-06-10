@@ -19,6 +19,7 @@
                   <th>套餐名称</th>
                   <th>套餐时长</th>
                   <th>套餐金额</th>
+                  <th>套餐图标</th>
                   <th>权重</th>
                   <th>套餐状态</th>
                   <if condition="$admin[role] eq 1">
@@ -34,6 +35,7 @@
                     <td>{$item.package_name}</td>
                     <td>{$item.package_time}分钟</td>
                     <td>{$item.package_amount}元</td>
+                    <td><img src="{$item.package_pic}" style="max-width: 120px;" /></td>
                     <td>{$item.weight}</td>
                     <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq '0'"/><font color="red">下架</font><else/>已删除</if></td>
                     <if condition="$admin[role] eq 1">

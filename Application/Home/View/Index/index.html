@@ -98,18 +98,19 @@
         .product_list div.product_block div.product_item img{max-width: 100px;}
         #tabItems{}
         #tabItems li{ float: left; width: 33.2%; text-align: center; vertical-align: top; padding-top: 6px; }
-        #tabItems li .package_block{ width: 62px; height: 59px; background: url(/Public/images/package.png) no-repeat; text-align: center; margin: 0 auto; position: relative; }
+        #tabItems li .package_block{ width: 82px; height: 79px; background: url(/Public/images/package.png) no-repeat; text-align: center; margin: 0 auto; position: relative; }
         .package_block .package_title{ font-size: 12px; color: #fff; line-height: 16px;}
         .package_block .package_money{ font-size: 12px; color: #000; line-height: 28px; font-weight: 600;}
         .package_block  .select_block{top: -6px; right: -6px; position: absolute; display: none;}
         .package_block .active{ display: block;}
+        .package_block .package_bg_block img{ width: 100%; height: auto}
     </style>
 </block>
 <block name="content">
     <div class="content-padding abs100" style="padding-top:0px;">
         <div id="userCenterContent">
             <div class="user-info">
-                <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
+                <img class="bg" src="__PUBLIC__/images/mz.png" />
 
             </div>
             <div class="text-item-tab wrap">
@@ -126,8 +127,11 @@
                     <li>
                         <div class="package_block" data-id="{$package.id}">
                             <div class="select_block" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
-                            <div class="package_title">按摩<br/>{$package.package_time}分钟</div>
-                            <div class="package_money"> ￥{$package.package_amount}元</div>
+                            <div class="package_bg_block">
+                            <img src="{$package.package_pic}" />
+                            </div>
+                            <!--<div class="package_title">按摩<br/>{$package.package_time}分钟</div>
+                            <div class="package_money"> ￥{$package.package_amount}元</div>-->
                         </div>
                     </li>
                     </volist>
@@ -139,11 +143,13 @@
                 <a class="button" id="btnVercode2" style="width: 120px; margin-top: 12px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
             </div>
 
-            <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
+            <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px; display: none">
                 出门在外的人士，如果有一款贴心的按摩沙发随时随地，缓解旅途的疲劳，让您流连忘返，请试试魔座的产品。酒店、影院、地铁站甚至出租车上都有我们的身影，随手一扫，即可享受无处不在的舒适感觉。
             </div>
 
             <div class="product_list">
+                <img src="/Public/images/mz1.png" style="width: 100%;" />
+                <!--
                 <div class="product_block">
                     <div class="product_item">
                         <div class="product_img"><img src="/Public/images/yizi1.jpg" /> </div>
@@ -157,7 +163,7 @@
                         <div class="product_img"><img src="/Public/images/yizi3.jpg" /> </div>
                         <div class="product_title">绿色按摩</div>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div style="clear: both">&nbsp;</div>
 

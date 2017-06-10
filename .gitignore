@@ -8,4 +8,5 @@
 .htaccess
 Application/Runtime/*
 Application/logs/*
+Application/Common/Conf/other.php
 uploads/*
