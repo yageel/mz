@@ -14,7 +14,6 @@ class AdminUserController extends BaseController
      */
     public function index()
     {
-
         $city_list = M('city')->where(array('status'=>1))->select();
         $this->assign('city_list', $city_list);
 
@@ -50,6 +49,11 @@ class AdminUserController extends BaseController
                 $where['role'] = 5;
                 $tab = 'spread';
             }
+        }
+
+        //
+        if($this->admin['role'] == 2){
+
         }
 
         $this->assign('tab', $tab);

@@ -19,6 +19,47 @@ class OrderController extends BaseController {
             $where['role'] = 5;
         }
 
+        // 运营筛选
+        if($this->admin['role'] == 2){
+            if($tab == '' OR $tab == 'operational'){
+                $where['role'] = 2;
+                $where['id'] = $this->admin['id'];
+            }elseif($tab == 'channel'){
+                $where['role'] = 3;
+                $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE operational_user_id='{$this->admin['id']}'))"];
+            }
+
+        // 渠道筛选
+        }elseif($this->admin['role'] == 3){
+            if($tab == 'channel'){
+                $where['role'] = 3;
+                $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE channel_user_id='{$this->admin['id']}'))"];
+            }
+        // 魔座筛选
+        }elseif($this->admin['role'] == 4){
+            if($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE user_id='{$this->admin['id']}'))"];
+            }
+        }
+
+
+
 
         $db = M('admin'); // 实例化User对象
         $count = $db->where($where)->count();// 查询满足要求的总记录数
@@ -27,6 +68,8 @@ class OrderController extends BaseController {
         $show = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
+        //
         foreach($list as $i=>$item){
             // 运营人员
             if($item['role'] == 2){

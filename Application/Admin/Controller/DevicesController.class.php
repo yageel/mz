@@ -7,6 +7,18 @@ use Think\Page;
 class DevicesController extends BaseController {
     public function index(){
         $where = [];
+
+        // 运营人员设备
+        if($this->admin['role'] == 2){
+            $where['operational_user_id'] = $this->admin['id'];
+        // 渠道人员
+        }elseif($this->admin['role'] == 3){
+            $where['channel_user_id'] = $this->admin['id'];
+        // 魔座人员
+        }elseif($this->admin['role'] == 4){
+            $where['user_id'] = $this->admin['id'];
+        }
+
         $db = M('Devices'); // 实例化User对象
         $count = $db->where($where)->count();// 查询满足要求的总记录数
         $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
