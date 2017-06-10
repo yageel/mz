@@ -52,8 +52,43 @@ class AdminUserController extends BaseController
         }
 
         //
+        // 运营筛选
         if($this->admin['role'] == 2){
+            if($tab == '' OR $tab == 'operational'){
+                $where['role'] = 2;
+                $where['id'] = $this->admin['id'];
+            }elseif($tab == 'channel'){
+                $where['role'] = 3;
+                $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE operational_user_id='{$this->admin['id']}'))"];
+            }
 
+            // 渠道筛选
+        }elseif($this->admin['role'] == 3){
+            if($tab == 'channel'){
+                $where['role'] = 3;
+                $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE channel_user_id='{$this->admin['id']}'))"];
+            }
+            // 魔座筛选
+        }elseif($this->admin['role'] == 4){
+            if($tab == 'device'){
+                $where['role'] = 4;
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE user_id='{$this->admin['id']}')"];
+            }elseif($tab == 'spread'){
+                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE user_id='{$this->admin['id']}'))"];
+            }
         }
 
         $this->assign('tab', $tab);
