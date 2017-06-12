@@ -101,7 +101,7 @@ class IndexController extends BaseController {
 
             // 查询魔座状态
             $device_bool = true;
-            $device_number = $this->device_info['device_number'];
+            $device_number = $this->device_info['machine_number'];
             $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
             if($data_json){
                 $device_status = json_decode($data_json, true);
@@ -324,7 +324,7 @@ class IndexController extends BaseController {
                         $pwd = C('basic.api_pwd');
                         $time = $order['package_time'] * 60;
                         $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
-                        $device_number = $device_detail['device_number'];
+                        $device_number = $device_detail['machine_number'];
                         $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
                         $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
                         $json['data_json'] = $data_json;
