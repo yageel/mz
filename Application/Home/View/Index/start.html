@@ -109,8 +109,9 @@
     <div class="content-padding abs100" style="padding-top:0px;">
         <div id="userCenterContent">
             <div class="user-info">
+                <a href="javascript:sug('{:C('basic.support_qrcode')}')">
                 <img class="bg" src="{:C('basic.web_start_pic1')}" style="width: 100%"  />
-
+                </a>
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
@@ -177,6 +178,31 @@
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
+
+        function sug(img){
+            var okText, title;
+
+            callback = function (){}
+
+            var i = tools.dialog({
+                title: title || "客服二维码",
+                content: "<img src='"+img+"' style='width: 100%' />",
+                dialogClass: "dialog-alert",
+                contentStyle: {
+                    padding: "5px 20px 0 20px",
+                    color: "#888",
+                    fontSize: "15px",
+                    lineHeight: "150%"
+                },
+                btns: [{
+                    text: okText || "确定",
+                    click: function(){
+                        tools.closeDialog(i);
+                    },
+                    clsName: "ok"
+                }]
+            });
+        }
 
         $('.btnVercode').click(function(){
             if($(this).text() == '启动'){
