@@ -134,9 +134,9 @@
                     </if>
                 <elseif condition="$order[status] eq '0'" />
                     <if condition="$order[return_status] eq '0'">
-                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">支付失败</a>
                     <elseif condition="$order[create_time]+120 gt time()" />
-                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">返回购买</a>
+                        <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">支付失败</a>
                         <else/>
                         <a class="button btnVercode" href="{:tsurl('/index/index')}" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">准备中</a>
                     </if>
