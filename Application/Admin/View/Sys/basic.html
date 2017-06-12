@@ -18,7 +18,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">网站标题：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[title]"  class="form-control" value="{$config[basic][title]|default=''}" />
                       <span class="help-block m-b-none" style="color: #777">* 网站标题</span>
                   </div>
@@ -27,7 +27,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">网站域名：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[spread_user_id]"  class="form-control" value="{$config[basic][spread_user_id]|default=0}" />
                       <span class="help-block m-b-none" style="color: #777">* 前台访问域名</span>
                   </div>
@@ -36,7 +36,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">平台用户ID：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[platform_user_id]"  class="form-control" value="{$config[basic][platform_user_id]|default=1}" />
                       <span class="help-block m-b-none" style="color: #777">* 默认平台收益用户,默认为1</span>
                   </div>
@@ -45,7 +45,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">推广用户ID：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[spread_user_id]"  class="form-control" value="{$config[basic][spread_user_id]|default=0}" />
                       <span class="help-block m-b-none" style="color: #777">* 默认推广用户ID, 如果为空，无推广用户不计算分成</span>
                   </div>
@@ -54,7 +54,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">API账户：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[api_user]"  class="form-control" value="{$config[basic][api_user]|default=''}" />
                       <span class="help-block m-b-none" style="color: #777">* 魔座API账户</span>
                   </div>
@@ -63,7 +63,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">API密码：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[api_pwd]"  class="form-control" value="{$config[basic][api_pwd]|default=''}" />
                       <span class="help-block m-b-none" style="color: #777">* 魔座API密码</span>
                   </div>
@@ -72,7 +72,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">推广范围：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[spread_distance]"  class="form-control" value="{$config[basic][spread_distance]|default=0}" />
                       <span class="help-block m-b-none" style="color: #777">* 推广人员多少米范围内设备可以绑定推广</span>
                   </div>
@@ -81,7 +81,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">推广时长：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[spread_time]"  class="form-control" value="{$config[basic][spread_time]|default=0}" />
                       <span class="help-block m-b-none" style="color: #777">* 推广人员绑定设备后几个小时内有效</span>
                   </div>
@@ -90,7 +90,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">客服电话：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[support_tel]"  class="form-control" value="{$config[basic][support_tel]|default=''}" />
                       <span class="help-block m-b-none" style="color: #777">* 前台客服电话</span>
                   </div>
@@ -99,16 +99,16 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">客服二维码：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="basic[support_qrcode]"  class="form-control" value="{$config[basic][support_qrcode]|default=''}" />
-                      <span class="help-block m-b-none" style="color: #777">* 前台客服二维码</span>
+                  <div class="col-sm-6">
+                      <input type="text" id="support_qrcode"  data-url="{$config[basic][support_qrcode]}" name="basic[support_qrcode]" value="{$config[basic][support_qrcode]}" class="view_img form-control">
+                      <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'web','fileback'=>'support_qrcode'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
                   </div>
               </div>
 
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">首页头图片：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" id="web_pic1"  data-url="{$config[basic][web_pic1]}" name="basic[web_pic1]" value="{$config[basic][web_pic1]}" class="view_img form-control">
                       <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'web','fileback'=>'web_pic1'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
                   </div>
@@ -117,8 +117,8 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">首页文本文案：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="basic[web_text]"  class="form-control" value="{$config[basic][web_text]|default=''}" />
+                  <div class="col-sm-6">
+                      <textarea type="text" name="basic[web_text]"  class="form-control"  >{$config[basic][web_text]|default=''}</textarea>
                       <span class="help-block m-b-none" style="color: #777">* 前台文本文案</span>
                   </div>
               </div>
@@ -126,7 +126,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">首页尾图片：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" id="web_pic2"  data-url="{$config[basic][web_pic2]}" name="basic[web_pic2]" value="{$config[basic][web_pic2]}" class="view_img form-control">
                       <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'web','fileback'=>'web_pic2'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
                   </div>
@@ -135,7 +135,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">启动页头图片：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" id="web_start_pic1"  data-url="{$config[basic][web_start_pic1]}" name="basic[web_start_pic1]" value="{$config[basic][web_start_pic1]}" class="view_img form-control">
                       <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'web','fileback'=>'web_start_pic1'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
                   </div>
@@ -144,8 +144,8 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">启动页文本文案：</label>
-                  <div class="col-sm-10">
-                      <input type="text" name="basic[web_start_text]"  class="form-control" value="{$config[basic][web_start_text]|default=''}" />
+                  <div class="col-sm-6">
+                      <textarea type="text" name="basic[web_start_text]"  class="form-control"  >{$config[basic][web_start_text]|default=''}</textarea>
                       <span class="help-block m-b-none" style="color: #777">* 前台文本文案</span>
                   </div>
               </div>
@@ -153,7 +153,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">启动页尾图片：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" id="web_start_pic2"  data-url="{$config[basic][web_start_pic2]}" name="basic[web_start_pic2]" value="{$config[basic][web_start_pic2]}" class="view_img form-control">
                       <span class="help-block m-b-none"><iframe src="{:U('/upload/show',array('sid'=>'web','fileback'=>'web_start_pic2'))}" scrolling="no" topmargin="0" width="300" height="36" marginwidth="0" marginheight="0" frameborder="0" align="left" style="margin-top:3px; float:left"></iframe></span>
                   </div>
@@ -162,7 +162,7 @@
               <div class="hr-line-dashed"></div>
               <div class="form-group">
                   <label class="col-sm-2 control-label">版本号：</label>
-                  <div class="col-sm-10">
+                  <div class="col-sm-6">
                       <input type="text" name="basic[version]"  class="form-control" value="{$config[basic][version]|default=0}" />
                       <span class="help-block m-b-none" style="color: #777">* 默认推广用户ID, 如果为空，无推广用户不计算分成</span>
                   </div>
