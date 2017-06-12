@@ -205,6 +205,10 @@
         }
 
         $('.btnVercode').click(function(){
+            alert(12);
+            btnVercode22
+            $('#btnVercode22').html("启动失败");
+            return false;
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:$('input[name="order_sn"]').val()
