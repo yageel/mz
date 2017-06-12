@@ -334,7 +334,7 @@ class IndexController extends BaseController {
                                 // 启动成功~
                                 M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
                                 $json['state'] = 1;
-                                $json['msg'] = "启动成功~";
+                                $json['msg'] = "启动成功";
                                 break;
                             }else{
                                 // 启动失败
@@ -347,18 +347,24 @@ class IndexController extends BaseController {
                             break;
                         }
                     }else{
-                        // 已启动
-                        $json['state'] = 1;
-                        $json['msg'] = "设备已启动~";
-                        break;
+                        if($order['start_status'] == 1){
+                            // 已启动
+                            $json['state'] = 1;
+                            $json['msg'] = "设备已启动";
+                            break;
+                        }else{
+                            // 已启动
+                            $json['msg'] = "设备启动失败";
+                            break;
+                        }
                     }
                 }else{
                     // 不能启动
-                    $json['msg'] = "订单无效~";
+                    $json['msg'] = "订单无效";
                     break;
                 }
             }else{
-                $json['msg'] = "订单无效~";
+                $json['msg'] = "订单无效";
                 break;
             }
         }while(false);
