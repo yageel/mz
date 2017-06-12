@@ -124,7 +124,7 @@ class IndexController extends BaseController {
             // 机器状态不对，不支持服务
             if($device_bool){
                 $json['msg'] = "暂不能提供服务，请扫描其他机器试试吧~";
-                break;
+               // break;
             }
 
             // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
