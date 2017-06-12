@@ -2,7 +2,7 @@
  return array (
   'basic' => 
   array (
-    'title' => 's',
+    'title' => '魔座按摩椅',
     'spread_user_id' => '6',
     'platform_user_id' => '1',
     'api_user' => '13750541512',
