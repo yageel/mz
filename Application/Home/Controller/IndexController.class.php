@@ -311,6 +311,7 @@ class IndexController extends BaseController {
     public function start_device(){
         $order_sn = I('request.order_sn','','trim');
         $json = $this->ajax_json();
+        $json['state'] = 99;
         do{
             if($order_sn){
                 $order = M('order')->where(['order_sn'=>$order_sn])->find();
@@ -342,7 +343,6 @@ class IndexController extends BaseController {
                                 break;
                             }
                         }else{
-                            $json['state'] = 4;
                             $json['msg'] = "启动失败";
                             break;
                         }
