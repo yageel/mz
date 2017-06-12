@@ -205,20 +205,14 @@
         }
 
         $('.btnVercode').click(function(){
-            alert(12);
-            btnVercode22
-            $('#btnVercode22').html("启动失败");
-            return false;
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
-                        //$('#btnVercode22').html(result.msg);
-                        document.getElementById('btnVercode22').innerHTML = result.msg
+                        $('#btnVercode22').html(result.msg);
                     }else{
-                        //$('#btnVercode22').html("启动失败");
-                        document.getElementById('btnVercode22').innerHTML = "启动失败"
+                        $('#btnVercode22').html("启动失败");
                         tools.alert(result.msg)
                     }
                 });
