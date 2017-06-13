@@ -268,7 +268,9 @@ class IndexController extends BaseController {
                 $data['notify_url'] = C('BASE_URL')."/pay/notify/type/{$this->type}.html";
                 //print_r($data);die();
                 $jsApiParameters = jsapipay($data, true);
-                $json['data'] = json_decode($jsApiParameters);
+                $return = json_decode($jsApiParameters);
+                $return['order_sn'] = $order_sn;
+                $json['data'] = $return;
                 $json['error'] = 0;
                 break;
             }else{
@@ -289,6 +291,7 @@ class IndexController extends BaseController {
         M('order')->where(['order_sn'=>$order_sn])->save(['return_status'=>1, 'update_time'=>time()]);
         $json = $this->ajax_json();
         $json['state'] = 1;
+        $json['data']['order_sn'] = $order_sn;
         $json['msg'] = "处理成功~";
         $this->ajaxReturn($json);
     }
