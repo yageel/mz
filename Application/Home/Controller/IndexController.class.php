@@ -107,23 +107,17 @@ class IndexController extends BaseController {
 
             if($data_json){
                 $device_status = json_decode($data_json, true);
-                if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
                     $device_bool = false;
                 }
             }
-
-            var_dump($device_status);
-
-            var_dump($device_bool);
-
-            die();
 
             // 重试一次
             if($device_bool){
                 $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
                 if($data_json){
                     $device_status = json_decode($data_json, true);
-                    if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
+                    if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
                         $device_bool = false;
                     }
                 }
@@ -132,7 +126,7 @@ class IndexController extends BaseController {
             // 机器状态不对，不支持服务
             if($device_bool){
                 $json['msg'] = "暂不能提供服务，请扫描其他机器试试吧~";
-               // break;
+               break;
             }
 
             // `openid`, `device_id`, `package_id`, `status`, `return_status`, `create_time`
