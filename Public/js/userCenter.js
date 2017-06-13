@@ -63,6 +63,7 @@ $('#btnVercode').click(function(){
         spread_id:spread_id
     }, function (result){
         if(result.error==0){
+            $('input[name="order_sn"]').val(result.order_sn);
             callpay(result.data);
         }else if(result.error==1){
             tools.alert(result.msg, "系统提示");
@@ -104,12 +105,17 @@ function jsApiCall(data)
                     tools.alert("支付错误", "系统提示");
                     break;
                 case 'get_brand_wcpay_request:ok':
+                    var order_sn = $('input[name="order_sn"]').val();
+                    if(order_sn == ''){
+                        tools.alert("订单ID为空~");
+                        return false;
+                    }
                     // 同步成功状态~
                     tools.ajax($('input[name="updateurl"]').val(),{
-                        order_sn:data.order_sn
+                        order_sn:$('input[name="order_sn"]').val()
                     }, function (result){
                         // 自动更新~
-                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
+                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', $('input[name="order_sn"]').val());
                     });
                     break;
             }

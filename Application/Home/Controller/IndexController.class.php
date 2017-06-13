@@ -268,9 +268,8 @@ class IndexController extends BaseController {
                 $data['notify_url'] = C('BASE_URL')."/pay/notify/type/{$this->type}.html";
                 //print_r($data);die();
                 $jsApiParameters = jsapipay($data, true);
-                $return = json_decode($jsApiParameters);
-                $return['order_sn'] = $order_sn;
-                $json['data'] = $return;
+                $json['data'] = json_decode($jsApiParameters);
+                $json['order_sn'] = $order_sn;
                 $json['error'] = 0;
                 break;
             }else{
