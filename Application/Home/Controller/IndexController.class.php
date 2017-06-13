@@ -306,12 +306,70 @@ class IndexController extends BaseController {
 
     /**
      * 启动应用
+     *
+     * 设备启动状态： 1 正常启动成功， 2设备已经启动， 3 设备启动失败， 4 设备启动请求失败 6 订单无效
      */
     public function start(){
         $order_sn = I('request.order_sn','','trim');
+        // 无效订单
+        $this->assign('status', 6);
         if($order_sn){
             $order = M('order')->where(['order_sn'=>$order_sn])->find();
             $this->assign('order', $order);
+            do{
+                // 如果状态正常则
+                if($order['status'] == 1){
+                    // 启动设备
+                    if($order['start_status'] == '0'){
+                        // 启动操作
+                        $username = C('basic.api_user');
+                        $pwd = C('basic.api_pwd');
+                        $time = $order['package_time'] * 60;
+                        $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
+                        $device_number = $device_detail['machine_number'];
+                        $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
+                        $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
+                        $json['data_json'] = $data_json;
+                        if($data_json){
+                            $data = json_decode($data_json, true);
+                            if($data['code'] == 200){
+                                // 启动成功~
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
+                                $this->assign('status', 1);
+                                break;
+                            }else{
+                                // 启动失败
+                                M('order')->where(['id'=>$order['id']])->save(['start_status'=>3,'send_status'=>3,'start_log'=>"{$data['message']}",'update_time'=>time()]);
+                                //$json['msg'] = "启动失败~ 请联系客服人员吧~";
+                                $this->assign('status', 3);
+                                break;
+                            }
+                        }else{
+                            $json['msg'] = "启动失败";
+                            $this->assign('status', 4);
+                            break;
+                        }
+                    }else{
+                        if($order['start_status'] == 1){
+                            // 已启动
+                            $json['state'] = 1;
+                            $json['msg'] = "设备已启动";
+                            $this->assign('status', 2);
+                            break;
+                        }else{
+                            $this->assign('status', 3);
+                            // 已启动
+                            $json['msg'] = "设备启动失败";
+                            break;
+                        }
+                    }
+                }else{
+                    // 不能启动
+                    $json['msg'] = "订单无效";
+                    $this->assign('status', 6);
+                    break;
+                }
+            }while(false);
         }
         $this->display();
     }
