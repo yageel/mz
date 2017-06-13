@@ -157,6 +157,14 @@ class IndexController extends BaseController {
                     }
                 }
 
+                // 没有推广用系统设置推广
+                if(!$user_spread_id){
+                    $user_spread_id =  intval(C('basic.spread_user_id'));
+                    if($user_spread_id){
+                        $spread_info = M('admin')->where(['id'=>$user_spread_id])->find();
+                    }
+                }
+
                 // 如果没推广规则， 使用设备所有者规则
                 if(empty($rebate_info)){
                     //
@@ -205,8 +213,7 @@ class IndexController extends BaseController {
                 if($spread_info){
                     $spread_price = number_format(($package_info['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
                 }else{
-                    $spread_price =  C('basic.spread_user_id');
-                    $spread_price = $spread_price?$spread_price:0;
+                    $spread_price = 0;
                 }
 
                 $platform_price = $package_info['package_amount'] - $operational_price - $channel_price - $device_price - $spread_price;
