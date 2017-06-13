@@ -112,7 +112,7 @@ class IndexController extends BaseController {
                 }
             }
 
-            var_dump($data_json);
+            var_dump($device_status);
 
             var_dump($device_bool);
 
