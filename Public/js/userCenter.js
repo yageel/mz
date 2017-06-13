@@ -109,7 +109,7 @@ function jsApiCall(data)
                         order_sn:data.order_sn
                     }, function (result){
                         // 自动更新~
-                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', result.order_sn);
+                        window.location.href = $('input[name="starturl"]').val().replace('order_snid', data.order_sn);
                     });
                     break;
             }
