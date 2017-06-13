@@ -178,7 +178,8 @@
 
         function leftload(time){
             if(time >0 ){
-                $('.lefttime').htmL(time);
+                $('.leftblock').show();
+                $('.lefttime').html(time);
                 setTimeout(function(){time = time - 1; leftload(time);}, 1000);
             }else{
                 $('.leftblock').hide();
