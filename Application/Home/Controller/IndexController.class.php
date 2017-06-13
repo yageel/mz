@@ -106,7 +106,7 @@ class IndexController extends BaseController {
             $data_json = file_get_content($url);
             if($data_json){
                 // 记录日志
-                M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
+                M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time(),'openid'=>$this->openid]);
 
                 $device_status = json_decode($data_json, true);
                 if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
@@ -118,7 +118,7 @@ class IndexController extends BaseController {
             if($device_bool){
                 $data_json = file_get_content($url);
                 if($data_json){
-                    M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
+                    M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time(),'openid'=>$this->openid]);
                     $device_status = json_decode($data_json, true);
                     if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
                         $device_bool = false;
@@ -338,7 +338,7 @@ class IndexController extends BaseController {
                         $json['data_json'] = $data_json;
 
                         // 记录日志
-                        M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
+                        M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time(),'openid'=>$this->openid]);
                         if($data_json){
                             $data = json_decode($data_json, true);
                             if($data['code'] == 200){
