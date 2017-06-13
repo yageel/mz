@@ -119,7 +119,7 @@
 
             </div>
                 <div style="clear: both"></div>
-            <div style="clear: both; text-align: center; margin: 20px 0;">
+            <div style="clear: both; text-align: center; margin: 10px 0;">
                 <input type="hidden" name="starturl" value="{:tsurl('/index/start_device')}" />
                 <input type="hidden" name="order_sn" value="{$order[order_sn]}" />
                 <input type="hidden" name="time" value="{:time()}" />
@@ -128,10 +128,10 @@
                 <if condition="$order[status] eq 1">
                     <if condition="$status eq 1">
                         <div style="color: red; text-align: center; line-height: 26px; margin-bottom: 8px; display: none" class="leftblock">剩余：<font class="lefttime">{$times}</font> 秒</div>
-                        <div>套餐截止时间： {$expire_time}</div>
+                        <div style="margin-bottom: 12px; color: #666">套餐截止时间： {$expire_time}</div>
                         <a class="button btnVercode " style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >启动中</a>
                     <elseif  condition="$status eq 2" />
-                        <div>套餐截止时间：{$expire_time}</div>
+                        <div style="margin-bottom: 12px; color: #666">套餐截止时间：{$expire_time}</div>
                         <a class="button btnVercode "  style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >已启动</a>
                     <elseif condition="$status eq 3" />
                         <a class="button btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">启动失败</a>
