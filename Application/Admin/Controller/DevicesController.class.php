@@ -148,6 +148,7 @@ class DevicesController extends BaseController {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
+                //
                 $sign = encrypt_password($detail['qrcode'], $detail['id']);
                 $value = C('base_url')."index.php?s=/index/index/type/1/gfrom/2/qr/{$detail['qrcode']}/sign/{$sign}.html";
                 include APP_PATH."/../ThinkPHP/Library/Vendor/phpqrcode/phpqrcode.php";
