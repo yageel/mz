@@ -122,6 +122,7 @@
             <div style="clear: both; text-align: center; margin: 10px 0;">
                 <input type="hidden" name="starturl" value="{:tsurl('/index/start_device')}" />
                 <input type="hidden" name="order_sn" value="{$order[order_sn]}" />
+                <input type="hidden" name="status" value="{$status}" />
                 <input type="hidden" name="time" value="{:time()}" />
                 <input type="hidden" name="sign" value="{:md5('!@#$%^+_)(*&^'.time())}" />
 
