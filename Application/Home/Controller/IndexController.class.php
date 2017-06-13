@@ -376,7 +376,6 @@ class IndexController extends BaseController {
             }while(false);
         }
 
-        print_r($this->view->get());
         $this->display();
     }
 
