@@ -102,10 +102,12 @@ class IndexController extends BaseController {
             // 查询魔座状态
             $device_bool = true;
             $device_number = $this->device_info['machine_number'];
-            $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
-
-
+            $url = "http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}";
+            $data_json = file_get_content($url);
             if($data_json){
+                // 记录日志
+                M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
+
                 $device_status = json_decode($data_json, true);
                 if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
                     $device_bool = false;
@@ -114,8 +116,9 @@ class IndexController extends BaseController {
 
             // 重试一次
             if($device_bool){
-                $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+                $data_json = file_get_content($url);
                 if($data_json){
+                    M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
                     $device_status = json_decode($data_json, true);
                     if($device_status['code'] == 200 && $device_status['armchairstatus']['status'] == 'false'){
                         $device_bool = false;
@@ -330,9 +333,12 @@ class IndexController extends BaseController {
                         $time = $order['package_time'] * 60;
                         $device_detail = M('devices')->where(['id'=>$order['device_id']])->find();
                         $device_number = $device_detail['machine_number'];
-                        $json['url']="http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
-                        $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}");
+                        $url = "http://life.smartline.com.cn/lifeproclient/armchair/start/{$username}/{$pwd}/{$device_number}/{$time}";
+                        $data_json = file_get_content($url);
                         $json['data_json'] = $data_json;
+
+                        // 记录日志
+                        M('log')->add(["url"=>$url, "data"=>$data_json,"create_time"=>time()]);
                         if($data_json){
                             $data = json_decode($data_json, true);
                             if($data['code'] == 200){
