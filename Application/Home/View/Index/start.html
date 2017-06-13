@@ -115,7 +115,8 @@
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
-                <span style="color: #666;">魔座编号： {$device_info.id}    <span style="color: red; margin-left: 20px; display: none" class="leftblock">剩余：<i class="lefttime"></i>秒</span></span>
+                <span style="color: #666;">魔座编号： {$device_info.id}   </span>
+
             </div>
                 <div style="clear: both"></div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
@@ -126,6 +127,7 @@
 
                 <if condition="$order[status] eq 1">
                     <if condition="$order[start_status] eq '0'">
+                        <div style="color: red; text-align: center; line-height: 26px; margin-bottom: 8px; display: none" class="leftblock">剩余：<font class="lefttime">0</font> 秒</div>
                         <a class="button btnVercode " id="btnVercode22" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >启动</a>
                     <elseif  condition="$order[start_status] eq 1" />
                         <a class="button btnVercode" style="width: 120px; background: #169bd5; line-height: 32px; height: 32px;">已启动</a>
