@@ -428,9 +428,10 @@ class BaseController extends Controller {
             return false;
         } else {
             // 强制公众号2需要授权
-            $snsapi_base = 'snsapi_userinfo';
+            $snsapi_base = 'snsapi_base';
+
             if( $type == 2 ){
-                $snsapi_base = 'snsapi_base';
+                $snsapi_base = 'snsapi_userinfo';
             }
 
             $url = $weObj->getOauthRedirect('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], uniqid(),$snsapi_base);
