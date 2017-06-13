@@ -127,7 +127,6 @@
 
                 <if condition="$order[status] eq 1">
                     <if condition="$status eq 1">
-
                         <div style="color: red; text-align: center; line-height: 26px; margin-bottom: 8px; display: none" class="leftblock">剩余：<font class="lefttime">{$times}</font> 秒</div>
                         <div style="margin-bottom: 12px; color: #666">套餐截止时间： {$expire_time}</div>
                         <a class="button btnVercode " style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >启动中</a>
@@ -158,9 +157,10 @@
         </div>
     </div>
 </block>
+
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
-    <if condtion="$order[status] eq 1 AND $status eq 1">
+    <if condition="$order[status] eq 1 AND $status eq 1">
         <script type="text/javascript">
 
             function leftload(time){
@@ -173,7 +173,7 @@
                 }
             }
 
-            leftload({$times});
+            leftload('{$times}');
         </script>
     </if>
 </block>
