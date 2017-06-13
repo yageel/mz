@@ -127,9 +127,25 @@
 
                 <if condition="$order[status] eq 1">
                     <if condition="$status eq 1">
+
                         <div style="color: red; text-align: center; line-height: 26px; margin-bottom: 8px; display: none" class="leftblock">剩余：<font class="lefttime">{$times}</font> 秒</div>
                         <div style="margin-bottom: 12px; color: #666">套餐截止时间： {$expire_time}</div>
                         <a class="button btnVercode " style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >启动中</a>
+                        <script type="text/javascript">
+
+                            function leftload(time){
+                                if(time >0 ){
+                                    $('.leftblock').show();
+                                    $('.lefttime').html(time);
+                                    setTimeout(function(){time = time - 1; leftload(time);}, 1000);
+                                }else{
+                                    $('.leftblock').hide();
+                                }
+                            }
+
+                            leftload({$times});
+                        </script>
+
                     <elseif  condition="$status eq 2" />
                         <div style="margin-bottom: 12px; color: #666">套餐截止时间：{$expire_time}</div>
                         <a class="button btnVercode "  style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;" >已启动</a>
@@ -159,16 +175,5 @@
 </block>
 <block name="js">
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
-    <script type="text/javascript">
 
-        function leftload(time){
-            if(time >0 ){
-                $('.leftblock').show();
-                $('.lefttime').html(time);
-                setTimeout(function(){time = time - 1; leftload(time);}, 1000);
-            }else{
-                $('.leftblock').hide();
-            }
-        }
-    </script>
 </block>
