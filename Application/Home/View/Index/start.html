@@ -115,7 +115,7 @@
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
-                <span style="color: #666;">魔座编号： {$device_info.id}</span>
+                <span style="color: #666;">魔座编号： {$device_info.id}    <span style="color: red; margin-left: 20px; display: none" class="leftblock">剩余：<i class="lefttime"></i>秒</span></span>
             </div>
                 <div style="clear: both"></div>
             <div style="clear: both; text-align: center; margin: 20px 0;">
@@ -176,13 +176,24 @@
     <script src="__PUBLIC__/js/userCenter.js?v=__VERSION__" type="text/javascript"></script>
     <script type="text/javascript">
 
+        function leftload(time){
+            if(time >0 ){
+                $('.lefttime').htmL(time);
+                setTimeout(function(){time = time - 1; leftload(time);}, 1000);
+            }else{
+                $('.leftblock').hide();
+            }
+        }
+
         $('.btnVercode').click(function(){
             if($(this).text() == '启动'){
                 tools.ajax($('input[name="starturl"]').val(),{
                     order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
+
                         $('#btnVercode22').html(result.msg);
+
                     }else{
                         $('#btnVercode22').html("启动失败");
                         tools.alert(result.msg)
