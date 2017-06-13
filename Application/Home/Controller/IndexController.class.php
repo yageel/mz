@@ -103,12 +103,20 @@ class IndexController extends BaseController {
             $device_bool = true;
             $device_number = $this->device_info['machine_number'];
             $data_json = file_get_content("http://life.smartline.com.cn/lifeproclient/armchair/status/load/{$device_number}");
+
+
             if($data_json){
                 $device_status = json_decode($data_json, true);
                 if($device_status['code'] == 200 && !$device_status['armchairstatus']['status']){
                     $device_bool = false;
                 }
             }
+
+            var_dump($data_json);
+
+            var_dump($device_bool);
+
+            die();
 
             // 重试一次
             if($device_bool){
