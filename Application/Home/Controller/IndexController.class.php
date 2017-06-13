@@ -315,6 +315,9 @@ class IndexController extends BaseController {
         $this->assign('status', 6);
         if($order_sn){
             $order = M('order')->where(['order_sn'=>$order_sn])->find();
+
+            $this->assign("expire_time", date("Y-m-d H:i:s", $order['update_time']+($order['package_time'] * 60)));
+            $this->assign('times', $order['package_time'] * 60);
             $this->assign('order', $order);
             do{
                 // 如果状态正常则
@@ -335,6 +338,7 @@ class IndexController extends BaseController {
                             if($data['code'] == 200){
                                 // 启动成功~
                                 M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
+                                $this->assign("expire_time", date("Y-m-d H:i:s", time()+($order['package_time'] * 60)));
                                 $this->assign('status', 1);
                                 break;
                             }else{
