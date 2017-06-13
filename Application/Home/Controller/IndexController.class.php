@@ -323,6 +323,7 @@ class IndexController extends BaseController {
         $order_sn = I('request.order_sn','','trim');
         $json = $this->ajax_json();
         $json['state'] = 99;
+        $json['times'] = 0;
         do{
             if($order_sn){
                 $order = M('order')->where(['order_sn'=>$order_sn])->find();
@@ -345,6 +346,7 @@ class IndexController extends BaseController {
                                 // 启动成功~
                                 M('order')->where(['id'=>$order['id']])->save(['start_status'=>1,'send_status'=>1, 'start_log'=>"{$data['message']}", 'update_time'=>time()]);
                                 $json['state'] = 1;
+                                $json['times'] = $order['package_time'] * 60;
                                 $json['msg'] = "启动成功";
                                 break;
                             }else{

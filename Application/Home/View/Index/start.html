@@ -191,7 +191,7 @@
                     order_sn:$('input[name="order_sn"]').val()
                 }, function (result){
                     if(result.state == 1){
-
+                        leftload(result.times);
                         $('#btnVercode22').html(result.msg);
 
                     }else{
