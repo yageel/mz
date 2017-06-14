@@ -207,11 +207,14 @@ class DevicesController extends BaseController {
             setlocale(LC_ALL, 'zh_CN');
             do{
                 $error_msg = '';
+                $success_msg = '';
+                $i = 0;
+                $ei = 0;
+                $si = 0;
                 $file_path = $_FILES['file']['tmp_name'];
                 if (file_exists($file_path)) {
                     $fp = fopen($file_path, "r");
-                    $i = 0;
-                    $ei = 0;
+
                     while ($line = fgetcsv($fp, 10240, "\t")) {
                         usleep(10);// 10微秒
 
@@ -326,10 +329,10 @@ class DevicesController extends BaseController {
                                 'update_time' => time(),
                                 'last_time' => 0,
                                 'city_id' => $city_id,
-                                'shop_name' => $item[3],
-                                'shop_address' => $item[4],
-                                'lon' => '',
-                                'lat' => ''
+                                'shop_name' => "{$item[3]}",
+                                'shop_address' => "{$item[4]}",
+                                'lon' => "{$item[6]}",
+                                'lat' => "{$item[5]}"
                             ]);
                         }
                         if (!$channel_user_id) {
@@ -384,6 +387,17 @@ class DevicesController extends BaseController {
                         if($device_info){
                             $device_id = $device_info['id'];
                         }else{
+                            if(empty($item[0])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，设备编号为空<br/>";
+                                continue;
+                            }
+
+                            if(empty($item[1])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，机器串号为空<br/>";
+                                continue;
+                            }
                             $device_id = M('devices')->add(
                                 [
                                     'device_number'=>"{$item[0]}",
@@ -404,13 +418,18 @@ class DevicesController extends BaseController {
                             $error_msg .= "第{$i}行，设备添加失败<br/>";
                             continue;
                         }
+                        $si++;
+                        $success_msg .="第{$i}行，设备添加成功<br/>";
 
                     }
                 }
             }while(false);
 
-
-            return ;
+            $this->assign('i', $i); // 总执行
+            $this->assign('ei', $ei); // 失败行
+            $this->assign('si', $si); // 成功行
+            $this->assign('error_msg', $error_msg); // 失败详情
+            $this->assign("success_msg", $success_msg); // 成功详情
         }
         $this->display();
     }
