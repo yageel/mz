@@ -65,7 +65,7 @@ class DevicesController extends BaseController {
             }else{
                 // 添加必要字段
                 $data['create_time'] = time();
-                $data['qrcode'] = uniqid() . Strings::randString(4) . Strings::randString(4);
+                $data['qrcode'] = uniqid() . random(4) . random(4);
                 $res = M('devices')->add($data);
             }
 
@@ -170,5 +170,248 @@ class DevicesController extends BaseController {
         $id = I('request.id',0,'intval');
         M('devices')->where(['id'=>$id])->save(['status'=>4, 'update_time'=>time()]);
         return $this->success("操作成功~");
+    }
+
+    /**
+     * 压缩二维码
+     */
+    public function zip(){
+        function addFileToZip($path,$zip){
+            $handler=opendir($path); //打开当前文件夹由$path指定。
+            while(($filename=readdir($handler))!==false){
+                if($filename != "." && $filename != ".."){//文件夹文件名字为'.'和‘..’，不要对他们进行操作
+                    if(is_dir($path."/".$filename)){// 如果读取的某个对象是文件夹，则递归
+                        addFileToZip($path."/".$filename, $zip);
+                    }else{ //将文件加入zip对象
+                        $zip->addFile($path."/".$filename);
+                    }
+                }
+            }
+            @closedir($path);
+        }
+
+        $zip=new ZipArchive();
+        if($zip->open('images.zip', ZipArchive::OVERWRITE)=== TRUE){
+            addFileToZip('images/', $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
+            $zip->close(); //关闭处理的zip文件
+        }
+    }
+
+    /**
+     * 导入设备
+     */
+    public function import(){
+        if(IS_POST){
+            set_time_limit(0);
+            header("Content-type: text/html; charset=utf-8");
+            setlocale(LC_ALL, 'zh_CN');
+            do{
+                $error_msg = '';
+                $file_path = $_FILES['file']['tmp_name'];
+                if (file_exists($file_path)) {
+                    $fp = fopen($file_path, "r");
+                    $i = 0;
+                    $ei = 0;
+                    while ($line = fgetcsv($fp, 10240, "\t")) {
+                        usleep(10);// 10微秒
+
+                        $info = iconv('gb2312', "utf-8//IGNORE", $line[0]);
+                        if ($info === false) {
+                            $info = $line[0];
+                        }
+
+                        if ($i == 0) {
+                            if (strpos($info, "设备编号") === false) {
+                                var_dump($info);
+                                $error_msg .= '请上传标准CSV文件2';
+                                break;
+                            }
+                            $i++;
+                            continue;
+                        }
+                        $i++;
+                        // 0设备编号	1机器串码	2归属城市	3门店名称	4门店地址	5门店经度	6门店纬度	7运营人员	8运营电话	9渠道人员	10渠道电话	11魔座人员	12魔座电话	13连接方式
+
+                        $item = explode(",", $info);
+                        //print_r($item);
+                        if (count($item) != 14) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，只有" . count($item) . "列，不标准<br/>";
+                            continue;
+                        }
+                        foreach($item as $k=>$val){
+                            $item[$k] = trim($val);
+                        }
+
+                        // 运营人员添加
+                        $operational_user = M('admin')->where(['mobile'=>trim($item[8])])->find();
+                        if($operational_user){
+                            $operational_user_id = $operational_user['id'];
+                        }else{
+                            if(empty($item[7])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，运营人员为空<br/>";
+                                continue;
+                            }
+
+                            if(empty($item[8])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，运营电话为空<br/>";
+                                continue;
+                            }
+
+                            /*
+                             'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
+                            'shop_name', 'shop_address', 'lon', 'lat', 'openid', 'status', 'create_time', 'update_time', 'last_time'
+                            */
+                            $salt = random(12);
+                            $operational_user_id = M('admin')->add([
+                                'username' => $item[8],
+                                'contact_name' => $item[7],
+                                'salt' => $salt,
+                                'pwd' => encrypt_password('123456', $salt),
+                                'role' => 2,
+                                'mobile' => $item[8],
+                                'create_time' => time(),
+                                'update_time' => time(),
+                                'last_time' => 0
+                            ]);
+                        }
+
+                        if (!$operational_user_id) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，运营人员添加失败<br/>";
+                            continue;
+                        }
+
+                        // 渠道人员添加
+                        $channel_user = M('admin')->where(['mobile'=>trim($item[10])])->find();
+                        if($channel_user){
+                            $channel_user_id = $channel_user['id'];
+                        }else{
+                            /*
+                             'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
+                            'shop_name', 'shop_address', 'lon', 'lat', 'openid', 'status', 'create_time', 'update_time', 'last_time'
+                            */
+
+                            $city = M('area')->where(['city_name'=>$item[2]])->find();
+                            if(!$city){
+                                $ei++;
+                                $error_msg .= "第{$i}行，【$item[2]】没找到对应的城市<br/>";
+                                continue;
+                            }
+                            $city_id = $city['id'];
+
+                            if(empty($item[9])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，渠道人员为空<br/>";
+                                continue;
+                            }
+
+                            if(empty($item[10])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，渠道电话为空<br/>";
+                                continue;
+                            }
+
+                            $salt = random(12);
+                            $channel_user_id = M('admin')->add([
+                                'username' => $item[10],
+                                'contact_name' => $item[9],
+                                'salt' => $salt,
+                                'pwd' => encrypt_password('123456', $salt),
+                                'role' => 3,
+                                'mobile' => $item[9],
+                                'create_time' => time(),
+                                'update_time' => time(),
+                                'last_time' => 0,
+                                'city_id' => $city_id,
+                                'shop_name' => $item[3],
+                                'shop_address' => $item[4],
+                                'lon' => '',
+                                'lat' => ''
+                            ]);
+                        }
+                        if (!$channel_user_id) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，渠道人员添加失败<br/>";
+                            continue;
+                        }
+
+                        // 魔座人员添加
+                        $device_user = M('admin')->where(['mobile'=>trim($item[12])])->find();
+                        if($device_user){
+                            $device_user_id = $device_user['id'];
+                        }else{
+                            /*
+                             'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
+                            'shop_name', 'shop_address', 'lon', 'lat', 'openid', 'status', 'create_time', 'update_time', 'last_time'
+                            */
+
+                            if(empty($item[11])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，魔座人员为空<br/>";
+                                continue;
+                            }
+
+                            if(empty($item[12])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，魔座电话为空<br/>";
+                                continue;
+                            }
+                            $salt = random(12);
+                            $device_user_id = M('admin')->add([
+                                'username' => $item[12],
+                                'contact_name' => $item[11],
+                                'salt' => $salt,
+                                'pwd' => encrypt_password('123456', $salt),
+                                'role' => 4,
+                                'mobile' => $item[12],
+                                'create_time' => time(),
+                                'update_time' => time(),
+                                'last_time' => 0,
+                            ]);
+                        }
+
+                        if (!$channel_user_id) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，魔座人员添加失败<br/>";
+                            continue;
+                        }
+
+                        // 设备信息
+                        $device_info = M('devices')->where(['machine_number'=>$item[1]])->find();
+                        if($device_info){
+                            $device_id = $device_info['id'];
+                        }else{
+                            $device_id = M('devices')->add(
+                                [
+                                    'device_number'=>"{$item[0]}",
+                                    'machine_number'=>"{$item[1]}",
+                                    'user_id'=>"{$device_user_id}",
+                                    'operational_user_id'=>"{$operational_user_id}",
+                                    'channel_user_id'=>"{$channel_user_id}",
+                                    'link_mode'=>"{$item[13]}",
+                                    'qrcode'=>uniqid() . random(4) . random(4),
+                                    'create_time'=>time(),
+                                    'update_time'=>time()
+                                ]
+                            );
+                        }
+
+                        if (!$device_id) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，设备添加失败<br/>";
+                            continue;
+                        }
+
+                    }
+                }
+            }while(false);
+
+
+            return ;
+        }
+        $this->display();
     }
 }
