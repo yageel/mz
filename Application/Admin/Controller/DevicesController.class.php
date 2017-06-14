@@ -212,6 +212,7 @@ class DevicesController extends BaseController {
                 $ei = 0;
                 $si = 0;
                 $file_path = $_FILES['file']['tmp_name'];
+
                 if (file_exists($file_path)) {
                     $fp = fopen($file_path, "r");
 
@@ -405,7 +406,7 @@ class DevicesController extends BaseController {
                                     'user_id'=>"{$device_user_id}",
                                     'operational_user_id'=>"{$operational_user_id}",
                                     'channel_user_id'=>"{$channel_user_id}",
-                                    'link_mode'=>"{$item[13]}",
+                                    'link_mode'=>strtolower($item[13])=='wifi'?1:2,
                                     'qrcode'=>uniqid() . random(4) . random(4),
                                     'create_time'=>time(),
                                     'update_time'=>time()
@@ -424,7 +425,7 @@ class DevicesController extends BaseController {
                     }
                 }
             }while(false);
-
+            $this->assign('show', true);
             $this->assign('i', $i); // 总执行
             $this->assign('ei', $ei); // 失败行
             $this->assign('si', $si); // 成功行
