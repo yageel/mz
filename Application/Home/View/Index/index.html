@@ -91,6 +91,32 @@
             margin-top: 6px;
             color: #666;
         }
+
+        .text-item-content{
+            padding:0.1rem 0rem;
+        }
+
+        .button2, a.button2 {
+            color: #FEFEFE;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            line-height: 42px;
+            border-radius: 5px;
+            height: 42px;
+            overflow: hidden;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            overflow: hidden;
+            background: linear-gradient(45deg, #4ada9c, #41bdac);
+            background: -webkit-linear-gradient(45deg, #4ada9c, #41bdac);
+        }
+
         .product_list{ text-align: center; clear: both; height: 260px;}
         .product_list div.product_block{ margin: 0 auto; margin: 6px; border-top: #ddd 1px solid; text-align: center;}
         .product_list div.product_block div.product_item{ float: left; margin: 6px 1px; width: 32%; border: #efefef 1px solid; }
@@ -138,14 +164,15 @@
                     </li>
                     </volist>
                 </ul>
-            </div>
                 <div style="clear: both"></div>
-            <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
-                <a class="button" id="btnVercode2" style="width: 120px; margin-top: 12px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
+            </div>
+            <div style="clear: both; text-align: center; margin: 12px 0;">
+                <a class="button2" id="btnVercode" style="width: 160px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
+                <a class="button2" id="btnVercode2" style="width: 160px; background: #169bd5;  line-height: 32px; height: 32px;" href="{:tsurl('/index/spread')}">他人推荐</a>
+                <div style="clear: both"></div>
             </div>
 
-            <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px;">
+            <div class="text-item-content1 wrap" style="padding: 0 6px; color: #bababa; font-size: 12px; line-height: 20px;">
                 {:C('basic.web_text')}
             </div>
 

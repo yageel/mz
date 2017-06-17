@@ -91,7 +91,7 @@
             margin-top: 6px;
             color: #666;
         }
-        .spread_block{ clear: both; height: 120px;border: 1px solid #ddd; width: 96%; overflow: hidden;  margin: 12px auto; text-align: left; }
+        .spread_block{ clear: both; max-height: 120px;border: 1px solid #ddd; width: 96%; overflow: hidden;  margin: 12px auto; text-align: left; }
         .spread_block .spread_list{ margin: 12px; overflow: scroll; }
         .spread_block .spread_list div{ clear: both; float: left; line-height: 26px; width: 98%;}
         .product_list{ text-align: center; clear: both; height: 160px;}
@@ -152,12 +152,12 @@
                         </volist>
                     </div>
                 </div>
-                <div style="clear: both; text-align: center; margin: 20px 0;">
-                    <a class="button" id="btnVercode" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
+                <div style="clear: both; text-align: center; margin:12px 0;">
+                    <a class="button" id="btnVercode" style="width: 160px; background: #ff9933; line-height: 32px; height: 32px;">点击支付</a>
                 </div>
 
-            <div class="text-item-content1 wrap" style="padding: 12px; color: #bababa; font-size: 12px; line-height: 20px; display: none;">
-               {:C('basic.web_text')}
+            <div class="text-item-content1 wrap" style="padding: 0 12px; color: #bababa; font-size: 12px; line-height: 20px;">
+                {:C('basic.web_text')}
             </div>
 
             <div class="product_list">
