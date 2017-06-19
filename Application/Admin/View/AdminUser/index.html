@@ -23,7 +23,7 @@
             <!--//运营模块-->
             <div id="tab-1" class="tab-pane <if condition='$tab eq ""  OR $tab eq "operational"'>active</if>">
                 <div class="panel-body">
-                    <div class="m-b-md"><a href="{:U('/admin_user/import',['tab'=>'operational'])}" target="_self" class="btn btn-primary ">导入运营</a>  <a href="{:U('/admin_user/edit',['tab'=>'operational'])}" target="_self" class="btn btn-primary ">新建运营</a> </div>
+                    <div class="m-b-md"><if condition="$admin[role] eq 1"><a href="{:U('/admin_user/import',['tab'=>'operational'])}" target="_self" class="btn btn-primary ">导入运营</a>  <a href="{:U('/admin_user/edit',['tab'=>'operational'])}" target="_self" class="btn btn-primary ">新建运营</a> </if></div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -71,7 +71,7 @@
             <!--//渠道模块-->
             <div id="tab-2" class="tab-pane <if condition='$tab eq "channel"'>active</if>">
                 <div class="panel-body">
-                    <div class="m-b-md"><a href="{:U('/admin_user/import',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">导入渠道</a>  <a href="{:U('/admin_user/edit',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">新建渠道</a> </div>
+                    <div class="m-b-md"><if condition="$admin[role] eq 1"><a href="{:U('/admin_user/import',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">导入渠道</a>  <a href="{:U('/admin_user/edit',['tab'=>'channel'])}" target="_self" class="btn btn-primary ">新建渠道</a> </if></div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -121,7 +121,7 @@
             <!--//模座模块-->
             <div id="tab-3" class="tab-pane <if condition='$tab eq "device"'>active</if>">
                 <div class="panel-body">
-                    <div class="m-b-md"><a href="{:U('/admin_user/import',['tab'=>'device'])}" target="_self" class="btn btn-primary ">导入模座</a>  <a href="{:U('/admin_user/edit',['tab'=>'device'])}" target="_self" class="btn btn-primary ">新建模座</a> </div>
+                    <div class="m-b-md"><if condition="$admin[role] eq 1"><a href="{:U('/admin_user/import',['tab'=>'device'])}" target="_self" class="btn btn-primary ">导入模座</a>  <a href="{:U('/admin_user/edit',['tab'=>'device'])}" target="_self" class="btn btn-primary ">新建模座</a> </if></div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
