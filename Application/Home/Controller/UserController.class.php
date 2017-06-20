@@ -338,16 +338,9 @@ class UserController extends BaseController {
         if($shop_list){
             $html = '';
             foreach($shop_list as $shop){
-                $device_list = M("devices")->where(['channel_user_id'=>$shop['id'],"status"=>1])->select();
-                if($device_list){
-                    $html .= '<div class="group">';
-                    $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" value="1" /> '.$shop['shop_name'].'</div>';
-                    foreach($device_list as $device){
-                        $html .= '<div class="input_block"><input type="checkbox" id="id'.$device['id'].'" class="spread_id" name="spread_id[]" value="{$device.id}" />'.$device['id'].'</div>';
-                    }
-                    $html .= '</div>';
-                }
-
+                $html .= '<div class="group">';
+                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" name="spread_id[]" value="1" /> '.$shop['shop_name'].'</div>';
+                $html .= '</div>';
             }
         }
 
@@ -373,13 +366,18 @@ class UserController extends BaseController {
         $json = $this->ajax_json();
         do{
             if($spread_id ){
+
                 foreach($spread_id as $spread){
-                    $device = M('devices_spread')->where(['device_id'=>$spread, 'user_id'=>$this->users['id']])->find();
-                    if($device){
-                        M('devices_spread')->where(['id'=>$device['id']])->save(['update_time'=>time()]);
-                    }else{
-                        M('devices_spread')->add(['device_id'=>$spread, 'user'=>$this->users['id'], 'update_time'=>time(),'create_time'=>time()]);
+                    $spread_list = M('devices')->where(['user_id'=>$spread, "status"=>1])->field('id')->select();
+                    foreach($spread_list as $device_info){
+                        $device = M('devices_spread')->where(['device_id'=>$device_info['id'], 'user_id'=>$this->users['id']])->find();
+                        if($device){
+                            M('devices_spread')->where(['id'=>$device_info['id']])->save(['update_time'=>time()]);
+                        }else{
+                            M('devices_spread')->add(['device_id'=>$device_info['id'], 'user'=>$this->users['id'], 'update_time'=>time(),'create_time'=>time()]);
+                        }
                     }
+
                 }
             }
 

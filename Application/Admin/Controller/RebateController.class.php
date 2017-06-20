@@ -85,17 +85,21 @@ class RebateController extends BaseController {
         }
         if($id){
             $detail = M('rebate')->where(['id'=>$id])->find();
-            $user_list = M('admin')->where(['rebate_id'=>$detail['id']])->select();
-            $subscribe = [];
-            foreach($user_list as $user){
-                $subscribe[] = $user['id'];
-            }
-            $detail['subscribe_list'] = $subscribe;
+            $detail['subscribe_list'] = explode(",", $detail['subscribe_list']);
             $this->assign('detail', $detail);
         }
 
-        $user_list = M('admin')->where(['status'=>['lt', 4], 'role'=>['in',[2,3,4,5]]])->order("role ASC")->select();
-        $this->assign('user_list', $user_list);
+        $limit = 50;
+        $where = ["status"=>1];
+        if($detail['subscribe_list']){
+            // array('like',array('%thinkphp%','%tp'),'OR');
+            $where['id'] = ['in',$detail['subscribe_list'],"OR"];
+            if(count($detail['subscribe_list']) > 50){
+                $limit = count($detail['subscribe_list']) + 10;
+            }
+        }
+        $device_list = M("devices")->where($where)->order("id DESC")->limit(20)->select();
+        $this->assign('device_list', $device_list);
         $this->display();
     }
 }
