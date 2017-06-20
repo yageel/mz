@@ -153,49 +153,19 @@ class IndexController extends BaseController {
 
                 // 优先级 1. 推广分成， 2. 设备所有者分成, 3. 渠道分成 4. 运营分成
                 if($spread_id){
-                    $spread_info = M('admin')->where(['id'=>$spread_id])->find();
-                    if($spread_info){
-                        $user_spread_id = $spread_id;
-                        if($spread_info['rebate_id']){
-                            $rebate_info = M('rebate')->where(['id'=>$spread_info['rebate_id'],'status'=>1])->find();
-                        }
-                    }
+                    $user_spread_id = $spread_id;
                 }
 
                 // 没有推广用系统设置推广
                 if(!$user_spread_id){
                     $user_spread_id =  intval(C('basic.spread_user_id'));
-                    if($user_spread_id){
-                        $spread_info = M('admin')->where(['id'=>$user_spread_id])->find();
-                    }
                 }
 
-                // 如果没推广规则， 使用设备所有者规则
-                if(empty($rebate_info)){
-                    //
-                    $device_user = M('admin')->where(['id'=>$user_channel_id])->find();
-                    if($device_user['rabate_id']){
-                        $rebate_info = M('rebate')->where(['id'=>$device_user['rabate_id'],'status'=>1])->find();
-                    }
+                // 获取推广链接
+                if($this->device_info['rebate_id']){
+                    $rebate_info = M('rebate')->where(['id'=>$this->device_info['rebate_id']])->find();
                 }
 
-                // 如果没推广规则， 使用渠道所有者规则
-                if(empty($rebate_id)){
-                    //
-                    $channel_user = M('admin')->where(['id'=>$user_channel_id])->find();
-                    if($channel_user['rabate_id']){
-                        $rebate_info = M('rebate')->where(['id'=>$channel_user['rabate_id'],'status'=>1])->find();
-                    }
-                }
-
-                // 如果没推广规则， 使用运营所有者规则
-                if(empty($rebate_id)){
-                    //
-                    $operational_user = M('admin')->where(['id'=>$user_operational_id])->find();
-                    if($operational_user['rabate_id']){
-                        $rebate_info = M('rebate')->where(['id'=>$operational_user['rabate_id']['rabate_id'],'status'=>1])->find();
-                    }
-                }
 
                 // 默认系统返利规则
                 if(! $rebate_info ){
@@ -215,7 +185,7 @@ class IndexController extends BaseController {
                 $operational_price = number_format(($package_info['package_amount'] * $rebate_info['operational_rebate'] / 100),2,'.','');
                 $channel_price = number_format(($package_info['package_amount'] * $rebate_info['channel_rebate'] / 100),2,'.','');
                 $device_price = number_format(($package_info['package_amount'] * $rebate_info['device_rebate'] / 100),2,'.','');
-                if($spread_info){
+                if($user_spread_id){
                     $spread_price = number_format(($package_info['package_amount'] * $rebate_info['spread_rebate'] / 100),2,'.','');
                 }else{
                     $spread_price = 0;

@@ -15,7 +15,7 @@ class RebateController extends BaseController {
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach($list as $i=>$item){
-            $list[$i]['user_list'] = M('admin')->where(['rebate_id'=>$item['id'],'status'=>['lt', 4]])->select();
+            $list[$i]['subscribe_list'] = M("devices")->where(['rebate_id'=>$item['id']])->field('id')->select();
         }
         $this->assign('page', $show);
         $this->assign('list', $list);
@@ -65,15 +65,15 @@ class RebateController extends BaseController {
 
                 if($data['subscribe']){
                     // 处理现有的
-                    M('admin')->where(['id'=>['in',$data['subscribe']]])->save(['rebate_id'=>$id]);
-                    M('admin')->where(['rebate_id'=>$id, 'id'=>['NOT IN', $data['subscribe']]])->save(['rebate_id'=>0]);
+                    M('devices')->where(['id'=>['in',$data['subscribe']]])->save(['rebate_id'=>$id]);
+                    M('devices')->where(['rebate_id'=>$id, 'id'=>['NOT IN', $data['subscribe']]])->save(['rebate_id'=>0]);
                 }
             }else{
                 $data['create_time'] = time();
                 $data['rebate_type'] = 1;
                 $res = M('rebate')->add($data);
                 if($res && $data['subscribe']){
-                    M('admin')->where(['id'=>['in',$data['subscribe']]])->save(['rebate_id'=>$res]);
+                    M('devices')->where(['id'=>['in',$data['subscribe']]])->save(['rebate_id'=>$res]);
                 }
             }
 
@@ -85,20 +85,25 @@ class RebateController extends BaseController {
         }
         if($id){
             $detail = M('rebate')->where(['id'=>$id])->find();
-            $detail['subscribe_list'] = explode(",", $detail['subscribe_list']);
+
+            $detail['subscribe_list'] = M("devices")->where(['rebate_id'=>$id])->field('id')->select();;
             $this->assign('detail', $detail);
         }
 
+        $ids = [];
         $limit = 50;
         $where = ["status"=>1];
         if($detail['subscribe_list']){
-            // array('like',array('%thinkphp%','%tp'),'OR');
-            $where['id'] = ['in',$detail['subscribe_list'],"OR"];
-            if(count($detail['subscribe_list']) > 50){
-                $limit = count($detail['subscribe_list']) + 10;
+            foreach($detail['subscribe_list'] as $device){
+                $ids[] = $device['id'];
+            }
+            $where['id'] = ['in',$ids,"OR"];
+            if(count($ids) > 50){
+                $limit = count($ids) + 10;
             }
         }
-        $device_list = M("devices")->where($where)->order("id DESC")->limit(20)->select();
+        $device_list = M("devices")->where($where)->order("id DESC")->limit($limit)->select();
+        $this->assign('ids', $ids);
         $this->assign('device_list', $device_list);
         $this->display();
     }

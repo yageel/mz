@@ -38,7 +38,7 @@
                     <td>{$item.device_rebate}%</td>
                     <td>{$item.spread_rebate}%</td>
                     <td>{$item.platform_rebate}%</td>
-                    <td><volist name="item[user_list]" id="user">【{:admin_user_role($user[role])}】{$user.contact_name},</volist></td>
+                    <td><volist name="item[subscribe_list]" id="device">【{:admin_user(device_info($device[id])[user_id],false)[shop_name]}】{$device.id},</volist></td>
                     <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq '0'"/><font color="red">异常</font><else/>已删除</if></td>
                     <td class="center">
                       <a href="{:U('/rebate/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>

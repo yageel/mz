@@ -113,6 +113,12 @@ function package_info($package_id=0, $show=true){
     }
 }
 
+function device_info($device_id=0){
+    $info = M('devices')->where(['id'=>$device_id])->find();
+    return $info;
+
+}
+
 /**
  * 获取城市信息~
  * @param $city_id

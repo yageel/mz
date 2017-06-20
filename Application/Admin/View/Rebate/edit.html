@@ -65,8 +65,8 @@
                                 <volist name="device_list" id="device">
                                 <label for="id{$device.id}" style=" border: 1px solid #ddd; font-weight: normal; line-height: 20px; margin: 6px; padding: 6px;">
                                     <input type="checkbox" id="id{$device.id}" name="subscribe[]" style="height: 20px!important; width: 20px!important; float: left; line-height: 20px;"
-                                    <if condition="in_array($device[id], (array)$detail[subscribe_list])">checked</if>  value="{$device.id}" class="form-control input-s"  maxlength="6" />
-                                    <span style="padding-bottom: -4px;">【{:admin_user($device[user_id],false)['shop_name']}】[{$device.device_number}]</span> </label>
+                                    <if condition="in_array($device[id], $ids)">checked</if>  value="{$device.id}" class="form-control input-s"  maxlength="6" />
+                                    <span style="padding-bottom: -4px;">【{:admin_user($device[user_id],false)[shop_name]}】[{$device.device_number}]</span> </label>
                                 </volist>
                                 <span class="help-block m-b-none">*设备推广分成</span>
                             </div>
