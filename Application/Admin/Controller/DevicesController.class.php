@@ -278,7 +278,8 @@ class DevicesController extends BaseController {
                                 'mobile' => $item[8],
                                 'create_time' => time(),
                                 'update_time' => time(),
-                                'last_time' => 0
+                                'last_time' => 0,
+                                'status' => 1
                             ]);
                         }
 
@@ -333,7 +334,8 @@ class DevicesController extends BaseController {
                                 'shop_name' => "{$item[3]}",
                                 'shop_address' => "{$item[4]}",
                                 'lon' => "{$item[6]}",
-                                'lat' => "{$item[5]}"
+                                'lat' => "{$item[5]}",
+                                'status'=>1
                             ]);
                         }
                         if (!$channel_user_id) {
@@ -374,6 +376,7 @@ class DevicesController extends BaseController {
                                 'create_time' => time(),
                                 'update_time' => time(),
                                 'last_time' => 0,
+                                'status'=>1
                             ]);
                         }
 
@@ -409,7 +412,8 @@ class DevicesController extends BaseController {
                                     'link_mode'=>strtolower($item[13])=='wifi'?1:2,
                                     'qrcode'=>uniqid() . random(4) . random(4),
                                     'create_time'=>time(),
-                                    'update_time'=>time()
+                                    'update_time'=>time(),
+                                    'status'=>1
                                 ]
                             );
                         }
