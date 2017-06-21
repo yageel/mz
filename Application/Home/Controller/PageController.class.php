@@ -1,6 +1,6 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
-   
+class PageController extends Controller {
+
 }
