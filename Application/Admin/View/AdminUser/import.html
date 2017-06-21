@@ -7,7 +7,7 @@
 
     <div class="col-sm-12">
       <div class="ibox float-e-margins">
-          <div class=""> <a href="{:U('/admin_user/index',['tab'=>$tab])}" target="_self" class="btn btn-primary ">返回</a>  <a href="{:U('/admin_user/index',['tab'=>$tab])}" target="_self" class="btn btn-primary ">下载{$import_name}导入模版</a></div>
+          <div class=""> <a href="{:U('/admin_user/index',['tab'=>$tab])}" target="_self" class="btn btn-primary ">返回</a>  <a href="/Public/admin/<if condition='$tab eq "channel"'>channel<else/>user</if>.csv" target="_self" class="btn btn-primary ">下载{$import_name}导入模版</a></div>
         <div class="ibox-title">
           <h5><a href="{:U('/admin_user/index')}"> 角色管理</a> > <small>{$import_name}导入</small></h5>
           <div class="ibox-tools">
@@ -15,12 +15,12 @@
    </div>
         </div>
         <div class="ibox-content">
-          <form method="post" name="edit" target="_self" action="{:U('/admin_user/import')}" class="form-horizontal">
+          <form method="post" name="edit" target="_self" action="{:U('/admin_user/import')}" enctype="multipart/form-data" class="form-horizontal">
               <input type="hidden" name="tab" value="{$tab}" />
             <div class="form-group">
               <label class="col-sm-2 control-label">导入文件：</label>
               <div class="col-sm-4">
-                <input type="file" name="city_name" value="" class="form-control" />
+                <input type="file" name="file" value="" class="form-control" />
                   <label class="m-t-sm text-danger">*请按模版文件上传标准CSV文件</label>
               </div>
             </div>

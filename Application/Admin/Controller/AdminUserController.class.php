@@ -264,21 +264,149 @@ class AdminUserController extends BaseController
      */
     public function import(){
         $tab = I('request.tab','','trim');
-        if(IS_POST){
-
-        }
-
+        $role = 0;
         if($tab == 'operational'){
             $this->assign('import_name',"运营账户");
+            $role = 2;
         }elseif($tab == 'channel'){
             $this->assign('import_name',"渠道账户");
+            $role = 3;
         }elseif($tab == 'device'){
             $this->assign('import_name',"模座账户");
+            $role = 4;
         }elseif($tab == 'spread'){
             $this->assign('import_name',"推广账户");
+            $role = 5;
         }else{
             $this->assign('import_name',"系统账户");
         }
+
+
+        if(IS_POST){
+            if($role < 1){
+                return $this->error("请选择导入角色类型~");
+            }
+
+            do{
+                $error_msg = '';
+                $success_msg = '';
+                $i = 0;
+                $ei = 0;
+                $si = 0;
+                $file_path = $_FILES['file']['tmp_name'];
+
+                if (file_exists($file_path)) {
+                    $fp = fopen($file_path, "r");
+
+                    while ($line = fgetcsv($fp, 10240, "\t")) {
+                        usleep(10);// 10微秒
+
+                        $info = iconv('gb2312', "utf-8//IGNORE", $line[0]);
+                        if ($info === false) {
+                            $info = $line[0];
+                        }
+
+                        if ($i == 0) {
+                            if (strpos($info, "设备编号") === false) {
+                                $error_msg .= '请上传标准CSV文件2';
+                                break;
+                            }
+                            $i++;
+                            continue;
+                        }
+                        $i++;
+                        // 0联系人	1联系号码	2登录用户	3登录密码
+                        $item = explode(",", $info);
+                        $num = $role == 3?9:4;
+                        if (count($item) != $num) {
+                            $ei++;
+                            $error_msg .= "第{$i}行，只有" . count($item) . "列，不标准<br/>";
+                            continue;
+                        }
+                        foreach($item as $k=>$val){
+                            $item[$k] = trim($val);
+                        }
+
+                        // 运营人员添加//
+                        $user = M('admin')->where(['username'=>trim($item[2])])->find();
+                        if($user){
+                            if($user['mobile'] != trim($item[1])){
+                                $ei++;
+                                $error_msg .= "第{$i}行，【{$item[2]}】用户名已经存在<br/>";
+                                continue;
+                            }
+                            if(in_array($role, explode(',', $user['role_list']))){
+                                $si++;
+                                $success_msg .="第{$i}行，用户已经存在成功<br/>";
+                                continue;
+                            }else{
+                                $role_list = explode(',', $user['role_list']);
+                                foreach($role_list as $ky=>$ry){
+                                    if(empty($ry)){
+                                        unset($role_list[$ky]);
+                                    }
+                                }
+                                $role_list[] = $role;
+                                M('admin')->where(['id'=>$user['id']])->save(['role_list'=>join(',', $role_list)]);
+                                $si++;
+                                $success_msg .="第{$i}行，用户编辑成功<br/>";
+                                continue;
+                            }
+                        }else{
+                            $salt = random(12);
+                            $pwd = encrypt_password(trim($item[3]), $salt);
+                            if($role == 3){
+                                $city = M('area')->where(['city_name'=>trim($item[8])])->find();
+                                if(empty($city)){
+                                    $ei++;
+                                    $error_msg .= "第{$i}行，【{$item[8]}】城市不存在，请在【基础设置->运营城市】里面查找对比<br/>";
+                                    continue;
+                                }
+                                M('admin')->add([
+                                    'username' => time($item[2]),
+                                    'mobile' => trim($item[1]),
+                                    'contact_name' => trim($item[0]),
+                                    'salt' => $salt,
+                                    'pwd' => $pwd,
+                                    'role'=>$role,
+                                    'role_list' => $role,
+                                    'status' => 1,
+                                    'shop_name' => trim($item[4]),
+                                    'shop_address' => trim($item[5]),
+                                    'lon' => trim($item[7]),
+                                    'lat' => trim($item[6]),
+                                    'city_id' => $city['id']
+                                ]);
+                            }else{
+                                M('admin')->add([
+                                    'username' => time($item[2]),
+                                    'mobile' => trim($item[1]),
+                                    'contact_name' => trim($item[0]),
+                                    'salt' => $salt,
+                                    'pwd' => $pwd,
+                                    'role'=>$role,
+                                    'role_list' => $role,
+                                    'status' => 1
+
+                                ]);
+                            }
+
+
+                            $si++;
+                            $success_msg .="第{$i}行，用户添加成功<br/>";
+
+                        }
+                    }
+                }
+            }while(false);
+            $this->assign('show', true);
+            $this->assign('i', $i); // 总执行
+            $this->assign('ei', $ei); // 失败行
+            $this->assign('si', $si); // 成功行
+            $this->assign('error_msg', $error_msg); // 失败详情
+            $this->assign("success_msg", $success_msg); // 成功详情
+        }
+
 
         $this->assign('tab', $tab);
         $this->display();

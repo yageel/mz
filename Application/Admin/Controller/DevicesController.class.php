@@ -226,7 +226,6 @@ class DevicesController extends BaseController {
 
                         if ($i == 0) {
                             if (strpos($info, "设备编号") === false) {
-                                var_dump($info);
                                 $error_msg .= '请上传标准CSV文件2';
                                 break;
                             }
