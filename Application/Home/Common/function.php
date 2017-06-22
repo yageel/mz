@@ -301,6 +301,7 @@ function tsurl($url = '', $vars = '', $suffix = true, $domain = false) {
             }
         }
     }
+
     return U($url, $vars, $suffix, $domain);
 }
 
