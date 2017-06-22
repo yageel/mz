@@ -406,8 +406,6 @@ class AdminUserController extends BaseController
             $this->assign('error_msg', $error_msg); // 失败详情
             $this->assign("success_msg", $success_msg); // 成功详情
         }
-
-
         $this->assign('tab', $tab);
         $this->display();
     }

@@ -250,6 +250,12 @@ class DevicesController extends BaseController {
                         $operational_user = M('admin')->where(['mobile'=>trim($item[8])])->find();
                         if($operational_user){
                             $operational_user_id = $operational_user['id'];
+                            // 更新角色
+                            if(!in_array(2, explode(',', $operational_user['role_list']))){
+                                $role_list = $operational_user['role_list']?explode(',', $operational_user['role_list']):[];
+                                $role_list[] = $operational_user_id;
+                               M('admin')->where(['id'=>$operational_user['id']])->save(['role_list'=>join(',', $role_list)]);
+                            }
                         }else{
                             if(empty($item[7])){
                                 $ei++;
@@ -262,7 +268,6 @@ class DevicesController extends BaseController {
                                 $error_msg .= "第{$i}行，运营电话为空<br/>";
                                 continue;
                             }
-
                             /*
                              'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
                             'shop_name', 'shop_address', 'lon', 'lat', 'openid', 'status', 'create_time', 'update_time', 'last_time'
@@ -292,6 +297,13 @@ class DevicesController extends BaseController {
                         $channel_user = M('admin')->where(['mobile'=>trim($item[10])])->find();
                         if($channel_user){
                             $channel_user_id = $channel_user['id'];
+
+                            // 更新角色
+                            if(!in_array(3, explode(',', $channel_user['role_list']))){
+                                $role_list = $channel_user['role_list']?explode(',', $channel_user['role_list']):[];
+                                $role_list[] = $channel_user_id;
+                                M('admin')->where(['id'=>$channel_user['id']])->save(['role_list'=>join(',', $role_list)]);
+                            }
                         }else{
                             /*
                              'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
@@ -347,6 +359,13 @@ class DevicesController extends BaseController {
                         $device_user = M('admin')->where(['mobile'=>trim($item[12])])->find();
                         if($device_user){
                             $device_user_id = $device_user['id'];
+
+                            // 更新角色
+                            if(!in_array(3, explode(',', $device_user['role_list']))){
+                                $role_list = $device_user['role_list']?explode(',', $device_user['role_list']):[];
+                                $role_list[] = $device_user_id;
+                                M('admin')->where(['id'=>$device_user['id']])->save(['role_list'=>join(',', $role_list)]);
+                            }
                         }else{
                             /*
                              'username',  'contact_name', 'pic', 'pwd', 'salt', 'role', 'rebate_id', 'mobile', 'city_id',
