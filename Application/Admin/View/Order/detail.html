@@ -7,7 +7,7 @@
     <ul class="nav nav-tabs">
       <li class="<if condition='$tab eq "" OR $tab eq "operational"'>active</if>"><a data-toggle="tab" href="{:U('/order/index')}"> 运营佣金管理</a></li>
       <li class="<if condition='$tab eq "channel"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'channel'])}"> 渠道佣金管理</a></li>
-      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'device'])}" > 模座佣金管理</a></li>
+      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'device'])}" > 魔座佣金管理</a></li>
       <li class="<if condition='$tab eq "spread"'>active</if>"><a data-toggle="tab" href="{:U('/order/index',['tab'=>'spread'])}"> 推广管佣金理</a></li>
     </ul>
     <div class="tab-content">
@@ -22,7 +22,7 @@
               <th>用户ID</th>
               <th>联系人员</th>
               <th>联系号码</th>
-              <th>模座数</th>
+              <th>魔座数</th>
               <th>佣金余额</th>
               <th>总收入</th>
               <th>总销售</th>
@@ -67,7 +67,7 @@
             <th>用户ID</th>
             <th>联系人员</th>
             <th>联系号码</th>
-            <th>模座数</th>
+            <th>魔座数</th>
             <th>佣金余额</th>
             <th>总收入</th>
             <th>总销售</th>
@@ -102,7 +102,7 @@
   </div>
   <!--//渠道模块-->
 
-  <!--//模座模块-->
+  <!--//魔座模块-->
   <div id="tab-3" class="tab-pane <if condition='$tab eq "device"'>active</if>">
   <div class="panel-body">
     <div class="m-b-md"> </div>
@@ -113,7 +113,7 @@
           <th>用户ID</th>
           <th>联系人员</th>
           <th>联系号码</th>
-          <th>模座数</th>
+          <th>魔座数</th>
           <th>佣金余额</th>
           <th>总收入</th>
           <th>总销售</th>
@@ -146,7 +146,7 @@
     </div>
   </div>
   </div>
-  <!--//模座模块-->
+  <!--//魔座模块-->
 
   <!--//推广模块-->
   <div id="tab-4" class="tab-pane <if condition='$tab eq "spread"'>active</if>">
@@ -159,7 +159,7 @@
           <th>用户ID</th>
           <th>联系人员</th>
           <th>联系号码</th>
-          <th>模座数</th>
+          <th>魔座数</th>
           <th>佣金余额</th>
           <th>总收入</th>
           <th>总销售</th>

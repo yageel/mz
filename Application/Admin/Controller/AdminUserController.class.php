@@ -272,7 +272,7 @@ class AdminUserController extends BaseController
             $this->assign('import_name',"渠道账户");
             $role = 3;
         }elseif($tab == 'device'){
-            $this->assign('import_name',"模座账户");
+            $this->assign('import_name',"魔座账户");
             $role = 4;
         }elseif($tab == 'spread'){
             $this->assign('import_name',"推广账户");

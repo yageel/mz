@@ -26,6 +26,15 @@ class LoginController extends Controller {
             return $this->error('登陆失败',U('/login/index'));
         }
 
+        unset($user['role']);
+
+        if($user['role_list']){
+            $role_list = explode(',', $user['role_list']);
+            if(count($role_list) == 1){
+                session('role', $role_list[0]);
+            }
+        }
+
         session('is_login', 1);
         session('login_user_id',$user['id']);
         session('login_user', $user);

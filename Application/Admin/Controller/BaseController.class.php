@@ -13,11 +13,17 @@ class BaseController extends Controller {
             return redirect(U('/login/index'));
         }
 
-        $this->admin = M('admin')->find(session('login_user_id'));
+        $this->admin = session('login_user');
         if(!$this->admin){
             return redirect(U('/login/index'));
         }
 
+		// 切换角色
+		if(empty(session('role')) && ACTION_NAME != 'checkrole'){
+			return redirect(U('/index/checkrole'));
+		}
+		// 设置角色
+		$this->admin['role'] = session('role');
         $this->assign('admin', $this->admin);
     }
 
