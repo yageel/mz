@@ -19,7 +19,7 @@ class BaseController extends Controller {
         }
 
 		// 切换角色
-		if(empty(session('role')) && ACTION_NAME != 'checkrole'){
+		if(empty(session('role')) && ACTION_NAME != 'checkrole' && ACTION_NAME != 'logout'){
 			return redirect(U('/index/checkrole'));
 		}
 		// 设置角色

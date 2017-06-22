@@ -26,7 +26,21 @@ class IndexController extends BaseController {
      * 切换角色
      */
     public function checkrole(){
-        $this->assign('role_list', explode(',',$this->admin['role_list']));
+        $role_list = explode(',',$this->admin['role_list']);
+        if(IS_POST){
+            $role = I('role',0,'intval');
+            if($role){
+                if(in_array($role, $role_list)){
+                    session('role', $role);
+                    return redirect(U('/index/index'));
+                }else{
+                    return $this->error("你选择的角色错误~");
+                }
+            }else{
+                return $this->error("请选择登陆的角色~");
+            }
+        }
+        $this->assign('role_list', $role_list);
         $this->display();
     }
 }
