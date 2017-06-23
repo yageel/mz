@@ -42,7 +42,8 @@
                     <td><if condition="$item.status eq 1"><font color="green">正常</font> <elseif condition="$item[status] eq '0'"/><font color="red">异常</font><else/>已删除</if></td>
                     <td class="center">
                       <a href="{:U('/rebate/edit', array('id'=>$item['id']))}"><i class="fa fa-check text-navy"></i> 编辑</a>
-                      <a href="{:U('/rebate/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该分成规则吗？')"><i class="fa fa-check text-navy"></i> 删除</a>
+                      <if condition="$item[id] gt 1">
+                      <a href="{:U('/rebate/del', array('id'=>$item['id']))}" onclick="return confirm('您确认要删除该分成规则吗？')"><i class="fa fa-check text-navy"></i> 删除</a></if>
                     </td>
                   </tr>
                 </volist>
