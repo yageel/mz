@@ -1,7 +1,7 @@
 <?php
 $config = array(
     //'配置项'=>'配置值'
-    'URL_MODEL'            =>2,    //2是去除index.php
+    'URL_MODEL'            =>3,    //2是去除index.php
     'DB_FIELDTYPE_CHECK'   =>true,
     'TMPL_STRIP_SPACE'     =>true,
     'OUTPUT_ENCODE'        =>true, // 页面压缩输出
