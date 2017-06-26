@@ -10,51 +10,51 @@ class OrderController extends BaseController {
 
         $where = ['status'=>['lt', 4]];
         if($tab == '' OR $tab == 'operational'){
-            $where['role'] = 2;
+            $where['_string']="FIND_IN_SET(2,role_list)";
         }elseif($tab == 'channel'){
-            $where['role'] = 3;
+            $where['_string']="FIND_IN_SET(3,role_list)";
         }elseif($tab == 'device'){
-            $where['role'] = 4;
+            $where['_string']="FIND_IN_SET(4,role_list)";
         }elseif($tab == 'spread'){
-            $where['role'] = 5;
+            $where['_string']="FIND_IN_SET(5,role_list)";
         }
 
         // 运营筛选
         if($this->admin['role'] == 2){
             if($tab == '' OR $tab == 'operational'){
-                $where['role'] = 2;
+                $where['_string']="FIND_IN_SET(2,role_list)";
                 $where['id'] = $this->admin['id'];
             }elseif($tab == 'channel'){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE operational_user_id='{$this->admin['id']}'))"];
             }
 
         // 渠道筛选
         }elseif($this->admin['role'] == 3){
             if($tab == 'channel'){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE channel_user_id='{$this->admin['id']}'))"];
             }
         // 魔座筛选
         }elseif($this->admin['role'] == 4){
             if($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
-                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE user_id='{$this->admin['id']}'))"];
+                $where['_string']="FIND_IN_SET(5,role_list)";
+                $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SEELCT id FROM t_devices WHERE user_id='{$this->admin['id']}'))"];
             }
         }
 
@@ -71,17 +71,30 @@ class OrderController extends BaseController {
 
         //
         foreach($list as $i=>$item){
-            // 运营人员
-            if($item['role'] == 2){
-                // $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
+            $role_list = explode(',', $item['role_list']);
+
+            if($tab == '' OR $tab == 'operational'){
                 $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$item['id']])->count();
-            }elseif($item['role'] == 3){
+            }elseif($tab == 'channel'){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $item['id']])->count();
-            }elseif($item['role'] == 4){
+            }elseif($tab == 'device'){
                 $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $item['id']])->count();
-            }elseif($item['role'] == 5){
+            }elseif($tab == 'spread'){
                 $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $item['id']])->count();
             }
+
+
+            // 运营人员
+//            if(in_array(2, $role_list)){
+//                // $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
+//                $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$item['id']])->count();
+//            }elseif(in_array(3, $role_list)){
+//                $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $item['id']])->count();
+//            }elseif(in_array(4, $role_list)){
+//                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $item['id']])->count();
+//            }elseif(in_array(5, $role_list)){
+//                $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $item['id']])->count();
+//            }
         }
 
         $this->assign('tab', $tab);
