@@ -44,7 +44,7 @@ class PayController extends Controller
     }
 
     public function record(){
-        $result['out_trade_no'] = '2017060318562361819916458394';
+        $result['out_trade_no'] = $_GET['no']?$_GET['no']:'2017060318562361819916458394';
         $result['transaction_id'] = '2017060318562361819916458394';
         $pay_log_id = 1;
         $order_sn = $result['out_trade_no'];
