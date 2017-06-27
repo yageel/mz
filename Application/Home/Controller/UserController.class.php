@@ -23,7 +23,7 @@ class UserController extends BaseController {
      * 角色流水
      */
     public function record(){
-        $role = I('role',0,'intval');
+        $role = I('request.role',0,'intval');
 
         $this->assign('role', $role);
         $this->display();
