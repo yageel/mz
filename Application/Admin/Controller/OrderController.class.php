@@ -121,16 +121,23 @@ class OrderController extends BaseController {
             $where['status'] = 1;
             // 运营人员
             if($tab2 == 'operational'){
+                $user['role'] = 2;
                 $where['operational_user_id'] = $user['id'];
             // 渠道人员
             }elseif($tab2 == 'channel'){
+                $user['role'] = 3;
                 $where['channel_user_id'] = $user['id'];
             // 魔座人员
             }elseif($tab2 == 'device'){
+                $user['role'] = 4;
                 $where['device_user_id'] = $user['id'];
             // 推广人员
             }elseif($tab2 == 'spread'){
+                $user['role'] = 5;
                 $where['spread_user_id'] = $user['id'];
+            }else{
+                $user['role'] = 1;
+                $where['user_id'] = 0;
             }
             $db = M('order');
             $count = $db->where($where)->count();// 查询满足要求的总记录数
