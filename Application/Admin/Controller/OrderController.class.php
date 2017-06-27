@@ -71,7 +71,7 @@ class OrderController extends BaseController {
 
         //
         foreach($list as $i=>$item){
-            $role_list = explode(',', $item['role_list']);
+            // $role_list = explode(',', $item['role_list']);
 
             if($tab == '' OR $tab == 'operational'){
                 $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$item['id']])->count();
