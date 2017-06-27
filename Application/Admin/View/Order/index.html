@@ -48,7 +48,7 @@
                 <td>{$item.total_sales_amount}元</td>
                 <td>{:admin_user_status($item['status'])}</td>
                 <td class="center">
-                  <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>''])}"><i class="fa fa-check text-navy"></i>详细</a>
+                  <a href="{:U('/order/user', ['id' => $item['id'], 'tab2'=>'operational'])}"><i class="fa fa-check text-navy"></i>详细</a>
                 </td>
               </tr>
             </volist>
@@ -93,7 +93,7 @@
               <td>{$item.total_sales_amount}元</td>
               <td>{:admin_user_status($item['status'])}</td>
               <td class="center">
-                <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>''])}"><i class="fa fa-check text-navy"></i>详细</a>
+                <a href="{:U('/order/user', ['id' => $item['id'], 'tab2'=>'channel'])}"><i class="fa fa-check text-navy"></i>详细</a>
               </td>
             </tr>
           </volist>
@@ -138,7 +138,7 @@
             <td>{$item.total_sales_amount}元</td>
             <td>{:admin_user_status($item['status'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>''])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/user', ['id' => $item['id'], 'tab2'=>'device'])}"><i class="fa fa-check text-navy"></i>详细</a>
             </td>
           </tr>
         </volist>
@@ -183,7 +183,7 @@
             <td>{$item.total_sales_amount}元</td>
             <td>{:admin_user_status($item['status'])}</td>
             <td class="center">
-              <a href="{:U('/order/user', ['id' => $item['id'], 'tab'=>''])}"><i class="fa fa-check text-navy"></i>详细</a>
+              <a href="{:U('/order/user', ['id' => $item['id'], 'tab2'=>'spread'])}"><i class="fa fa-check text-navy"></i>详细</a>
             </td>
           </tr>
         </volist>

@@ -108,35 +108,28 @@ class OrderController extends BaseController {
      */
     public function user(){
         $tab = I('request.tab','','trim');
+        $tab2 = I('request.tab2','','trim');
         $id = I('request.id',0,'intval');
         $user = D('Admin')->get_user_info($id);
 
         // 用户角色对应跳转标签
-        if($user['role'] == 2){
-            $user['tab'] = '';
-        }elseif($user['role'] == 3){
-            $user['tab'] = 'channel';
-        }elseif($user['role'] == 4){
-            $user['tab'] = 'device';
-        }elseif($user['tab'] == 5){
-            $user['tab'] = 'spread';
-        }
+        $uesr['tab'] = $tab2;
 
         // 订单流水
         if($tab == ''){
             $where = [];
             $where['status'] = 1;
             // 运营人员
-            if($user['role'] == 2){
+            if($tab2 == 'operational'){
                 $where['operational_user_id'] = $user['id'];
             // 渠道人员
-            }elseif($user['role'] == 3){
+            }elseif($tab2 == 'channel'){
                 $where['channel_user_id'] = $user['id'];
             // 魔座人员
-            }elseif($user['role'] == 4){
+            }elseif($tab2 == 'device'){
                 $where['device_user_id'] = $user['id'];
             // 推广人员
-            }elseif($user['role'] == 5){
+            }elseif($tab2 == 'spread'){
                 $where['spread_user_id'] = $user['id'];
             }
             $db = M('order');
