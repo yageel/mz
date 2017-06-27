@@ -48,8 +48,9 @@ class PayController extends Controller
         $result['transaction_id'] = '2017060318562361819916458394';
         $pay_log_id = 1;
         $order_sn = $result['out_trade_no'];
-        
+
         $recharge = M('order')->where(['order_sn'=>$order_sn])->find();
+        print_r($recharge);
 
         if($recharge && $recharge['status'] < 1){
             $data = array(
