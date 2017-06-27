@@ -11,15 +11,7 @@
     <meta name="x5-orientation" content="landscape" />
     <meta name="x5-page-mode" content="app" />
     <!-- 针对特殊公众号标题显示要求处理 -->
-    <title><block name="title"></block>
-        <if condition="$cityInfo['city_id'] eq 63">
-
-        <elseif condition="$cityInfo['city_id'] eq 3"/>
-
-        <else />
-            -{$cityInfo['city_name']}
-        </if>
-    </title>
+    <title><block name="title"></block>{:C('basic.title')}</title>
     <meta charset="utf-8" />
     <link href="__PUBLIC__/css/comm.css?v=__VERSION__" rel="stylesheet" />
 	<block name="head"></block>
