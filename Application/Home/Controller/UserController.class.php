@@ -25,7 +25,7 @@ class UserController extends BaseController {
     public function record(){
         $role = I('request.role',0,'intval');
 
-        $this->assign('role', $role);
+        $this->assign('user_role', $role);
         $this->display();
     }
 
