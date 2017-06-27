@@ -141,7 +141,7 @@ class PayNotifyCallBack extends WxPayNotify
                 // `channel_rebate`, `channel_user_id`, `channel_money`, `device_rebate`, `device_user_id`, `device_money`, `spread_rebate`,
                 // `spread_user_id`, `spread_money`, `payment_no`, `payment_log_id`, `pay_time`, `send_status`, `create_time`, `update_time`, `
                 //`, `city_id`, `client_ip`, `client_agent`
-                $user = M('admin')->where(['id'=>$res1['platform_user_id']])->find();
+                $user = M('admin')->where(['id'=>$recharge['platform_user_id']])->find();
                 $log = [
                     'record_type' => 1,
                     'user_id' => $user['id'],
