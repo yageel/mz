@@ -48,6 +48,7 @@ class PayController extends Controller
         $result['transaction_id'] = '2017060318562361819916458394';
         $pay_log_id = 1;
         $order_sn = $result['out_trade_no'];
+        
         $recharge = M('order')->where(['order_sn'=>$order_sn])->find();
 
         if($recharge && $recharge['status'] < 1){
@@ -57,7 +58,7 @@ class PayController extends Controller
                 'payment_no'=>$result['transaction_id'],
                 'status' => 1
             );
-            $res1 = M('order')->where(['order_sn'=>$order_sn])->save($data);
+            $res1 = M('order')->where(["order_sn"=>$order_sn])->save($data);
             ///////////////////////记录流水
             if($res1){
                 // 平台进账//
@@ -68,17 +69,18 @@ class PayController extends Controller
                 // `channel_rebate`, `channel_user_id`, `channel_money`, `device_rebate`, `device_user_id`, `device_money`, `spread_rebate`,
                 // `spread_user_id`, `spread_money`, `payment_no`, `payment_log_id`, `pay_time`, `send_status`, `create_time`, `update_time`, `
                 //`, `city_id`, `client_ip`, `client_agent`
-                $user = M('admin')->where(['id'=>1])->find();
+                $user = M('admin')->where(['id'=>$res1['platform_user_id']])->find();
                 $log = [
                     'record_type' => 1,
-                    'user_id' => 1,
+                    'user_id' => $user['id'],
                     'water_id' => $recharge['id'],
                     'amount' => $recharge['platform_money'],
                     'total_amount' => $recharge['platform_money'] + $user['total_amount'],
                     'create_time' => time()
                 ];
                 M('amount_record')->add($log);
-                M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['platform_money']}', total_income_amount = total_income_amount+'{$recharge['platform_money']}',total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id=1");
+                M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['platform_money']}', total_income_amount = total_income_amount+ '{$recharge['platform_money']}',
+                  total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$user['id']}'");
 
                 // 运营进账//
                 if($recharge['operational_user_id']){
@@ -92,8 +94,8 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['operational_money']}',total_income_amount=total_income_amount+'{$recharge['operational_money']}',".
-                        "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['operational_user_id']}'");
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['operational_money']}', total_income_amount = total_income_amount+ '{$recharge['operational_money']}',
+                      total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['operational_user_id']}'");
                 }
 
                 // 渠道进账//
@@ -109,8 +111,8 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->execute("UPDATE t_admin SET total_amount = total_amount+'{$recharge['channel_money']}',total_income_amount=total_income_amount+'{$recharge['channel_money']}',".
-                        "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['channel_user_id']}'");
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['channel_money']}', total_income_amount = total_income_amount+ '{$recharge['channel_money']}',
+                      total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['channel_user_id']}'");
                 }
 
                 // 魔座进账//
@@ -126,8 +128,8 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->execute("UPDATE t_admin SET total_amount=total_amount+'{$recharge['device_money']}',total_income_amount=total_income_amount+'{$recharge['device_money']}',".
-                      "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['device_user_id']}'");
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['device_money']}', total_income_amount = total_income_amount+ '{$recharge['device_money']}',
+                      total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['device_user_id']}'");
                 }
 
                 // 推广进账//
@@ -142,14 +144,13 @@ class PayController extends Controller
                         'create_time' => time()
                     ];
                     M('amount_record')->add($log);
-                    M()->execute("UPDATE t_admin SET total_amount=total_amount+'{$recharge['spread_money']}',total_income_amount=total_income_amount+'{$recharge['spread_money']}',".
-                        "total_sales_amount=total_sales_amount+'{$recharge['package_amount']}',total_orders=total_orders+1 WHERE id='{$recharge['spread_user_id']}'");
+                    M()->execute("UPDATE t_admin SET total_amount = total_amount + '{$recharge['spread_money']}', total_income_amount = total_income_amount+ '{$recharge['spread_money']}',
+                      total_sales_amount = total_sales_amount+'{$recharge['package_amount']}', total_orders = total_orders+1  WHERE id='{$recharge['spread_user_id']}'");
                 }
             }
-            ///////////////////////记录流水
             return true;
+            ///////////////////////记录流水
         }
-
     }
 }
 
