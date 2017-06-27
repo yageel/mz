@@ -9,6 +9,7 @@ class OrderController extends BaseController {
         $tab = I('request.tab','', 'trim');
 
         $where = ['status'=>['lt', 4]];
+
         if($tab == '' OR $tab == 'operational'){
             $where['_string']="FIND_IN_SET(2,role_list)";
         }elseif($tab == 'channel'){
@@ -68,6 +69,7 @@ class OrderController extends BaseController {
         $show = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        echo $db->getLastSql();
 
         //
         foreach($list as $i=>$item){
