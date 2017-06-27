@@ -80,7 +80,7 @@
                 </a>
                 </if>
 
-                <volist id="role" name=":explode(',',$user['role_list'])">
+                <volist id="role" name=":explode(',',$admin['role_list'])">
                     <a class="left-menu-item wrap" href="javascript:void(0)" data-href="{:tsurl('/user/record',['type'=>$role])}" onclick="leftMenuClick(this, 'V4侧边导航栏-点击按钮6')">
                         <div class="menu-icon" style="width: 48px;height: 48px;"><img src="__PUBLIC__/images/game.png" style="width: 100%;height: 100%;margin-top: -10px;" /></div>
                         <span class="wrap-content">{:admin_user_role($role)}流水</span>
