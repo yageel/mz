@@ -116,6 +116,11 @@ class OrderController extends BaseController {
         // 用户角色对应跳转标签
         $uesr['tab'] = $tab2;
 
+        $this->assign('tab2', $tab2);
+        if(empty($tab2)){
+            $this->error("请选择要查看角色数据~");
+        }
+
         // 订单流水
         if($tab == ''){
             $where = [];
@@ -164,7 +169,6 @@ class OrderController extends BaseController {
 
         // 旗下设备
         }elseif($tab == 'device'){
-
             if(in_array($user['role'],[2,3,4])){
                 $where = [];
                 $where['status'] = 1;

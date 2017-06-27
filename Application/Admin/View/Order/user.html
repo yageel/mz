@@ -58,9 +58,9 @@
 
   <div class="tabs-container ibox">
     <ul class="nav nav-tabs">
-      <li class="<if condition='$tab eq ""'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>''])}"> 佣金明细</a></li>
-      <li class="<if condition='$tab eq "balance"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'balance'])}"> 结算明细</a></li>
-      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'device'])}" > 运营魔座</a></li>
+      <li class="<if condition='$tab eq ""'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'','tab2'=>$tab2])}"> 佣金明细</a></li>
+      <li class="<if condition='$tab eq "balance"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'balance','tab2'=>$tab2])}"> 结算明细</a></li>
+      <li class="<if condition='$tab eq "device"'>active</if>"><a data-toggle="tab" href="{:U('/order/user',['id'=>$user['id'],'tab'=>'device','tab2'=>$tab2])}" > 运营魔座</a></li>
     </ul>
     <div class="tab-content">
       <!--//交易流水模块-->
