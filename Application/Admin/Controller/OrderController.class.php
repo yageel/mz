@@ -69,7 +69,6 @@ class OrderController extends BaseController {
         $show = $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         $list = $db->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
-        echo $db->getLastSql();
 
         //
         foreach($list as $i=>$item){
