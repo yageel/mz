@@ -20,6 +20,16 @@ class UserController extends BaseController {
     }
 
     /**
+     * 角色流水
+     */
+    public function record(){
+        $role = I('role',0,'intval');
+
+        $this->assign('role', $role);
+        $this->display();
+    }
+
+    /**
      * 个人月详情
      */
     public function money_record(){

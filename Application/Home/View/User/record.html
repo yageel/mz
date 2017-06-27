@@ -1,0 +1,61 @@
+<extend name="Layout/master" />
+<block name="title">M币详情</block>
+<block name="head">
+	<link href="__PUBLIC__/css/details-comm.css?v=__VERSION__" rel="stylesheet" />
+	<link href="__PUBLIC__/css/balanceDetails.css?v=__VERSION__" rel="stylesheet" />
+	<style>
+		.button-list{
+			margin-top: 10px;
+			padding: 15px;
+			background: #F0F0EF;
+		}
+		.dividing{
+			padding:0.12rem 0rem;
+			background: #F0F0EF;
+		}
+	</style>
+</block>
+<block name="content">
+	<div class="content-padding abs100">
+		<div id="balanceDetailsContent" class="wrap wrap-vertical">
+			<div class="user-info">
+                <img class="bg" src="__PUBLIC__/spring/images/user-center-bg.jpg" />
+				<div>
+					<img class="head" src="{$users['wx_pic']|default='__PUBLIC__/images/temp/user-user-head.jpg'}" />
+					<span class="name color-white">{$users['wx_name']|default="未知"}</span>
+				</div>
+			</div>
+			<!--
+			<div>
+				<div class="text-item-tab wrap">
+					<a href="{:tsurl('/user/index')}" class="color-link wrap-content ">个人余额：<span class="color-focus">￥{$usersBank['total_amount']}</span></a>
+					<a href="{:tsurl('/user/index',array('tab'=>'mbi'))}" class="color-link wrap-content active">个人M币：<span class="color-focus"><span class="iconfont">&#xe608;</span>{$usersBank['total_integral']}</span></a>
+				</div>
+			</div>
+			-->
+			<div class="dividing">
+				<div class="color-link">
+					<img src="__PUBLIC__/images/label.png" class="label">
+					<span>{:admin_user_role($role)}流水</span>
+				</div>
+			</div>
+			<!--列表循环-->
+			<div class="wrap-content ohide">
+				<div class="balanceDetails-items" id="balanceDetailsItems" data-page="{$total_pages}" data-type="mbi">
+					<volist name="list" id="item">
+					<a href="javascript:void(0)" class="wrap <if condition="$item.record_num lt 0">color-green<else/>color-link</if>">
+						<span class="wrap-content" style="width: 60%;">
+							<i class="text-overhide">{$item.title}</i>
+							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
+						</span>
+						<span class="<if condition="$item.record_num lt 0">color-green<else/>color-text</if> mbi"><if condition="$item.record_num gt 0">+</if>{$item.record_num}</span>
+					</a>
+					</volist>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+
+</block>
