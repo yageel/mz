@@ -164,13 +164,12 @@ class DevicesController extends BaseController {
     }
 
     public function qrcode2(){
-//        $id = I('request.id',0,'intval');
-//        $detail = M('Devices')->where(['id'=>$id])->find();
-        $detail['device_number'] = '12345';
-        $detail['qrcode'] = '654321';
+        $id = I('request.id',0,'intval');
+        $detail = M('Devices')->where(['id'=>$id])->find();
 
         if($detail){
-            if(!file_exists(APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png")){
+            $qrcode_path = APP_PATH."/../uploads/qrcode/".$detail['qrcode'] .".png";
+            if(!file_exists($qrcode_path)){
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
@@ -181,29 +180,37 @@ class DevicesController extends BaseController {
                 $errorCorrectionLevel = 'L';//容错级别
                 $matrixPointSize = 12;//生成图片大小
                 //生成二维码图片
-                \QRcode::png($value, APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png", $errorCorrectionLevel, $matrixPointSize, 2);
-            }
+                \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
-            $logo = '/wwwroot/managedx.millionmake.com/Public/img/signin/icon.png';//需要显示在二维码中的Logo图像
-            $QR = APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png";
-            if ($logo !== FALSE) {
+                $logo = APP_PATH . '/../Public/images/logo.png';//需要显示在二维码中的Logo图像
+                $QR = $qrcode_path;
+
                 $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
-                $logo = imagecreatefromstring ( file_get_contents ( $logo ) );
                 $QR_width = imagesx ( $QR );
                 $QR_height = imagesy ( $QR );
-                $logo_width = imagesx ( $logo );
-                $logo_height = imagesy ( $logo );
-                $logo_qr_width = $QR_width / 5;
-                $scale = $logo_width / $logo_qr_width;
-                $logo_qr_height = $logo_height / $scale;
-                $from_width = ($QR_width - $logo_qr_width) / 2;
-                imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
+
+                $font = APP_PATH ."../Public/fonts/msyhbd.ttf";
+                $red = imagecolorallocate($QR, 250,0, 0);
+                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
+
+                if (file_exists($logo)) {
+
+                    $logo = imagecreatefromstring ( file_get_contents ( $logo ) );
+                    $logo_width = imagesx ( $logo );
+                    $logo_height = imagesy ( $logo );
+                    $logo_qr_width = $QR_width / 5;
+                    $scale = $logo_width / $logo_qr_width;
+                    $logo_qr_height = $logo_height / $scale;
+                    $from_width = ($QR_width - $logo_qr_width) / 2;
+                    imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
+                }
+
+                imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
 
             }
-            imagepng ( $QR, 'ewmlogo.png' );//带Logo二维码的文件名
 
-            echo "<img src='ewmlogo.png' />";
-            // return header("location: /uploads/qrcode/{$detail['device_number']}.png");
+
+            return header("location: /uploads/qrcode/{$detail['device_number']}.png");
         }else{
             return $this->error("没找到设备信息~");
         }
