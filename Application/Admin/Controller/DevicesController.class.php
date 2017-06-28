@@ -306,7 +306,7 @@ class DevicesController extends BaseController {
                             // 更新角色
                             if(!in_array(2, explode(',', $operational_user['role_list']))){
                                 $role_list = $operational_user['role_list']?explode(',', $operational_user['role_list']):[];
-                                $role_list[] = $operational_user_id;
+                                $role_list[] = 2;
                                M('admin')->where(['id'=>$operational_user['id']])->save(['role_list'=>join(',', $role_list)]);
                             }
                         }else{
@@ -336,7 +336,8 @@ class DevicesController extends BaseController {
                                 'create_time' => time(),
                                 'update_time' => time(),
                                 'last_time' => 0,
-                                'status' => 1
+                                'status' => 1,
+                                'role_list'=>2
                             ]);
                         }
 
@@ -354,7 +355,7 @@ class DevicesController extends BaseController {
                             // 更新角色
                             if(!in_array(3, explode(',', $channel_user['role_list']))){
                                 $role_list = $channel_user['role_list']?explode(',', $channel_user['role_list']):[];
-                                $role_list[] = $channel_user_id;
+                                $role_list[] = 3;
                                 M('admin')->where(['id'=>$channel_user['id']])->save(['role_list'=>join(',', $role_list)]);
                             }
                         }else{
@@ -399,7 +400,8 @@ class DevicesController extends BaseController {
                                 'shop_address' => "{$item[4]}",
                                 'lon' => "{$item[6]}",
                                 'lat' => "{$item[5]}",
-                                'status'=>1
+                                'status'=>1,
+                                'role_list' => 3
                             ]);
                         }
                         if (!$channel_user_id) {
@@ -414,9 +416,9 @@ class DevicesController extends BaseController {
                             $device_user_id = $device_user['id'];
 
                             // 更新角色
-                            if(!in_array(3, explode(',', $device_user['role_list']))){
+                            if(!in_array(4, explode(',', $device_user['role_list']))){
                                 $role_list = $device_user['role_list']?explode(',', $device_user['role_list']):[];
-                                $role_list[] = $device_user_id;
+                                $role_list[] = 4;
                                 M('admin')->where(['id'=>$device_user['id']])->save(['role_list'=>join(',', $role_list)]);
                             }
                         }else{
@@ -447,7 +449,8 @@ class DevicesController extends BaseController {
                                 'create_time' => time(),
                                 'update_time' => time(),
                                 'last_time' => 0,
-                                'status'=>1
+                                'status'=>1,
+                                'role_list' => 4
                             ]);
                         }
 
