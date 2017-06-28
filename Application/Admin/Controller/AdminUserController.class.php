@@ -27,26 +27,26 @@ class AdminUserController extends BaseController
 
         if($tab){
             if($tab == 'channel'){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
             }elseif($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
             }elseif($tab == 'spread'){
-                $where['role'] = 5;
+                $where['_string']="FIND_IN_SET(5,role_list)";
             }elseif($tab == 'operational'){
-                $where['role'] = 2;
+                $where['_string']="FIND_IN_SET(2,role_list)";
             }
         }else{
             if($this->admin['role'] == 1){
-                $where['role'] = 2;
+                $where['_string']="FIND_IN_SET(2,role_list)";
                 $tab = 'operational';
             }elseif($this->admin['role'] == 2){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
                 $tab = 'channel';
             }elseif($this->admin['role'] == 3){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $tab = 'device';
             }elseif($this->admin['role'] == 4){
-                $where['role'] = 5;
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $tab = 'spread';
             }
         }
@@ -55,38 +55,38 @@ class AdminUserController extends BaseController
         // 运营筛选
         if($this->admin['role'] == 2){
             if($tab == '' OR $tab == 'operational'){
-                $where['role'] = 2;
+                $where['_string']="FIND_IN_SET(2,role_list)";
                 $where['id'] = $this->admin['id'];
             }elseif($tab == 'channel'){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE operational_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE operational_user_id='{$this->admin['id']}'))"];
             }
 
             // 渠道筛选
         }elseif($this->admin['role'] == 3){
             if($tab == 'channel'){
-                $where['role'] = 3;
+                $where['_string']="FIND_IN_SET(3,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT channel_user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE channel_user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE channel_user_id='{$this->admin['id']}'))"];
             }
             // 魔座筛选
         }elseif($this->admin['role'] == 4){
             if($tab == 'device'){
-                $where['role'] = 4;
+                $where['_string']="FIND_IN_SET(4,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices WHERE user_id='{$this->admin['id']}')"];
             }elseif($tab == 'spread'){
-                $where['role'] = 5;//`device_id`, `user_id`,
+                $where['_string']="FIND_IN_SET(5,role_list)";
                 $where['id'] = ['EXP', "IN(SELECT user_id FROM t_devices_spread WHERE device_id IN(SELECT id FROM t_devices WHERE user_id='{$this->admin['id']}'))"];
             }
         }
@@ -103,14 +103,14 @@ class AdminUserController extends BaseController
         $list = $users->where($where)->order('id DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         foreach($list as $i=>$user){
             // 运营人员
-            if($user['role'] == 2){
+            if($tab == 'operational' || empty($tab)){
                 $list[$i]['total_channel'] = M()->query("SELECT COUNT(*) AS tp_count FROM (SELECT id FROM t_devices WHERE operational_user_id='{$user['id']}' GROUP BY channel_user_id)t")[0]['tp_count'];// D('Devices')->where(['operational_user_id'=>$user['id']])->group("shop_id")->count();
                 $list[$i]['total_device'] = D('Devices')->where(['operational_user_id'=>$user['id']])->count();
-            }elseif($user['role'] == 3){
+            }elseif($tab == 'channel'){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
-            }elseif($user['role'] == 4){
+            }elseif($tab== 'device'){
                 $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
-            }elseif($user['role'] == 5){
+            }elseif($tab == 'spread'){
                  $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
             }
         }
@@ -143,7 +143,7 @@ class AdminUserController extends BaseController
 
             if($tab){
                 if($tab == 'channel'){
-                    $data['role'] = 3;
+                    $role = 3;
                     if(empty($data['city_id'])){
                         return $this->error("请选择门店所在城市");
                     }
@@ -164,14 +164,14 @@ class AdminUserController extends BaseController
                         return $this->error("请输入门店地址对应维度");
                     }
                 }elseif($tab == 'device'){
-                    $data['role'] = 4;
+                    $role = 4;
                 }elseif($tab == 'spread'){
-                    $data['role'] = 5;
+                    $role = 5;
                 }elseif($tab == 'operational'){
-                    $data['role'] = 2;
+                    $role = 2;
                 }
             }else{
-                $data['role'] = 2;
+                $role = 2;
             }
 
             if($data['password']){
@@ -197,6 +197,11 @@ class AdminUserController extends BaseController
                         return $this->error("该手机号已经存在系统~");
                     }
                 }
+                $role_list = explode(',',$info['role_list']);
+                if(!in_array($role,$role_list)){
+                    $role_list[] = $role;
+                }
+                $data['role_list'] = join(',', $role_list);
                 $data['update_time'] = time();
                 $res = M('admin')->where(['id'=>$id])->save($data);
             }else{
@@ -215,7 +220,7 @@ class AdminUserController extends BaseController
                 if($username){
                     return $this->error("该登陆名已经存在~");
                 }
-
+                $data['role_list'] = $role;
                 $data['create_time'] = time();
                 $res = M('admin')->add($data);
             }
