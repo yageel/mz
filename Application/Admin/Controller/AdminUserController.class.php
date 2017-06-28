@@ -234,17 +234,6 @@ class AdminUserController extends BaseController
 
         if($id){
             $detail = M('admin')->where(['id'=>$id])->find();
-            if($detail['role'] == 1){
-                $tab = "system";
-            }elseif($detail['role'] == 2){
-                $tab = "operational";
-            }elseif($detail['role'] == 3){
-                $tab = "channel";
-            }elseif($detail['role'] == 4){
-                $tab = "device";
-            }elseif($detail['role'] == 5){
-                $tab = "spread";
-            }
             $this->assign('detail', $detail);
         }
         $this->assign('tab', $tab);
