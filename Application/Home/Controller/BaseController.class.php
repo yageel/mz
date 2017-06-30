@@ -140,6 +140,7 @@ class BaseController extends Controller {
 
         if($this->gfrom != 4){
             $signature = $this->getShareSign($this->type, true);
+            var_dump($signature);
 
             $this->assign('signature', $signature);//赚了
             $this->assign('share_default_title', "魔座按摩椅带给你不一样的享受！");
