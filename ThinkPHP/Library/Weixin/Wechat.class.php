@@ -1275,6 +1275,7 @@ class Wechat {
             }
         }
         $result = $this->http_get(self::API_URL_PREFIX . self::GET_TICKET_URL . 'access_token=' . $this->access_token . '&type=jsapi');
+        var_dump($result);
         if ($result) {
             $json = json_decode($result, true);
             if (!$json || !empty($json['errcode'])) {
@@ -1300,9 +1301,8 @@ class Wechat {
      * @param string $appid 用于多个appid时使用,可空
      * @return array|bool 返回签名字串
      */
-    public function getJsSign($url, $timestamp = 0, $noncestr = '', $appid = '') {echo 0000;
+    public function getJsSign($url, $timestamp = 0, $noncestr = '', $appid = '') {
        if (!$this->jsapi_ticket && !$this->getJsTicket($appid) || !$url){
-           echo "1111";
            return false;
        }
 
