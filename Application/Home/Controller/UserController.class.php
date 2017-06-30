@@ -349,7 +349,7 @@ class UserController extends BaseController {
             $html = '';
             foreach($shop_list as $shop){
                 $html .= '<div class="group">';
-                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" name="spread_id[]" value="'.$shop['id'].'" /> '.$shop['shop_name'].'</div>';
+                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block spread_id" name="spread_id[]" value="'.$shop['id'].'" /> '.$shop['shop_name'].'</div>';
                 $html .= '</div>';
             }
         }
