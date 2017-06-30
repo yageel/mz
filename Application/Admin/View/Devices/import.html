@@ -34,16 +34,17 @@
               <if condition="$show">
           <div class="hr-line-dashed"></div>
           <div class="form-group">
-              <pre>
-                  <font color="red">总执行{$i}行</font>
-                  <font color="red">失败{$ei}行</font>
-                  失败信息：
+              <label class="col-sm-2 control-label"></label>
+              <div class="col-sm-4">
+                  <font color="red">总执行{$i}行</font><br/>
+                  <font color="red">失败{$ei}行</font><br/>
+                  失败信息：<br/>
                   {$error_msg}
                   <hr/>
-                  <font color="green">成功{$si}行</font>
-                  成功信息：
+                  <font color="green">成功{$si}行</font><br/>
+                  成功信息：<br/>
                   {$success_msg}
-              </pre>
+              </div>
           </div>
               </if>
           </form>
