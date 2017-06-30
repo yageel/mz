@@ -109,7 +109,7 @@ class AdminUserController extends BaseController
             }elseif($tab == 'channel'){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
             }elseif($tab== 'device'){
-                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+                $list[$i]['total_device'] = D('Devices')->where(['user_id' => $user['id']])->count();
             }elseif($tab == 'spread'){
                  $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
             }
