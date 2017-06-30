@@ -1259,10 +1259,10 @@ class Wechat {
      * @param string $jsapi_ticket 手动指定jsapi_ticket，非必要情况不建议用
      */
     public function getJsTicket($appid = '', $jsapi_ticket = '') {
-        if (!$this->access_token && !$this->checkAuth()){echo 111;
+        if (!$this->access_token && !$this->checkAuth()){
             return false;
         }
-        echo 222;
+
         if (!$appid)
             $appid = $this->appid;
         if ($jsapi_ticket) { //手动指定token，优先使用
