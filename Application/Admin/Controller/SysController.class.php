@@ -130,7 +130,7 @@ class SysController extends BaseController
         }
 
         if(I('request.t') > 0){
-            return redirect(U('/sys/basic',['h'=>time()]));
+            return redirect(U('/sys/basic',['h'=>time()])."&ts=".time());
         }
 
         $config =  (array)load_config(COMMON_PATH . 'Conf/other.php');
