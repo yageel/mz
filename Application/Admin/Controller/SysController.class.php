@@ -129,8 +129,8 @@ class SysController extends BaseController
             return $this->success("编辑成功~", U('/sys/basic',['t'=>time()]));
         }
 
-        if(I('t')){
-            return $this->redirect('/sys/basic');
+        if(I('request.t') > 0){
+            return redirect(U('/sys/basic'));
         }
 
         $config =  (array)load_config(COMMON_PATH . 'Conf/other.php');
