@@ -162,7 +162,7 @@ class BaseController extends Controller {
         }
 
         $cityInfo = D('City')->get_city($type);
-        print_r($cityInfo);
+
         if(empty($cityInfo)){
             die('No Found Weixin Option.');
         }
@@ -287,7 +287,7 @@ class BaseController extends Controller {
      */
     protected function getShareSign($type,$ajax=false,$url=null)
     {
-        echo $type;
+
         $wechat = $this->initWechat($type);
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
@@ -296,6 +296,7 @@ class BaseController extends Controller {
 		}
         
         $signPackage = $wechat->getJsSign($url);
+        var_dump($signPackage);
         $share = [
             "appid" => $signPackage["appid"],
             "str" => $signPackage['noncestr'],
