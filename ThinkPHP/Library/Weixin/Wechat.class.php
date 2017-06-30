@@ -1300,7 +1300,7 @@ class Wechat {
      * @param string $appid 用于多个appid时使用,可空
      * @return array|bool 返回签名字串
      */
-    public function getJsSign($url, $timestamp = 0, $noncestr = '', $appid = '') {
+    public function getJsSign($url, $timestamp = 0, $noncestr = '', $appid = '') {echo 0000;
        if (!$this->jsapi_ticket && !$this->getJsTicket($appid) || !$url){
            echo "1111";
            return false;
