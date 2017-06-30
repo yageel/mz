@@ -129,7 +129,9 @@ class SysController extends BaseController
             return $this->success("编辑成功~", U('/sys/basic',['t'=>time()]));
         }
 
-        $this->assign('config', (array)load_config(COMMON_PATH . 'Conf/other.php'));
+        $config =  (array)load_config(COMMON_PATH . 'Conf/other.php');
+        print_r($config);
+        $this->assign('config',$config);
         $this->display();
     }
 
