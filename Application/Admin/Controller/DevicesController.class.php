@@ -391,7 +391,7 @@ class DevicesController extends BaseController {
                                 'salt' => $salt,
                                 'pwd' => encrypt_password('123456', $salt),
                                 'role' => 3,
-                                'mobile' => $item[9],
+                                'mobile' => $item[10],
                                 'create_time' => time(),
                                 'update_time' => time(),
                                 'last_time' => 0,
