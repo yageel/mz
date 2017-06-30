@@ -460,4 +460,20 @@ class AdminUserController extends BaseController
         $this->display();
     }
 
+    /**
+     * 删除用户
+     */
+    public function del(){
+        $id = I('request.id',0,'intval');
+        if($id){
+            $info = M('admin')->where(['id'=>$id])->find();
+            if($info){
+                M('admin_bak')->add($info);
+                M('admin')->where(['id'=>$id])->delete();
+            }
+        }
+
+        return $this->success('操作成功~');
+    }
+
 }
