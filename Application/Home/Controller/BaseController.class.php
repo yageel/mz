@@ -138,7 +138,7 @@ class BaseController extends Controller {
         }
         $this->assign('isLogin', $this->isLogin);
 
-        if($this->from != 4){
+        if($this->gfrom != 4){
             $signature = $this->getShareSign($this->type, true);
 
             $this->assign('signature', $signature);//赚了
