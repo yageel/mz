@@ -1259,8 +1259,10 @@ class Wechat {
      * @param string $jsapi_ticket 手动指定jsapi_ticket，非必要情况不建议用
      */
     public function getJsTicket($appid = '', $jsapi_ticket = '') {
-        if (!$this->access_token && !$this->checkAuth())
+        if (!$this->access_token && !$this->checkAuth()){
             return false;
+        }
+
         if (!$appid)
             $appid = $this->appid;
         if ($jsapi_ticket) { //手动指定token，优先使用
@@ -1275,7 +1277,6 @@ class Wechat {
             }
         }
         $result = $this->http_get(self::API_URL_PREFIX . self::GET_TICKET_URL . 'access_token=' . $this->access_token . '&type=jsapi');
-        var_dump($result);
         if ($result) {
             $json = json_decode($result, true);
             if (!$json || !empty($json['errcode'])) {
@@ -1315,13 +1316,11 @@ class Wechat {
             $url = substr($url, 0, $ret);
         $url = trim($url);
         if (empty($url)){
-            echo "2222";
             return false;
         }
         $arrdata = array("timestamp" => $timestamp, "noncestr" => $noncestr, "url" => $url, "jsapi_ticket" => $this->jsapi_ticket);
         $sign = $this->getSignature($arrdata);
         if (!$sign){
-            echo 333;
             return false;
         }
         $signPackage = array(
