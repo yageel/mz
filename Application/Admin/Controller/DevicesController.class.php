@@ -169,6 +169,7 @@ class DevicesController extends BaseController {
 
         if($detail){
             $qrcode_path = APP_PATH."/../uploads/qrcode/".$detail['qrcode'] .".png";
+            echo $qrcode_path;
             //if(!file_exists($qrcode_path))
             {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
@@ -184,7 +185,7 @@ class DevicesController extends BaseController {
                 \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
                 $logo = APP_PATH . '/../Public/images/logo.png';//需要显示在二维码中的Logo图像
-                echo $log;
+                echo http://mzht.hotwifibox.com/index.php?s=/devices/qrcode/id/201601.html;
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
