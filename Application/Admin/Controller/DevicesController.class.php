@@ -169,7 +169,7 @@ class DevicesController extends BaseController {
 
         if($detail){
             $qrcode_path = realpath(APP_PATH."../uploads/qrcode/".$detail['qrcode'] .".png");
-           // echo $qrcode_path."<br/>";
+            echo $qrcode_path."<br/>";die();
             //if(!file_exists($qrcode_path))
             {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
