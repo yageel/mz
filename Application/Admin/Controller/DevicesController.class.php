@@ -168,7 +168,7 @@ class DevicesController extends BaseController {
         $detail = M('Devices')->where(['id'=>$id])->find();
 
         if($detail){
-            $qrcode_path = realpath(APP_PATH."../uploads/qrcode/".$detail['qrcode'] .".png");
+            $qrcode_path = realpath(APP_PATH."../uploads/qrcode/").$detail['qrcode'] .".png";
             echo $qrcode_path."<br/>";die();
             //if(!file_exists($qrcode_path))
             {
