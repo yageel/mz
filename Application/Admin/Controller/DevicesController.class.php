@@ -213,6 +213,7 @@ class DevicesController extends BaseController {
                 }
                 ob_clean();
                 imagepng ( $QR, $qrcode_path.".png");//带Logo二维码的文件名
+                imagedestroy($QR);
 
 
             }
