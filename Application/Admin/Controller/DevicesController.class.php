@@ -185,7 +185,7 @@ class DevicesController extends BaseController {
                 \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
                 $logo = APP_PATH . '/../Public/images/logo.png';//需要显示在二维码中的Logo图像
-                echo http://mzht.hotwifibox.com/index.php?s=/devices/qrcode/id/201601.html;
+                echo $logo;
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
