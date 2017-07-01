@@ -188,7 +188,7 @@ class DevicesController extends BaseController {
                 //echo $logo."<br/>";
                 $QR = $qrcode_path;
 
-                $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
+                $QR = imagecreatefrompng (  $QR  );
                 $QR_width = imagesx ( $QR );
                 $QR_height = imagesy ( $QR );
 
@@ -201,7 +201,7 @@ class DevicesController extends BaseController {
                 //if (file_exists($logo))
                 {
 
-                    $logo = imagecreatefromstring ( file_get_contents ( $logo ) );
+                    $logo = imagecreatefrompng ( $logo  );
                     $logo_width = imagesx ( $logo );
                     $logo_height = imagesy ( $logo );
                     $logo_qr_width = $QR_width / 5;
