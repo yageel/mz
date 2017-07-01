@@ -218,7 +218,7 @@ class DevicesController extends BaseController {
             }
 
             header('content-type: image/png');
-            echo  file_get_content($qrcode_path);
+            readfile($qrcode_path);
         }else{
             return $this->error("没找到设备信息~");
         }
