@@ -184,6 +184,7 @@ class DevicesController extends BaseController {
                 \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
                 $logo = APP_PATH . '/../Public/images/logo.png';//需要显示在二维码中的Logo图像
+                echo $log;
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
@@ -191,6 +192,7 @@ class DevicesController extends BaseController {
                 $QR_height = imagesy ( $QR );
 
                 $font = APP_PATH ."../Public/fonts/msyhbd.ttf";
+                echo $font;
                 $red = imagecolorallocate($QR, 250,0, 0);
                 imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
 
@@ -211,7 +213,7 @@ class DevicesController extends BaseController {
             }
 
 
-            return header("location: /uploads/qrcode/{$detail['device_number']}.png");
+            echo ("/uploads/qrcode/{$detail['device_number']}.png");
         }else{
             return $this->error("没找到设备信息~");
         }
