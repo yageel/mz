@@ -187,7 +187,7 @@ class DevicesController extends BaseController {
                 imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
                 imagedestroy($QR);
             }
-            return header("location: /uploads/qrcode/{$detail['device_number']}.png");
+            return header("location: /uploads/qrcode/{$detail['qrcode']}.png");
         }else{
             return $this->error("没找到设备信息~");
         }
