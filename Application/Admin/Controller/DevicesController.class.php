@@ -156,6 +156,35 @@ class DevicesController extends BaseController {
                 $matrixPointSize = 12;//生成图片大小
                 //生成二维码图片
                 \QRcode::png($value, APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png", $errorCorrectionLevel, $matrixPointSize, 2);
+                $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
+
+                $QR = APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png";
+
+                $QR = imagecreatefrompng (  $QR  );
+                $QR_width = imagesx ( $QR );
+                $QR_height = imagesy ( $QR );
+
+                $font = realpath(APP_PATH ."../Public/fonts/msyhbd.ttf");
+
+                $red = imagecolorallocate($QR, 250,0, 0);
+                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 1, $red, $font,$detail['device_number']);
+
+                if (file_exists($logo))
+                {
+                    $logo = imagecreatefrompng ( $logo  );
+                    $logo_width = imagesx ( $logo );
+                    $logo_height = imagesy ( $logo );
+                    $logo_qr_width = $QR_width / 5;
+                    $scale = $logo_width / $logo_qr_width;
+                    $logo_qr_height = $logo_height / $scale;
+                    $from_width = ($QR_width - $logo_qr_width) / 2;
+
+                    imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
+                    imagedestroy($logo);
+                }
+                //ob_clean();
+                imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
+                imagedestroy($QR);
             }
             return header("location: /uploads/qrcode/{$detail['device_number']}.png");
         }else{
