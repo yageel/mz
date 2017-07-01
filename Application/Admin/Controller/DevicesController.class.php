@@ -196,7 +196,7 @@ class DevicesController extends BaseController {
                 echo 22,',', 0,',', $QR_width/2 - 30,',', $QR_height- 0,',', $font,',',$detail['device_number']."<br/>";
 
                 $red = imagecolorallocate($QR, 250,0, 0);
-                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
+                //imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
 
                 if (file_exists($logo)) {
 
