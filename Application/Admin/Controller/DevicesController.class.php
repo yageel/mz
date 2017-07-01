@@ -169,7 +169,8 @@ class DevicesController extends BaseController {
 
         if($detail){
             $qrcode_path = APP_PATH."/../uploads/qrcode/".$detail['qrcode'] .".png";
-            if(!file_exists($qrcode_path)){
+            //if(!file_exists($qrcode_path))
+            {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
