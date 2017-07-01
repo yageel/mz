@@ -144,7 +144,8 @@ class DevicesController extends BaseController {
         $id = I('request.id',0,'intval');
         $detail = M('Devices')->where(['id'=>$id])->find();
         if($detail){
-            if(!file_exists(APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png")){
+            $qrcode_path = realpath(APP_PATH."../uploads/qrcode/").'/'.$detail['qrcode'] .".png";
+            if(!file_exists($qrcode_path)){
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
@@ -155,10 +156,10 @@ class DevicesController extends BaseController {
                 $errorCorrectionLevel = 'L';//容错级别
                 $matrixPointSize = 12;//生成图片大小
                 //生成二维码图片
-                \QRcode::png($value, APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png", $errorCorrectionLevel, $matrixPointSize, 2);
+                \QRcode::png($value,$qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
                 $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
 
-                $QR = APP_PATH."/../uploads/qrcode/".$detail['device_number'] .".png";
+                $QR = $qrcode_path;
 
                 $QR = imagecreatefrompng (  $QR  );
                 $QR_width = imagesx ( $QR );
