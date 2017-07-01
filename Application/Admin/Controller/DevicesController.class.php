@@ -212,7 +212,8 @@ class DevicesController extends BaseController {
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
                 }
 
-                imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
+                imagepng ( $QR, $qrcode_path.".png");//带Logo二维码的文件名
+
 
             }
 
