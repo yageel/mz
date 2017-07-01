@@ -185,7 +185,8 @@ class DevicesController extends BaseController {
                 \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
                 $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
-                //echo $logo."<br/>";
+
+                
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefrompng (  $QR  );
@@ -196,7 +197,7 @@ class DevicesController extends BaseController {
                // echo 22,',', 0,',', $QR_width/2 - 30,',', $QR_height- 0,',', $font,',',$detail['device_number']."<br/>";
 
                 $red = imagecolorallocate($QR, 250,0, 0);
-                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
+                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 1, $red, $font,$detail['device_number']);
 
                 //if (file_exists($logo))
                 {
