@@ -198,7 +198,8 @@ class DevicesController extends BaseController {
                 $red = imagecolorallocate($QR, 250,0, 0);
                 //imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
 
-                if (file_exists($logo)) {
+                //if (file_exists($logo))
+                {
 
                     $logo = imagecreatefromstring ( file_get_contents ( $logo ) );
                     $logo_width = imagesx ( $logo );
@@ -207,6 +208,7 @@ class DevicesController extends BaseController {
                     $scale = $logo_width / $logo_qr_width;
                     $logo_qr_height = $logo_height / $scale;
                     $from_width = ($QR_width - $logo_qr_width) / 2;
+                    echo "22";
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
                 }
 
