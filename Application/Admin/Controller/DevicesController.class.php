@@ -170,12 +170,12 @@ class DevicesController extends BaseController {
         if($detail){
             $qrcode_path = realpath(APP_PATH."../uploads/qrcode/").'/'.$detail['qrcode'] .".png";
 
-            //if(!file_exists($qrcode_path))
+            if(!file_exists($qrcode_path))
             {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
                     mkdir(APP_PATH."/../uploads/qrcode/",0755, true);
                 }
-                //
+
                 $sign = encrypt_password($detail['qrcode'], $detail['id']);
                 $value = C('base_url')."index.php?s=/index/index/type/1/gfrom/2/qr/{$detail['qrcode']}/sign/{$sign}.html";
                 include APP_PATH."/../ThinkPHP/Library/Vendor/phpqrcode/phpqrcode.php";
@@ -186,7 +186,6 @@ class DevicesController extends BaseController {
 
                 $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
 
-                
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefrompng (  $QR  );
@@ -194,14 +193,12 @@ class DevicesController extends BaseController {
                 $QR_height = imagesy ( $QR );
 
                 $font = realpath(APP_PATH ."../Public/fonts/msyhbd.ttf");
-               // echo 22,',', 0,',', $QR_width/2 - 30,',', $QR_height- 0,',', $font,',',$detail['device_number']."<br/>";
 
                 $red = imagecolorallocate($QR, 250,0, 0);
                 imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 1, $red, $font,$detail['device_number']);
 
-                //if (file_exists($logo))
+                if (file_exists($logo))
                 {
-
                     $logo = imagecreatefrompng ( $logo  );
                     $logo_width = imagesx ( $logo );
                     $logo_height = imagesy ( $logo );
@@ -213,7 +210,7 @@ class DevicesController extends BaseController {
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
                 }
                 //ob_clean();
-                imagepng ( $QR, $qrcode_path.".png");//带Logo二维码的文件名
+                imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
                 imagedestroy($QR);
 
 
