@@ -169,7 +169,7 @@ class DevicesController extends BaseController {
 
         if($detail){
             $qrcode_path = realpath(APP_PATH."../uploads/qrcode/".$detail['qrcode'] .".png");
-            echo $qrcode_path."<br/>";
+           // echo $qrcode_path."<br/>";
             //if(!file_exists($qrcode_path))
             {
                 if(!file_exists(APP_PATH."/../uploads/qrcode/")){
@@ -185,7 +185,7 @@ class DevicesController extends BaseController {
                 \QRcode::png($value, $qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
 
                 $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
-                echo $logo."<br/>";
+                //echo $logo."<br/>";
                 $QR = $qrcode_path;
 
                 $QR = imagecreatefromstring ( file_get_contents ( $QR ) );
@@ -193,7 +193,7 @@ class DevicesController extends BaseController {
                 $QR_height = imagesy ( $QR );
 
                 $font = realpath(APP_PATH ."../Public/fonts/msyhbd.ttf");
-                echo 22,',', 0,',', $QR_width/2 - 30,',', $QR_height- 0,',', $font,',',$detail['device_number']."<br/>";
+               // echo 22,',', 0,',', $QR_width/2 - 30,',', $QR_height- 0,',', $font,',',$detail['device_number']."<br/>";
 
                 $red = imagecolorallocate($QR, 250,0, 0);
                 //imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 0, $red, $font,$detail['device_number']);
@@ -208,7 +208,7 @@ class DevicesController extends BaseController {
                     $scale = $logo_width / $logo_qr_width;
                     $logo_qr_height = $logo_height / $scale;
                     $from_width = ($QR_width - $logo_qr_width) / 2;
-                    echo "22";
+
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
                 }
 
