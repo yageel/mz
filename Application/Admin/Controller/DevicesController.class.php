@@ -208,6 +208,7 @@ class DevicesController extends BaseController {
                     $from_width = ($QR_width - $logo_qr_width) / 2;
 
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
+                    imagedestroy($logo);
                 }
                 //ob_clean();
                 imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
@@ -216,8 +217,8 @@ class DevicesController extends BaseController {
 
             }
 
-
-            echo ("/uploads/qrcode/{$detail['device_number']}.png");
+            header('content-type: image/png');
+            echo  file_get_content($qrcode_path);
         }else{
             return $this->error("没找到设备信息~");
         }
