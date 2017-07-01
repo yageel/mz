@@ -210,13 +210,13 @@ class DevicesController extends BaseController {
                     imagecopyresampled ( $QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height );
                     imagedestroy($logo);
                 }
-                //ob_clean();
+                //
                 imagepng ( $QR, $qrcode_path);//带Logo二维码的文件名
                 imagedestroy($QR);
 
 
             }
-
+            ob_clean();
             header('content-type: image/png');
             readfile($qrcode_path);
         }else{
