@@ -73,6 +73,11 @@ $('#btnVercode').click(function(){
 
 $('#btnVercode6').click(function(){
     var spread_id = [];
+    if($('input:checked').val() == undefined){
+        alert(11);
+    }else{
+        alert(22);
+    }
     $('input:checked').each(function(){
         spread_id.push($(this).val())
     });
