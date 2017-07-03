@@ -1,4 +1,5 @@
-<?php	return array (
+<?php
+return array (
     //'DB_DEPLOY_TYPE'=> true,
     'DB_TYPE' => 'mysql',
     'DB_CHARSET'=> 'utf8mb4',
