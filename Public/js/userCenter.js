@@ -74,7 +74,7 @@ $('#btnVercode').click(function(){
 $('#btnVercode6').click(function(){
     var spread_id = [];
     if($('input:checked').val() == undefined){
-        alert(11);
+        tools.alert("请选择绑定的设备~", "系统提示~");
     }else{
         alert(22);
     }
@@ -82,7 +82,7 @@ $('#btnVercode6').click(function(){
         spread_id.push($(this).val())
     });
 
-    alert(spread_id.length);
+    alert(spread_id);
     return false;
     if(spread_id.length < 1){
         tools.alert("请选择绑定的设备~", "系统提示~");
