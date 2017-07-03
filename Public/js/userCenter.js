@@ -76,6 +76,9 @@ $('#btnVercode6').click(function(){
     $('.spread_id:checked').each(function(){
         spread_id.push($(this).val())
     });
+
+    alert(spread_id.length);
+    return false;
     if(spread_id.length < 1){
         tools.alert("请选择绑定的设备~", "系统提示~");
         return false;
