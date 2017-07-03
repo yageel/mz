@@ -92,7 +92,7 @@ class BaseController extends Controller {
         // 测试接口分配测试用户
         if($this->gfrom == 4 && empty($this->openid)){
             // 增加自定义测试用户
-             $this->openid = $_GET['wx_openid2']?$_GET['wx_openid2']:'ochkGv1tTGLLRNJ0n6VmdkggifIQ';
+             $this->openid = $_GET['wx_openid2']?$_GET['wx_openid2']:'obZe1uAe_oUzI3EYuy_akvAAg0Sg';
         }
 
         // 最高获取三次
