@@ -76,7 +76,7 @@ $('#btnVercode2').click(function(){
     $('.spread_id:checked').each(function(){
         spread_id.push($(this).val())
     });
-    if(spread_id == []){
+    if(spread_id.length < 1){
         tools.alert("请选择绑定的设备~", "系统提示~");
         return false;
     }
@@ -84,7 +84,12 @@ $('#btnVercode2').click(function(){
         spread_id:spread_id
     }, function (result){
         if(result.state == 1){
-            tools.alert("绑定成功~");
+            tools.alert("绑定成功~",function(){
+                window.location.href = $('input[name="url2"]').val();
+            });
+
+        }else{
+            tools.alert(result.msg);
         }
     });
 });

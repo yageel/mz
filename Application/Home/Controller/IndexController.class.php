@@ -428,7 +428,7 @@ class IndexController extends BaseController {
      * 邀请人
      */
     public function spread(){
-        $spread_list = M('devices_spread')->where(['device_id'=>$this->device_id])->select();
+        $spread_list = M('devices_spread')->where(['device_id'=>$this->device_id])->order("update_time DESC")->select();
         foreach($spread_list as $i=>$item){
             $spread_list[$i]['user'] = M('admin')->where(['id'=>$item['user_id']])->find();
         }

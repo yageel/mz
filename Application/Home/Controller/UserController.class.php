@@ -375,8 +375,7 @@ class UserController extends BaseController {
         $spread_id = (array)I('spread_id',[],'');
         $json = $this->ajax_json();
         do{
-            if($spread_id ){
-
+            if(!empty($spread_id) ){
                 foreach($spread_id as $spread){
                     $spread_list = M('devices')->where(['user_id'=>$spread, "status"=>1])->field('id')->select();
                     foreach($spread_list as $device_info){
@@ -389,11 +388,13 @@ class UserController extends BaseController {
                     }
 
                 }
+            }else{
+                $json['msg'] = "请选择推广设备~";
+                break;
             }
 
         }while(false);
         $json['state'] = 1;
-        $json['request'] = $_REQUEST;
         $this->ajaxReturn($json);
 
     }
