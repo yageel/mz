@@ -71,7 +71,7 @@ $('#btnVercode').click(function(){
     });
 });
 
-$('#btnVercode2').click(function(){
+$('#btnVercode6').click(function(){
     var spread_id = [];
     $('.spread_id:checked').each(function(){
         spread_id.push($(this).val())
