@@ -75,19 +75,13 @@ $('#btnVercode6').click(function(){
     var spread_id = [];
     if($('input:checked').val() == undefined){
         tools.alert("请选择绑定的设备~", "系统提示~");
-    }else{
-        alert(22);
+        return false;
     }
+
     $('input:checked').each(function(){
         spread_id.push($(this).val())
     });
-
-    alert(spread_id);
-    return false;
-    if(spread_id.length < 1){
-        tools.alert("请选择绑定的设备~", "系统提示~");
-        return false;
-    }
+    
     tools.ajax($('input[name="url"]').val(),{
         spread_id:spread_id
     }, function (result){
