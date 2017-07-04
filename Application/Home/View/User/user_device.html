@@ -42,7 +42,7 @@
 			</div>
 			<!--列表循环-->
 			<div class="wrap-content ohide">
-				<div class="balanceDetails-items" id="balanceDetailsItems" data-page="{$total_pages}" data-type="mbi">
+				<div class="balanceDetails-items" id="balanceDetailsItems" data-url="{:tsurl('/user/user_device',['role'=>$user_role])}" data-page="{$total_pages}" data-type="mbi">
 					<volist name="list" id="item">
 						<a href="javascript:void(0)" class="wrap color-link">
 						<span class="wrap-content" style="width: 60%;">
@@ -62,5 +62,5 @@
 	</div>
 </block>
 <block name="js">
-
+	<script src="__PUBLIC__/js/balanceDetails.js?v=__VERSION__&1"></script>
 </block>
