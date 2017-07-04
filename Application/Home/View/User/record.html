@@ -48,7 +48,7 @@
 							<i class="text-overhide">订单详情</i>
 							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
 						</span>
-						<span class="<if condition="color-text">+<if condition="$user_role eq 2">{$item.operational_money	}<elseif condition="$user_role eq 3"/>{$item.channel_money}<elseif condition="$user_role eq 4"/>{$item.device_money}<elseif condition="$user_role eq 5"/>{$item.spread_money}</if> ￥</span>
+						<span class="color-text">+<if condition="$user_role eq 2">{$item.operational_money	}<elseif condition="$user_role eq 3"/>{$item.channel_money}<elseif condition="$user_role eq 4"/>{$item.device_money}<elseif condition="$user_role eq 5"/>{$item.spread_money}</if> ￥</span>
 						</a>
 					</volist>
 				</div>
