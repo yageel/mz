@@ -39,7 +39,7 @@ $(function () {
 
                     link.href = "javascript:void(0)";
                     link.innerHTML = data.html[i];
-                    link.class = data.a[i];
+                    link.setAttribute('class',data.a[i]);
                     fragment.appendChild(link);
                 });
 
