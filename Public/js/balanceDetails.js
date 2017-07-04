@@ -29,15 +29,13 @@ $(function () {
                 detailsScroll[info.type === "more" ? "setPullMoreResult" : "setPullRefreshResult"](true);
                 pageCount = data.data.total_pages;
 
-                var balanceDetailsItems = $("#balanceDetailsItems"),
-                    fragment = document.createDocumentFragment();
+                var balanceDetailsItems = $("#balanceDetailsItems");
 
                 if (info.type === "refresh")
                     balanceDetailsItems.find("a").remove();
 
-                fragment.appendChild(data.html);
 
-                balanceDetailsItems.find(".pull-down").before(fragment);
+                balanceDetailsItems.find(".pull-down").before(data.html);
 
                 detailsScroll.refresh();
                 detailsScroll.haveMore(pageIndex < pageCount);
