@@ -540,6 +540,7 @@ class UserController extends BaseController {
             foreach($list as $i=>$row){
                 $device = M('devices')->where(['id'=>$row['device_id']])->find();
                 $list[$i]['device_id'] = $device['device_number'];
+                $list[$i]['create_time'] = $row['update_time'];
                 if($row['user_id']){
                     $list[$i]['user'] = M('admin')->where(['id'=>$row['channel_user_id']])->field('id,username,shop_name')->find();
                 }
@@ -559,6 +560,7 @@ class UserController extends BaseController {
             $list = M('devices')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
             foreach($list as $i=>$row){
                 $list[$i]['device_id'] = $row['device_number'];
+                $list[$i]['create_time'] = $row['create_time'];
                 if($row['user_id']){
                     $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
                 }
