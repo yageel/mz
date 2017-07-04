@@ -531,9 +531,30 @@ class UserController extends BaseController {
      */
     public function user_device(){
         $user_role = I('request.role',0,'intval');
-
         $this->assign('user_role', $user_role);
+        $where = [];
+        if($user_role == 2){
+            $where['operational_user_id'] = $this->admin['id'];
+        }elseif($user_role == 3){
+            $where['channel_user_id'] = $this->admin['id'];
+        }elseif($user_role == 4){
+            $where['user_id'] = $this->admin['id'];
+        }
 
+        if($user_role == 5){
+
+        }else{
+            $count = M('devices')->where($where)->count();
+            $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+
+            $show = $Page->show();// 分页显示输出
+            // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+            $list = M('devices')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        }
+
+        $this->assign('list', $list);
+        $this->assign('total_page', $Page->totalPages);
+        $this->assign('user_role', $user_role);
         $this->display();
     }
 
