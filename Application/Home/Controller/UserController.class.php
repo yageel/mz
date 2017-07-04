@@ -538,7 +538,8 @@ class UserController extends BaseController {
             // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
             $list = M('devices_spread')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
             foreach($list as $i=>$row){
-                $list[$i]['device_id'] = $row['device_id'];
+                $device = M('devices')->where(['id'=>$row['device_id']])->find();
+                $list[$i]['device_id'] = $device['device_number'];
                 if($row['user_id']){
                     $list[$i]['user'] = M('admin')->where(['id'=>$row['channel_user_id']])->field('id,username,shop_name')->find();
                 }
@@ -557,7 +558,7 @@ class UserController extends BaseController {
             // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
             $list = M('devices')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
             foreach($list as $i=>$row){
-                $list[$i]['device_id'] = $row['id'];
+                $list[$i]['device_id'] = $row['device_number'];
                 if($row['user_id']){
                     $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
                 }
