@@ -81,7 +81,7 @@ $('#btnVercode6').click(function(){
     $('input:checked').each(function(){
         spread_id.push($(this).val())
     });
-    
+
     tools.ajax($('input[name="url"]').val(),{
         spread_id:spread_id
     }, function (result){

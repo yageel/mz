@@ -343,13 +343,25 @@ class UserController extends BaseController {
         $sql = "SELECT*,ROUND(6378.138 * 2 * ASIN(SQRT(POW( SIN(($longitude * PI() / 180 - lat * PI() / 180) / 2),2) +".
             "COS($longitude * PI() / 180) * COS(lat * PI() / 180) * POW( SIN(($latitude * PI() / 180 - lon * PI() / 180 ) / 2),2)))".
             "* 1000) AS juli FROM t_admin  WHERE role = 3 AND status=1 HAVING  juli<$spread_distance ORDER BY juli ASC";
-        file_put_contents(APP_PATH."/log.sql",$sql);
         $shop_list = M()->query($sql);
+
+        // 计算推广账户~
+        $time = time() - intval(C('basic.spread_time')) * 3600;
+        $device_list = M('devices_spread')->where(['user_id'=>$this->admin['id'], 'update_time' =>['gt', $time]])->field('channel_user_id')->select();
+        $user_list = [];
+        foreach($device_list as $row){
+            $user_list[] = $row['channel_user_id'];
+        }
+
         if($shop_list){
             $html = '';
             foreach($shop_list as $shop){
+                $str = '';
+                if(in_array($shop['id'], $user_list)){
+                    $str = 'checked';
+                }
                 $html .= '<div class="group">';
-                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block spread_id" name="spread_id[]" value="'.$shop['id'].'" /> '.$shop['shop_name'].'</div>';
+                $html .= '<div class="input_group_block"><input type="checkbox"  '.$str.' class="group_block spread_id" name="spread_id[]" value="'.$shop['id'].'" /> '.$shop['shop_name'].'</div>';
                 $html .= '</div>';
             }
         }
