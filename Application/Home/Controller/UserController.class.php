@@ -540,7 +540,7 @@ class UserController extends BaseController {
             foreach($list as $i=>$row){
                 $list[$i]['device_id'] = $row['device_id'];
                 if($row['user_id']){
-                    $list[$i]['user'] = M('admin')->where(['id'=>$row['channel_user_id']])->find('id,username,shop_name')->find();
+                    $list[$i]['user'] = M('admin')->where(['id'=>$row['channel_user_id']])->field('id,username,shop_name')->find();
                 }
 
                 if($row['rebate_id']){
@@ -559,7 +559,7 @@ class UserController extends BaseController {
             foreach($list as $i=>$row){
                 $list[$i]['device_id'] = $row['id'];
                 if($row['user_id']){
-                    $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->find('id,username,shop_name')->find();
+                    $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
                 }
 
                 if($row['rebate_id']){
