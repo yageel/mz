@@ -640,7 +640,7 @@ class UserController extends BaseController {
                 }
             }
         }
-
+        $json['state'] = 99;
         $this->ajaxReturn($json);
     }
 
