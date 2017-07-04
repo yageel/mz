@@ -100,8 +100,7 @@ class UserController extends BaseController {
                 $price = $item['spread_money'];
             }
             $json['a'][] = 'wrap '.($item['record_type'] == 2?'color-green':'color-link');
-            $json['html'][] = '<a href="javascript:void(0)" class="wrap '.($item['record_type'] == 2?'color-green':'color-link').'">
-						<span class="wrap-content" style="width: 60%;">
+            $json['html'][] = '<span class="wrap-content" style="width: 60%;">
 							<i class="text-overhide">￥'.$item['package_amount'].'订单分成</i>
 							<i>'.date("Y-m-d H:i:s",$item['create_time']).'</i>
 						</span>
