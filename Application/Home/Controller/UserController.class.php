@@ -532,6 +532,7 @@ class UserController extends BaseController {
     public function user_device(){
         $user_role = I('request.role',0,'intval');
 
+        $this->assign('user_role', $user_role);
 
         $this->display();
     }
