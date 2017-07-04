@@ -46,9 +46,9 @@ class UserController extends BaseController {
 
         $count = M('order')->where($where)->count();// 查询满足要求的总记录数
         $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-
-        $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
         $show = $Page->show();// 分页显示输出
+        $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
+
 
         $this->assign('total_pages', $Page->totalPages);
         $this->assign('page', $show);
@@ -80,7 +80,7 @@ class UserController extends BaseController {
 
         $count = M('order')->where($where)->count();// 查询满足要求的总记录数
         $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-
+        $Page->show();
         $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
         $html = '';
         $json = $this->ajax_json();
@@ -100,7 +100,7 @@ class UserController extends BaseController {
             }
             $html .= '<a href="javascript:void(0)" class="wrap '.($item['record_type'] == 2?'color-green':'color-link').'">
 						<span class="wrap-content" style="width: 60%;">
-							<i class="text-overhide">￥{'.$item['package_amount'].'订单分成</i>
+							<i class="text-overhide">￥'.$item['package_amount'].'订单分成</i>
 							<i>'.date("Y-m-d H:i:s",$item['create_time']).'</i>
 						</span>
 						<span class="color-text">+'.$price.' ￥</span>
