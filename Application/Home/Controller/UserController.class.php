@@ -12,10 +12,14 @@ class UserController extends BaseController {
         if(empty($this->users['mobile'])){
             return header("location: ".tsurl('/register/index'));
         }
+
+        // 绑定用户~
+        if(empty($this->admin)){
+            return $this->error("没找到关联用户~", tsurl('/register/index'));
+        }
     }
 
     public function index(){
-
         $this->display();
     }
 
@@ -26,6 +30,30 @@ class UserController extends BaseController {
         $role = I('request.role',0,'intval');
 
         $this->assign('user_role', $role);
+        $where = [];
+        $where['status'] = 1;
+        if($role == 2){
+            $where['platform_user_id'] = $this->admin['id'];
+        }elseif($role == 3){
+            $where['channel_user_id'] = $this->admin['id'];
+        }elseif($role == 4){
+            $where['device_user_id'] = $this->admin['id'];
+        }elseif($role == 5){
+            $where['spread_user_id'] = $this->admin['id'];
+        }else{
+            $where['status'] = 10;
+        }
+
+        $count = M('order')->where($where)->count();// 查询满足要求的总记录数
+        $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+
+        $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
+        $show = $Page->show();// 分页显示输出
+
+        $this->assign('total_pages', $Page->totalPages);
+        $this->assign('page', $show);
+        $this->assign('list', $list);
+
         $this->display();
     }
 
@@ -35,7 +63,7 @@ class UserController extends BaseController {
     public function money_record(){
 
         $where = [];
-        $where['user_id'] = $this->users['bind_user_id'];
+        $where['user_id'] = $this->admin['id'];
 
         $db = M('amount_record'); // 实例化User对象
         $count = $db->where($where)->count();// 查询满足要求的总记录数
