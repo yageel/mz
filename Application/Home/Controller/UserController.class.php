@@ -584,7 +584,64 @@ class UserController extends BaseController {
      * 用户设备API
      */
     public function user_device_api(){
+        $user_role = I('request.role',0,'intval');
+        $this->assign('user_role', $user_role);
+        $where = [];
+        if($user_role == 2){
+            $where['operational_user_id'] = $this->admin['id'];
+        }elseif($user_role == 3){
+            $where['channel_user_id'] = $this->admin['id'];
+        }elseif($user_role == 4){
+            $where['user_id'] = $this->admin['id'];
+        }
+        $json = $this->ajax_json();
+        $json['html'] = [];
+        $json['a'] = [];
+        if($user_role == 5){
+            // 已经推广过的设备~
+            $where = [];
+            $where['user_id'] = $this->admin['id'];
+            $count = M('devices_spread')->where($where)->count();
+            $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 
+            $show = $Page->show();// 分页显示输出
+            // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+            $list = M('devices_spread')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+            foreach($list as $i=>$row){
+                $device = M('devices')->where(['id'=>$row['device_id']])->find();
+                $user = M('admin')->where(['id'=>$row['channel_user_id']])->field('id,username,shop_name')->find();
+                if($row['rebate_id']){
+                    $rebate = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                }else{
+                    $rebate = M('rebate')->where(['rebate_type'=>0])->find();
+                }
+
+                $json['a'] = 'wrap color-link';
+                $json['html'] = '<span class="wrap-content" style="width: 60%;"><i class="text-overhide">'.$user['shop_name'].$device['device_number'].'</i><i>'.date("Y-m-d H:i:s",$row['update_time']).'</i></span><span class="color-text">分成比例：'.$rebate['spread_rebate'].'%</span>';
+            }
+        }else{
+            $count = M('devices')->where($where)->count();
+            $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+
+            $show = $Page->show();// 分页显示输出
+            // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+            $list = M('devices')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+            foreach($list as $i=>$row){
+                $list[$i]['device_id'] = $row['device_number'];
+                $list[$i]['create_time'] = $row['create_time'];
+                if($row['user_id']){
+                    $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
+                }
+
+                if($row['rebate_id']){
+                    $list[$i]['rebate'] = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                }else{
+                    $list[$i]['rebate'] = M('rebate')->where(['rebate_type'=>0])->find();
+                }
+            }
+        }
+
+        $this->ajaxReturn($json);
     }
 
     /**
