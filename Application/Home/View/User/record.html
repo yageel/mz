@@ -37,6 +37,7 @@
 				<div class="color-link">
 					<img src="__PUBLIC__/images/label.png" class="label">
 					<span>{:admin_user_role($user_role)}流水</span>
+					<span><a href="{:tsurl('/user/user_device',['user_role'=>$user_role])}">{:admin_user_role($user_role)}设备</a> </span>
 				</div>
 			</div>
 			<!--列表循环-->
@@ -45,13 +46,17 @@
 					<volist name="list" id="item">
 						<a href="javascript:void(0)" class="wrap <if condition="$item[record_type] eq 2">color-green<else/>color-link</if>">
 						<span class="wrap-content" style="width: 60%;">
-							<i class="text-overhide">{$item.device_id},订单分成, {$item.package_amount} ￥</i>
+							<i class="text-overhide">￥{$item.package_amount}订单分成</i>
 							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
 						</span>
 						<span class="color-text">+<if condition="$user_role eq 2">{$item.operational_money	}<elseif condition="$user_role eq 3"/>{$item.channel_money}<elseif condition="$user_role eq 4"/>{$item.device_money}<elseif condition="$user_role eq 5"/>{$item.spread_money}</if> ￥</span>
 						</a>
 					</volist>
 				</div>
+			</div>
+			<!--新增两个button-->
+			<div class="button-list">
+				<a onclick="gotoLink(this)" href="javascript:void(0)" data-href="{:tsurl('/user/index')}" class="button loginBtn">个人中心</a>
 			</div>
 		</div>
 	</div>
