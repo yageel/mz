@@ -127,7 +127,7 @@
         #tabItems li .package_block{ width: 82px; height: 79px; text-align: center; margin: 0 auto; position: relative; }
         .package_block .package_title{ font-size: 12px; color: #fff; line-height: 16px;}
         .package_block .package_money{ font-size: 12px; color: #000; line-height: 28px; font-weight: 600;}
-        .package_block  .select_block{top: -6px; right: -6px; position: absolute; display: none;}
+        .package_block  .select_block{top: 20px; right: -6px; position: absolute; display: none;}
         .package_block .active{ display: block;}
         .package_block .package_bg_block img{ width: 100%; height: auto}
     </style>
@@ -154,7 +154,7 @@
                     <volist name="package_list" id="package">
                     <li>
                         <div class="package_block" data-id="{$package.id}">
-                            <div class="select_block <if condition='$key eq 1'>active</if>" ><img src="/Public/images/select.png" style="height: 16px;" /> </div>
+                            <div class="select_block <if condition='$key eq 1'>active</if>" ><img src="/Public/images/select.png" style="width: 60%" /> </div>
                             <div class="package_bg_block">
                             <img src="{$package.package_pic}" />
                             </div>
