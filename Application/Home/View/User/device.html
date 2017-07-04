@@ -118,7 +118,7 @@
             </div>
             <div class="text-item-tab wrap">
                 <img src="__PUBLIC__/images/label.png" class="label">
-                <span style="color: #666;">绑定魔座</span>
+                <span style="color: #666;"> <if condition="in_array(5, explode(',',$admin['role_list']))">绑定魔座<else/>附近魔座</if></span>
             </div>
             <div class="text-item-content" id="tabItems">
                 <input type="hidden" name="url" value="{:tsurl('/user/bind_device')}" />
