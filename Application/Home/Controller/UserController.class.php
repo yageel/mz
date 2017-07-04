@@ -528,7 +528,27 @@ class UserController extends BaseController {
         }
 
         if($user_role == 5){
+            // 已经推广过的设备~
+            $where = [];
+            $where['user_id'] = $this->admin['id'];
+            $count = M('devices_spread')->where($where)->count();
+            $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 
+            $show = $Page->show();// 分页显示输出
+            // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+            $list = M('devices_spread')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
+            foreach($list as $i=>$row){
+                $list[$i]['device_id'] = $row['device_id'];
+                if($row['user_id']){
+                    $list[$i]['user'] = M('admin')->where(['id'=>$row['channel_user_id']])->find('id,username,shop_name')->find();
+                }
+
+                if($row['rebate_id']){
+                    $list[$i]['rebate'] = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                }else{
+                    $list[$i]['rebate'] = M('rebate')->where(['rebate_type'=>0])->find();
+                }
+            }
         }else{
             $count = M('devices')->where($where)->count();
             $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
@@ -537,8 +557,9 @@ class UserController extends BaseController {
             // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
             $list = M('devices')->where($where)->order("id DESC")->limit($Page->firstRow . ',' . $Page->listRows)->select();
             foreach($list as $i=>$row){
+                $list[$i]['device_id'] = $row['id'];
                 if($row['user_id']){
-                    $list[$i]['user'] = M('admin')->where()->find('id,username,shop_name')->find();
+                    $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->find('id,username,shop_name')->find();
                 }
 
                 if($row['rebate_id']){
