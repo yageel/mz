@@ -34,7 +34,7 @@ $(function () {
 
                 if (info.type === "refresh")
                     balanceDetailsItems.find("a").remove();
-                fragment.textContent = (data.html )
+                fragment.innerHTML = (data.html )
                 // fragment.innerHTML = (data.html);
 
                 balanceDetailsItems.find(".pull-down").before(fragment);
