@@ -37,12 +37,12 @@
 				<div class="color-link">
 					<img src="__PUBLIC__/images/label.png" class="label">
 					<span>{:admin_user_role($user_role)}设备</span>
-					<span style="float: right; padding-right: 8px;"><a href="{:tsurl('/user/user_device_api',['role'=>$user_role])}">{:admin_user_role($user_role)}流水</a> </span>
+					<span style="float: right; padding-right: 8px;"><a href="{:tsurl('/user/record',['role'=>$user_role])}">{:admin_user_role($user_role)}流水</a> </span>
 				</div>
 			</div>
 			<!--列表循环-->
 			<div class="wrap-content ohide">
-				<div class="balanceDetails-items" id="balanceDetailsItems" data-url="{:tsurl('/user/user_device',['role'=>$user_role])}" data-page="{$total_pages}" data-type="mbi">
+				<div class="balanceDetails-items" id="balanceDetailsItems" data-url="{:tsurl('/user/user_device_api',['role'=>$user_role])}" data-page="{$total_pages}" data-type="mbi">
 					<volist name="list" id="item">
 						<a href="javascript:void(0)" class="wrap color-link">
 						<span class="wrap-content" style="width: 60%;">
