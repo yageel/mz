@@ -44,7 +44,7 @@
 							<i class="text-overhide"><if condition="$item[record_type] eq 1">订单分成<else/>余额提现</if></i>
 							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
 						</span>
-                        <span class="<if condition="$item[record_type] eq 2">color-green<else/>color-text</if>"><if condition="$item[record_type] eq 1">+</if>{$item.amount} ￥</span>
+                        <span class="<if condition="$item[record_type] eq 0">color-green<else/>color-text</if>"><if condition="$item[record_type] eq 1">+<else/>-</if>{$item.amount} ￥</span>
                     </a>
                     </volist>
                 </div>

@@ -109,7 +109,7 @@ class AdminUserController extends BaseController
             }elseif($tab == 'channel'){
                 $list[$i]['total_device'] = D('Devices')->where(['channel_user_id' => $user['id']])->count();
             }elseif($tab== 'device'){
-                $list[$i]['total_device'] = D('Devices')->where(['device_user_id' => $user['id']])->count();
+                $list[$i]['total_device'] = D('Devices')->where(['user_id' => $user['id']])->count();
             }elseif($tab == 'spread'){
                  $list[$i]['total_device'] = M('devices_spread')->where(['user_id' => $user['id']])->count();
             }
@@ -458,6 +458,22 @@ class AdminUserController extends BaseController
 
         $this->assign('detail', $this->admin);
         $this->display();
+    }
+
+    /**
+     * 删除用户
+     */
+    public function del(){
+        $id = I('request.id',0,'intval');
+        if($id){
+            $info = M('admin')->where(['id'=>$id])->find();
+            if($info){
+                M('admin_bak')->add($info);
+                M('admin')->where(['id'=>$id])->delete();
+            }
+        }
+
+        return $this->success('操作成功~');
     }
 
 }

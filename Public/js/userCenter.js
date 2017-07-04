@@ -71,20 +71,27 @@ $('#btnVercode').click(function(){
     });
 });
 
-$('#btnVercode2').click(function(){
+$('#btnVercode6').click(function(){
     var spread_id = [];
-    $('.spread_id:checked').each(function(){
-        spread_id.push($(this).val())
-    });
-    if(spread_id == []){
+    if($('input:checked').val() == undefined){
         tools.alert("请选择绑定的设备~", "系统提示~");
         return false;
     }
+
+    $('input:checked').each(function(){
+        spread_id.push($(this).val())
+    });
+    
     tools.ajax($('input[name="url"]').val(),{
         spread_id:spread_id
     }, function (result){
         if(result.state == 1){
-            tools.alert("绑定成功~");
+            tools.alert("绑定成功~",function(){
+                window.location.href = $('input[name="url2"]').val();
+            });
+
+        }else{
+            tools.alert(result.msg);
         }
     });
 });

@@ -349,7 +349,7 @@ class UserController extends BaseController {
             $html = '';
             foreach($shop_list as $shop){
                 $html .= '<div class="group">';
-                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block" name="spread_id[]" value="1" /> '.$shop['shop_name'].'</div>';
+                $html .= '<div class="input_group_block"><input type="checkbox" class="group_block spread_id" name="spread_id[]" value="'.$shop['id'].'" /> '.$shop['shop_name'].'</div>';
                 $html .= '</div>';
             }
         }
@@ -375,25 +375,26 @@ class UserController extends BaseController {
         $spread_id = (array)I('spread_id',[],'');
         $json = $this->ajax_json();
         do{
-            if($spread_id ){
-
+            if(!empty($spread_id) ){
                 foreach($spread_id as $spread){
                     $spread_list = M('devices')->where(['user_id'=>$spread, "status"=>1])->field('id')->select();
                     foreach($spread_list as $device_info){
-                        $device = M('devices_spread')->where(['device_id'=>$device_info['id'], 'user_id'=>$this->users['id']])->find();
+                        $device = M('devices_spread')->where(['device_id'=>$device_info['id'], 'user_id'=>$this->admin['id']])->find();
                         if($device){
                             M('devices_spread')->where(['id'=>$device_info['id']])->save(['update_time'=>time()]);
                         }else{
-                            M('devices_spread')->add(['device_id'=>$device_info['id'], 'user'=>$this->users['id'], 'update_time'=>time(),'create_time'=>time()]);
+                            M('devices_spread')->add(['device_id'=>$device_info['id'],'channel_user_id'=>$spread, 'user_id'=>$this->admin['id'], 'update_time'=>time(),'create_time'=>time()]);
                         }
                     }
 
                 }
+            }else{
+                $json['msg'] = "请选择推广设备~";
+                break;
             }
 
         }while(false);
         $json['state'] = 1;
-        $json['request'] = $_REQUEST;
         $this->ajaxReturn($json);
 
     }

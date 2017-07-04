@@ -1,5 +1,5 @@
 ﻿<extend name="Layout/master" />
-<block name="title">魔座</block>
+<block name="title"></block>
 <block name="head">
     <link href="__PUBLIC__/css/userCenter.css?v=__VERSION__" rel="stylesheet" />
     <style>
@@ -122,6 +122,7 @@
             </div>
             <div class="text-item-content" id="tabItems">
                 <input type="hidden" name="url" value="{:tsurl('/user/bind_device')}" />
+                <input type="hidden" name="url2" value="{:tsurl('/user/index')}" />
                 <ul class="">
 
                 </ul>
@@ -132,9 +133,9 @@
 
                 </div>
             </div>
-            <if condition="in_array(5, explode(',',$user['role_list']))">
+            <if condition="in_array(5, explode(',',$admin['role_list']))">
             <div style="clear: both; text-align: center; margin: 20px 0;">
-                <a class="button" id="btnVercode2" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">绑定推广</a>
+                <a class="button" id="btnVercode6" style="width: 120px; background: #ff9933; line-height: 32px; height: 32px;">绑定推广</a>
             </div>
             </if>
 

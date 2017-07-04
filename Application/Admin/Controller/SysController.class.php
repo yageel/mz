@@ -126,10 +126,16 @@ class SysController extends BaseController
             $data = $_POST;
             $settingstr = "<?php \n return ".var_export($data, true).";\n ?>";
             file::write_file(COMMON_PATH . 'Conf/other.php',$settingstr);
+            sleep(3);
             return $this->success("编辑成功~", U('/sys/basic',['t'=>time()]));
         }
 
-        $this->assign('config', (array)load_config(COMMON_PATH . 'Conf/other.php'));
+        if(I('request.t') > 0){
+            return redirect(U('/sys/basic',['h'=>time()])."&ts=".time());
+        }
+
+        $config =  (array)load_config(COMMON_PATH . 'Conf/other.php');
+        $this->assign('config',$config);
         $this->display();
     }
 

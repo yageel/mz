@@ -34,6 +34,7 @@ class BaseController extends Controller {
 	 */
 	protected function initWechat($type)
 	{
+
 		if ($this->wechat) {
 			return $this->wechat;
 		}

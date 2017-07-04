@@ -133,7 +133,7 @@
                     <volist name="package_list" id="package">
                     <li>
                         <div class="package_block" data-id="{$package.id}">
-                            <div class="select_block" ><img src="/Public/images/select.png" style="width: 60%" /> </div>
+                            <div class="select_block  <if condition='$key eq 1'>active</if" ><img src="/Public/images/select.png" style="width: 60%" /> </div>
                             <div class="package_bg_block">
                                 <img src="{$package.package_pic}" />
                             </div>
