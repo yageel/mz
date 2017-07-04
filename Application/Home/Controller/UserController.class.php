@@ -108,6 +108,7 @@ class UserController extends BaseController {
         }
 
         $json['html'] = $html;
+        $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }
 
@@ -162,7 +163,7 @@ class UserController extends BaseController {
                     </a>';
         }
         $json['html'] = $html;
-
+        $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }
 
@@ -215,7 +216,7 @@ class UserController extends BaseController {
                     </a>';
         }
         $json['html'] = $html;
-
+        $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }
 
