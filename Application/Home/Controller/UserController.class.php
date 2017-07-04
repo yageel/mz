@@ -82,10 +82,11 @@ class UserController extends BaseController {
         $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $Page->show();
         $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
-        $html = '';
         $json = $this->ajax_json();
 
         $json['state'] = 99;
+        $json['html'] = [];
+        $json['a'] = [];
         foreach($list as $item){
 
             $price = 0;
@@ -98,16 +99,15 @@ class UserController extends BaseController {
             }elseif($role == 5){
                 $price = $item['spread_money'];
             }
-            $html .= '<a href="javascript:void(0)" class="wrap '.($item['record_type'] == 2?'color-green':'color-link').'">
+            $json['a'][] = 'wrap '.($item['record_type'] == 2?'color-green':'color-link');
+            $json['html'][] = '<a href="javascript:void(0)" class="wrap '.($item['record_type'] == 2?'color-green':'color-link').'">
 						<span class="wrap-content" style="width: 60%;">
 							<i class="text-overhide">￥'.$item['package_amount'].'订单分成</i>
 							<i>'.date("Y-m-d H:i:s",$item['create_time']).'</i>
 						</span>
-						<span class="color-text">+'.$price.' ￥</span>
-						</a>';
+						<span class="color-text">+'.$price.' ￥</span>';
         }
 
-        $json['html'] = $html;
         $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }
@@ -152,17 +152,16 @@ class UserController extends BaseController {
 
         $json = $this->ajax_json();
         $json['state'] = 99;
-        $html = '';
+        $json['html'] = [];
+        $json['a'] = [];
         foreach($list as $item){
-            $html .= '<a href="javascript:void(0)" class="wrap '.($item['record_type'] == 2?'color-green':'color-link').'">
-						<span class="wrap-content" style="width: 60%;">
+            $json['a'][] = 'wrap '.($item['record_type'] == 2?'color-green':'color-link');
+            $json['html'][] = '<span class="wrap-content" style="width: 60%;">
 							<i class="text-overhide">'.($item['record_type'] == 1?'订单分成':'余额提现').'</i>
 							<i>'.date("Y-m-d H:i:s",$item['create_time']).'</i>
 						</span>
-                        <span class="'.($item['record_type'] == 0?'color-green':'color-text').'">'.($item['record_type'] == 1?'+':'-').$item['amount'].' ￥</span>
-                    </a>';
+                        <span class="'.($item['record_type'] == 0?'color-green':'color-text').'">'.($item['record_type'] == 1?'+':'-').$item['amount'].' ￥</span>';
         }
-        $json['html'] = $html;
         $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }
@@ -205,17 +204,16 @@ class UserController extends BaseController {
 
         $json = $this->ajax_json();
         $json['state'] = 99;
-        $html = '';
+        $json['html'] = [];
+        $json['a'] = [];
         foreach($list as $item){
-            $html .= '<a href="javascript:void(0)" class="wrap color-green">
-						<span class="wrap-content" style="width: 60%;">
+            $json['a'][] = 'wrap color-green';
+            $json['html'][] = '<span class="wrap-content" style="width: 60%;">
 							<i class="text-overhide">用户提现</i>
 							<i>'.date("Y-m-d H:i:s",$item['create_time']).'</i>
 						</span>
-                        <span class="color-green">'.$item['cash_amount'].' ￥</span>
-                    </a>';
+                        <span class="color-green">'.$item['cash_amount'].' ￥</span>';
         }
-        $json['html'] = $html;
         $json['data']['total_pages'] = $Page->totalPages;
         $this->ajaxReturn($json);
     }

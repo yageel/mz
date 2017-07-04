@@ -34,8 +34,14 @@ $(function () {
 
                 if (info.type === "refresh")
                     balanceDetailsItems.find("a").remove();
-                fragment.innerHTML = (data.html )
-                // fragment.innerHTML = (data.html);
+                $.each(data.html, function (i) {
+                    var link = document.createElement("a");
+
+                    link.href = "javascript:void(0)";
+                    link.innerHTML = data.html[i];
+                    link.class = data.a[i];
+                    fragment.appendChild(link);
+                });
 
                 balanceDetailsItems.find(".pull-down").before(fragment);
 
