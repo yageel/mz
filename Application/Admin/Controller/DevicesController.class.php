@@ -156,7 +156,7 @@ class DevicesController extends BaseController {
                 $errorCorrectionLevel = 'L';//容错级别
                 $matrixPointSize = 12;//生成图片大小
                 //生成二维码图片
-                \QRcode::png($value,$qrcode_path, $errorCorrectionLevel, $matrixPointSize, 2);
+                \QRcode::png($value,$qrcode_path, $errorCorrectionLevel, $matrixPointSize, 4);
                 $logo = realpath(APP_PATH . '../Public/images/logo.png');//需要显示在二维码中的Logo图像
 
                 $QR = $qrcode_path;
@@ -168,7 +168,7 @@ class DevicesController extends BaseController {
                 $font = realpath(APP_PATH ."../Public/fonts/msyhbd.ttf");
 
                 $red = imagecolorallocate($QR, 250,0, 0);
-                imagettftext($QR, 22, 0, $QR_width/2 - 30, $QR_height- 1, $red, $font,$detail['device_number']);
+                imagettftext($QR, 22, 0, $QR_width/2 - 50, $QR_height- 12, $red, $font,$detail['device_number']);
 
                 if (file_exists($logo))
                 {
