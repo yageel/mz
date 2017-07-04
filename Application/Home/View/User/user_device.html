@@ -36,20 +36,20 @@
 			<div class="dividing">
 				<div class="color-link">
 					<img src="__PUBLIC__/images/label.png" class="label">
-					<span>{:admin_user_role($user_role)}流水</span>
-					<span><a href="{:tsurl('/user/user_device',['role'=>$user_role])}">{:admin_user_role($user_role)}设备</a> </span>
+					<span>{:admin_user_role($user_role)}设备</span>
+					<span><a href="{:tsurl('/user/record',['user_role'=>$user_role])}">{:admin_user_role($user_role)}流水</a> </span>
 				</div>
 			</div>
 			<!--列表循环-->
 			<div class="wrap-content ohide">
-				<div class="balanceDetails-items" id="balanceDetailsItems" data-url="{:tsurl('/user/record_api',['role'=>$user_role])}" data-page="{$total_pages}" data-type="mbi">
+				<div class="balanceDetails-items" id="balanceDetailsItems" data-page="{$total_pages}" data-type="mbi">
 					<volist name="list" id="item">
-						<a href="javascript:void(0)" class="wrap <if condition="$item[record_type] eq 2">color-green<else/>color-link</if>">
+						<a href="javascript:void(0)" class="wrap color-link">
 						<span class="wrap-content" style="width: 60%;">
-							<i class="text-overhide">￥{$item.package_amount}订单分成</i>
+							<i class="text-overhide">{$item.package_amount}</i>
 							<i>{$item.create_time|date='Y-m-d H:i:s',###}</i>
 						</span>
-						<span class="color-text">+<if condition="$user_role eq 2">{$item.operational_money	}<elseif condition="$user_role eq 3"/>{$item.channel_money}<elseif condition="$user_role eq 4"/>{$item.device_money}<elseif condition="$user_role eq 5"/>{$item.spread_money}</if> ￥</span>
+						<span class="color-text"></span>
 						</a>
 					</volist>
 				</div>

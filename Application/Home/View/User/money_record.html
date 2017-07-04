@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="wrap-content ohide">
-                <div class="balanceDetails-items" id="balanceDetailsItems" data-page="{$total_pages}" data-type="money">
+                <div class="balanceDetails-items" id="balanceDetailsItems"  data-url="{:tsurl('/user/money_record_api')}" data-page="{$total_pages}" data-type="money">
                     <volist name="list" id="item">
                     <a href="javascript:void(0)" class="wrap <if condition="$item[record_type] eq 2">color-green<else/>color-link</if>">
 						<span class="wrap-content" style="width: 60%;">
