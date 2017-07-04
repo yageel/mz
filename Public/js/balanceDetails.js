@@ -22,7 +22,7 @@ $(function () {
             else
                 pageIndex = 1;
 
-            tools.ajax(tools.url("user", isMontyDetails ? "money_api" : "integral_api"), {
+            tools.ajax($('#balanceDetailsItems').attr('data-url'), {
                 p: pageIndex,
                 pageSize: pageSize
             }, function (data) {
@@ -35,46 +35,7 @@ $(function () {
                 if (info.type === "refresh")
                     balanceDetailsItems.find("a").remove();
 
-                $.each(data.data.list, function () {
-                    var link = document.createElement("a");
-                    link.href = "javascript:void(0)";
-
-                    with (this) {
-                        var html = '<span class="wrap-content" style="width:60%"><i class="text-overhide">' + title + '</i><i>' + tools.date(create_time + "000").format() + '</i></span>';
-                        var flag = isMontyDetails ? "" : "mbi";
-                        if (isMontyDetails) {
-                            if (money > 0){
-                                link.className = "wrap color-link";
-                                html += "<span class='color-text " + flag + "'>";
-                                html += '+' + money + '￥';
-                            }
-                            else{
-                                link.className = "wrap color-green";
-                                html+="<span class=" + flag + ">";
-                                html += money + '￥';
-                            }
-                            // html += '￥' + money;
-                        } else {
-                            if (record_num > 0){
-                                link.className = "wrap color-link";
-                                html += "<span class='color-text " + flag + "'>";
-                                html += '+' + record_num;
-                            }
-                            else{
-                                link.className = "wrap color-green";
-                                html += "<span class=" + flag + ">";
-                                html += record_num;
-                            }
-                            // html += record_num;
-                        }
-
-                        html += '</span>';
-
-                        link.innerHTML = html;
-                    }
-
-                    fragment.appendChild(link);
-                });
+                fragment.appendChild(data.html);
 
                 balanceDetailsItems.find(".pull-down").before(fragment);
 
