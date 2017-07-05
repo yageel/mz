@@ -11,7 +11,7 @@ $(function () {
 
     pageCount = tools.isNumber(pageCount) ? parseInt(pageCount) : 0;
 
-    new ntScroll("balanceDetailsContent");
+    //new ntScroll("balanceDetailsContent");
 
     window.detailsScroll = new ntScroll("balanceDetailsItems", {
         pullRefresh: true,

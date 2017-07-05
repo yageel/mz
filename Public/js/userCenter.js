@@ -4,7 +4,7 @@
  */
 
 $(function () {
-    // new ntScroll("userCenterContent");
+     new ntScroll("userCenterContent");
 });
 
 function sug(img){
