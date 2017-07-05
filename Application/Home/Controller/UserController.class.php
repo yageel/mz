@@ -88,7 +88,6 @@ class UserController extends BaseController {
         $json['html'] = [];
         $json['a'] = [];
         foreach($list as $item){
-
             $price = 0;
             if($role == 2){
                 $price = $item['operational_money'];
@@ -546,10 +545,12 @@ class UserController extends BaseController {
                 }
 
                 if($row['rebate_id']){
-                    $list[$i]['rebate'] = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                    $rebate_info = M('rebate')->where(['id'=>$row['rebate_id']])->find();
                 }else{
-                    $list[$i]['rebate'] = M('rebate')->where(['rebate_type'=>0])->find();
+                    $rebate_info = M('rebate')->where(['rebate_type'=>0])->find();
                 }
+
+                $list[$i]['rebate'] = $rebate_info['spread_rebate'];
             }
         }else{
             $count = M('devices')->where($where)->count();
@@ -566,10 +567,18 @@ class UserController extends BaseController {
                 }
 
                 if($row['rebate_id']){
-                    $list[$i]['rebate'] = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                    $rebate_info = M('rebate')->where(['id'=>$row['rebate_id']])->find();
                 }else{
-                    $list[$i]['rebate'] = M('rebate')->where(['rebate_type'=>0])->find();
+                    $rebate_info = M('rebate')->where(['rebate_type'=>0])->find();
                 }
+                if($user_role == 2){
+                    $list[$i]['rebate'] = $rebate_info['operational_rebate'];
+                }elseif($user_role == 3){
+                    $list[$i]['rebate'] = $rebate_info['channel_rebate'];
+                }elseif($user_role == 4){
+                    $list[$i]['rebate'] = $rebate_info['device_rebate'];
+                }
+
             }
         }
 
@@ -632,15 +641,23 @@ class UserController extends BaseController {
             foreach($list as $i=>$row){
                 $list[$i]['device_id'] = $row['device_number'];
                 $list[$i]['create_time'] = $row['create_time'];
-                if($row['user_id']){
-                    $list[$i]['user'] = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
-                }
-
+                $user = M('admin')->where(['id'=>$row['user_id']])->field('id,username,shop_name')->find();
                 if($row['rebate_id']){
-                    $list[$i]['rebate'] = M('rebate')->where(['id'=>$row['rebate_id']])->find();
+                    $rebate_info = M('rebate')->where(['id'=>$row['rebate_id']])->find();
                 }else{
-                    $list[$i]['rebate'] = M('rebate')->where(['rebate_type'=>0])->find();
+                    $rebate_info = M('rebate')->where(['rebate_type'=>0])->find();
                 }
+                $rebate = 0;
+                if($user_role == 2){
+                    $rebate = $rebate_info['operational_rebate'];
+                }elseif($user_role == 3){
+                    $rebate = $rebate_info['channel_rebate'];
+                }elseif($user_role == 4){
+                    $rebate = $rebate_info['device_rebate'];
+                }
+                $json['a'] = 'wrap color-link';
+                $json['html'] = '<span class="wrap-content" style="width: 60%;"><i class="text-overhide">'.$user['shop_name'].$row['device_number'].'</i><i>'.date("Y-m-d H:i:s",$row['update_time']).'</i></span><span class="color-text">分成比例：'.$rebate.'%</span>';
+
             }
         }
         $json['state'] = 99;
