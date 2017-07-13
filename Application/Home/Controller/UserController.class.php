@@ -49,13 +49,13 @@ class UserController extends BaseController {
         $show = $Page->show();// 分页显示输出
         $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
         if($role == 2){
-            $total_amount = M('order')->where($where)->count('operational_money');
+            $total_amount = M('order')->where($where)->sum('operational_money');
         }elseif($role == 3){
-            $total_amount = M('order')->where($where)->count('channel_money');
+            $total_amount = M('order')->where($where)->sum('channel_money');
         }elseif($role == 4){
-            $total_amount = M('order')->where($where)->count('device_money');
+            $total_amount = M('order')->where($where)->sum('device_money');
         }elseif($role == 5){
-            $total_amount = M('order')->where($where)->count('spread_money');
+            $total_amount = M('order')->where($where)->sum('spread_money');
         }
     print_r($total_amount);
 
