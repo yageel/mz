@@ -57,7 +57,7 @@ class UserController extends BaseController {
         }elseif($role == 5){
             $total_amount = M('order')->where($where)->sum('spread_money');
         }
-
+        $total_amount = number_format(floatval($total_amount),2,'.','');
         $this->assign('total_amount', $total_amount);
         $this->assign('total_pages', $Page->totalPages);
         $this->assign('page', $show);
