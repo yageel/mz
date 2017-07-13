@@ -234,14 +234,6 @@ class UserController extends BaseController {
             }
             $time = time();
             $title = '提现';
-            //判断提现次数
-            $beginTime = strtotime('first day of this month midnight');
-            $endTime = strtotime('-1 second first day of next month midnight');
-            $cash_count = D('cash_record')->where("`openid` = '{$this->openid}' AND `city_id` = {$this->type} AND `create_time` BETWEEN {$beginTime} AND {$endTime}")->count();
-            if ($cash_count >= 3) {
-                $result['msg'] = '本月提现次数已用完，无法提现';
-                break;
-            }
 
             //判断提现金额
             if ($money < 1) {
