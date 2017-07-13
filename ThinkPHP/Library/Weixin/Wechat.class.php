@@ -1207,7 +1207,6 @@ class Wechat {
 
         $result = $this->http_get(self::API_URL_PREFIX . self::AUTH_URL . 'appid=' . $appid . '&secret=' . $appsecret);
 
-        var_dump($result);
         if($_GET['test']=='yes'){
             var_dump($result);
         }
@@ -1311,7 +1310,6 @@ class Wechat {
            return false;
        }
 
-        var_dump("---");
 
         if (!$timestamp)
             $timestamp = time();

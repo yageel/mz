@@ -296,7 +296,7 @@ class BaseController extends Controller {
 		}
         
         $signPackage = $wechat->getJsSign($url);
-        var_dump($signPackage);
+
         $share = [
             "appid" => $signPackage["appid"],
             "str" => $signPackage['noncestr'],
