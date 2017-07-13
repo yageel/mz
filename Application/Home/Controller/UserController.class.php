@@ -33,7 +33,7 @@ class UserController extends BaseController {
         $where = [];
         $where['status'] = 1;
         if($role == 2){
-            $where['platform_user_id'] = $this->admin['id'];
+            $where['operational_user_id'] = $this->admin['id'];
         }elseif($role == 3){
             $where['channel_user_id'] = $this->admin['id'];
         }elseif($role == 4){
@@ -48,6 +48,16 @@ class UserController extends BaseController {
         $Page = new Page($count, 20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show();// 分页显示输出
         $list = M('order')->where( $where)->limit($Page->firstRow . ',' . $Page->listRows)->order("id DESC")->select();
+        if($role == 2){
+            $total_amount = M('order')->where($where)->count('operational_money');
+        }elseif($role == 3){
+            $total_amount = M('order')->where($where)->count('channel_money');
+        }elseif($role == 4){
+            $total_amount = M('order')->where($where)->count('device_money');
+        }elseif($role == 5){
+            $total_amount = M('order')->where($where)->count('spread_money');
+        }
+    print_r($total_amount);
 
 
         $this->assign('total_pages', $Page->totalPages);
