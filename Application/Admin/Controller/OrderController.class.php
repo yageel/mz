@@ -123,6 +123,10 @@ class OrderController extends BaseController {
 
         // 订单流水
         if($tab == ''){
+            $total_income_amount = M('order')->where(['status'=>1,'operational_user_id'=>$user['id']])->sum('operational_money');
+            $total_amount = '';
+            $total_cash_amount = '';
+            $total_orders = '';
             $where = [];
             $where['status'] = 1;
             // 运营人员
