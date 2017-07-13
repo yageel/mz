@@ -1260,10 +1260,9 @@ class Wechat {
      * @param string $jsapi_ticket 手动指定jsapi_ticket，非必要情况不建议用
      */
     public function getJsTicket($appid = '', $jsapi_ticket = '') {
-        var_dump("===");
         if (!$this->access_token && !$this->checkAuth()){
             return false;
-        }  var_dump("+++");
+        }
 
         if (!$appid)
             $appid = $this->appid;
@@ -1279,7 +1278,7 @@ class Wechat {
             }
         }
         $result = $this->http_get(self::API_URL_PREFIX . self::GET_TICKET_URL . 'access_token=' . $this->access_token . '&type=jsapi');
-        var_dump($result);
+
         if ($result) {
             $json = json_decode($result, true);
             if (!$json || !empty($json['errcode'])) {
